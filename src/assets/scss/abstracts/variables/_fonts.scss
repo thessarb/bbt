@@ -1,0 +1,119 @@
+//Purchased web fonts
+$font--boxed-regular: 'Boxed Regular';
+$font--boxed-medium: 'Boxed Medium';
+$font--boxed-semibold: 'Boxed Semi bold';
+
+// Fonts
+.body-big {
+  &__regular, &__medium, &__semibold {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  &__regular {
+    font-family: $font--boxed-regular;
+    font-weight: 500;
+  }
+  &__medium {
+    font-family: $font--boxed-medium;
+    font-weight: 600;
+  }
+  &__semibold {
+    font-family: $font--boxed-semibold;
+    font-weight: 600;
+  }
+}
+
+.body-normal {
+  &__regular, &__medium, &__semibold {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  &__regular {
+    font-family: $font--boxed-regular;
+    font-weight: 500;
+  }
+  &__medium {
+    font-family: $font--boxed-medium;
+    font-weight: 600;
+  }
+  &__semibold {
+    font-family: $font--boxed-semibold;
+    font-weight: 600;
+  }
+}
+
+.body-small {
+  &__regular, &__medium, &__semibold {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  &__regular {
+    font-family: $font--boxed-regular;
+    font-weight: 500;
+  }
+  &__medium {
+    font-family: $font--boxed-medium;
+    font-weight: 600;
+  }
+  &__semibold {
+    font-family: $font--boxed-semibold;
+    font-weight: 600;
+  }
+}
+
+.caption {
+  &__regular, &__medium, &__semibold {
+    font-size: 10px;
+    line-height: 12px;
+  }
+  &__regular {
+    font-family: $font--boxed-regular;
+    font-weight: 500;
+  }
+  &__medium {
+    font-family: $font--boxed-medium;
+    font-weight: 600;
+  }
+  &__semibold {
+    font-family: $font--boxed-semibold;
+    font-weight: 600;
+  }
+}
+
+.subheading {
+  &__regular, &__medium, &__semibold {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  &__regular {
+    font-family: $font--boxed-regular;
+    font-weight: 500;
+  }
+  &__medium {
+    font-family: $font--boxed-medium;
+    font-weight: 600;
+  }
+  &__semibold {
+    font-family: $font--boxed-semibold;
+    font-weight: 600;
+  }
+}
+
+.heading {
+  &__regular, &__medium, &__semibold {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  &__regular {
+    font-family: $font--boxed-regular;
+    font-weight: 500;
+  }
+  &__medium {
+    font-family: $font--boxed-medium;
+    font-weight: 600;
+  }
+  &__semibold {
+    font-family: $font--boxed-semibold;
+    font-weight: 600;
+  }
+}
