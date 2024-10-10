@@ -1,0 +1,88 @@
+// Tags
+// Example Usage:
+//<div className="tag tag--green">
+//     Label
+//</div>
+.tag {
+  display: inline-flex;
+  padding: toRem(2) toRem(6);
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  font-family: $font--boxed-semibold;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 125%;
+  border-radius: toRem(2);
+
+  &--green {
+    color: $bbt-white;
+    background-color: $bbt-primary-green;
+  }
+
+  &--blue {
+    color: $bbt-white;
+    background-color: $bbt-blue-100;
+  }
+
+  &--dark-red {
+    color: $bbt-white;
+    background-color: $bbt-red-100;
+  }
+
+  &--red {
+    color: $bbt-white;
+    background-color: $bbt-red-70;
+  }
+
+  &--grey {
+    color: $bbt-white;
+    background-color: $bbt-secondary-grey;
+  }
+
+  &--orange {
+    color: $bbt-white;
+    background-color: $bbt-orange-100;
+  }
+
+  &--light-grey {
+    color: $bbt-grey-60;
+    background-color: $bbt-grey-20;
+  }
+
+  &--grey-70 {
+    color: $bbt-white;
+    background-color: $bbt-grey-70;
+  }
+
+  &--grey-60 {
+    color: $bbt-white;
+    background-color: $bbt-grey-60;
+  }
+
+  &--grey-50 {
+    color: $bbt-white;
+    background-color: $bbt-grey-50;
+  }
+
+  &--grey-40 {
+    color: $bbt-white;
+    background-color: $bbt-grey-40;
+  }
+
+  &--grey-30 {
+    color: $bbt-white;
+    background-color: $bbt-grey-30;
+  }
+
+  &--white {
+    color: $bbt-secondary-grey;
+    background-color: $bbt-white;
+    border: toRem(1) solid $bbt-grey-10;
+  }
+
+  &--yellow {
+    color: $bbt-secondary-grey;
+    background-color: $bbt-yellow-100;
+  }
+}
