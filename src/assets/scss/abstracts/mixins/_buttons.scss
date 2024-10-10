@@ -1,0 +1,815 @@
+// Buttons
+// Usage example
+//<button className="button button-secondary button--big button--green">
+//    <span className="button__text">Button text</span>
+//    <i className="button__icon"></i>
+//</button>
+
+.button {
+  display: inline-flex;
+  padding: toRem(8) toRem(12);
+  align-items: center;
+  gap: toRem(5);
+  width: fit-content;
+  height: fit-content;
+  font-family: $font--boxed-regular;
+  font-size: toRem(12);
+  font-weight: 500;
+  line-height: 125%;
+  color: $bbt-white;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: $bbt-blue-100;
+  border: none;
+  border-radius: toRem(4);
+  transition: all .35s ease;
+
+  &:not(:has(.button__text)) {
+    padding: toRem(10);
+  }
+
+  &:hover{
+    background-color: $bbt-blue-50;
+    transition: all .35s ease;
+  }
+
+  &:focus{
+    background-color: $bbt-blue-100;
+    box-shadow: 0p 0p 10px 0 rgba(55, 126, 187, 0.50);
+    transition: all .35s ease;
+  }
+
+  &:active{
+    background-color: $bbt-blue-50;
+    box-shadow: 3px 3px 2px 0 #3B6D9F inset;
+    transition: all .35s ease;
+  }
+
+  &:disabled {
+    background-color: $bbt-blue-10;
+    box-shadow: none;
+    cursor: not-allowed;
+    transition: all .35s ease;
+  }
+
+  &__icon {
+    width: toRem(12);
+    height: toRem(12);
+    mask-size: toRem(12);
+    display: inline-block;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    transition: background-color .35s;
+    background-color: $bbt-white;
+  }
+
+  &--green {
+    background-color: $bbt-primary-green;
+
+    &:hover{
+      background-color: $bbt-green-50;
+    }
+
+    &:focus{
+      background-color: $bbt-primary-green;
+      box-shadow: 0 0 10px 0 rgba(67, 176, 42, 0.50);
+    }
+
+    &:active{
+      background-color: $bbt-green-50;
+      box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.50) inset;
+    }
+
+    &:disabled {
+      color: $bbt-green-40;
+      background-color: $bbt-green-10;
+      box-shadow: none;
+      cursor: not-allowed;
+
+      .button__icon {
+        background-color: $bbt-green-40;
+      }
+    }
+  }
+
+  &--grey {
+    background-color: $bbt-secondary-grey;
+
+    &:hover{
+      background-color: $bbt-grey-50;
+    }
+
+    &:focus{
+      background-color: $bbt-secondary-grey;
+      box-shadow: 0 0 10px 0 rgba(83, 86, 90, 0.50);
+    }
+
+    &:active{
+      background-color: $bbt-grey-50;
+      box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.50) inset;
+    }
+
+    &:disabled {
+      color: $bbt-grey-30;
+      background-color: $bbt-grey-10;
+      box-shadow: none;
+      cursor: not-allowed;
+
+      .button__icon {
+        background-color: $bbt-grey-30;
+      }
+    }
+  }
+
+  &--light-grey {
+    color: $bbt-grey-60;
+    background-color: $bbt-grey-10;
+
+    .button__icon {
+      background-color: $bbt-grey-50;
+    }
+
+    &:hover{
+      background-color: $bbt-grey-5;
+    }
+
+    &:focus{
+      background-color: $bbt-grey-10;
+      box-shadow: 0 0 10px 0 rgba(169, 169, 170, 0.75);
+    }
+
+    &:active{
+      background-color: $bbt-grey-5;
+      box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.50) inset;
+    }
+
+    &:disabled {
+      color: $bbt-grey-20;
+      background-color: $bbt-grey-5;
+      box-shadow: none;
+      cursor: not-allowed;
+
+      .button__icon {
+        background-color: $bbt-grey-20;
+      }
+    }
+  }
+
+  &--red {
+    background-color: $bbt-red-100;
+
+    &:hover{
+      background-color: $bbt-orange-50;
+    }
+
+    &:focus{
+      background-color: $bbt-red-100;
+      box-shadow: 0 0 10px 0 rgba(169, 19, 10, 0.50);
+    }
+
+    &:active{
+      background-color: $bbt-orange-50;
+      box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.50) inset;
+    }
+
+    &:disabled {
+      color: $bbt-red-50;
+      background-color: $bbt-red-10;
+      box-shadow: none;
+      cursor: not-allowed;
+
+      .button__icon {
+        background-color: $bbt-red-50;
+      }
+    }
+  }
+
+  &--orange {
+    background-color: $bbt-orange-100;
+
+    &:hover{
+      background-color: $bbt-orange-50;
+    }
+
+    &:focus{
+      background-color: $bbt-orange-100;
+      box-shadow: 0 0 10px 0 rgba(239, 134, 80, 0.50);
+    }
+
+    &:active{
+      background-color: $bbt-orange-50;
+      box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.50) inset;
+    }
+
+    &:disabled {
+      color: $bbt-orange-50;
+      background-color: $bbt-orange-10;
+      box-shadow: none;
+      cursor: not-allowed;
+
+      .button__icon {
+        background-color: $bbt-orange-50;
+      }
+    }
+  }
+
+  // button-secondary
+  &-secondary {
+    color: $bbt-blue-100;
+    background-color: transparent;
+    border: toRem(1) solid $bbt-blue-100;
+
+    .button__icon {
+      background-color: $bbt-blue-100;
+    }
+
+    &:hover {
+      color: $bbt-blue-50;
+      background-color: transparent;
+      border: toRem(1) solid $bbt-blue-50;
+
+      .button__icon {
+        background-color: $bbt-blue-50;
+      }
+    }
+
+    &:focus {
+      color: $bbt-blue-100;
+      background-color: $bbt-white;
+      border: toRem(1) solid $bbt-blue-100;
+      box-shadow: 0 0 10px 0 rgba(55, 126, 187, 0.50);
+
+      .button__icon {
+        background-color: $bbt-blue-100;
+      }
+    }
+
+    &:active {
+      color: $bbt-blue-100;
+      background-color: $bbt-white;
+      border: toRem(1) solid $bbt-blue-100;
+      box-shadow: 3px 3px 2px 0 rgba(59, 109, 159, 0.50) inset;
+
+      .button__icon {
+        background-color: $bbt-blue-100;
+      }
+    }
+
+    &:disabled {
+      color: $bbt-blue-10;
+      background-color: transparent;
+      border: toRem(1) solid $bbt-blue-10;
+      box-shadow: none;
+      cursor: not-allowed;
+
+      .button__icon {
+        background-color: $bbt-blue-10;
+      }
+    }
+
+    &.button--green {
+      color: $bbt-primary-green;
+      background-color: transparent;
+      border: toRem(1) solid $bbt-primary-green;
+
+      .button__icon {
+        background-color: $bbt-primary-green;
+      }
+
+      &:hover {
+        color: $bbt-green-50;
+        background-color: transparent;
+        border: toRem(1) solid $bbt-green-50;
+
+        .button__icon {
+          background-color: $bbt-green-50;
+        }
+      }
+
+      &:focus {
+        color: $bbt-primary-green;
+        background-color: $bbt-white;
+        border: toRem(1) solid $bbt-primary-green;
+        box-shadow: 0 0 10px 0 rgba(67, 176, 42, 0.50);
+
+        .button__icon {
+          background-color: $bbt-primary-green;
+        }
+      }
+
+      &:active {
+        color: $bbt-primary-green;
+        background-color: $bbt-white;
+        border: toRem(1) solid $bbt-primary-green;
+        box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.50) inset;
+
+        .button__icon {
+          background-color: $bbt-primary-green;
+        }
+      }
+
+      &:disabled {
+        color: $bbt-green-40;
+        background-color: transparent;
+        border: toRem(1) solid $bbt-green-10;
+        box-shadow: none;
+        cursor: not-allowed;
+
+        .button__icon {
+          background-color: $bbt-green-40;
+        }
+      }
+    }
+
+    &.button--grey {
+      color: $bbt-secondary-grey;
+      background-color: transparent;
+      border: toRem(1) solid $bbt-secondary-grey;
+
+      .button__icon {
+        background-color: $bbt-secondary-grey;
+      }
+
+      &:hover {
+        color: $bbt-grey-50;
+        background-color: transparent;
+        border: toRem(1) solid $bbt-grey-50;
+
+        .button__icon {
+          background-color: $bbt-grey-50;
+        }
+      }
+
+      &:focus {
+        color: $bbt-secondary-grey;
+        background-color: $bbt-white;
+        border: toRem(1) solid $bbt-secondary-grey;
+        box-shadow: 0 0 10px 0 rgba(83, 86, 90, 0.50);
+
+        .button__icon {
+          background-color: $bbt-secondary-grey;
+        }
+      }
+
+      &:active {
+        color: $bbt-secondary-grey;
+        background-color: $bbt-white;
+        border: toRem(1) solid $bbt-secondary-grey;
+        box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.50) inset;
+      }
+
+      &:disabled {
+        color: $bbt-grey-10;
+        background-color: transparent;
+        border: toRem(1) solid $bbt-grey-10;
+        box-shadow: none;
+        cursor: not-allowed;
+
+        .button__icon {
+          background-color: $bbt-grey-10;
+        }
+      }
+    }
+
+    &.button--light-grey {
+      color: $bbt-grey-60;
+      background-color: transparent;
+      border: toRem(1) solid $bbt-grey-60;
+
+      .button__icon {
+        background-color: $bbt-grey-60;
+      }
+
+      &:hover {
+        color: $bbt-grey-40;
+        background-color: transparent;
+        border: toRem(1) solid $bbt-grey-40;
+
+        .button__icon {
+          background-color: $bbt-grey-40;
+        }
+      }
+
+      &:focus {
+        color: $bbt-grey-60;
+        background-color: $bbt-white;
+        border: toRem(1) solid $bbt-grey-60;
+        box-shadow: 0 0 10px 0 rgba(169, 169, 170, 0.75);
+
+        .button__icon {
+          background-color: $bbt-grey-60;
+        }
+      }
+
+      &:active {
+        color: $bbt-grey-60;
+        background-color: $bbt-white;
+        border: toRem(1) solid $bbt-grey-60;
+        box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.50) inset;
+      }
+
+      &:disabled {
+        color: $bbt-grey-20;
+        background-color: transparent;
+        border: toRem(1) solid $bbt-grey-5;
+        box-shadow: none;
+        cursor: not-allowed;
+
+        .button__icon {
+          background-color: $bbt-grey-20;
+        }
+      }
+    }
+
+    &.button--red {
+      color: $bbt-red-100;
+      background-color: transparent;
+      border: toRem(1) solid $bbt-red-100;
+
+      .button__icon {
+        background-color: $bbt-red-100;
+      }
+
+      &:hover {
+        color: $bbt-orange-50;
+        background-color: transparent;
+        border: toRem(1) solid $bbt-orange-50;
+
+        .button__icon {
+          background-color: $bbt-orange-50;
+        }
+      }
+
+      &:focus {
+        color: $bbt-red-100;
+        background-color: $bbt-white;
+        border: toRem(1) solid $bbt-red-100;
+        box-shadow: 0 0 10px 0 rgba(169, 19, 10, 0.50);
+
+        .button__icon {
+          background-color: $bbt-orange-100;
+        }
+      }
+
+      &:active {
+        color: $bbt-red-100;
+        background-color: $bbt-white;
+        border: toRem(1)solid $bbt-red-100;
+        box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.50) inset;
+
+        .button__icon {
+          background-color: $bbt-orange-100;
+        }
+      }
+
+      &:disabled {
+        color: $bbt-orange-10;
+        background-color: transparent;
+        border: toRem(1) solid $bbt-orange-10;
+        box-shadow: none;
+        cursor: not-allowed;
+
+        .button__icon {
+          background-color: $bbt-orange-10;
+        }
+      }
+    }
+
+    &.button--orange {
+      color: $bbt-orange-100;
+      background-color: transparent;
+      border: toRem(1) solid $bbt-orange-100;
+
+      .button__icon {
+        background-color: $bbt-orange-100;
+      }
+
+      &:hover {
+        color: $bbt-orange-50;
+        background-color: transparent;
+        border: toRem(1) solid $bbt-orange-50;
+
+        .button__icon {
+          background-color: $bbt-orange-50;
+        }
+      }
+
+      &:focus {
+        color: $bbt-orange-100;
+        background-color: $bbt-white;
+        border: toRem(1) solid transparent;
+        box-shadow: 0 0 10px 0 rgba(239, 134, 80, 0.50);
+
+        .button__icon {
+          background-color: $bbt-orange-100;
+        }
+      }
+
+      &:active {
+        color: $bbt-orange-100;
+        background-color: $bbt-white;
+        border: toRem(1) solid $bbt-orange-100;
+        box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.50) inset;
+      }
+
+      &:disabled {
+        color: $bbt-orange-10;
+        background-color: transparent;
+        border: toRem(1) solid $bbt-orange-10;
+        box-shadow: none;
+        cursor: not-allowed;
+
+        .button__icon {
+          background-color: $bbt-orange-10;
+        }
+      }
+    }
+  }
+
+  // button-ghost
+  &-gost {
+    color: $bbt-blue-100;
+    background-color: transparent;
+    border: none;
+
+    .button__icon {
+      background-color: $bbt-blue-100;
+    }
+
+    &:hover {
+      color: $bbt-blue-50;
+      background-color: transparent;
+
+      .button__icon {
+        background-color: $bbt-blue-50;
+      }
+    }
+
+    &:focus {
+      color: $bbt-blue-100;
+      background-color: $bbt-white;
+      box-shadow: 0 0 10px 0 rgba(55, 126, 187, 0.50);
+
+      .button__icon {
+        background-color: $bbt-blue-100;
+      }
+    }
+
+    &:active {
+      color: $bbt-blue-100;
+      background-color: $bbt-white;
+      box-shadow: 3px 3px 2px 0 rgba(59, 109, 159, 0.50) inset;
+    }
+
+    &:disabled {
+      color: $bbt-blue-10;
+      background-color: transparent;
+      box-shadow: none;
+      cursor: not-allowed;
+
+      .button__icon {
+        background-color: $bbt-blue-10;
+      }
+    }
+
+    &.button--green {
+      color: $bbt-primary-green;
+      background-color: transparent;
+
+      .button__icon {
+        background-color: $bbt-primary-green;
+      }
+
+      &:hover {
+        color: $bbt-green-50;
+        background-color: transparent;
+
+        .button__icon {
+          background-color: $bbt-green-50;
+        }
+      }
+
+      &:focus {
+        color: $bbt-primary-green;
+        background-color: $bbt-white;
+        box-shadow: 0 0 10px 0 rgba(67, 176, 42, 0.50);
+
+        .button__icon {
+          background-color: $bbt-primary-green;
+        }
+      }
+
+      &:active {
+        color: $bbt-primary-green;
+        background-color: $bbt-white;
+        box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.50) inset;
+      }
+
+      &:disabled {
+        color: $bbt-green-40;
+        background-color: transparent;
+        box-shadow: none;
+        cursor: not-allowed;
+
+        .button__icon {
+          background-color: $bbt-green-40;
+        }
+      }
+    }
+
+    &.button--grey {
+      color: $bbt-secondary-grey;
+      background-color: transparent;
+
+      .button__icon {
+        background-color: $bbt-secondary-grey;
+      }
+
+      &:hover {
+        color: $bbt-grey-50;
+        background-color: transparent;
+
+        .button__icon {
+          background-color: $bbt-grey-50;
+        }
+      }
+
+      &:focus {
+        color: $bbt-secondary-grey;
+        background-color: $bbt-white;
+        box-shadow: 0 0 10px 0 rgba(83, 86, 90, 0.50);
+
+        .button__icon {
+          background-color: $bbt-secondary-grey;
+        }
+      }
+
+      &:active {
+        color: $bbt-secondary-grey;
+        background-color: $bbt-white;
+        box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.50) inset;
+      }
+
+      &:disabled {
+        color: $bbt-grey-10;
+        background-color: transparent;
+        box-shadow: none;
+        cursor: not-allowed;
+
+        .button__icon {
+          background-color: $bbt-grey-10;
+        }
+      }
+    }
+
+    &.button--light-grey {
+      color: $bbt-grey-60;
+      background-color: transparent;
+
+      .button__icon {
+        background-color: $bbt-grey-60;
+      }
+
+      &:hover {
+        color: $bbt-grey-40;
+        background-color: transparent;
+
+        .button__icon {
+          background-color: $bbt-grey-40;
+        }
+      }
+
+      &:focus {
+        color: $bbt-grey-60;
+        background-color: $bbt-white;
+        box-shadow: 0 0 10px 0 rgba(169, 169, 170, 0.75);
+
+        .button__icon {
+          background-color: $bbt-grey-60;
+        }
+      }
+
+      &:active {
+        color: $bbt-grey-60;
+        background-color: $bbt-white;
+        box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.50) inset;
+      }
+
+      &:disabled {
+        color: $bbt-grey-20;
+        background-color: transparent;
+        box-shadow: none;
+        cursor: not-allowed;
+
+        .button__icon {
+          background-color: $bbt-grey-20;
+        }
+      }
+    }
+
+    &.button--red {
+      color: $bbt-red-100;
+      background-color: transparent;
+
+      .button__icon {
+        background-color: $bbt-red-100;
+      }
+
+      &:hover {
+        color: $bbt-orange-50;
+        background-color: transparent;
+
+        .button__icon {
+          background-color: $bbt-red-50;
+        }
+      }
+
+      &:focus {
+        color: $bbt-red-100;
+        background-color: $bbt-white;
+        box-shadow: 0 0 10px 0 rgba(169, 19, 10, 0.50);
+
+        .button__icon {
+          background-color: $bbt-red-100;
+        }
+      }
+
+      &:active {
+        color: $bbt-red-100;
+        background-color: $bbt-white;
+        box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.50) inset;
+      }
+
+      &:disabled {
+        color: $bbt-orange-10;
+        background-color: transparent;
+        box-shadow: none;
+        cursor: not-allowed;
+
+        .button__icon {
+          background-color: $bbt-red-10;
+        }
+      }
+    }
+
+    &.button--orange {
+      color: $bbt-orange-100;
+      background-color: transparent;
+
+      .button__icon {
+        background-color: $bbt-orange-100;
+      }
+
+      &:hover {
+        color: $bbt-orange-50;
+        background-color: transparent;
+
+        .button__icon {
+          background-color: $bbt-orange-50;
+        }
+      }
+
+      &:focus {
+        color: $bbt-orange-100;
+        background-color: $bbt-white;
+        box-shadow: 0 0 10px 0 rgba(239, 134, 80, 0.50);
+
+        .button__icon {
+          background-color: $bbt-orange-100;
+        }
+      }
+
+      &:active {
+        color: $bbt-orange-100;
+        background-color: $bbt-white;
+        box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.50) inset;
+      }
+
+      &:disabled {
+        color: $bbt-orange-10;
+        background-color: transparent;
+        box-shadow: none;
+        cursor: not-allowed;
+
+        .button__icon {
+          background-color: $bbt-orange-10;
+        }
+      }
+    }
+  }
+
+  // Size
+  &--big {
+    gap: toRem(10);
+    padding: toRem(10) toRem(16);
+    font-size: toRem(14);
+    border-radius: toRem(5);
+
+    .button__icon {
+      width: toRem(18);
+      height: toRem(18);
+      mask-size: toRem(18);
+    }
+  }
+}
