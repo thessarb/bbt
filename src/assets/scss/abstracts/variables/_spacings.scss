@@ -1,0 +1,13 @@
+$unit-factor: toRem(10);
+
+$unit-0: calc(1 / 2 * $unit-factor);    /* 5 */
+$unit-1: calc(2 * $unit-factor);    /* 20 */
+$unit-2: calc(4 * $unit-factor);    /* 30 */
+$unit-3: calc(6 * $unit-factor);    /* 40 */
+$unit-4: calc(8 * $unit-factor);    /* 50 */
+$unit-5: calc(10 * $unit-factor);   /* 60 */
+$unit-6: calc(12 * $unit-factor);   /* 70 */
+$unit-7: calc(14 * $unit-factor);   /* 80 */
+$unit-8: calc(16 * $unit-factor);   /* 90 */
+$unit-9: calc(18 * $unit-factor);   /* 100 */
+$unit-10: calc(20 * $unit-factor);  /* 110 */
