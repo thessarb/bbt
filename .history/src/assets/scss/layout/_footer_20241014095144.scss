@@ -1,0 +1,28 @@
+.footer {
+    height: calc(10 * $unit-factor);
+    padding: calc(2 * $unit-factor); 
+    color: $bbt-white;
+    border: 1px solid $bbt-secondary-grey;
+    border-radius: 4px;
+    background-color: $bbt-secondary-grey;
+    margin: 0px calc(2 * $unit-factor) 0px calc(2 * $unit-factor);
+    > div {
+        display: flex;
+        justify-content: flex-start;
+      > div {
+        display: flex;
+        align-items: center;
+        vertical-align: middle;
+        justify-content: flex-start;
+        a {
+          text-decoration: none;
+        }
+      }
+    }
+
+    @media (min-width: 768px) {
+      &__developed-by {
+        justify-content: flex-end;
+      }
+    }
+  }

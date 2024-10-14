@@ -1,0 +1,192 @@
+.vertical-menu {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    padding-top: 104px;
+    background: $bbt-grey-10;
+    color: $bbt-white;
+    transition: all 0.3s;
+    min-height: calc(100vh - 80px);
+    z-index: 1001;
+
+    &__caption-color {
+        padding: 20px;
+        color: $bbt-grey-50;
+    }
+
+    #sidebar-menu {
+      padding: 20px;
+
+      .menu-item {
+        text-decoration: none;
+        outline: none;
+
+        button {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          margin-bottom: 5px;
+        //   padding: 10px 20px;
+        //   color: $bbt-white;
+          background: none;
+          border: none;
+          border-radius: 8px;
+          gap: 5px;
+          text-align: start;
+
+          span {
+            // font-family: $urbanist-medium;
+            font-size: 16px;
+            background: $bbt-white;
+            // color: $neutral-700;
+          }
+
+          .icon {
+            background: $bbt-grey-50;
+          }
+
+          &.collapsed {
+            .sidebar-arrow {
+              transform: rotate(0deg);
+              transition: 0.3s;
+            }
+          }
+
+          .sidebar-arrow {
+            transform: rotate(180deg);
+            transition: 0.3s;
+          }
+
+          &:hover {
+            transition: 0.3s;
+            // background: $neutral-200;
+
+            span {
+            //   color: $neutral-800;
+            //   background: $neutral-200;
+              transition: 0.3s;
+            }
+
+            .icon {
+            //   background: $neutral-800;
+              transition: 0.3s;
+            }
+          }
+        }
+
+        &.active {
+          button {
+            position: relative;
+
+            span {
+              color: $bbt-primary-green;
+            }
+
+            .icon {
+              background: $bbt-primary-green;
+            }
+
+            .sidebar-arrow {
+              transform: rotate(180deg);
+              transition: 0.3s;
+            }
+
+            &::after {
+              content: "";
+              position: absolute;
+              top: 0;
+              right: 0;
+              height: 100%;
+              width: 4px;
+              background-color: $bbt-primary-green;;
+              border-top-left-radius: 10px;
+              border-bottom-left-radius: 10px;
+            }
+
+            &:hover {
+              border-top-right-radius: 0px;
+              border-bottom-right-radius: 0px;
+            }
+          }
+        }
+
+        div {
+          .sub-menu {
+            margin: 0;
+            background: $bbt-white;
+            // color: $neutral-700;
+            overflow: hidden;
+            cursor: pointer;
+
+            li {
+              display: flex;
+              position: relative;
+
+              &:hover {
+                // background: $yellow-50;
+                border-radius: 4px;
+              }
+
+              a {
+                width: 100%;
+                padding: 10px 20px 10px 60px;
+                text-decoration: none;
+                // color: $neutral-700;
+
+                &::before {
+                  content: "";
+                  position: absolute;
+                  top: 0;
+                  left: 30px;
+                  height: 100%;
+                  width: 1px;
+                //   background-color: $neutral-600;
+                }
+
+                &.active {
+                //   background: $yellow-50;
+                //   font-family: $urbanist-semibold;
+
+                  &::before {
+                    // background-color: $yellow-400;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    @media (max-width: 992px) {
+      padding-top: 80px;
+      width: 0;
+      box-shadow: 4px 0px 8px rgba(16, 24, 64, 0.08);
+
+      &.open {
+        width: 250px;
+        transition: 0.3s;
+        animation-name: shownum;
+        animation-duration: 0.3s;
+        animation-delay: 0.3s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes shownum {
+        from {
+          display: none;
+          visibility: hidden;
+        }
+        to {
+          display: block;
+          visibility: visible;
+        }
+      }
+    }
+
+    @media (max-width: 375px) {
+      &.open {
+        width: 100%;
+      }
+    }
+  }
