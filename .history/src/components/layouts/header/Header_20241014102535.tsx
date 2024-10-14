@@ -1,4 +1,6 @@
 import React, { Fragment } from "react";
+import { SidebarStatus } from "src/store/sidebar/SidebarStatus";
+
 interface HeaderProps {
   sidebarStatus: boolean;
   toggleSidebar: (status: boolean) => void;
@@ -8,7 +10,6 @@ const ThommasGroupeLogo: string =
   require("../../../assets/images/logo/Logo.svg").default;
 
 const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
-  // const userData = useUserdata((state: any) => state.userData);
 
   const handleToggle = () => {
     toggleSidebar(!sidebarStatus); 
