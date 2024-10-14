@@ -1,0 +1,20 @@
+
+import React from "react";
+import { Helmet } from "react-helmet";
+import Sidebar from "../../components/layouts/sidebar/Sidebar";
+import Dashboard from "../../components/panel/dashboard/Dashboard";
+
+const OrdersView: React.FC = () => {
+  return (
+    <>
+      <Helmet>
+        <title>Übersicht</title>
+      </Helmet>
+      <Sidebar>
+        <Orders />
+      </Sidebar>
+    </>
+  );
+};
+
+export default OrdersView;
