@@ -1,0 +1,41 @@
+.access-denied {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  text-align: center;
+  background-color: $bbt-red-50;
+  
+  > div {
+    h1 {
+      color: $bbt-red-100;
+      font-size: 8.5rem;
+      letter-spacing: 0.1em;
+      margin: 0.025em 0;
+      text-shadow: 0.05em 0.05em 0 $bbt;
+      white-space: nowrap;
+
+      @media (max-width: 767px) {
+        font-size: 7.5rem;
+      }
+
+      @media (max-width: 576px) {
+        font-size: 5.5rem;
+      }
+    }
+
+    h2 {
+      color: $bbt-grey-70;
+      margin-bottom: 0.4em;
+    }
+
+    p {
+      margin-top: 0;
+      font-size: 16px;
+      max-width: 700px;
+      margin: auto;
+      margin-bottom: 1rem;
+    }
+  }
+}
