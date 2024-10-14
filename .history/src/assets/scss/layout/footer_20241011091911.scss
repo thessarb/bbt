@@ -1,0 +1,33 @@
+.footer {
+    max-width: 1400px;
+    height: 60px;
+    padding: 15px 70px;
+    color: $bbt-white;
+    border: 1px solid $bbt-secondary-grey;
+    border-radius: 4px;
+    background-color: $bbt-secondary-grey;
+    font-size: 14px;
+    > div {
+        display: flex;
+        justify-content: flex-start;
+      > div {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        a {
+          text-decoration: none;
+        }
+      }
+    }
+
+    @media (min-width: 768px) {
+      &__developed-by {
+        justify-content: flex-end;
+      }
+    }
+
+    @media (max-width: 992px) {
+      margin-left: 0;
+      padding: 15px 25px;
+    }
+  }
