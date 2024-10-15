@@ -1,25 +1,44 @@
-import React, { Fragment, ReactNode } from "react";
+import React, { Fragment, ReactNode, useRef, useEffect } from "react";
 import { SidebarStatus } from "src/store/sidebar/SidebarStatus";
 import Header from "../header/Header";
 import SidebarContent from "./SidebarContent";
 import Footer from "../footer/Footer";
 const ThommasGroupeLogo: string =
   require("../../../assets/images/logo/Logo.svg").default;
+
 interface SidebarProps {
   children: ReactNode;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   const sidebarStatus = SidebarStatus((state: any) => state.sidebar);
-  const addSidebarStatus = SidebarStatus((state: any) => state.addSidebar); 
-  
+  const addSidebarStatus = SidebarStatus((state: any) => state.addSidebar);
+  const sidebarRef = useRef<HTMLDivElement | null>(null);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
+      addSidebarStatus(false);
+    }
+  };
+
+  useEffect(() => {
+    if (sidebarStatus) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [sidebarStatus]);
+
   return (
-    <>
+    <Fragment>
       <Header sidebarStatus={sidebarStatus} toggleSidebar={addSidebarStatus} />
       <div
-        className={`${
-          sidebarStatus === true ? " vertical-menu vertical-menu__open" : " vertical-menu__closed"
-        }`}
+        ref={sidebarRef}
+        className={`vertical-menu ${sidebarStatus ? "open" : "closed"}`}
       >
         <div data-simplebar>
           <div className="vertical-menu__logo">
@@ -45,7 +64,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
         <div className="page-content">{children}</div>
       </div>
       <Footer />
-    </>
+    </Fragment>
   );
 };
 

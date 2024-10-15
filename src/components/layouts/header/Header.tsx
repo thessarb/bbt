@@ -18,7 +18,7 @@ const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
     <Fragment>
       <header id="page-topbar">
         <div className="navbar-header">
-          <div className="d-flex">
+          <div>
             <div className="navbar-header__navbar-brand-box navbar-header__logo">
               <img src={ThommasGroupeLogo} alt="ThommasGroupe" />
             </div>
@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
               </button>
             </div>
           </div>
-          <div className="d-flex navbar-header__main-navbar">
+          <div className="navbar-header__main-navbar">
             <div className="navbar-header__action-box">
               <div className="navbar-header-notification">
                 <button className="button button-gost button--big button--grey">

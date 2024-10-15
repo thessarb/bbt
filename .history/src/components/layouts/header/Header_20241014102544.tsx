@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-
 interface HeaderProps {
   sidebarStatus: boolean;
   toggleSidebar: (status: boolean) => void;

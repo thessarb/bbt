@@ -47,7 +47,7 @@ const SidebarButton: React.FC<SidebarButtonProps> = ({
       <NavLink to={path ? path : ""} className="sidebar__menu-item">
         <button className="collapsed" type="button">
           {icon && <i className={`icon ${icon}`} />}
-          <span className="body-normal__regular">{name}</span>
+          <span>{name}</span>
         </button>
       </NavLink>
       {/* )}  */}

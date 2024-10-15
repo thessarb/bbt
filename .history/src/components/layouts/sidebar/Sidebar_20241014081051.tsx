@@ -12,7 +12,6 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   const sidebarStatus = SidebarStatus((state: any) => state.sidebar);
   const addSidebarStatus = SidebarStatus((state: any) => state.addSidebar); 
-
   
   return (
     <>
