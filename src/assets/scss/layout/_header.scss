@@ -25,6 +25,10 @@
       align-items: center;
       margin: 0;
 
+      a {
+        cursor: pointer;
+      }
+
       @media (max-width: 992px) {
         height: 100%;
         width: 146px;
@@ -65,7 +69,7 @@
     }
 
     &__notification {
-      margin: auto;
+      padding: 10px;
       display: flex;
       align-items: center;
       vertical-align: middle;
@@ -78,6 +82,7 @@
 
     &__user-box {
       display: grid;
+      cursor: pointer;
     }
 
     &__user-text {
