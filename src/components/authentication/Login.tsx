@@ -75,7 +75,7 @@ const Login = () => {
 
                     <div className="login__button">
                         <Link to={PATHS.inviteRequest} className="login__button-register caption__regular">
-                            Sie haben noch keinen Zugang?
+                            <span className="login__button-register-text">Sie haben noch keinen Zugang?</span>
                             <span className="login__button-register-link">Zugang anfragen</span>
                         </Link>
 
