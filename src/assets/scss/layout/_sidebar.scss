@@ -2,17 +2,28 @@
   width: 300px;
   position: fixed;
   top: 0;
+  left: 0;
   background: $bbt-grey-10;
   color: $bbt-secondary-grey;
-  transition: 0.3s ease;
   height: 100%;
   z-index: 1001;
+  transition: transform 0.3s ease; 
+  transform: translateX(-100%); 
+
+  &.open {
+    transform: translateX(0);
+  }
+
+  &.closed {
+    transform: translateX(-100%); 
+  }
 
   &__caption-color {
     padding-left: 26px;
     padding-top: 26px;
     color: $bbt-grey-50;
   }
+
   &__logo {
     display: flex;
     align-items: center;
@@ -21,14 +32,7 @@
     padding-right: calc(2 * $unit-factor);
     padding-top: 14px;
   }
-  &__open {
-    width: 300px;
-    transition: width 0.3s ease;
-  }
-  &__closed {
-    display: none;
-    visibility: hidden;
-  }
+
   #sidebar-menu {
     padding-left: 26px;
     padding-top: calc(2 * $unit-factor);
@@ -51,6 +55,8 @@
           cursor: pointer;
 
           span {
+            font-family: $font--boxed-regular;
+            font-weight: 500;
             font-size: 16px;
             background: $bbt-grey-10;
             color: $bbt-secondary-grey;
@@ -60,19 +66,14 @@
             background: $bbt-grey-50;
           }
 
-          &.collapsed {
-            .sidebar-arrow {
-              transform: rotate(0deg);
-              transition: 0.3s;
-            }
-          }
-
           &:hover {
             transition: 0.3s ease-out;
             background: $bbt-grey-10;
 
             span {
               color: $bbt-secondary-grey;
+              font-family: $font--boxed-medium;
+              font-weight: 600;
               background: $bbt-grey-10;
               transition: 0.3s ease-out;
             }
@@ -83,39 +84,15 @@
             }
           }
         }
-
-        &.active {
-          button {
-            position: relative;
-
-            span {
-              color: $bbt-primary-green;
-            }
-
-            .icon {
-              background: $bbt-primary-green;
-            }
-          }
-        }
       }
     }
   }
 
   @media (max-width: 992px) {
     box-shadow: 4px 0px 8px rgba(16, 24, 64, 0.08);
-
-    &__open {
-      width: 250px;
-      transition: 0.3s;
-      animation-name: shownum;
-      animation-duration: 0.3s;
-      animation-delay: 0.3s;
-      animation-fill-mode: forwards;
-    }
   }
+
   @media (max-width: 375px) {
-    &__open {
-      width: 100%;
-    }
+    width: 100%; 
   }
 }
