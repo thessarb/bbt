@@ -30,23 +30,23 @@
   &__button {
     display: flex;
     gap: $unit-3;
-  }
 
-  &__button-login {
-    flex-shrink: 0;
-  }
+    &-login {
+      flex-shrink: 0;
+    }
 
-  &__button-register {
-    color: $bbt-text;
-    text-decoration: none;
-    cursor: pointer;
-  }
+    &-register {
+      color: $bbt-text;
+      text-decoration: none;
+      cursor: pointer;
+    }
 
-  &__button-register-text {
-    margin-right: toRem(3);
-  }
+    &-register-text {
+      margin-right: toRem(3);
+    }
 
-  &__button-register-link {
-    color: $bbt-primary-green;
+    &-register-link {
+      color: $bbt-primary-green;
+    }
   }
 }

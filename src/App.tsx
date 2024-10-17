@@ -11,7 +11,7 @@ function App() {
     return (
         <div className="body">
             <BrowserRouter>
-                <Login/>
+                <ForgotPassword/>
             </BrowserRouter>
         </div>
     );

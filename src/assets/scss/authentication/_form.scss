@@ -95,17 +95,19 @@
 
   // Select styles
   &__select {
-    .react-select__value-container {
-      padding: 0;
-    }
-
     &.filled {
       .react-select__control {
         border-bottom-color: $bbt-secondary-grey;
       }
     }
+  }
 
-    .react-select__control {
+  .react-select {
+    &__value-container {
+      padding: 0;
+    }
+
+    &__control {
       min-height: toRem(18);
       border: none;
       border-bottom: toRem(1) solid $bbt-grey-50;
@@ -134,11 +136,11 @@
       }
     }
 
-    .react-select__input {
+    &__input {
       margin-left: toRem(-2) !important;
     }
 
-    .react-select__placeholder {
+    &__placeholder {
       margin-left: 0;
       font-family: $font--boxed-regular;
       font-weight: 500;
@@ -148,16 +150,16 @@
       transition: color .35s ease-in-out;
     }
 
-    .react-select__single-value {
+    &__single-value {
       margin-left: 0;
       color: $bbt-text;
     }
 
-    .react-select__indicator-separator {
+    &__indicator-separator {
       display: none;
     }
 
-    .react-select__indicator {
+    &__indicator {
       color: $bbt-grey-50;
       width: toRem(18);
       height: toRem(18);
@@ -167,7 +169,7 @@
       transition: background-color 0.35s;
     }
 
-    .react-select__clear-indicator {
+    &__clear-indicator {
       mask-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='X'%3E%3Cpath id='Vector' d='M11.2473 10.628C11.2879 10.6686 11.3202 10.7169 11.3422 10.77C11.3642 10.8231 11.3755 10.88 11.3755 10.9375C11.3755 10.995 11.3642 11.0519 11.3422 11.105C11.3202 11.1581 11.2879 11.2064 11.2473 11.247C11.2066 11.2877 11.1584 11.3199 11.1053 11.3419C11.0522 11.3639 10.9952 11.3752 10.9377 11.3752C10.8803 11.3752 10.8233 11.3639 10.7702 11.3419C10.7171 11.3199 10.6689 11.2877 10.6282 11.247L7.00024 7.61851L3.37227 11.247C3.29018 11.3291 3.17884 11.3752 3.06274 11.3752C2.94665 11.3752 2.8353 11.3291 2.75321 11.247C2.67112 11.1649 2.625 11.0536 2.625 10.9375C2.625 10.8214 2.67112 10.7101 2.75321 10.628L6.38173 7L2.75321 3.37203C2.67112 3.28994 2.625 3.1786 2.625 3.0625C2.625 2.9464 2.67112 2.83506 2.75321 2.75297C2.8353 2.67088 2.94665 2.62476 3.06274 2.62476C3.17884 2.62476 3.29018 2.67088 3.37227 2.75297L7.00024 6.38148L10.6282 2.75297C10.7103 2.67088 10.8216 2.62476 10.9377 2.62476C11.0538 2.62476 11.1652 2.67088 11.2473 2.75297C11.3294 2.83506 11.3755 2.9464 11.3755 3.0625C11.3755 3.1786 11.3294 3.28994 11.2473 3.37203L7.61876 7L11.2473 10.628Z' fill='%23A9130A'/%3E%3C/g%3E%3C/svg%3E%0A");
       background-color: $bbt-secondary-grey;
       margin-right: $unit-0;
@@ -177,12 +179,12 @@
       }
     }
 
-    .react-select__dropdown-indicator {
+    &__dropdown-indicator {
       mask-image: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='CaretDown'%3E%3Cpath id='Vector' d='M15.023 7.14798L9.39798 12.773C9.34574 12.8253 9.2837 12.8668 9.21541 12.8951C9.14713 12.9234 9.07393 12.938 9.00001 12.938C8.92609 12.938 8.85289 12.9234 8.7846 12.8951C8.71632 12.8668 8.65428 12.8253 8.60204 12.773L2.97704 7.14798C2.87149 7.04243 2.81219 6.89927 2.81219 6.75001C2.81219 6.60074 2.87149 6.45759 2.97704 6.35204C3.08259 6.24649 3.22574 6.18719 3.37501 6.18719C3.52427 6.18719 3.66743 6.24649 3.77298 6.35204L9.00001 11.5798L14.227 6.35204C14.2793 6.29978 14.3413 6.25832 14.4096 6.23004C14.4779 6.20175 14.5511 6.18719 14.625 6.18719C14.6989 6.18719 14.7721 6.20175 14.8404 6.23004C14.9087 6.25832 14.9707 6.29978 15.023 6.35204C15.0752 6.4043 15.1167 6.46634 15.145 6.53463C15.1733 6.60291 15.1878 6.6761 15.1878 6.75001C15.1878 6.82392 15.1733 6.8971 15.145 6.96539C15.1167 7.03367 15.0752 7.09571 15.023 7.14798Z' fill='%23A9A9AA'/%3E%3C/g%3E%3C/svg%3E%0A");
       background-color: $bbt-grey-50;
     }
 
-    .react-select__menu {
+    &__menu {
       border-radius: 0;
       box-shadow: 0px 6px 16px 0 rgba(0, 0, 0, 0.08);
       border-bottom: 1px solid $bbt-primary-green;
@@ -190,7 +192,7 @@
       padding: toRem(10) toRem(8) toRem(8) 0;
     }
 
-    .react-select__menu-list {
+    &__menu-list {
       max-height: 140px;
       overflow-y: auto;
 
@@ -210,7 +212,7 @@
       }
     }
 
-    .react-select__option {
+    &__option {
       background: $bbt-white;
       color: $bbt-text;
       display: flex;
