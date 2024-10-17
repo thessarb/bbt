@@ -21,7 +21,7 @@
 
   &__header {
     height: 78px;
-    padding: 20px;
+    padding: $unit-1;
     color: $bbt-secondary-grey;
     border-bottom: 1px solid $bbt-grey-50;
     display: flex;
@@ -32,9 +32,6 @@
   &__user {
     color: $bbt-secondary-grey;
   }
-  &__date {
-    color: $bbt-secondary-grey;
-  }
 
   &__user-name {
     color: $bbt-secondary-grey;
@@ -42,13 +39,25 @@
   &__user-email {
     color: $bbt-primary-green;
   }
+  &__message {
+    color: $bbt-secondary-grey;
+  }
+
   &__change-password-link {
     color: $bbt-primary-green;
     cursor: pointer;
     text-decoration: none;
   }
+
+  &__button-end {
+    display: flex;
+    justify-content: end;
+    margin-top: $unit-3; 
+    margin-left: auto;
+  }
+
   &__body {
-    padding: 20px;
+    padding: $unit-1;
 
     p {
       margin: 0 0 10px;
@@ -58,6 +67,10 @@
       border: 0;
       border-top: 1px solid $bbt-grey-10;
       margin: 15px 0;
+    }
+
+    > div:last-child {
+      padding-bottom: $unit-1;
     }
   }
 }

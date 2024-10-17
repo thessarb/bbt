@@ -1,11 +1,11 @@
 .footer {
-    height: 60px;
-    padding: calc(2 * $unit-factor); 
+    height: $unit-5;
+    padding: $unit-1; 
     color: $bbt-white;
     border: 1px solid $bbt-secondary-grey;
     border-radius: 4px;
     background-color: $bbt-secondary-grey;
-    margin: 0px calc(2 * $unit-factor) 0px calc(2 * $unit-factor);
+    margin: 0px $unit-1 $unit-1 $unit-1;
     > div {
         display: flex;
         justify-content: flex-start;

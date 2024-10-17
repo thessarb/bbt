@@ -28,14 +28,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: calc(2 * $unit-factor);
-    padding-right: calc(2 * $unit-factor);
+    padding-left: $unit-1;
+    padding-right: $unit-1;
     padding-top: 14px;
   }
 
   #sidebar-menu {
     padding-left: 26px;
-    padding-top: calc(2 * $unit-factor);
+    padding-top: $unit-1;
     .sidebar {
       &__menu-item {
         text-decoration: none;
@@ -50,7 +50,7 @@
           background: none;
           border: none;
           border-radius: 8px;
-          gap: 5px;
+          gap: $unit-0;
           text-align: start;
           cursor: pointer;
 
@@ -88,11 +88,11 @@
     }
   }
 
-  @media (max-width: 992px) {
+  @media (min-width: 300px) and (max-width: 992px) {
     box-shadow: 4px 0px 8px rgba(16, 24, 64, 0.08);
   }
 
-  @media (max-width: 375px) {
+  @media (min-width: 200px) and  (max-width: 375px) {
     width: 100%; 
   }
 }

@@ -16,11 +16,11 @@
       text-shadow: 0.05em 0.05em 0 $bbt-red-10;
       white-space: nowrap;
 
-      @media (max-width: 767px) {
+      @media (min-width: 300px) and (max-width: 767px) {
         font-size: 7.5rem;
       }
 
-      @media (max-width: 576px) {
+      @media (min-width: 300px) and (max-width: 576px) {
         font-size: 5.5rem;
       }
     }

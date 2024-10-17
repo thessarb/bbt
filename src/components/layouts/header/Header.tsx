@@ -1,5 +1,7 @@
 import React, { Fragment, useState, useRef, useEffect } from "react";
 import PATHS from "src/routes/Paths";
+import NotificationDropdown from "../Common/NotificationDropdown";
+import UserDropdown from "../Common/UserDropdown";
 interface HeaderProps {
   sidebarStatus: boolean;
   toggleSidebar: (status: boolean) => void;
@@ -10,14 +12,23 @@ const ThommasGroupeLogo: string =
 
 const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
   // const userData = useUserdata((state: any) => state.userData);
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
+
+  const [isUserDropdownOpen, setUserDropdownOpen] = useState(false);
+  const [isNotificationDropdownOpen, setNotificationDropdownOpen] =
+    useState(false);
   const userBoxRef = useRef<HTMLDivElement | null>(null);
+  const notificationRef = useRef<HTMLDivElement | null>(null);
+
   const handleToggle = () => {
     toggleSidebar(!sidebarStatus);
   };
 
   const handleUserBoxClick = () => {
-    setDropdownOpen((prevState) => !prevState);
+    setUserDropdownOpen((prevState) => !prevState);
+  };
+
+  const handleNotificationClick = () => {
+    setNotificationDropdownOpen((prevState) => !prevState);
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -25,12 +36,18 @@ const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
       userBoxRef.current &&
       !userBoxRef.current.contains(event.target as Node)
     ) {
-      setDropdownOpen(false);
+      setUserDropdownOpen(false);
+    }
+    if (
+      notificationRef.current &&
+      !notificationRef.current.contains(event.target as Node)
+    ) {
+      setNotificationDropdownOpen(false);
     }
   };
 
   useEffect(() => {
-    if (isDropdownOpen) {
+    if (isUserDropdownOpen || isNotificationDropdownOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -39,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isDropdownOpen]);
+  }, [isUserDropdownOpen, isNotificationDropdownOpen]);
 
   return (
     <Fragment>
@@ -63,11 +80,19 @@ const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
             </div>
           </div>
           <div className="navbar-header__main-navbar">
-            <div className="navbar-header__action-box">
-              <div className="navbar-header__notification">
+            <div
+                className="navbar-header__notification"
+                ref={notificationRef}
+                onClick={handleNotificationClick}
+              >
                 <i className="icon-notification"></i>
+                {isNotificationDropdownOpen && (
+                  <div className="overlay" />
+                )}
+                {isNotificationDropdownOpen && (
+                  <NotificationDropdown />
+                )}
               </div>
-
               <div
                 className="navbar-header__user-box"
                 ref={userBoxRef}
@@ -77,43 +102,15 @@ const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
                   Eingeloggt als:
                 </span>
                 <span className="body-normal__regular">Vorname Nachname</span>
-                {isDropdownOpen && <div className="overlay" />}
-                {isDropdownOpen && (
-                  <div className="user-info-dropdown">
-                    <div className="user-info-dropdown__header heading__semibold">
-                      <span>Benutzer Informationen</span>
-                      <button className="button button-gost button--big button--grey">
-                        <i className="button__icon icon-x"></i>
-                      </button>
-                    </div>
-                    <div className="user-info-dropdown__body">
-                      <p className="user-info-dropdown__user caption__regular">
-                        Eingeloggt als:
-                      </p>
-                      <p className="user-info-dropdown__user-name body-big__medium">
-                        Vorname Nachname{" "}
-                        <span className="user-info-dropdown__user-email body-normal__regular">
-                          vorname.nachname@firma.de
-                        </span>
-                      </p>
-                      <p className="user-info-dropdown__date body-small__regular">
-                        Registriert: 10.09.2024
-                      </p>
-                      <hr />
-                      <span
-                        className="user-info-dropdown__change-password-link body-normal__regular"
-                      >
-                        Passwort ändern
-                      </span>
-                    </div>
-                  </div>
+                {isUserDropdownOpen && <div className="overlay" />}
+                {isUserDropdownOpen && (
+                  <UserDropdown/>
                 )}
               </div>
               <div>
                 <button className="button button--big button--light-grey">
                   <i className="button__icon icon-sign-out"></i>
                 </button>
-              </div>
             </div>
           </div>
         </div>
