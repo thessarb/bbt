@@ -1,0 +1,52 @@
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+
+  &__username {
+    margin-bottom: toRem(18);
+  }
+
+  &__password {
+    margin-bottom: toRem(8);
+  }
+
+  &__forgot-pasword {
+    margin-bottom: $unit-5;
+    color: $bbt-text;
+    text-align: right;
+  }
+
+  &__forgot-pasword-link {
+    margin-left: toRem(3);
+    color: $bbt-primary-green;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  // Button
+  &__button {
+    display: flex;
+    gap: $unit-3;
+  }
+
+  &__button-login {
+    flex-shrink: 0;
+  }
+
+  &__button-register {
+    color: $bbt-text;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  &__button-register-text {
+    margin-right: toRem(3);
+  }
+
+  &__button-register-link {
+    color: $bbt-primary-green;
+  }
+}
