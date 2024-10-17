@@ -1,0 +1,28 @@
+.thank-you {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: toRem(16);
+    margin-bottom: $unit-6;
+    color: $bbt-black;
+  }
+
+  &__title {
+    color: $bbt-text;
+  }
+
+  &__author {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__author-team {
+    font-weight: 700;
+  }
+}

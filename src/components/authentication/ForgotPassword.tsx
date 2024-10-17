@@ -19,14 +19,13 @@ const ForgotPassword = () => {
         <>
             <div className="forgot-password">
                 <form className="form">
-
                     <div className="form__logo">
                         <img src={ThommasGroupeLogo} alt="ThommasGroupe"/>
                     </div>
                     <span className="forgot-password__title body-normal__semibold">
                         Passwort vergessen?
                     </span>
-                    <div className="form__field forgot-password__username ">
+                    <div className="form__field forgot-password__username">
                         <label
                             htmlFor="username"
                             className={`form__label caption__regular ${isEmailFilled ? "filled" : ""}`}>
@@ -44,6 +43,15 @@ const ForgotPassword = () => {
                             required/>
                         <span className="error-message caption__regular">Error message</span>
                     </div>
+
+                    <div className="form-error-message body-small__regular">
+                        Es existiert kein Konto mit dieser E-Mail-Adresse.
+                    </div>
+
+                    <Link to={PATHS.inviteRequest} className="forgot-password__button-register caption__regular">
+                        <span className="forgot-password__button-register-text">Sie haben noch keinen Zugang?</span>
+                        <span className="forgot-password__button-register-link">Zugang anfragen</span>
+                    </Link>
 
                     <div className="forgot-password__button">
                         <Link to={PATHS.login}

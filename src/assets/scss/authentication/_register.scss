@@ -1,0 +1,36 @@
+.register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+
+  &__title {
+    display: block;
+    margin-bottom: toRem(15);
+    color: $bbt-text;
+  }
+
+  &__box {
+    display: flex;
+    flex-direction: column;
+    gap: $unit-1;
+    margin-bottom: $unit-3;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: space-between;
+    gap: $unit-3;
+  }
+
+  &__button-register {
+    flex-shrink: 0;
+  }
+
+  &__form-field {
+    .error-message {
+      margin-top: $unit-0;
+    }
+  }
+}
