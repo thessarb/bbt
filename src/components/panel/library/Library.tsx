@@ -4,7 +4,7 @@ const Library = () => {
 
     return (
         <>
-            <div className="table-list table-list--secondary">
+            <div className="library table-list table-list--secondary">
                 <table role="table">
                     <thead>
                     <tr role="row">

@@ -19,41 +19,41 @@ const UnreadMessages = () => {
                     <thead>
                     <tr role="row">
                         <th role="columnheader">
-                            <div className='body-normal__semibold'>
+                            <span className='body-normal__semibold'>
                                 Auftrag
                                 <i className="icon-dots-three-vertical"></i>
-                            </div>
+                            </span>
                         </th>
                         <th role="columnheader">
-                            <div className='body-normal__semibold'>
+                            <span className='body-normal__semibold'>
                                 Auftragsname
                                 <i className="icon-dots-three-vertical"></i>
-                            </div>
+                            </span>
                         </th>
                         <th role="columnheader">
-                            <div className='body-normal__semibold'>
+                            <span className='body-normal__semibold'>
                                 Betreff
                                 <i className="icon-dots-three-vertical"></i>
-                            </div>
+                            </span>
 
                         </th>
                         <th role="columnheader">
-                            <div className='body-normal__semibold'>
+                            <span className='body-normal__semibold'>
                                 Inhalt
                                 <i className="icon-dots-three-vertical"></i>
-                            </div>
+                            </span>
                         </th>
                         <th role="columnheader">
-                            <div className='body-normal__semibold'>
+                            <span className='body-normal__semibold'>
                                 Datum
                                 <i className="icon-dots-three-vertical"></i>
-                            </div>
+                            </span>
                         </th>
                         <th role="columnheader">
-                            <div className='body-normal__semibold'>
+                            <span className='body-normal__semibold'>
                                 Dringlichkeit
                                 <i className="icon-dots-three-vertical"></i>
-                            </div>
+                            </span>
                         </th>
                     </tr>
                     </thead>
