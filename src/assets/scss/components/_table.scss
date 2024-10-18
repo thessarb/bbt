@@ -10,16 +10,19 @@
   &__title {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     gap: $unit-0;
+    min-height: $unit-5;
     padding: $unit-factor toRem(26) $unit-factor $unit-factor;
-    background: $bbt-white;
+    background: $bbt-grey-10;
 
     @media (min-width: 992px) {
       flex-direction: row;
       justify-content: space-between;
       height: $unit-5;
       padding: 0 toRem(26) 0 $unit-factor;
+      background: $bbt-white;
       border: none;
     }
   }
@@ -54,6 +57,15 @@
           .icon-dots-three-vertical {
             background-color: $bbt-secondary-grey;
             cursor: pointer;
+          }
+
+          @media (min-width: 992px) {
+            min-width: toRem(120);
+
+            &:first-child,
+            &:last-child {
+              min-width: auto;
+            }
           }
         }
 
@@ -124,17 +136,27 @@
             text-align: right !important;
 
             &:before {
+              display: none;
               min-width: 0;
               padding-right: 0;
 
               @media (min-width: 576px) {
+                display: block;
                 min-width: calc(50vw - $unit-4);
                 padding-right: $unit-factor;
               }
             }
 
             @media (min-width: 992px) {
-              padding: toRem(16) $unit-factor;
+              padding: 0 $unit-factor;
+            }
+          }
+
+          &:nth-last-child(2) {
+            @media (min-width: 992px) {
+              [class^="icon-"] {
+                margin-left: $unit-0;
+              }
             }
           }
 
@@ -145,7 +167,7 @@
 
           @media (min-width: 992px) {
             display: table-cell;
-            padding: 0 $unit-factor;
+            padding: toRem(16) $unit-factor;
             word-break: break-word;
             background: $bbt-white;
           }
@@ -166,6 +188,7 @@
 
   @media (min-width: 992px) {
     background: $bbt-white;
+    overflow-x: auto;
   }
 
   &--secondary,

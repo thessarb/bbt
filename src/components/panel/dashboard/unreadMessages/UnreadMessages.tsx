@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link} from "react-router-dom"
+import PATHS from "../../../../routes/Paths";
 
 const UnreadMessages = () => {
 
@@ -9,9 +11,9 @@ const UnreadMessages = () => {
                     <span className="table-list__title-left subheading__regular">
                         Ungelesene Systemnachrichten
                     </span>
-                    <span className="table-list__title-right body-normal__regular">
+                    <Link to={PATHS.messages} className="table-list__title-right button button--green button-gost">
                         Alle Systemnachrichten lesen
-                    </span>
+                    </Link>
                 </div>
                 <table role="table">
                     <thead>
@@ -49,7 +51,7 @@ const UnreadMessages = () => {
                         </th>
                         <th role="columnheader">
                             <div className='body-normal__semibold'>
-                                Kritisch
+                                Dringlichkeit
                                 <i className="icon-dots-three-vertical"></i>
                             </div>
                         </th>
@@ -61,12 +63,25 @@ const UnreadMessages = () => {
                         <td role="cell" className='body-normal__regular' data-label={'Auftrag'}>80700</td>
                         <td role="cell" className='body-normal__regular' data-label={'Auftragsname'}>München Isar</td>
                         <td role="cell" className='body-normal__regular' data-label={'Betreff'}>Verzögerung</td>
-                        <td role="cell" className='body-normal__regular' data-label={'Inhalt'}>Lieferung der Massivwand
-                            XY verzögert sich um X
-                            Tage.
+                        <td role="cell" className='body-normal__regular' data-label={'Inhalt'}>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Delectus dignissimos doloribus ducimus et excepturi fuga labore,               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Delectus dignissimos doloribus ducimus et excepturi fuga labore,
+                            Delectus dignissimos doloribus ducimus et excepturi fuga labore,
+                            Delectus dignissimos doloribus ducimus et excepturi fuga labore,
+                            Delectus dignissimos doloribus ducimus et excepturi fuga labore,
+                            Delectus dignissimos doloribus ducimus et excepturi fuga labore,
+                            Delectus dignissimos doloribus ducimus et excepturi fuga labore,
+                            Delectus dignissimos doloribus ducimus et excepturi fuga labore,
+                            Delectus dignissimos doloribus ducimus et excepturi fuga labore,
+                            Delectus dignissimos doloribus ducimus et excepturi fuga labore,
+                            Delectus dignissimos doloribus ducimus et excepturi fuga labore,
+                            Delectus dignissimos doloribus ducimus et excepturi fuga labore,
+                            Delectus dignissimos doloribus ducimus et excepturi fuga labore,
+                            1818
                         </td>
                         <td role="cell" className='body-normal__regular' data-label={'Datum'}>12.05.2024</td>
-                        <td role="cell" className='body-normal__regular' data-label={'Kritisch'}>
+                        <td role="cell" className='body-normal__regular' data-label={'Dringlichkeit'}>
                             <i className="icon-warning"></i>
                         </td>
                         <td role="cell" className='table-list__button' data-label={' '}>
@@ -84,7 +99,7 @@ const UnreadMessages = () => {
                             Tage.
                         </td>
                         <td role="cell" className='body-normal__regular' data-label={'Datum'}>12.05.2024</td>
-                        <td role="cell" className='body-normal__regular' data-label={'Kritisch'}>
+                        <td role="cell" className='body-normal__regular' data-label={'Dringlichkeit'}>
                             <i className="icon-warning"></i>
                         </td>
                         <td role="cell" className='table-list__button'>
@@ -102,7 +117,7 @@ const UnreadMessages = () => {
                             Tage.
                         </td>
                         <td role="cell" className='body-normal__regular' data-label={'Datum'}>12.05.2024</td>
-                        <td role="cell" className='body-normal__regular' data-label={'Kritisch'}>
+                        <td role="cell" className='body-normal__regular' data-label={'Dringlichkeit'}>
                             <i className="icon-warning"></i>
                         </td>
                         <td role="cell" className='table-list__button'>
