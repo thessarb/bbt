@@ -239,9 +239,25 @@
     table {
       tbody {
         tr {
+          transition: font-weight .35s linear;
+
           &:hover,
           &:focus,
           &:active {
+            box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            transition: all .35s linear;
+
+            td, .collapsed {
+              font-weight: 600;
+
+              .icon-caret-right {
+                background-color: $bbt-secondary-grey;
+              }
+            }
+          }
+
+          &.active {
             box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.15);
 
             td {
@@ -251,7 +267,6 @@
                 background-color: $bbt-primary-green;
               }
             }
-
           }
         }
 

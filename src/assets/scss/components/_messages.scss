@@ -1,0 +1,85 @@
+.messages {
+  &.table-list--accordion {
+    table {
+      thead {
+        tr {
+          th {
+            @media (min-width: 992px) {
+              min-width: toRem(100);
+
+              &:first-child {
+                min-width: auto;
+              }
+            }
+          }
+
+          .contents {
+            min-width: auto;
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          height: $unit-5;
+          min-height: $unit-5;
+          transition: height .35s linear;
+
+          td {
+            @media (min-width: 992px) {
+              padding: toRem(21) $unit-factor;
+              vertical-align: top;
+            }
+
+            .button {
+              @media (min-width: 992px) {
+                margin: toRem(-10) 0;
+
+                &:first-child {
+                  margin-left: unset;
+                }
+              }
+            }
+
+            .icon-caret-right {
+              transition: transform .35s ease-in-out;
+            }
+
+            .collapsed {
+              overflow: hidden;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              text-overflow: ellipsis;
+              -webkit-line-clamp: 1;
+              max-height: toRem(18);
+              transition: max-height .35s linear;
+            }
+          }
+
+          &.active {
+            td {
+              font-weight: 600;
+
+              .icon-caret-right {
+                background-color: $bbt-primary-green;
+                transform: rotate(90deg);
+                transition: transform .35s ease-in-out;
+              }
+
+              .collapsed {
+                font-weight: 600;
+                color: $bbt-secondary-grey;
+                -webkit-line-clamp: unset;
+                opacity: 1;
+              }
+
+              @media (min-width: 992px) {
+                padding: toRem(21) $unit-factor;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
