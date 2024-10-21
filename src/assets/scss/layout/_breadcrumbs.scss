@@ -1,0 +1,17 @@
+.breadcrumb {
+  margin-bottom: 30px;
+  &__page-title-box {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  &__home {
+    text-align: left;
+    cursor: pointer;
+  }
+  &__title {
+    text-align: left;
+    color: $bbt-primary-green;
+    cursor: auto;
+  }
+}

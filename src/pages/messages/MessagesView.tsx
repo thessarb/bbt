@@ -2,6 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import Sidebar from "../../components/layouts/sidebar/Sidebar";
 import Messages from "src/components/panel/messages/Messages";
+import Breadcrumb from "src/components/layouts/Common/Breadcrumb";
 
 const MessagesView: React.FC = () => {
   return (
@@ -10,6 +11,7 @@ const MessagesView: React.FC = () => {
         <title>Systemnachrichten</title>
       </Helmet>
       <Sidebar>
+      <Breadcrumb title={"Home"}  subtitle={"Systemnachrichten"}/>
         <Messages />
       </Sidebar>
     </>

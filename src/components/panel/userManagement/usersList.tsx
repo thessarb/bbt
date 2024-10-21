@@ -3,7 +3,7 @@ const UsersList = () => {
 
     return (
         <>
-        User list
+        Benutzerverwaltung
         </>
     )
 };

@@ -33,21 +33,6 @@ const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
     setNotificationDropdownOpen((prevState) => !prevState);
   };
 
-  // useEffect(() => {
-  //   let timeoutId: NodeJS.Timeout;
-
-  //   if (!isNotificationDropdownOpen) {
-  //     timeoutId = setTimeout(() => {
-  //       setShouldRender(false);
-  //     }, 3000);
-  //   } else {
-  //     setShouldRender(true);
-  //   }
-  //   return () => {
-  //     clearTimeout(timeoutId);
-  //   };
-  // }, [isUserDropdownOpen, isNotificationDropdownOpen]);
-
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
 
@@ -58,7 +43,7 @@ const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
     } else {
       setShouldRender(true);
     }
-    
+
     if (isNotificationDropdownOpen || isUserDropdownOpen) {
       document.body.classList.add("no-scroll");
     } else {
