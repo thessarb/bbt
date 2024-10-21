@@ -1,11 +1,32 @@
 import React, { Fragment, useState, useRef, useEffect } from "react";
+interface UserDropdownProps {
+  isOpen: boolean;
+}
+const UserDropdown: React.FC<UserDropdownProps> = ({ isOpen }) => {
+  const [toggleHandle, setToggleHandle] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-const UserDropdown = () => {
+  const handleClickInside = (event: React.MouseEvent) => {
+    const isButtonClick = (event.target as HTMLElement).closest(".button-gost");
+    if (!isButtonClick) {
+      event.stopPropagation();
+    }
+  };
+
   return (
-    <div className="user-info-dropdown">
+    <div
+      className={`user-info-dropdown ${isOpen ? "open" : ""} ${
+        !isOpen && toggleHandle ? "close" : ""
+      }`}
+      ref={dropdownRef}
+      onClick={handleClickInside}
+    >
       <div className="user-info-dropdown__header heading__semibold">
         <span>Benutzer Informationen</span>
-        <button className="button button-gost button--big button--grey">
+        <button
+          className="button button-gost button--big button--grey"
+          onClick={() => setToggleHandle(true)}
+        >
           <i className="button__icon icon-x"></i>
         </button>
       </div>

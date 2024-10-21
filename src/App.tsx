@@ -12,8 +12,7 @@ function App() {
     return (
         <div className="body">
             <BrowserRouter>
-                <ThankYou/>
-                <Register/>
+                <DashboardView/>
             </BrowserRouter>
         </div>
     );
