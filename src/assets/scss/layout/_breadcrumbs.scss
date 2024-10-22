@@ -1,17 +1,20 @@
 .breadcrumb {
-  margin-bottom: 30px;
-  &__page-title-box {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  &__home {
-    text-align: left;
-    cursor: pointer;
-  }
-  &__title {
-    text-align: left;
-    color: $bbt-primary-green;
-    cursor: auto;
-  }
+	margin-bottom: $unit-2;
+
+	&__page-title-box {
+		display: flex;
+		flex-direction: column;
+		gap: $unit-0;
+	}
+
+	&__home {
+		text-align: left;
+		cursor: pointer;
+	}
+
+	&__title {
+		text-align: left;
+		color: $bbt-primary-green;
+		cursor: auto;
+	}
 }
