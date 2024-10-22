@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import CustomPagination from "src/helpers/CustomPaginate";
 import { Link } from "react-router-dom";
 import PATHS from "../../../../routes/Paths";

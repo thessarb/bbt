@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import CustomPagination from "src/helpers/CustomPaginate";
 
 const Library = () => {
-  const [page, setPage] = useState(1);
+
+    const [page, setPage] = useState(1);
   const mockData = {
     total: 100,
     current_page: 1,
@@ -11,7 +12,7 @@ const Library = () => {
   };
   return (
     <>
-      <div className="table-list table-list--secondary">
+      <div className="library table-list table-list--secondary">
         <table role="table">
           <thead>
             <tr role="row">
