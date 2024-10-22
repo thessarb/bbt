@@ -1,0 +1,22 @@
+.library {
+  table {
+    thead {
+      tr {
+        th {
+          @media (min-width: 992px) {
+            min-width: toRem(150);
+
+            &:first-child,
+            &:nth-child(2) {
+              min-width: toRem(150);
+              width: toRem(150);
+            }
+            &:last-child {
+              min-width: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+}

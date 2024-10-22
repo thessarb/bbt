@@ -1,20 +1,21 @@
 import React, { useState } from "react";
+import React, { useState } from "react";
 import Select from "react-select";
 import CustomPagination from "src/helpers/CustomPaginate";
 
 const Library = () => {
-  const [page, setPage] = useState(1);
-  const [selectedOption, setSelectedOption] = useState<{
-    value: string;
-    label: string;
-  } | null>(null);
+    const [page, setPage] = useState(1);
+    const [selectedOption, setSelectedOption] = useState<{
+        value: string;
+        label: string;
+    } | null>(null);
 
-  const mockData = {
-    total: 100,
-    current_page: 1,
-    per_page: 10,
-    last_page: 10,
-  };
+    const mockData = {
+        total: 100,
+        current_page: 1,
+        per_page: 10,
+        last_page: 10,
+    };
 
   const options = [
     { value: 'chocolate', label: 'Chocolate with love ' },
@@ -30,7 +31,7 @@ const Library = () => {
 
   return (
     <>
-      <div className="table-list table-list--secondary">
+      <div className="library table-list table-list--secondary">
         <table role="table">
           <thead>
             <tr role="row">
