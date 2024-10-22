@@ -187,13 +187,13 @@
     &__menu {
       border-radius: 0;
       box-shadow: 0px 6px 16px 0 rgba(0, 0, 0, 0.08);
-      border-bottom: 1px solid $bbt-primary-green;
+      border-bottom: toRem(1) solid $bbt-primary-green;
       z-index: 100;
       padding: toRem(10) toRem(8) toRem(8) 0;
     }
 
     &__menu-list {
-      max-height: 140px;
+      max-height: toRem(140);
       overflow-y: auto;
 
       // Custom scrollbar styling
@@ -239,7 +239,7 @@
       // Custom styling to highlight "Match" text in green
       &.custom-option {
         .highlight {
-          color: red !important;
+          color: $bbt-red-100 !important;
         }
       }
     }
