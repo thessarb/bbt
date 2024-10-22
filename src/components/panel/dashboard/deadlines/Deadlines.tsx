@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import CustomPagination from "src/helpers/CustomPaginate";
 import Select from "react-select";
+import CustomModal from "../../../Modal/CustomModal";
 
 const Deadlines = () => {
+  // pagination
   const [page, setPage] = useState(1);
   const [selectedOption, setSelectedOption] = useState<{
     value: string;
@@ -15,6 +17,13 @@ const Deadlines = () => {
     per_page: 10,
     last_page: 10,
   };
+
+  // Modal
+  const [show, setShow] = useState(false);
+  const handleShow = () => {
+    setShow(true);
+  };
+
   return (
     <>
       <div className="table-list">
@@ -161,165 +170,15 @@ const Deadlines = () => {
                 <i className="icon-warning"></i>
               </td>
               <td role="cell" className="table-list__button" data-label={" "}>
-                <div className="button button-gost button--big button--grey">
+
+                <button  onClick={handleShow} className='button button-gost button--big button--grey'>
                   <i className="button__icon icon-note-pencil"></i>
-                </div>
+                </button>
+                {show && <CustomModal show={show} setShow={setShow} />}
+
               </td>
             </tr>
-            <tr>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Auftrag"}
-              >
-                80700
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Auftragsname"}
-              >
-                München Isar
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"BA"}
-              >
-                1
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Haus"}
-              >
-                Haus 1
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Geschoss"}
-              >
-                KG
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Ebene"}
-              >
-                Treppenhaus
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Produkt"}
-              >
-                Decke OG
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Zu erledigen"}
-              >
-                Plan für
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Frist"}
-              >
-                12.05.2024
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Dringlichkeit"}
-              >
-                <i className="icon-warning"></i>
-              </td>
-              <td role="cell" className="table-list__button" data-label={" "}>
-                <div className="button button-gost button--big button--grey">
-                  <i className="button__icon icon-note-pencil"></i>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Auftrag"}
-              >
-                80700
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Auftragsname"}
-              >
-                München Isar
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"BA"}
-              >
-                1
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Haus"}
-              >
-                Haus 1
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Geschoss"}
-              >
-                KG
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Ebene"}
-              >
-                Treppenhaus
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Produkt"}
-              >
-                Decke OG
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Zu erledigen"}
-              >
-                Plan für Bauabschnitt 2.1 hochladen
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Frist"}
-              >
-                12.05.2024
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Dringlichkeit"}
-              >
-                <i className="icon-warning"></i>
-              </td>
-              <td role="cell" className="table-list__button" data-label={" "}>
-                <div className="button button-gost button--big button--grey">
-                  <i className="button__icon icon-note-pencil"></i>
-                </div>
-              </td>
-            </tr>
+
           </tbody>
         </table>
       </div>

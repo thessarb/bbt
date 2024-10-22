@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import CustomPagination from "src/helpers/CustomPaginate";
+import FileViewerModal from "../../Modal/FileViewerModal";
 
 const Library = () => {
     const [page, setPage] = useState(1);
@@ -15,6 +16,12 @@ const Library = () => {
         per_page: 10,
         last_page: 10,
     };
+
+  // Modal
+  const [show, setShow] = useState(false);
+  const handleShow = () => {
+    setShow(true);
+  };
 
   const options = [
     { value: 'chocolate', label: 'Chocolate with love ' },
@@ -146,9 +153,11 @@ const Library = () => {
                 <div className="button button-gost button--big button--grey">
                   <i className="button__icon icon-download-simple"></i>
                 </div>
-                <div className="button button-gost button--big button--grey">
+
+                <button  onClick={handleShow} className='button button-gost button--big button--grey'>
                   <i className="button__icon icon-eye"></i>
-                </div>
+                </button>
+                {show && <FileViewerModal show={show} setShow={setShow} />}
               </td>
             </tr>
           </tbody>

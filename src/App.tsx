@@ -7,13 +7,20 @@ import ForgotPassword from "./components/authentication/ForgotPassword";
 import ResetPassword from "./components/authentication/ResetPassword";
 import Register from "./components/authentication/Register";
 import ThankYou from "./components/authentication/ThankYou";
+
+import CustomModal from "./components/Modal/CustomModal";
 import LibraryView from "./pages/library/LibraryView";
 
 function App() {
     return (
         <div className="body">
             <BrowserRouter>
+
+                {/*<ThankYou/>*/}
+                {/*<DashboardView/>*/}
                 <LibraryView/>
+                {/*<Register/>*/}
+
             </BrowserRouter>
         </div>
     );
