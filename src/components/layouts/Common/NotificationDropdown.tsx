@@ -14,7 +14,6 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
   isOpen,
 }) => {
   const navigate = useNavigate();
-  const [notification, setNotification] = useState<boolean>(false);
   const [toggleHandle, setToggleHandle] = useState<boolean>(false);
   const [hasOpened, setHasOpened] = useState<boolean>(false)
   const dropdownRef = useRef<HTMLDivElement | null>(null);

@@ -2,6 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import Sidebar from "../../components/layouts/sidebar/Sidebar";
 import Library from "src/components/panel/library/Library";
+import Breadcrumb from "src/components/layouts/Common/Breadcrumb";
 
 const LibraryView: React.FC = () => {
   return (
@@ -10,6 +11,7 @@ const LibraryView: React.FC = () => {
         <title>Bibliothek</title>
       </Helmet>
       <Sidebar>
+      <Breadcrumb title={"Home"}  subtitle={"Bibliothek"}/>
         <Library />
       </Sidebar>
     </>

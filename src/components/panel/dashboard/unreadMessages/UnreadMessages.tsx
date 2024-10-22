@@ -1,9 +1,16 @@
 import CustomPagination from "src/helpers/CustomPaginate";
 import { Link } from "react-router-dom";
 import PATHS from "../../../../routes/Paths";
+import Select from "react-select";
+import React, { useState } from 'react';
 
 const UnreadMessages = () => {
   const [page, setPage] = useState(1);
+  const [selectedOption, setSelectedOption] = useState<{
+    value: string;
+    label: string;
+  } | null>(null);
+
   const mockData = {
     total: 100,
     current_page: 1,
@@ -232,7 +239,40 @@ const UnreadMessages = () => {
           </tbody>
         </table>
       </div>
-      <CustomPagination data={mockData} setActivePage={(e) => setPage(e)} />
+      <div className="pagination-container">
+        <div className="form">
+          <div className="form__field-select">
+            <label
+              htmlFor="pagination"
+              className={`form__label caption__regular ${
+                selectedOption ? "filled" : ""
+              }`}
+            >
+              Einträge pro Seite
+            </label>
+
+            <Select
+              id="pagination"
+              classNamePrefix="react-select"
+              className={`form__select body-normal__regular ${
+                selectedOption ? "filled" : ""
+              }`}
+              placeholder={false}
+              value={5}
+              // options={options}
+              isClearable={true}
+              closeMenuOnSelect={true}
+              name="company-type"
+              isSearchable={true}
+              required
+            />
+            <span className="error-message caption__regular">
+              Error message
+            </span>
+          </div>
+        </div>
+        <CustomPagination data={mockData} setActivePage={(e) => setPage(e)} />
+      </div>
     </>
   );
 };
