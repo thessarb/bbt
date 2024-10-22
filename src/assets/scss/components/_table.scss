@@ -1,11 +1,17 @@
+.page-title {
+  margin-bottom: 13px;
+  margin-top: 16px;
+}
+
 .table-list {
   display: flex;
   justify-content: center;
   flex-direction: column;
   border-radius: toRem(4);
   background: $bbt-grey-5;
-  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.10);
-  margin-bottom: $unit-5;
+  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: $unit-3;
+
 
   &__title {
     display: flex;

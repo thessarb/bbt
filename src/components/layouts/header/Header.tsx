@@ -12,10 +12,12 @@ const ThommasGroupeLogo: string =
 
 const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
   // const userData = useUserdata((state: any) => state.userData);
-
   const [isUserDropdownOpen, setUserDropdownOpen] = useState(false);
+  const [shouldRender, setShouldRender] = useState(isUserDropdownOpen);
+
   const [isNotificationDropdownOpen, setNotificationDropdownOpen] =
     useState(false);
+
   const userBoxRef = useRef<HTMLDivElement | null>(null);
   const notificationRef = useRef<HTMLDivElement | null>(null);
 
@@ -31,32 +33,48 @@ const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
     setNotificationDropdownOpen((prevState) => !prevState);
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      userBoxRef.current &&
-      !userBoxRef.current.contains(event.target as Node)
-    ) {
-      setUserDropdownOpen(false);
-    }
-    if (
-      notificationRef.current &&
-      !notificationRef.current.contains(event.target as Node)
-    ) {
-      setNotificationDropdownOpen(false);
-    }
-  };
-
   useEffect(() => {
-    if (isUserDropdownOpen || isNotificationDropdownOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
+    let timeoutId: NodeJS.Timeout;
+
+    if (!isNotificationDropdownOpen) {
+      timeoutId = setTimeout(() => {
+        setShouldRender(false);
+      }, 3000);
     } else {
-      document.removeEventListener("mousedown", handleClickOutside);
+      setShouldRender(true);
+    }
+
+    if (isNotificationDropdownOpen || isUserDropdownOpen) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        notificationRef.current &&
+        !notificationRef.current.contains(event.target as Node)
+      ) {
+        setNotificationDropdownOpen(false);
+      }
+
+      if (
+        userBoxRef.current &&
+        !userBoxRef.current.contains(event.target as Node)
+      ) {
+        setUserDropdownOpen(false);
+      }
+    };
+
+    if (isNotificationDropdownOpen || isUserDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      clearTimeout(timeoutId);
     };
-  }, [isUserDropdownOpen, isNotificationDropdownOpen]);
+  }, [isNotificationDropdownOpen, isUserDropdownOpen]);
 
   return (
     <Fragment>
@@ -81,36 +99,30 @@ const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
           </div>
           <div className="navbar-header__main-navbar">
             <div
-                className="navbar-header__notification"
-                ref={notificationRef}
-                onClick={handleNotificationClick}
-              >
-                <i className="icon-notification"></i>
-                {isNotificationDropdownOpen && (
-                  <div className="overlay" />
-                )}
-                {isNotificationDropdownOpen && (
-                  <NotificationDropdown />
-                )}
-              </div>
-              <div
-                className="navbar-header__user-box"
-                ref={userBoxRef}
-                onClick={handleUserBoxClick}
-              >
-                <span className="caption__regular navbar-header__user-text">
-                  Eingeloggt als:
-                </span>
-                <span className="body-normal__regular">Vorname Nachname</span>
-                {isUserDropdownOpen && <div className="overlay" />}
-                {isUserDropdownOpen && (
-                  <UserDropdown/>
-                )}
-              </div>
-              <div>
-                <button className="button button--big button--light-grey">
-                  <i className="button__icon icon-sign-out"></i>
-                </button>
+              className="navbar-header__notification"
+              ref={notificationRef}
+              onClick={handleNotificationClick}
+            >
+              <i className="icon-notification"></i>
+              {isNotificationDropdownOpen && <div className="overlay" />}
+              <NotificationDropdown isOpen={isNotificationDropdownOpen} />
+            </div>
+            <div
+              className="navbar-header__user-box"
+              ref={userBoxRef}
+              onClick={handleUserBoxClick}
+            >
+              <span className="caption__regular navbar-header__user-text">
+                Eingeloggt als:
+              </span>
+              <span className="body-normal__regular">Vorname Nachname</span>
+              {isUserDropdownOpen && <div className="overlay" />}
+              <UserDropdown isOpen={isUserDropdownOpen} />
+            </div>
+            <div>
+              <button className="button button--big button--light-grey">
+                <i className="button__icon icon-sign-out"></i>
+              </button>
             </div>
           </div>
         </div>

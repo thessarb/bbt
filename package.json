@@ -11,6 +11,7 @@
     "@types/node": "^16.18.113",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",
+    "@types/react-js-pagination": "^3.0.7",
     "@types/react-router-dom": "^5.3.3",
     "bootstrap": "^5.3.3",
     "crypto-js": "^4.2.0",

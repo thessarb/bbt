@@ -28,6 +28,12 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     }
 
+    if (sidebarStatus) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -36,9 +42,10 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   return (
     <Fragment>
       <Header sidebarStatus={sidebarStatus} toggleSidebar={addSidebarStatus} />
+      {sidebarStatus && <div className="overlay" />}
       <div
         ref={sidebarRef}
-        className={`vertical-menu ${sidebarStatus ? "open" : "closed"}`}
+        className={`vertical-menu ${sidebarStatus ? "vertical-menu__open" : "vertical-menu__closed"}`}
       >
         <div data-simplebar>
           <div className="vertical-menu__logo">

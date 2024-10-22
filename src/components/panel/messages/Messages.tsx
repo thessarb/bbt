@@ -1,6 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
-
+import CustomPagination from "src/helpers/CustomPaginate";
+import Select from "react-select";
 const Messages = () => {
+    const [page, setPage] = useState(1);
+    const [selectedOption, setSelectedOption] = useState<{
+        value: string;
+        label: string;
+    } | null>(null);
+
+    const mockData = {
+        total: 100,
+        current_page: 1,
+        per_page: 10,
+        last_page: 10,
+    };
+
     const [activeRowId, setActiveRowId] = useState<null | number>(null);
     const rowRefs = useRef<{ [key: number]: HTMLTableRowElement | null }>({});
 
