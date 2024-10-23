@@ -5,26 +5,25 @@ export default function AccessDenied() {
 
   return (
     <div className={"access-denied container-fluid small-offset-left"}>
-      <div>
-        <h1 className="boxed-regular__medium">
-          4<span>0</span>3
-        </h1>
-        <h2 className="boxed-regular__semi-bold">Access Denied</h2>
-        <p>
-          "We're sorry, but you do not have the required permissions to view
-          this page. This might be due to an expired session, restricted access
-          rights, or a specific page requirement. Please ensure you are logged
-          in with the correct account or contact your system administrator for
-          further assistance.
-        </p>
-      </div>
+      <div className="m-auto">
+        <div className="no-access body-small__medium">
+          <span className="background-grey">403</span>
+          <span className="background-light-grey">No Access</span>
+        </div>
+        <div className="access-denied__code boxed-regular__medium">
+          Kein Zugriff
+        </div>
+        </div>
+        <h2 className="boxed-regular__semi-bold">
+          Du hast leider nicht die notwendige Berechtigungen für diese Seite.
+        </h2>
       <button
-        className="button button--big button--red"
+        className="button button-secondary button--big button--green"
         onClick={() => navigate(-1)}
       >
-        <span className="button__text"> Go Back</span>
+        <i className="button_icon icon-arrow-left"/>
+        <span className="button__text">Zurück</span>
       </button>
-      
     </div>
   );
 }

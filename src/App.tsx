@@ -8,6 +8,7 @@ import ResetPassword from "./components/authentication/ResetPassword";
 import Register from "./components/authentication/Register";
 import ThankYou from "./components/authentication/ThankYou";
 import LibraryView from "./pages/library/LibraryView";
+import AccessDenied from "./pages/accessdenied/AccessDenied";
 
 function App() {
     return (
