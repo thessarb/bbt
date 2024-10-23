@@ -1,8 +1,8 @@
 .filter-dialog {
     position: absolute;
-    width: 229px;
-    height: 368px;
-    margin-top: 25px;
+    width: toRem(229);
+    height: toRem(368);
+    margin-top: toRem(25);
     padding: $unit-1;
     display: flex;
     flex-direction: column;
@@ -15,7 +15,7 @@
     z-index: 10;
 
     &__search {
-      margin-top: 4px;
+      margin-top: toRem(4);
       margin-bottom: $unit-1;
     }
 
@@ -30,10 +30,10 @@
       &-options {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: $unit-factor;
       }
       label {
-        gap: 10px;
+        gap: $unit-factor;
       }
     }
 
@@ -42,19 +42,19 @@
       label {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: $unit-factor;
       }
     }
 
     &__options {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: toRem(5);
 
       label {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: $unit-factor;
       }
     }
   }

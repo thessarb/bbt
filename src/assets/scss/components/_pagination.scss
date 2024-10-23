@@ -13,7 +13,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: toRem(15);
   }
   .form {
     width: toRem(166);
@@ -57,9 +57,9 @@
     font-size: 12px;
     font-weight: 500;
     line-height: 15px;
-    padding: $unit-0 10px;
+    padding: $unit-0 $unit-factor;
     border: 1px solid transparent;
-    border-radius: 4px;
+    border-radius: toRem(4);
     transition: all 0.3s ease;
     display: inline-flex;
     text-decoration: none;

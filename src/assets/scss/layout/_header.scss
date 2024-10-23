@@ -9,7 +9,7 @@
 .navbar-header {
   align-items: center;
   display: flex;
-  height: 78px;
+  height: toRem(78);
   justify-content: space-between;
   margin: 0 auto;
   border-bottom: 2px solid $bbt-grey-5;
@@ -19,7 +19,7 @@
   &__navbar-brand-box {
     height: 100%;
     display: flex;
-    gap: 0 6px;
+    gap: 0 toRem(6);
     align-content: center;
     align-items: center;
     margin: 0;
@@ -43,7 +43,7 @@
     background: $bbt-white;
     align-items: center;
     justify-content: end;
-    gap: 15px;
+    gap: toRem(15);
 
     @media (min-width: 300px) {
       width: calc(100% - 250px);
@@ -74,7 +74,7 @@
   }
 
   &__notification {
-    padding: 10px;
+    padding: $unit-factor;
     display: flex;
     align-items: center;
     vertical-align: middle;
