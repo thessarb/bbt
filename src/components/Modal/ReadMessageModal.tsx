@@ -7,7 +7,7 @@ interface ReadMessageModalProps {
     setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function ReadMessageModal({ show, setShow }: ReadMessageModalProps) {
+const ReadMessageModal = ({ show, setShow }: ReadMessageModalProps) => {
     const [animateClose, setAnimateClose] = useState(false);
 
     const handleClose = () => {
