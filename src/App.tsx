@@ -15,11 +15,11 @@ import MessagesView from "./pages/messages/MessagesView";
 
 function App() {
     return (
-            <div className="body">
-                <BrowserRouter>
-                    <DashboardView/>
-                </BrowserRouter>
-            </div>
+        <div className="body">
+            <BrowserRouter>
+                <DashboardView/>
+            </BrowserRouter>
+        </div>
     );
 }
 
