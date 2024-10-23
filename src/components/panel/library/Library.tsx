@@ -18,11 +18,11 @@ const Library = () => {
     last_page: 10,
   };
 
-  // Modal
-  const [show, setShow] = useState(false);
-  const handleShow = () => {
-    setShow(true);
-  };
+    // Modal
+    const [show, setShow] = useState(false);
+    const handleShow = () => {
+        setShow(true);
+    };
 
   const [isFilterDialogOpen, setIsFilterDialogOpen] = useState<string | null>(
     null
@@ -165,119 +165,57 @@ const Library = () => {
                 Montageanleitungen Betonbauteile
               </td>
 
-              <td role="cell" className="table-list__button" data-label={" "}>
-                <div className="button button-gost button--big button--grey">
-                  <i className="button__icon icon-download-simple"></i>
-                </div>
-                <div className="button button-gost button--big button--grey">
-                  <i className="button__icon icon-eye"></i>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Art"}
-              >
-                Montageanleitung
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Datum"}
-              >
-                01.01.2024
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Beschreibung"}
-              >
-                Montageanleitungen Betonbauteile
-              </td>
-
-              <td role="cell" className="table-list__button" data-label={" "}>
-                <div className="button button-gost button--big button--grey">
-                  <i className="button__icon icon-download-simple"></i>
-                </div>
-                <div className="button button-gost button--big button--grey">
-                  <i className="button__icon icon-eye"></i>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Art"}
-              >
-                Montageanleitung
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Datum"}
-              >
-                01.01.2024
-              </td>
-              <td
-                role="cell"
-                className="body-normal__regular"
-                data-label={"Beschreibung"}
-              >
-                Montageanleitungen Betonbauteile
-              </td>
-              <td role="cell" className="table-list__button" data-label={" "}>
-                <div className="button button-gost button--big button--grey">
-                  <i className="button__icon icon-download-simple"></i>
+                            <td role="cell" className="table-list__button" data-label={" "}>
+                                <div className="button button-gost button--big button--grey">
+                                    <i className="button__icon icon-download-simple"></i>
+                                </div>
+                                <div onClick={handleShow} className='button button-gost button--big button--grey'>
+                                    <i className="button__icon icon-eye"></i>
+                                </div>
+                                {show && <FileViewerModal show={show} setShow={setShow}/>}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
 
-                <button  onClick={handleShow} className='button button-gost button--big button--grey'>
-                  <i className="button__icon icon-eye"></i>
-                </button>
-                {show && <FileViewerModal show={show} setShow={setShow} />}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div className="pagination-container">
-        <div className="form">
-          <div className="form__field-select">
-            <label
-              htmlFor="pagination"
-              className={`form__label caption__regular ${
-                selectedOption ? "filled" : ""
-              }`}
-            >
-              Einträge pro Seite
-            </label>
 
-            <Select
-              id="pagination"
-              classNamePrefix="react-select"
-              className={`form__select body-normal__regular ${
-                selectedOption ? "filled" : ""
-              }`}
-              placeholder={false}
-              value={5}
-              // options={options}
-              isClearable={true}
-              closeMenuOnSelect={true}
-              name="company-type"
-              isSearchable={true}
-              required
-            />
-            <span className="error-message caption__regular">
+                <div className="pagination-container">
+                    <div className="form">
+                        <div className="form__field-select">
+                            <label
+                                    htmlFor="pagination"
+                                    className={`form__label caption__regular ${
+                                            selectedOption ? "filled" : ""
+                                    }`}
+                            >
+                                Einträge pro Seite
+                            </label>
+
+                            <Select
+                                    id="pagination"
+                                    classNamePrefix="react-select"
+                                    className={`form__select body-normal__regular ${
+                                            selectedOption ? "filled" : ""
+                                    }`}
+                                    placeholder={false}
+                                    value={5}
+                                    // options={options}
+                                    isClearable={true}
+                                    closeMenuOnSelect={true}
+                                    name="company-type"
+                                    isSearchable={true}
+                                    required
+                            />
+                            <span className="error-message caption__regular">
               Error message
             </span>
-          </div>
-        </div>
-        <CustomPagination data={mockData} setActivePage={(e) => setPage(e)} />
-      </div>
-    </>
-  );
+                        </div>
+                    </div>
+                    <CustomPagination data={mockData} setActivePage={(e) => setPage(e)}/>
+                </div>
+            </>
+    );
 };
 
 export default Library;
