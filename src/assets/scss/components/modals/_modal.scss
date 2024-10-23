@@ -104,12 +104,8 @@
 
   &--half {
     .modal-dialog {
-      max-width: 640px !important;
+      max-width: toRem(640) !important;
       max-height: 50vh !important;
-
-      @media (min-width: 576px) {
-        max-width: 640px !important;
-      }
     }
 
     .modal-content {
@@ -121,7 +117,6 @@
   }
 }
 
-// Animation keyframes for opening (slide down) and closing (slide up)
 @keyframes slideShow {
   0% {
     top: -100% !important;
@@ -137,66 +132,5 @@
   }
   100% {
     top: -100% !important;
-  }
-}
-
-.read-message {
-  .modal-body {
-    padding: $unit-1 0 !important;
-  }
-
-  &__description {
-    padding: $unit-1;
-  }
-}
-
-.file-viewer {
-  .modal-body {
-    padding: 0 !important;
-  }
-}
-
-.plan-view {
-  .modal-body {
-    padding: $unit-1 0 !important;
-  }
-
-  table {
-    padding: 0 $unit-1;
-  }
-
-  .pagination-container {
-    padding: 0 $unit-1;
-
-    .pagination-block,
-    .pagination {
-      margin-bottom: 0;
-    }
-  }
-
-  .company {
-     table {
-       thead {
-         th {
-           @media (min-width: 992px) {
-             min-width: auto;
-
-             &:first-child {
-               min-width: toRem(120);
-             }
-             &:last-child {
-               min-width: auto;
-             }
-           }
-
-           &.width-auto {
-             @media (min-width: 992px) {
-               min-width: auto;
-             }
-           }
-         }
-       }
-     }
-
   }
 }

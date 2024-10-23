@@ -10,7 +10,7 @@
   border-radius: toRem(4);
   background: $bbt-grey-5;
   box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.1);
-  margin-bottom: $unit-3;
+  margin-bottom: $unit-2;
 
 
   &__title {
@@ -40,6 +40,7 @@
   table {
     overflow: hidden;
     border-spacing: 0;
+    border-collapse: unset;
 
     @media (min-width: 992px) {
       background-color: $bbt-grey-10;
@@ -195,6 +196,21 @@
   @media (min-width: 992px) {
     background: $bbt-white;
     overflow-x: auto;
+  }
+
+  // Text and Icon
+  .text-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: $unit-factor;
+
+    .icon-x-square {
+      background-color: $bbt-orange-100;
+    }
+
+    .icon-check-square {
+      background-color: $bbt-primary-green;
+    }
   }
 
   &--secondary,
