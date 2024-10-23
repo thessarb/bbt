@@ -9,6 +9,7 @@ import Register from "./components/authentication/Register";
 import ThankYou from "./components/authentication/ThankYou";
 import CustomModal from "./components/Modal/CustomModal";
 import LibraryView from "./pages/library/LibraryView";
+import AccessDenied from "./pages/accessdenied/AccessDenied";
 import MessagesView from "./pages/messages/MessagesView";
 
 function App() {
@@ -20,7 +21,6 @@ function App() {
                 <MessagesView/>
                 <LibraryView/>
                 <Register/>
-
             </BrowserRouter>
         </div>
     );

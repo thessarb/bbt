@@ -3,45 +3,123 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  justify-content: center;
   text-align: center;
-  background-color: $bbt-red-50;
+  background-color: $bbt-grey-5;
+  padding: 20px;
+  word-break: break-word;
+  margin-top: 100px;
 
-  > div {
-    h1 {
-      color: $bbt-red-100;
-      font-size: 8.5rem;
-      letter-spacing: 0.1em;
-      margin: 0.025em 0;
-      text-shadow: 0.05em 0.05em 0 $bbt-red-10;
-      white-space: nowrap;
-
-      @media (min-width: 300px) {
-        font-size: 7.5rem;
-      }
-      @media (max-width: 767px) {
-        font-size: 7.5rem;
-      }
-
-      @media (min-width: 300px) {
-        font-size: 5.5rem;
-      }
-      @media (max-width: 576px) {
-        font-size: 5.5rem;
-      }
+  .no-access {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    .background-grey {
+      padding-top: 2px;
+      padding-right: 6px;
+      padding-bottom: 2px;
+      padding-left: 6px;
+      border-radius: 2px;
+      color: $bbt-white;
+      background-color: $bbt-secondary-grey;
     }
-
-    h2 {
-      color: $bbt-grey-70;
-      margin-bottom: 0.4em;
+    .background-light-grey {
+      padding-top: 2px;
+      padding-right: 6px;
+      padding-bottom: 2px;
+      padding-left: 6px;
+      border-radius: 2px;
+      color: $bbt-grey-60;
+      background-color: $bbt-grey-20;
     }
+  }
 
-    p {
-      margin-top: 0;
+  &__code {
+    color: $bbt-primary-green;
+    font-size: 96px;
+    letter-spacing: 0.1em;
+    line-height: 120px;
+    margin-bottom: 60px;
+    font-weight: 600;
+    word-break: break-word;
+
+
+    @media (min-width: 488px) {
+      font-size: 96px;
+    }
+    @media (max-width: 676px) {
+      font-size: 70px;
+    }
+    @media (min-width: 300px) {
+      font-size: 70px;
+    }
+    @media (max-width: 488px) {
+      font-size: 50px;
+    }
+  }
+
+  h2 {
+    font-size: 36px;
+    line-height: 45px;
+    font-weight: 500;
+    color: $bbt-secondary-grey;
+    margin-bottom: 100px;
+    @media (min-width: 488px) {
+      font-size: 36px;
+    }
+    @media (max-width: 676px) {
+      font-size: 26px;
+    }
+    @media (min-width: 300px) {
+      font-size: 26px;
+    }
+    @media (max-width: 488px) {
       font-size: 16px;
-      max-width: 700px;
-      margin: auto;
-      margin-bottom: 1rem;
+    }
+  }
+
+  button {
+    &:hover {
+      color: $bbt-green-50;
+      background-color: transparent;
+      border: toRem(1) solid $bbt-green-50;
+
+      .icon-arrow-left {
+        background-color: $bbt-green-50;
+      }
+    }
+    &:focus {
+      color: $bbt-primary-green;
+      background-color: $bbt-white;
+      border: toRem(1) solid $bbt-primary-green;
+      box-shadow: 0 0 10px 0 rgba(67, 176, 42, 0.5);
+
+      .icon-arrow-left {
+        background-color: $bbt-primary-green;
+      }
+    }
+    &:active {
+      color: $bbt-primary-green;
+      background-color: $bbt-white;
+      border: toRem(1) solid $bbt-primary-green;
+      box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.5) inset;
+
+      .icon-arrow-left {
+        background-color: $bbt-primary-green;
+      }
+    }
+    &:disabled {
+      color: $bbt-green-40;
+      background-color: transparent;
+      border: toRem(1) solid $bbt-green-10;
+      box-shadow: none;
+      cursor: not-allowed;
+
+      .icon-arrow-left {
+        background-color: $bbt-green-40;
+      }
+    }
+    .icon-arrow-left {
+      background-color: $bbt-primary-green;
     }
   }
 }
