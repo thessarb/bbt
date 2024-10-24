@@ -1,55 +1,134 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Select from "react-select";
 import CustomPagination from "src/helpers/CustomPaginate";
+import FilterDialog from "src/helpers/TableFilters";
 
 const Library = () => {
-    const [page, setPage] = useState(1);
-    const [selectedOption, setSelectedOption] = useState<{
-        value: string;
-        label: string;
-    } | null>(null);
+  const [page, setPage] = useState(1);
+  const [selectedOption, setSelectedOption] = useState<{
+    value: string;
+    label: string;
+  } | null>(null);
 
-    const mockData = {
-        total: 100,
-        current_page: 1,
-        per_page: 10,
-        last_page: 10,
+  const mockData = {
+    total: 100,
+    current_page: 1,
+    per_page: 10,
+    last_page: 10,
+  };
+
+  const [isFilterDialogOpen, setIsFilterDialogOpen] = useState<string | null>(
+    null
+  );
+
+  const [filterDialogPosition, setFilterDialogPosition] = useState<{
+    top: number;
+    left: number;
+  } | null>(null);
+
+  const [filterData, setFilterData] = useState<{
+    searchTerm: string;
+    order: string;
+    selectedOptions: string[];
+  }>({
+    searchTerm: "",
+    order: "asc",
+    selectedOptions: [],
+  });
+
+  const handleFilterChange = (filter: {
+    searchTerm: string;
+    order: string;
+    selectedOptions: string[];
+  }) => {
+    setFilterData(filter);
+  };
+
+  const filterOptions = ["Option 1", "Option 2"];
+
+  const closeFilterDialog = () => setIsFilterDialogOpen(null);
+
+  const filterDialogRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        filterDialogRef.current &&
+        !filterDialogRef.current.contains(event.target as Node)
+      ) {
+        closeFilterDialog();
+      }
     };
 
-  const options = [
-    { value: 'chocolate', label: 'Chocolate with love ' },
-    { value: 'strawberry', label: 'Strawberry with test' },
-    { value: 'vanilla', label: 'Vanilla test' },
-    { value: 'chocolate', label: 'Chocolate with love ' },
-    { value: 'strawberry', label: 'Strawberry with test' },
-    { value: 'vanilla', label: 'Vanilla test' },
-    { value: 'chocolate', label: 'Chocolate with love ' },
-    { value: 'strawberry', label: 'Strawberry with test' },
-    { value: 'vanilla', label: 'Vanilla test' },
-];
+    if (isFilterDialogOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isFilterDialogOpen]);
 
   return (
     <>
-      <div className="library table-list table-list--secondary">
+      <div className="table-list table-list--secondary">
         <table role="table">
           <thead>
             <tr role="row">
               <th role="columnheader">
                 <div className="body-normal__semibold">
                   Art
-                  <i className="icon-dots-three-vertical"></i>
+                  <i
+                    className="icon-dots-three-vertical"
+                    onClick={() => setIsFilterDialogOpen("art")}
+                  ></i>
+                  {isFilterDialogOpen === "art" && (
+                    <div ref={filterDialogRef}>
+                      <FilterDialog
+                        options={filterOptions}
+                        onFilterChange={handleFilterChange}
+                        closeFilter={() => closeFilterDialog}
+                      />
+                    </div>
+                  )}
                 </div>
               </th>
               <th role="columnheader">
                 <div className="body-normal__semibold">
                   Datum
-                  <i className="icon-dots-three-vertical"></i>
+                  <i
+                    className="icon-dots-three-vertical"
+                    onClick={() => setIsFilterDialogOpen("datum")}
+                  ></i>
+                  {isFilterDialogOpen === "datum" && (
+                    <div ref={filterDialogRef}>
+                      <FilterDialog
+                        options={filterOptions}
+                        onFilterChange={handleFilterChange}
+                        closeFilter={() => closeFilterDialog}
+                      />
+                    </div>
+                  )}
                 </div>
               </th>
               <th role="columnheader">
                 <div className="body-normal__semibold">
                   Beschreibung
-                  <i className="icon-dots-three-vertical"></i>
+                  <i
+                    className="icon-dots-three-vertical"
+                    onClick={() => setIsFilterDialogOpen("beschreibung")}
+                  ></i>
+                  {isFilterDialogOpen === "beschreibung" && (
+                    <div ref={filterDialogRef}>
+                      <FilterDialog
+                        options={filterOptions}
+                        onFilterChange={handleFilterChange}
+                        closeFilter={() => closeFilterDialog}
+                      />
+                    </div>
+                  )}
                 </div>
               </th>
               <th role="columnheader"></th>

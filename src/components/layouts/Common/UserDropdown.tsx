@@ -4,20 +4,27 @@ interface UserDropdownProps {
 }
 const UserDropdown: React.FC<UserDropdownProps> = ({ isOpen }) => {
   const [toggleHandle, setToggleHandle] = useState<boolean>(false);
+  const [hasOpened, setHasOpened] = useState<boolean>(false)
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const handleClickInside = (event: React.MouseEvent) => {
-    const isButtonClick = (event.target as HTMLElement).closest(".button-gost");
+    const isButtonClick = (event.target as HTMLElement).closest(
+      ".button-gost"
+    );
     if (!isButtonClick) {
-      event.stopPropagation();
+      event.stopPropagation(); 
     }
   };
 
+  if (isOpen && !hasOpened) {
+    setHasOpened(true);
+  }
+
   return (
     <div
-      className={`user-info-dropdown ${isOpen ? "open" : ""} ${
-        !isOpen && toggleHandle ? "close" : ""
-      }`}
+    className={`user-info-dropdown ${
+      isOpen ? "open" : hasOpened ? "close" : ""
+    }`}
       ref={dropdownRef}
       onClick={handleClickInside}
     >

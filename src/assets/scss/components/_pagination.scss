@@ -1,4 +1,10 @@
 .pagination-container {
+  margin-bottom: $unit-5;
+
+  &__bottom {
+    margin-bottom: $unit-3;
+  }
+
   @media (min-width: 300px) {
     display: flex;
     justify-content: space-between;
@@ -23,12 +29,7 @@
   display: flex;
   height: $unit-3;
   justify-content: space-between;
-  margin-bottom: $unit-3;
   align-items: end;
-
-  &__pagination--bottom {
-    margin-bottom: $unit-5;
-  }
 }
 
 .pagination {
