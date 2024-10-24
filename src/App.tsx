@@ -9,6 +9,7 @@ import Register from "./components/authentication/Register";
 import ThankYou from "./components/authentication/ThankYou";
 import LibraryView from "./pages/library/LibraryView";
 import AccessDenied from "./pages/accessdenied/AccessDenied";
+import Error404 from "./pages/notfound/Error404";
 
 function App() {
     return (

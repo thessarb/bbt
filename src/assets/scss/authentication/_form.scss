@@ -285,7 +285,7 @@
 
 .form-radio {
   display: flex;
-  gap: 10px;
+  gap: $unit-factor;
 
   .radio-button {
     display: flex;
@@ -296,29 +296,29 @@
       right: 0;
       left: auto;
       margin: 0 !important;
-      border: 2px solid $bbt-grey-50;
+      border: toRem(2) solid $bbt-grey-50;
       box-shadow: none;
       padding: 0;
       -webkit-appearance: inherit;
       appearance: inherit;
       border-radius: 50%;
       box-sizing: border-box;
-      width: 18px;
-      height: 18px;
+      width: toRem(18);
+      height: toRem(18);
       cursor: pointer;
       transition: 0.3s ease;
 
       &:checked {
-        border: 6px solid $bbt-primary-green;
+        border: toRem(6) solid $bbt-primary-green;
         transition: 0.2s ease;
 
         &:hover {
-          border: 6px solid $bbt-primary-green;
+          border: toRem(6) solid $bbt-primary-green;
           transition: 0.3s ease;
         }
 
         &:disabled {
-          border: 2px solid $bbt-grey-30;
+          border: toRem(2) solid $bbt-grey-30;
           transition: 0.3s ease;
         }
       }
@@ -328,25 +328,25 @@
       }
 
       &:hover {
-        border: 2px solid $bbt-secondary-grey;
+        border: toRem(2) solid $bbt-secondary-grey;
         transition: 0.3s ease;
       }
 
       &:disabled {
-        border: 2px solid $bbt-grey-30;
+        border: toRem(2) solid $bbt-grey-30;
         transition: 0.3s ease;
       }
       &.input-error {
-        border: 2px solid $bbt-red-100;
+        border: toRem(2) solid $bbt-red-100;
 
         &:hover {
-          border: 2px solid $bbt-red-100;
+          border: toRem(2) solid $bbt-red-100;
           transition: 0.3s ease;
         }
 
         &:focus {
           transition: 0.3s ease;
-          border: 2px solid $bbt-red-100;
+          border: toRem(2) solid $bbt-red-100;
           color: $bbt-red-100;
         }
       }
@@ -356,35 +356,35 @@
 
 .form-checkbox {
   display: flex;
-  gap: 10px;
+  gap: $unit-factor;
   cursor: pointer;
 
   input[type="checkbox"] {
     right: 0;
     left: auto;
     margin: 0 !important;
-    border: 2px solid $bbt-grey-50;
+    border: toRem(2) solid $bbt-grey-50;
     box-shadow: none;
     padding: 0;
     -webkit-appearance: inherit;
     appearance: inherit;
     box-sizing: border-box;
-    width: 18px;
-    height: 18px;
+    width: toRem(18);
+    height: toRem(18);
     cursor: pointer;
     transition: 0.3s ease;
 
     &:checked {
-      border: 6px solid $bbt-primary-green;
+      border: toRem(6) solid $bbt-primary-green;
       transition: 0.2s ease;
 
       &:hover {
-        border: 6px solid $bbt-primary-green;
+        border: toRem(6) solid $bbt-primary-green;
         transition: 0.3s ease;
       }
 
       &:disabled {
-        border: 2px solid $bbt-green-50;
+        border: toRem(2) solid $bbt-green-50;
         transition: 0.3s ease;
       }
     }
@@ -394,25 +394,25 @@
     }
 
     &:hover {
-      border: 2px solid $bbt-secondary-grey;
+      border: toRem(2) solid $bbt-secondary-grey;
       transition: 0.3s ease;
     }
 
     &:disabled {
-      border: 2px solid $bbt-grey-30;
+      border: toRem(2) solid $bbt-grey-30;
       transition: 0.3s ease;
     }
     &.input-error {
-      border: 2px solid $bbt-red-100;
+      border: toRem(2) solid $bbt-red-100;
 
       &:hover {
-        border: 2px solid $bbt-red-100;
+        border: toRem(2) solid $bbt-red-100;
         transition: 0.3s ease;
       }
 
       &:focus {
         transition: 0.3s ease;
-        border: 2px solid $bbt-red-100;
+        border: toRem(2) solid $bbt-red-100;
         color: $bbt-red-100;
       }
     }

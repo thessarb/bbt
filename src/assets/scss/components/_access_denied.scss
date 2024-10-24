@@ -5,29 +5,29 @@
   height: 100vh;
   text-align: center;
   background-color: $bbt-grey-5;
-  padding: 20px;
+  padding: $unit-1;
   word-break: break-word;
-  margin-top: 100px;
+  margin-top: toRem(100);
 
   .no-access {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: toRem(6);
     .background-grey {
-      padding-top: 2px;
-      padding-right: 6px;
-      padding-bottom: 2px;
-      padding-left: 6px;
-      border-radius: 2px;
+      padding-top: toRem(2);
+      padding-right: toRem(6);
+      padding-bottom: toRem(2);
+      padding-left: toRem(6);
+      border-radius: toRem(2);
       color: $bbt-white;
       background-color: $bbt-secondary-grey;
     }
     .background-light-grey {
-      padding-top: 2px;
-      padding-right: 6px;
-      padding-bottom: 2px;
-      padding-left: 6px;
-      border-radius: 2px;
+      padding-top: toRem(2);
+      padding-right: toRem(6);
+      padding-bottom: toRem(2);
+      padding-left: toRem(6);
+      border-radius: toRem(2);
       color: $bbt-grey-60;
       background-color: $bbt-grey-20;
     }
@@ -35,10 +35,10 @@
 
   &__code {
     color: $bbt-primary-green;
-    font-size: 96px;
+    font-size: toRem(96);
     letter-spacing: 0.1em;
-    line-height: 120px;
-    margin-bottom: 60px;
+    line-height: toRem(120);
+    margin-bottom: toRem(60);
     font-weight: 600;
     word-break: break-word;
 
@@ -62,7 +62,7 @@
     line-height: 45px;
     font-weight: 500;
     color: $bbt-secondary-grey;
-    margin-bottom: 100px;
+    margin-bottom: toRem(100);
     @media (min-width: 488px) {
       font-size: 36px;
     }
