@@ -1,0 +1,136 @@
+.modal {
+  top: -100% !important;
+  display: flex !important;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  transition: top .35s ease-in-out !important;
+
+  &.show {
+    top: 0 !important;
+    animation: slideShow .35s forwards;
+  }
+
+  &.slide-up {
+    animation: slideHide .35s forwards;
+    top: -100% !important;
+  }
+
+  .modal-dialog {
+    width: 100% !important;
+    max-width: toRem(1280) !important;
+    max-height: 79vh !important;
+    margin: 0 !important;
+    padding: 0 $unit-1 !important;
+    overflow: auto;
+
+    @media (min-width: 1400px) {
+      padding: 0 !important;
+    }
+  }
+
+  .modal-content {
+    width: 100% !important;
+    height: 100%;
+    max-height: 79vh !important;
+    margin: auto;
+  }
+
+  .modal-header {
+    padding: $unit-1 !important;
+    background-color: $bbt-grey-5 !important;
+    border-bottom: toRem(1) solid $bbt-grey-50 !important;
+    border-top-left-radius: toRem(4) !important;
+    border-top-right-radius: toRem(4) !important;
+
+    .modal-title {
+      display: flex;
+      flex-wrap: wrap;
+      line-height: toRem(28) !important;
+
+      .heading__regular {
+        margin-right: $unit-0;
+      }
+    }
+
+    .btn-close {
+      width: toRem(18) !important;
+      height: toRem(18) !important;
+      padding: toRem(10) !important;
+      margin-top: 0 !important;
+      margin-right: 0 !important;
+      margin-bottom: 0 !important;
+      font-size: 11px !important;
+      color: $bbt-secondary-grey !important;
+      background-color: transparent !important;
+      opacity: 1;
+
+      &:hover {
+        color: $bbt-grey-50 !important;
+        background-color: transparent !important;
+      }
+
+      &:focus {
+        color: $bbt-secondary-grey !important;
+        background-color: $bbt-white !important;
+        box-shadow: 0 0 10px 0 rgba(83, 86, 90, 0.50) !important;
+      }
+
+      &:active {
+        color: $bbt-secondary-grey !important;
+        background-color: $bbt-white !important;
+        box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.50) inset !important;
+      }
+    }
+  }
+
+  .modal-body {
+    overflow: auto;
+  }
+
+  .modal-footer {
+    gap: $unit-1;
+    padding: $unit-1 !important;
+    background-color: $bbt-grey-5 !important;
+    border: none;
+    border-top: none !important;
+    border-bottom-right-radius: toRem(4) !important;
+    border-bottom-left-radius: toRem(4) !important;
+
+    & > * {
+      margin: 0 !important;
+    }
+  }
+
+  &--half {
+    .modal-dialog {
+      max-width: toRem(640) !important;
+      max-height: 50vh !important;
+    }
+
+    .modal-content {
+      width: 100% !important;
+      height: 100%;
+      max-height: 50vh !important;
+      margin: auto;
+    }
+  }
+}
+
+@keyframes slideShow {
+  0% {
+    top: -100% !important;
+  }
+  100% {
+    top: 0 !important;
+  }
+}
+
+@keyframes slideHide {
+  0% {
+    top: 0 !important;
+  }
+  100% {
+    top: -100% !important;
+  }
+}
