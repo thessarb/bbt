@@ -8,10 +8,10 @@ const OrdersView: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Aufgaben</title>
+        <title>Aufträge</title>
       </Helmet>
       <Sidebar>
-      <Breadcrumb title={"Home"}  subtitle={"Aufgaben"}/>
+      <Breadcrumb title={"Home"}  subtitle={"Aufträge"}/>
         <Orders />
       </Sidebar>
     </>

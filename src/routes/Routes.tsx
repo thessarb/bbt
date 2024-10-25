@@ -8,6 +8,7 @@ import ResetPasswordView from "src/pages/authentication/ResetPasswordView";
 
 import DashboardView from "src/pages/dashboard/DashboardView";
 import OrdersView from "src/pages/orders/OrdersView";
+import OrderDetailsOverviewView from "src/pages/orders/order_details/OrderDetailsOverview";
 import AdministrationView from "src/pages/administration/AdministrationView";
 import AdministrationOrderView from "src/pages/administration/AdmnistrationOrderView";
 import DocumentsView from "src/pages/documents/DocumentsView";
@@ -91,6 +92,14 @@ const PrivateRoutes: RouteItem[] = [
     element: checkPrivateRoutes(
       // <ProtectedRoute roles={[]}>
         <UsersListView />
+      // </ProtectedRoute>
+    ),
+  },
+  {
+    path: PATHS.orderDetails,
+    element: checkPrivateRoutes(
+      // <ProtectedRoute roles={[]}>
+        <OrderDetailsOverviewView />
       // </ProtectedRoute>
     ),
   },
