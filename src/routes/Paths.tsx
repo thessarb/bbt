@@ -8,6 +8,8 @@ const PATHS = {
 
   dashboard: "/dashboard",
   orders: "/auftrage",
+  orderDetails: "/auftrage/:id",
+  
   administration: "/verwaltung",
   administrationOrder: " /verwaltung/auftrag/:id",
   approvalGranted: "/freigabe-erteilt",
