@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import ThomasPlaneTable from "./ThomasPlaneTable";
-// import MainePlane from "./MainePlane";
+import MainePlane from "./MainePlane";
 import ListNoResult from "./ListNoResult";
 
 interface PlanViewModalProps {
@@ -84,7 +84,7 @@ function PlanViewModal({show, setShow}: PlanViewModalProps) {
                                 {visibleTab === 1 && (
                                         <div id="my-plane"
                                              className={`tab__content-item ${activeTab === 1 ? 'active' : 'close'}`}>
-                                            {/*{MainePlane ? < MainePlane/> : < ListNoResult/>}*/}
+                                            {MainePlane ? < MainePlane/> : < ListNoResult/>}
                                         </div>
                                 )}
                             </div>

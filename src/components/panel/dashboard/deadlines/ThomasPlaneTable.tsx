@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import ThomasPlaneFileViewModal from "./ThomasPlaneFileViewModal";
+import FreigebenFormModal from "./FreigebenFormModal";
 import Select from "react-select";
 import CustomPagination from "../../../../helpers/CustomPaginate";
 
@@ -129,15 +129,15 @@ function ThomasPlaneTable() {
                             </td>
 
                             <td role="cell" className="table-list__button" data-label={" "}>
-                                <div className="button button-gost button--big button--grey">
+                                <div onClick={handleShow} className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-check-square-offset"></i>
                                 </div>
-                                <div onClick={handleShow} className="button button-gost button--big button--grey">
+                                <div className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-eye"></i>
                                 </div>
 
-                                {showThomasModal && <ThomasPlaneFileViewModal showThomasModal={showThomasModal}
-                                                                              setShowThomasModal={setShowThomasModal}/>}
+                                {showThomasModal && <FreigebenFormModal showThomasModal={showThomasModal}
+                                                                        setShowThomasModal={setShowThomasModal}/>}
                             </td>
                         </tr>
                         </tbody>
