@@ -4,6 +4,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  padding-right: unset !important;
   transition: top .35s ease-in-out !important;
 
   &.show {

@@ -6,7 +6,7 @@ interface ThomasPlaneModalProps {
     setShowThomasModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function ThomasPlaneFileViewModal({showThomasModal, setShowThomasModal}: ThomasPlaneModalProps) {
+function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneModalProps) {
 
     // Modal
     const [animateClose, setAnimateClose] = useState(false);
@@ -25,7 +25,7 @@ function ThomasPlaneFileViewModal({showThomasModal, setShowThomasModal}: ThomasP
                         onHide={handleClose}
                         animation={true}
                         backdrop="static"
-                        className={`modal plan-view ${animateClose ? 'slide-up' : ''}`}
+                        className={`plan-view fade-in ${animateClose ? 'fade-out' : ''}`}
                 >
                     <Modal.Header closeButton>
                         <Modal.Title>
@@ -33,7 +33,7 @@ function ThomasPlaneFileViewModal({showThomasModal, setShowThomasModal}: ThomasP
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        thomas plane Image view
+                        thomas plane freigeben form modal
                     </Modal.Body>
                     <Modal.Footer>
                         <button className="button button-secondary button--big button--grey" onClick={handleClose}>
@@ -45,4 +45,4 @@ function ThomasPlaneFileViewModal({showThomasModal, setShowThomasModal}: ThomasP
     );
 }
 
-export default ThomasPlaneFileViewModal;
+export default FreigebenFormModal;
