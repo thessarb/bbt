@@ -24,7 +24,7 @@ const ReadMessageModal = ({ show, setShow }: ReadMessageModalProps) => {
                 show={show}
                 onHide={handleClose}
                 animation={true}
-                className={`modal read-message ${animateClose ? 'slide-up' : ''}`}
+                className={`read-message ${animateClose ? 'slide-up' : ''}`}
             >
                 <Modal.Header closeButton>
                     <Modal.Title>
