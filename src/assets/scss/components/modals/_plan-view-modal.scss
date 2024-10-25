@@ -1,0 +1,40 @@
+// Plan View Modal
+.plan-view {
+  .modal-body {
+    padding: $unit-1 0 !important;
+    background-color: $bbt-grey-5;
+  }
+
+  table {
+    padding: 0 $unit-1;
+  }
+
+  .pagination-container {
+    padding: 0 $unit-1;
+    margin-bottom: 0;
+
+    .pagination-block,
+    .pagination {
+      margin-bottom: 0;
+    }
+  }
+
+  .thomas-plane {
+    table {
+      thead {
+        th {
+          @media (min-width: 992px) {
+            min-width: toRem(100);
+
+            &:first-child {
+              min-width: toRem(120);
+            }
+            &:last-child {
+              min-width: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+}

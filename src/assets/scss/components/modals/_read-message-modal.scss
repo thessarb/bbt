@@ -1,0 +1,11 @@
+// Read Message Modal
+.read-message {
+  .modal-body {
+    padding: $unit-1 0;
+    background-color: $bbt-grey-5;
+  }
+
+  &__description {
+    padding: $unit-1;
+  }
+}

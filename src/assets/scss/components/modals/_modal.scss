@@ -4,6 +4,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  padding-right: unset !important;
   transition: top .35s ease-in-out !important;
 
   &.show {
@@ -14,6 +15,25 @@
   &.slide-up {
     animation: slideHide .35s forwards;
     top: -100% !important;
+  }
+
+  &.fade-in {
+    opacity: 0;
+    transition: opacity .35s ease-in-out !important;
+
+    &.show {
+      opacity: 1;
+      animation: unset;
+    }
+
+    &.fade-out {
+      opacity: 0;
+    }
+
+    .modal-dialog {
+      transition: unset !important;
+      transform: unset !important;
+    }
   }
 
   .modal-dialog {

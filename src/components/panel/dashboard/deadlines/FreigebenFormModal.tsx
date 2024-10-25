@@ -1,19 +1,19 @@
-import { useState } from 'react';
+import React, {useState} from 'react';
 import Modal from 'react-bootstrap/Modal';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
-interface FileViewerModalProps {
-    show: boolean;
-    setShow: React.Dispatch<React.SetStateAction<boolean>>;
+interface ThomasPlaneModalProps {
+    showThomasModal: boolean;
+    setShowThomasModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function FileViewerModal({ show, setShow }: FileViewerModalProps) {
-    const [animateClose, setAnimateClose] = useState(false);
+function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneModalProps) {
 
+    // Modal
+    const [animateClose, setAnimateClose] = useState(false);
     const handleClose = () => {
         setAnimateClose(true);
         setTimeout(() => {
-            setShow(false);
+            setShowThomasModal(false);
             setAnimateClose(false);
         }, 350);
     };
@@ -21,21 +21,19 @@ function FileViewerModal({ show, setShow }: FileViewerModalProps) {
     return (
             <>
                 <Modal
-                        show={show}
+                        show={showThomasModal}
                         onHide={handleClose}
                         animation={true}
-                        className={`modal file-viewer ${animateClose ? 'slide-up' : ''}`}
+                        backdrop="static"
+                        className={`plan-view fade-in ${animateClose ? 'fade-out' : ''}`}
                 >
                     <Modal.Header closeButton>
                         <Modal.Title>
-                            <span className="heading__regular">FileViewer:</span>
-                            <span className="heading__semibold">SchalplanSch alplanScha lplanSchalplan 5_TEDZ_SP_B0_00_0000_01_G</span>
+                            <span className="heading__semibold">Auftrag 80700: Pläne ansehen</span>
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="file-viewer__file">
-                            File view modal
-                        </div>
+                        thomas plane freigeben form modal
                     </Modal.Body>
                     <Modal.Footer>
                         <button className="button button-secondary button--big button--grey" onClick={handleClose}>
@@ -47,4 +45,4 @@ function FileViewerModal({ show, setShow }: FileViewerModalProps) {
     );
 }
 
-export default FileViewerModal;
+export default FreigebenFormModal;
