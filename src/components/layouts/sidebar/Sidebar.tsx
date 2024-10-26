@@ -63,6 +63,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
           </div>
           <div className="caption__medium vertical-menu__caption-color">
             <span>Menu</span>
+            {/* <span>Adminbereich</span> */}
           </div>
           <SidebarContent />
         </div>
