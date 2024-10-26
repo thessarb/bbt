@@ -15,7 +15,9 @@
     padding: 0 $unit-1;
     margin-bottom: $unit-factor;
   }
-
+  &__order {
+    padding: unset;
+  }
   &__buttons {
     position: relative;
     display: flex;

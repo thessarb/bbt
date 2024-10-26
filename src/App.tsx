@@ -12,12 +12,12 @@ import LibraryView from "./pages/library/LibraryView";
 import AccessDenied from "./pages/accessdenied/AccessDenied";
 import Error404 from "./pages/notfound/Error404";
 import MessagesView from "./pages/messages/MessagesView";
-
+import OrderDetailsOverviewView from "./pages/orders/order_details/OrderDetailsOverview";
 function App() {
     return (
         <div className="body">
             <BrowserRouter>
-                <DashboardView/>
+                <OrderDetailsOverviewView/>
             </BrowserRouter>
         </div>
     );
