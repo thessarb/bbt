@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from "react";
+import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 interface CustomModalProps {
     show: boolean;
@@ -21,29 +20,28 @@ function CustomModal({ show, setShow }: CustomModalProps) {
     return (
         <>
             <Modal
-                show={show}
-                onHide={handleClose}
-                animation={true}
+                isOpen={show}
+                toggle={handleClose}
+                className={`modal ${animateClose ? "slide-up" : ""}`}
+                fade={true}
                 backdrop="static"
-                className={`modal  ${animateClose ? 'slide-up' : ''}`}
             >
-                <Modal.Header closeButton>
-                    <Modal.Title>
-                        <span className="heading__regular">FileViewer:</span>
-                        <span className="heading__semibold">SchalplanSch alplanScha lplanSchalplan 5_TEDZ_SP_B0_00_0000_01_G</span>
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Ab asperiores at distinctio dolorum expedita facilis laboriosam libero maiores,
+                <ModalHeader toggle={handleClose}>
+                    <span className="heading__regular">FileViewer:</span>
+                    <span className="heading__semibold">
+                        SchalplanSch alplanScha lplanSchalplan 5_TEDZ_SP_B0_00_0000_01_G
+                    </span>
+                </ModalHeader>
+                <ModalBody>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit. Ab asperiores at distinctio dolorum expedita facilis laboriosam libero maiores,
                     maxime minus nisi non nulla placeat quaerat quam quasi, ratione? Ducimus, odio!
-                </Modal.Body>
-                <Modal.Footer>
+                </ModalBody>
+                <ModalFooter>
                     <button className="button button-secondary button--big button--grey" onClick={handleClose}>
                         <span className="button__text">Schließen</span>
                     </button>
-                </Modal.Footer>
+                </ModalFooter>
             </Modal>
         </>
     );

@@ -1,25 +1,21 @@
 .modal {
-  top: -100% !important;
   display: flex !important;
   justify-content: center;
-  flex-direction: column;
   align-items: center;
-  padding-right: unset !important;
-  transition: top .35s ease-in-out !important;
+  padding-right: 0;
+  transition: top 0.35s ease-in-out;
 
   &.show {
-    top: 0 !important;
-    animation: slideShow .35s forwards;
+    animation: slideShow 0.35s forwards;
   }
 
   &.slide-up {
-    animation: slideHide .35s forwards;
-    top: -100% !important;
+    animation: slideHide 0.35s forwards;
   }
 
   &.fade-in {
     opacity: 0;
-    transition: opacity .35s ease-in-out !important;
+    transition: opacity 0.35s ease-in-out;
 
     &.show {
       opacity: 1;
@@ -31,42 +27,45 @@
     }
 
     .modal-dialog {
-      transition: unset !important;
-      transform: unset !important;
+      transition: unset;
+      transform: unset;
     }
   }
 
   .modal-dialog {
-    width: 100% !important;
-    max-width: toRem(1280) !important;
-    max-height: 79vh !important;
-    margin: 0 !important;
-    padding: 0 $unit-1 !important;
-    overflow: auto;
+    width: 100%;
+    max-width: toRem(1280);
+    max-height: 79vh;
+    margin: 0;
+    padding: 0 $unit-1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 
     @media (min-width: 1400px) {
-      padding: 0 !important;
+      padding: 0;
     }
   }
 
   .modal-content {
-    width: 100% !important;
-    height: 100%;
-    max-height: 79vh !important;
+    width: 100%;
+    height: auto;
+    max-height: 79vh;
     margin: auto;
+    overflow-y: auto;
   }
 
   .modal-header {
-    padding: $unit-1 !important;
-    background-color: $bbt-grey-5 !important;
-    border-bottom: toRem(1) solid $bbt-grey-50 !important;
-    border-top-left-radius: toRem(4) !important;
-    border-top-right-radius: toRem(4) !important;
+    padding: $unit-1;
+    background-color: $bbt-grey-5;
+    border-bottom: toRem(1) solid $bbt-grey-50;
+    border-top-left-radius: toRem(4);
+    border-top-right-radius: toRem(4);
 
     .modal-title {
       display: flex;
       flex-wrap: wrap;
-      line-height: toRem(28) !important;
+      line-height: toRem(28);
 
       .heading__regular {
         margin-right: $unit-0;
@@ -74,83 +73,122 @@
     }
 
     .btn-close {
-      width: toRem(18) !important;
-      height: toRem(18) !important;
-      padding: toRem(10) !important;
-      margin-top: 0 !important;
-      margin-right: 0 !important;
-      margin-bottom: 0 !important;
-      font-size: 11px !important;
-      color: $bbt-secondary-grey !important;
-      background-color: transparent !important;
+      width: toRem(18);
+      height: toRem(18);
+      padding: toRem(10);
+      margin-top: 0;
+      margin-right: 0;
+      margin-bottom: 0;
+      font-size: 11px;
+      color: $bbt-secondary-grey;
+      background-color: transparent;
       opacity: 1;
 
       &:hover {
-        color: $bbt-grey-50 !important;
-        background-color: transparent !important;
+        color: $bbt-grey-50;
+        background-color: transparent;
       }
 
       &:focus {
-        color: $bbt-secondary-grey !important;
-        background-color: $bbt-white !important;
-        box-shadow: 0 0 10px 0 rgba(83, 86, 90, 0.50) !important;
+        color: $bbt-secondary-grey;
+        background-color: $bbt-white;
+        box-shadow: 0 0 10px 0 rgba(83, 86, 90, 0.5);
       }
 
       &:active {
-        color: $bbt-secondary-grey !important;
-        background-color: $bbt-white !important;
-        box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.50) inset !important;
+        color: $bbt-secondary-grey;
+        background-color: $bbt-white;
+        box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.5) inset;
       }
     }
   }
 
   .modal-body {
+    padding: 20px;
+    overflow-y: auto;
     overflow: auto;
+    padding: 20px;
+
+    .change-password {
+      display: flex;
+      gap: 20px;
+
+      .password,
+      .validate-password {
+        width: 50%;
+        .title {
+          margin-top: $unit-factor;
+        }
+        .item {
+          display: flex;
+          align-items: center;
+          gap: $unit-factor;
+          margin-bottom: toRem(6);
+        }
+        .content-icon {
+          width: toRem(14);
+          height: toRem(14);
+          align-items: center;
+          flex-shrink: 0;
+
+          &.icon-check {
+            background-color: $bbt-primary-green;
+          }
+
+          &.icon-x {
+            background-color: $bbt-red-100;
+          }
+        }
+      }
+    }
   }
 
   .modal-footer {
     gap: $unit-1;
-    padding: $unit-1 !important;
-    background-color: $bbt-grey-5 !important;
+    padding: $unit-1;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: $bbt-grey-5;
     border: none;
-    border-top: none !important;
-    border-bottom-right-radius: toRem(4) !important;
-    border-bottom-left-radius: toRem(4) !important;
-
+    border-top: none;
+    border-bottom-right-radius: toRem(4);
+    border-bottom-left-radius: toRem(4);
+    &.no-background {
+      background-color: $bbt-white;
+    }
     & > * {
-      margin: 0 !important;
+      margin: 0;
     }
   }
-
   &--half {
     .modal-dialog {
-      max-width: toRem(640) !important;
-      max-height: 50vh !important;
+      max-width: toRem(640);
+      max-height: 50vh;
     }
 
     .modal-content {
-      width: 100% !important;
+      width: 100%;
       height: 100%;
-      max-height: 50vh !important;
+      max-height: 50vh;
       margin: auto;
     }
   }
 }
 
 @keyframes slideShow {
-  0% {
-    top: -100% !important;
+  from {
+    top: -100%;
   }
-  100% {
-    top: 0 !important;
+  to {
+    top: 0;
   }
 }
 
 @keyframes slideHide {
-  0% {
-    top: 0 !important;
+  from {
+    top: 0;
   }
-  100% {
-    top: -100% !important;
+  to {
+    top: -100%;
   }
 }
