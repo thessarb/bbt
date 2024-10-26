@@ -14,12 +14,6 @@ const SidebarItems = [
     // roles: [],
   },
   {
-    path: PATHS.administration,
-    icon: "icon-book-open",
-    name: "Verwaltung",
-    // roles: [],
-  },
-  {
     path: PATHS.documents,
     icon: "icon-files",
     name: "Dokumente",
@@ -35,6 +29,12 @@ const SidebarItems = [
     path: PATHS.messages,
     icon: "icon-envelope-simple",
     name: "Systemnachrichten",
+    // roles: [],
+  },
+  {
+    path: PATHS.userManagement,
+    icon: "icon-user",
+    name: "Benutzerverwaltung",
     // roles: [],
   },
 ];

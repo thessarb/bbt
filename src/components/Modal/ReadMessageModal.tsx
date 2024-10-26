@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from "react";
+import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 interface ReadMessageModalProps {
     show: boolean;
@@ -21,30 +20,29 @@ const ReadMessageModal = ({ show, setShow }: ReadMessageModalProps) => {
     return (
         <>
             <Modal
-                show={show}
-                onHide={handleClose}
-                animation={true}
-                className={`read-message ${animateClose ? 'slide-up' : ''}`}
+                isOpen={show}
+                toggle={handleClose}
+                className={`read-message ${animateClose ? "slide-up" : ""}`}
+                fade={true}
             >
-                <Modal.Header closeButton>
-                    <Modal.Title>
-                        <span className="heading__semibold">Verzögerung</span>
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+                <ModalHeader toggle={handleClose}>
+                    <span className="heading__semibold">Verzögerung</span>
+                </ModalHeader>
+                <ModalBody>
                     <div className="read-message__description body-big__regular">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto eos illo iure nemo perferendis quisquam sunt.
-                        Dolorum eum facilis harum labore nostrum placeat quis. Deleniti eaque est quae quaerat sit?
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto eos illo iure nemo
+                        perferendis quisquam sunt. Dolorum eum facilis harum labore nostrum placeat quis. Deleniti eaque
+                        est quae quaerat sit?
                     </div>
-                </Modal.Body>
-                <Modal.Footer>
+                </ModalBody>
+                <ModalFooter>
                     <button className="button button-secondary button--big button--grey" onClick={handleClose}>
                         <span className="button__text">Schließen</span>
                     </button>
-                </Modal.Footer>
+                </ModalFooter>
             </Modal>
         </>
     );
-}
+};
 
 export default ReadMessageModal;

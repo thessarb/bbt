@@ -1,5 +1,5 @@
 .vertical-menu {
-  width: 365px;
+  width: toRem(365);
   position: fixed;
   top: 0;
   left: 0;
@@ -30,13 +30,13 @@
     justify-content: space-between;
     padding-left: $unit-1;
     padding-right: $unit-1;
-    padding-top: 14px;
+    padding-top: toRem(14);
   }
 
   #sidebar-menu {
     padding-left: $unit-2;
     padding-right: $unit-2;
-    padding-top: 10px;
+    padding-top: $unit-factor;
     .sidebar {
       &__menu-item {
         text-decoration: none;

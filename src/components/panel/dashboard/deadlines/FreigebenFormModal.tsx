@@ -1,13 +1,12 @@
-import React, {useState} from 'react';
-import Modal from 'react-bootstrap/Modal';
+import React, { useState } from "react";
+import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 interface ThomasPlaneModalProps {
     showThomasModal: boolean;
     setShowThomasModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneModalProps) {
-
+function FreigebenFormModal({ showThomasModal, setShowThomasModal }: ThomasPlaneModalProps) {
     // Modal
     const [animateClose, setAnimateClose] = useState(false);
     const handleClose = () => {
@@ -19,29 +18,25 @@ function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneMo
     };
 
     return (
-            <>
-                <Modal
-                        show={showThomasModal}
-                        onHide={handleClose}
-                        animation={true}
-                        backdrop="static"
-                        className={`plan-view fade-in ${animateClose ? 'fade-out' : ''}`}
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title>
-                            <span className="heading__semibold">Auftrag 80700: Pläne ansehen</span>
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        thomas plane freigeben form modal
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <button className="button button-secondary button--big button--grey" onClick={handleClose}>
-                            <span className="button__text">Schließen</span>
-                        </button>
-                    </Modal.Footer>
-                </Modal>
-            </>
+        <>
+            <Modal
+                isOpen={showThomasModal}
+                toggle={handleClose}
+                className={`plan-view fade-in ${animateClose ? "fade-out" : ""}`}
+                fade={true}
+                backdrop="static"
+            >
+                <ModalHeader toggle={handleClose}>
+                    <span className="heading__semibold">Auftrag 80700: Pläne ansehen</span>
+                </ModalHeader>
+                <ModalBody>thomas plane freigeben form modal</ModalBody>
+                <ModalFooter>
+                    <button className="button button-secondary button--big button--grey" onClick={handleClose}>
+                        <span className="button__text">Schließen</span>
+                    </button>
+                </ModalFooter>
+            </Modal>
+        </>
     );
 }
 

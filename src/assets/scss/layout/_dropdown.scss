@@ -9,8 +9,8 @@
 }
 
 .no-scroll {
-  overflow: hidden; 
-  height: 100%;    
+  overflow: hidden;
+  height: 100%;
 }
 
 .user-info-dropdown {
@@ -29,7 +29,7 @@
     animation: slideUp 0.3s ease forwards;
     @keyframes slideUp {
       0% {
-        top: 65px;
+        top: toRem(65);
         opacity: 1;
       }
       100% {
@@ -48,18 +48,18 @@
         opacity: 1;
       }
       100% {
-        top: 65px;
+        top: toRem(65);
         opacity: 1;
       }
     }
   }
 
   &__notification {
-    right: 220px;
+    right: toRem(220);
   }
 
   &__header {
-    height: 78px;
+    height: toRem(78);
     padding: $unit-1;
     color: $bbt-secondary-grey;
     border-bottom: 1px solid $bbt-grey-50;
@@ -99,13 +99,13 @@
     padding: $unit-1;
 
     p {
-      margin: 0 0 10px;
+      margin: 0 0 $unit-factor;
     }
 
     hr {
       border: 0;
       border-top: 1px solid $bbt-grey-10;
-      margin: 15px 0;
+      margin: toRem(15) 0;
     }
 
     > div:last-child {
@@ -115,7 +115,7 @@
 
   @media (min-width: 300px) {
     right: $unit-6;
-    width: 540px;
+    width: toRem(540);
     border-radius: 4px;
 
     &__header {
@@ -128,25 +128,25 @@
       hr {
         border: 0;
         border-top: 1px solid $bbt-grey-10;
-        margin: 15px 0;
+        margin: toRem(15) 0;
       }
     }
   }
-  
+
   @media (max-width: 746px) {
     right: $unit-1;
     width: calc(100% - $unit-3);
     border-radius: 4px;
 
     &__header {
-      padding: 10px;
+      padding: $unit-factor;
     }
 
     &__body {
       padding: $unit-1;
 
       hr {
-        margin: 15px 0;
+        margin: toRem(15) 0;
       }
     }
   }
