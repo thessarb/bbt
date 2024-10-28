@@ -5,14 +5,14 @@ export default function Error404() {
 
   return (
     <div className={"access-denied container-fluid small-offset-left"}>
-      <div className="m-auto">
+      <div>
         <div className="no-access body-small__medium">
           <span className="background-grey">404</span>
           <span className="background-light-grey">Not Found</span>
         </div>
-        <div className="access-denied__code boxed-regular__medium">Ups...</div>
+        <div className="access-denied__code">Ups...</div>
       </div>
-      <h2 className="boxed-regular__semi-bold">
+      <h2>
         Es sieht so aus, als ob die angeforderte Seite nicht (mehr) existiert.
       </h2>
       <button
