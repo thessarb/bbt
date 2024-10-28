@@ -12,7 +12,6 @@
   box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.1);
   margin-bottom: $unit-2;
 
-
   &__title {
     display: flex;
     flex-direction: column;
@@ -105,7 +104,10 @@
           text-align: left !important;
           word-wrap: break-word;
           border-bottom: toRem(1) solid $bbt-grey-10;
-
+          &.green-text {
+            color: $bbt-primary-green;
+            text-decoration: underline;
+          }
           .button {
             &:first-child {
               margin-left: -$unit-factor;
@@ -235,7 +237,7 @@
 
       tbody {
         tr {
-          box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.10);
+          box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.1);
 
           td {
             &:last-child {
@@ -261,16 +263,17 @@
     table {
       tbody {
         tr {
-          transition: font-weight .35s linear;
+          transition: font-weight 0.35s linear;
 
           &:hover,
           &:focus,
           &:active {
             box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.15);
             cursor: pointer;
-            transition: all .35s linear;
+            transition: all 0.35s linear;
 
-            td, .collapsed {
+            td,
+            .collapsed {
               font-weight: 600;
               color: $bbt-text;
 
