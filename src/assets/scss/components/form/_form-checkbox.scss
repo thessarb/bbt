@@ -1,4 +1,4 @@
-// check box
+// Checkbox
 .form-checkbox {
   display: flex;
   gap: $unit-factor;
@@ -7,30 +7,30 @@
   input[type="checkbox"] {
     right: 0;
     left: auto;
+    width: toRem(18);
+    height: toRem(18);
+    padding: 0;
     margin: 0 !important;
     border: toRem(2) solid $bbt-grey-50;
     box-shadow: none;
-    padding: 0;
+    box-sizing: border-box;
     -webkit-appearance: inherit;
     appearance: inherit;
-    box-sizing: border-box;
-    width: toRem(18);
-    height: toRem(18);
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: .35s ease;
 
     &:checked {
       border: toRem(6) solid $bbt-primary-green;
-      transition: 0.2s ease;
+      transition: .35s ease;
 
       &:hover {
         border: toRem(6) solid $bbt-primary-green;
-        transition: 0.3s ease;
+        transition: .35s ease;
       }
 
       &:disabled {
         border: toRem(2) solid $bbt-green-50;
-        transition: 0.3s ease;
+        transition: .35s ease;
       }
     }
 
@@ -40,12 +40,12 @@
 
     &:hover {
       border: toRem(2) solid $bbt-secondary-grey;
-      transition: 0.3s ease;
+      transition: .35s ease;
     }
 
     &:disabled {
       border: toRem(2) solid $bbt-grey-30;
-      transition: 0.3s ease;
+      transition: .35s ease;
     }
 
     &.input-error {
@@ -54,7 +54,7 @@
       &:hover,
       &:focus {
         border: toRem(2) solid $bbt-red-100;
-        transition: 0.3s ease;
+        transition: .35s ease;
       }
 
       &:focus {
