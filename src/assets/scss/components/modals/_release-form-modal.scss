@@ -25,4 +25,22 @@
       border-radius: toRem(3);
     }
   }
+
+  .second-confirmation {
+    display: flex;
+    flex-direction: column;
+    padding: $unit-1;
+    color: $bbt-text;
+
+    &__text {
+      margin-bottom: $unit-1;
+    }
+
+    &__admin {
+      &--email {
+        color: $bbt-primary-green;
+        margin-left: $unit-0;
+      }
+    }
+  }
 }
