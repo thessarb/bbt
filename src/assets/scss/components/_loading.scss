@@ -1,7 +1,7 @@
 .loading-animation {
     display: inline-block;
-    width: 90px;
-    height: 90px;
+    width: toRem(90);
+    height: toRem(90);
     border-radius: 50%;
     background: conic-gradient(
       rgba(148, 189, 106, 1),
