@@ -1,0 +1,24 @@
+.loading-animation {
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: conic-gradient(
+      rgba(148, 189, 106, 1),
+      rgba(67, 176, 42, 1),
+      rgba(148, 189, 106, 1),
+      rgba(148, 189, 106, 1),
+    );
+    mask-image: radial-gradient(circle, transparent 55%, black 55%);
+    animation: spin 1.2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
