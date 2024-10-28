@@ -36,7 +36,7 @@ function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneMo
                 <Modal
                         isOpen={showThomasModal}
                         toggle={handleClose}
-                        className={`release-form fade-in ${animateClose ? "slide-up" : ""}`}
+                        className={`modal release-form ${animateClose ? "fade-out" : ""}`}
                         fade={true}
                         backdrop="static"
                 >
