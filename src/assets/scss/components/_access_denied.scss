@@ -7,8 +7,8 @@
   background-color: $bbt-grey-5;
   padding: $unit-1;
   word-break: break-word;
-  margin-top: toRem(100);
-
+  margin: toRem(100) auto auto auto;
+  
   .no-access {
     display: flex;
     align-items: center;
@@ -36,20 +36,16 @@
   &__code {
     color: $bbt-primary-green;
     font-size: toRem(96);
-    letter-spacing: 0.1em;
     line-height: toRem(120);
-    margin-bottom: toRem(60);
     font-weight: 600;
     word-break: break-word;
-
+    font-family: $font--boxed-medium;
+    margin-bottom: toRem(60);
 
     @media (min-width: 488px) {
       font-size: 96px;
     }
     @media (max-width: 676px) {
-      font-size: 70px;
-    }
-    @media (min-width: 300px) {
       font-size: 70px;
     }
     @media (max-width: 488px) {
@@ -63,13 +59,12 @@
     font-weight: 500;
     color: $bbt-secondary-grey;
     margin-bottom: toRem(100);
+    font-family: $font--boxed-regular;
+
     @media (min-width: 488px) {
       font-size: 36px;
     }
     @media (max-width: 676px) {
-      font-size: 26px;
-    }
-    @media (min-width: 300px) {
       font-size: 26px;
     }
     @media (max-width: 488px) {
