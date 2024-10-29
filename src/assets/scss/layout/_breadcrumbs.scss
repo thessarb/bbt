@@ -1,20 +1,26 @@
 .breadcrumb {
-	margin-bottom: $unit-2;
+  margin-bottom: $unit-3!important;
 
-	&__page-title-box {
-		display: flex;
-		flex-direction: column;
-		gap: $unit-0;
-	}
+  &__page-title-box {
+    display: flex;
+    flex-direction: column;
+    gap: $unit-0;
+  }
 
-	&__home {
-		text-align: left;
-		cursor: pointer;
-	}
+  &__home {
+    text-align: left;
+    color: $bbt-primary-green;
+    font-family: $font--boxed-regular;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+	text-decoration: underline;
+    cursor: pointer;
+  }
 
-	&__title {
-		text-align: left;
-		color: $bbt-primary-green;
-		cursor: auto;
-	}
+  &__title {
+    text-align: left;
+    color: $bbt-secondary-grey;
+    cursor: auto;
+  }
 }

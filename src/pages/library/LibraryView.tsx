@@ -11,7 +11,7 @@ const LibraryView: React.FC = () => {
         <title>Bibliothek</title>
       </Helmet>
       <Sidebar>
-      <Breadcrumb title={"Home"}  subtitle={"Bibliothek"}/>
+      <Breadcrumb title={"Übersicht"}  subtitle={"Bibliothek"}/>
         <Library />
       </Sidebar>
     </>
