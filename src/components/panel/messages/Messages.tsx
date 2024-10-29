@@ -91,19 +91,16 @@ const Messages = () => {
                         <th role="columnheader">
                             <div className="body-normal__semibold">
                                 Betreff
-                                <i className="icon-dots-three-vertical"></i>
                             </div>
                         </th>
                         <th role="columnheader">
                             <div className="body-normal__semibold">
                                 Kritisch
-                                <i className="icon-dots-three-vertical"></i>
                             </div>
                         </th>
                         <th role="columnheader">
                             <div className="contents body-normal__semibold">
                                 Inhalt
-                                <i className="icon-dots-three-vertical"></i>
                             </div>
                         </th>
                         <th role="columnheader">
