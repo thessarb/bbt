@@ -1,153 +1,124 @@
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #00000033;
-  z-index: 10;
-}
+.headerdropdown {
+	position: absolute;
+	right: $unit-1;
+	top: -500px;
+	width: calc(100% - $unit-3);
+	z-index: 3;
+	cursor: auto;
+	overflow: hidden;
+	background-color: $bbt-grey-5;
+	border: 1px solid $bbt-grey-50;
+	border-radius: 4px;
 
-.no-scroll {
-  overflow: hidden;
-  height: 100%;
-}
+	@media (min-width: 768px) {
+        right: $unit-6;
+        width: 540px;
+	}
 
-.user-info-dropdown {
-  position: absolute;
-  right: $unit-6;
-  width: 540px;
-  background-color: $bbt-grey-5;
-  border: 1px solid $bbt-grey-50;
-  border-radius: 4px;
-  z-index: 100;
-  cursor: auto;
-  overflow: hidden;
-  top: -450px;
+	&.close {
+		animation: slideUp 0.3s ease forwards;
 
-  &.close {
-    animation: slideUp 0.3s ease forwards;
-    @keyframes slideUp {
-      0% {
-        top: toRem(65);
-        opacity: 1;
-      }
-      100% {
-        top: -450px;
-        opacity: 1;
-      }
-    }
-  }
+		@keyframes slideUp {
+			0% {
+				top: 65px;
+				opacity: 1;
+			}
+			100% {
+				top: -450px;
+				opacity: 1;
+			}
+		}
+	}
 
-  &.open {
-    animation: slideDown 0.3s ease forwards;
-    top: 65px;
-    @keyframes slideDown {
-      0% {
-        top: -450px;
-        opacity: 1;
-      }
-      100% {
-        top: toRem(65);
-        opacity: 1;
-      }
-    }
-  }
+	&.open {
+		animation: slideDown 0.3s ease forwards;
+		top: 65px;
 
-  &__notification {
-    right: toRem(220);
-  }
+		@keyframes slideDown {
+			0% {
+				top: -450px;
+				opacity: 1;
+			}
+			100% {
+				top: 65px;
+				opacity: 1;
+			}
+		}
+	}
 
-  &__header {
-    height: toRem(78);
-    padding: $unit-1;
-    color: $bbt-secondary-grey;
-    border-bottom: 1px solid $bbt-grey-50;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+	&__notifications {
 
-  &__user {
-    color: $bbt-secondary-grey;
-  }
+		@media (min-width: 768px) {
+			right: toRem(220);
+		}
+	}
 
-  &__user-name {
-    color: $bbt-secondary-grey;
-  }
-  &__user-email {
-    color: $bbt-primary-green;
-  }
-  &__message {
-    color: $bbt-secondary-grey;
-  }
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: toRem(78);
+		padding: 10px;
+		color: $bbt-secondary-grey;
+		border-bottom: 1px solid $bbt-grey-50;
 
-  &__change-password-link {
-    color: $bbt-primary-green;
-    cursor: pointer;
-    text-decoration: none;
-  }
+		@media (min-width: 768px) {
+            padding: $unit-1;
+		}
 
-  &__button-end {
-    display: flex;
-    justify-content: end;
-    margin-top: $unit-3;
-    margin-left: auto;
-  }
+	}
 
-  &__body {
-    padding: $unit-1;
+	&__subtitle {
+		margin-bottom: 5px;
+		margin-top: 20px;
+		color: $bbt-secondary-grey;
+	}
 
-    p {
-      margin: 0 0 $unit-factor;
-    }
+	&__title {
+		color: $bbt-secondary-grey;
+	}
 
-    hr {
-      border: 0;
-      border-top: 1px solid $bbt-grey-10;
-      margin: toRem(15) 0;
-    }
+	&__email {
+		color: $bbt-primary-green;
+	}
 
-    > div:last-child {
-      padding-bottom: $unit-1;
-    }
-  }
+	&__message {
+		margin-top: 5px;
+		margin-bottom: 20px;
+		color: $bbt-secondary-grey;
+	}
 
-  @media (min-width: 300px) {
-    right: $unit-6;
-    width: toRem(540);
-    border-radius: 4px;
+	&__notification {
+		display: flex;
+		flex-direction: column;
 
-    &__header {
-      padding: $unit-1;
-    }
+		&:first-child {
+			border-bottom: 1px solid $bbt-grey-10;
+		}
+	}
 
-    &__body {
-      padding: $unit-1;
+	&__password {
+		color: $bbt-primary-green;
+		cursor: pointer;
+		text-decoration: none;
+		margin-top: $unit-1;
+	}
 
-      hr {
-        border: 0;
-        border-top: 1px solid $bbt-grey-10;
-        margin: toRem(15) 0;
-      }
-    }
-  }
+	&__date {
+		border-bottom: 1px solid $bbt-grey-50;
+		padding-bottom: $unit-1;
+		margin-top: 5px;
+		margin-bottom: 20px;
+	}
 
-  @media (max-width: 746px) {
-    right: $unit-1;
-    width: calc(100% - $unit-3);
-    border-radius: 4px;
+	&__button-end {
+		display: flex;
+		justify-content: end;
+		margin-top: $unit-3;
+		margin-left: auto;
+	}
 
-    &__header {
-      padding: $unit-factor;
-    }
-
-    &__body {
-      padding: $unit-1;
-
-      hr {
-        margin: toRem(15) 0;
-      }
-    }
-  }
+	&__body {
+		padding: $unit-1;
+	}
 }

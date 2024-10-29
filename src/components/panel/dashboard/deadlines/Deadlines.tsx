@@ -2,7 +2,7 @@ import React, {useState, useRef, useEffect} from "react";
 import CustomPagination from "src/helpers/CustomPaginate";
 import Select from "react-select";
 import FilterDialog from "src/helpers/TableFilters";
-import PlanViewModal from "./PlanViewModal";
+// import PlanViewModal from "./PlanViewModal";
 
 const Deadlines = () => {
     // pagination
@@ -346,7 +346,7 @@ const Deadlines = () => {
                                 <button onClick={handleShow} className='button button-gost button--big button--grey'>
                                     <i className="button__icon icon-note-pencil"></i>
                                 </button>
-                                {show && <PlanViewModal show={show} setShow={setShow}/>}
+                                {/*{show && <PlanViewModal show={show} setShow={setShow}/>}*/}
 
                             </td>
                         </tr>
