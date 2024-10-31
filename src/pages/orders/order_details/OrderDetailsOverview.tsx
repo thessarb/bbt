@@ -11,7 +11,7 @@ const OrderDetailsOverviewView: React.FC = () => {
         <title>Aufträge 80700</title>
       </Helmet>
       <Sidebar>
-      <Breadcrumb title={"Home"}  subtitle={"Aufträge 80700"}/>
+      <Breadcrumb title={"Übersicht"}  subtitle={"Aufträge 80700"}/>
         <OrderDetailsOverview />
       </Sidebar>
     </>
