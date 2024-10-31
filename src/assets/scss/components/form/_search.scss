@@ -1,0 +1,102 @@
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  button {
+    @media (max-width: 768px) {
+      width: 100%;
+      margin-top: $unit-1;
+    }
+
+    @media (min-width: 1200px) {
+      width: toRem(300);
+    }
+  }
+}
+
+.searchable-select {
+  position: relative;
+  width: 100%;
+
+  .icon-magnifying-glass {
+    position: absolute;
+    top: 50%;
+    left: $unit-1;
+    width: toRem(32);
+    height: toRem(32);
+    pointer-events: none;
+    background-color: $bbt-grey-50;
+    transform: translateY(-50%);
+  }
+
+  .searchable-input {
+    width: 100%;
+    max-width: 100%;
+    height: toRem(60);
+    padding-left: $unit-6;
+    background-color: $bbt-white;
+    border-radius: toRem(4);
+    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.1);
+    border: toRem(1) solid $bbt-grey-5;
+    font-size: 16px;
+    color: $bbt-secondary-grey;
+
+    &::placeholder {
+      color: $bbt-grey-50;
+      transition: color .35s ease-in-out;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    @media (min-width: 400px) {
+      width: toRem(500);
+    }
+
+    @media (min-width: 1024px) {
+      width: toRem(610);
+    }
+  }
+
+  .select-options {
+    position: absolute;
+    z-index: 1000;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: toRem(200);
+    margin-top: toRem(8);
+    color: $bbt-grey-70;
+    background-color: $bbt-white;
+    border-radius: toRem(4);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+
+    @media (min-width: 768px) {
+      width: toRem(400);
+    }
+
+    @media (min-width: 1024px) {
+      width: toRem(610);
+    }
+
+    .select-option {
+      padding: toRem(12);
+      cursor: pointer;
+
+      &:hover {
+        background-color: $bbt-grey-5;
+      }
+
+      .highlight {
+        color: $bbt-primary-green;
+      }
+    }
+  }
+}

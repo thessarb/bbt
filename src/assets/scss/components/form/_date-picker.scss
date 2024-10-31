@@ -1,0 +1,87 @@
+.date-picker {
+  position: relative;
+  width: 100%;
+
+  .react-datepicker-wrapper {
+    width: 100%;
+  }
+
+  &__label {
+    display: block;
+    color: $bbt-secondary-grey;
+    transition: color .35s;
+
+    &--required {
+      color: $bbt-red-100;
+      margin-left: toRem(3);
+    }
+  }
+
+  /* Focused State for Label */
+  &:has(.react-datepicker__tab-loop) {
+    .date-picker__label {
+      color: $bbt-primary-green;
+    }
+  }
+
+  &__icon {
+    top: 50%;
+    right: $unit-0;
+    width: toRem(14) !important;
+    height: toRem(14) !important;
+    padding: 0 !important;
+    background-color: $bbt-grey-50;
+    transform: translateY(-50%);
+  }
+
+  &:has(.date-picker__container:-webkit-autofill) {
+    .date-picker__icon {
+      z-index: 2;
+    }
+  }
+
+  &__container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: 0 !important;
+    font-family: $font--boxed-regular;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    color: $bbt-text;
+    background: transparent;
+    border: none;
+    border-bottom: toRem(1) solid $bbt-grey-50;
+    outline: none;
+    transition: border-color .35s;
+
+    &:focus {
+      border-color: $bbt-secondary-grey;
+    }
+
+    &::placeholder {
+      color: $bbt-grey-50;
+    }
+
+    // Remove background and color for autofilled fields
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 toRem(1000) $bbt-grey-5 inset !important;
+      -webkit-text-fill-color: $bbt-text !important;
+    }
+  }
+
+  &__error {
+    display: none; // Initially hidden
+    margin-top: $unit-0;
+    color: $bbt-red-100;
+  }
+
+  &--invalid &__container {
+    border-color: $bbt-red-100;
+  }
+
+  &--invalid &__error {
+    display: block; // Show error message when invalid
+  }
+}

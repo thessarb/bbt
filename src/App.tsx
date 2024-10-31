@@ -17,7 +17,7 @@ function App() {
     return (
         <div className="body">
             <BrowserRouter>
-                <LibraryView/>
+                <DashboardView/>
             </BrowserRouter>
         </div>
     );
