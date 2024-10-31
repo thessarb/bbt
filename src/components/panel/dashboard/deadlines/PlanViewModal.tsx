@@ -41,7 +41,7 @@ function PlanViewModal({ show, setShow }: PlanViewModalProps) {
             <Modal
                 isOpen={show}
                 toggle={handleClose}
-                className={`plan-view ${animateClose ? "slide-up" : ""}`}
+                className={`modal plan-view ${animateClose ? "slide-up" : ""}`}
                 fade={true}
             >
                 <ModalHeader toggle={handleClose}>

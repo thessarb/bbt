@@ -11,7 +11,7 @@ const UsersListView: React.FC = () => {
         <title>Benutzerverwaltung</title>
       </Helmet>
       <Sidebar>
-      <Breadcrumb title={"Home"}  subtitle={"Benutzerverwaltung"}/>
+      <Breadcrumb title={"Übersicht"}  subtitle={"Benutzerverwaltung"}/>
         <UsersList />
       </Sidebar>
     </>

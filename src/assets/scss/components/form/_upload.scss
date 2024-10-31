@@ -1,0 +1,87 @@
+.upload {
+  display: flex;
+  flex-direction: column;
+  gap: $unit-factor;
+  width: 100%;
+
+  &__title {
+    display: block;
+    color: $bbt-text;
+    transition: color .35s;
+
+    &--required {
+      color: $bbt-red-100;
+      margin-left: toRem(3);
+    }
+  }
+
+  &__content {
+    display: flex;
+    justify-content: center;
+    gap: $unit-factor;
+    padding: $unit-1;
+    background: $bbt-grey-10;
+    border-radius: toRem(4);
+    cursor: pointer;
+
+    &--input {
+      display: none;
+    }
+
+    &--icon {
+      flex-shrink: 0;
+      width: toRem(24);
+      height: toRem(24);
+      background: $bbt-primary-green;
+    }
+
+    &--box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: $unit-0;
+    }
+  }
+
+  &__required {
+    color: $bbt-red-100;
+  }
+
+  &__file {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: $unit-factor;
+
+    &--icon {
+      flex-shrink: 0;
+      width: toRem(20);
+      height: toRem(20);
+
+      &.icon-check {
+        background: $bbt-primary-green;
+      }
+
+      &.icon-x {
+        background: $bbt-red-100;
+      }
+    }
+
+    &--name {
+      color: $bbt-text;
+    }
+
+    &--name-error,
+    &--limit-error {
+      color:$bbt-red-100;
+    }
+
+    &--size {
+      color: $bbt-grey-50;
+    }
+
+    &--remove {
+      padding: $unit-0 !important;
+    }
+  }
+}
