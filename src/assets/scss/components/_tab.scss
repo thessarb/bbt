@@ -15,10 +15,12 @@
     padding: 0 $unit-1;
     margin-bottom: $unit-factor;
   }
+
   &__order {
     padding: unset;
     margin-bottom: $unit-3;
   }
+
   &__buttons {
     position: relative;
     display: flex;
@@ -61,7 +63,6 @@
     &:active,
     &.active {
       color: $bbt-secondary-grey;
-      font-weight: 600;
 
       &:before {
         opacity: 1;
@@ -82,6 +83,13 @@
 
     &.close {
       animation: hideTab .35s forwards;
+    }
+  }
+
+  // Messages styles
+  &__messages {
+    .tab__header {
+      padding: unset;
     }
   }
 }
