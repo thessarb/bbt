@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import Select, { components } from "react-select";
 import Fristen from "./Fristen";
 import Bauabschnitte from "./Bauabschnitte";
 import Ansprechpartner from "./Ansprechpartner";
@@ -30,27 +31,35 @@ const OrderDetailsOverview = () => {
         setIsOptionsOpen(true);
     };
 
-    const handleSelect = (option: any) => {
-        setSelectedOption(option);
-        setSearchTerm(option.label);
-        setFilteredOptions([]);
-        setIsOptionsOpen(false);
+    const filterOption = (option:any, inputValue:any) => {
+        return option.label.toLowerCase().includes(inputValue.toLowerCase());
     };
 
-    const getHighlightedText = (text: any, highlight: any) => {
-        if (!highlight) {
-            return text;
-        }
-        const regex = new RegExp(`(${highlight})`, "gi");
-        const parts = text.split(regex);
-        return parts.map((part: any, index: any) =>
-            regex.test(part) ? (
-                <span key={index} className="highlight">
-                    {part}
-                </span>
-            ) : (
-                part
-            )
+    const handleSelect = (option:any) => {
+        setSelectedOption(option);
+    };
+
+    const CustomOption = (props: any) => {
+        const { data, selectProps } = props;
+        const inputValue = selectProps.inputValue || ""; 
+
+        const highlightMatch = (label: string) => {
+            const regex = new RegExp(`(${inputValue})`, "gi");
+            const parts = label.split(regex);
+
+            return parts.map((part, index) =>
+                part.toLowerCase() === inputValue.toLowerCase() ? (
+                    <span key={index} style={{ color: "#43B02A" }}>{part}</span>
+                ) : (
+                    part
+                )
+            );
+        };
+
+        return (
+            <components.Option {...props}>
+                {highlightMatch(data.label)}
+            </components.Option>
         );
     };
 
@@ -70,25 +79,20 @@ const OrderDetailsOverview = () => {
     return (
         <>
             <div className="search-container">
-                <div className="searchable-select" ref={selectRef}>
-                    <i className="icon-magnifying-glass" />
-                    <input
-                        type="text"
-                        className="searchable-input"
-                        placeholder="Tragen Sie die Auftragsnummer oder -name ein."
-                        value={searchTerm}
-                        onChange={handleSearch}
-                    />
-                    {isOptionsOpen && (
-                        <div className="select-options">
-                            {filteredOptions.map((option: any) => (
-                                <div key={option.value} className="select-option" onClick={() => handleSelect(option)}>
-                                    {getHighlightedText(option.label, searchTerm)}
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
+            <div className="custom-select-wrapper">
+                <i className="icon-magnifying-glass"/>
+                <Select
+                    options={options}
+                    placeholder="Tragen Sie die Auftragsnummer oder -name ein."
+                    className="custom-select"
+                    classNamePrefix="react-select"
+                    components={{ Option: CustomOption }}
+                    onChange={handleSelect}
+                    filterOption={filterOption} 
+                    isClearable
+                    isSearchable
+                />
+            </div>
 
                 <button className="button button-gost button--big button--green">
                     <i className="button__icon icon-arrow-left"></i>
@@ -141,7 +145,7 @@ const OrderDetailsOverview = () => {
                             id="thomas-plane"
                             className={`tab__content-item ${activeTab === "fristen" ? "active" : "close"}`}
                         >
-                            <Fristen/>
+                            <Fristen />
                         </div>
                     )}
 
@@ -150,7 +154,7 @@ const OrderDetailsOverview = () => {
                             id="my-plane"
                             className={`tab__content-item ${activeTab === "bauabschnitte" ? "active" : "close"}`}
                         >
-                            <Bauabschnitte/>
+                            <Bauabschnitte />
                         </div>
                     )}
 
@@ -159,7 +163,7 @@ const OrderDetailsOverview = () => {
                             id="my-plane"
                             className={`tab__content-item ${activeTab === "ansprechpartner" ? "active" : "close"}`}
                         >
-                            <Ansprechpartner/>
+                            <Ansprechpartner />
                         </div>
                     )}
                 </div>
