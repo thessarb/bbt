@@ -11,7 +11,7 @@ const DocumentsView: React.FC = () => {
           <title>Dokumente</title>
         </Helmet>
         <Sidebar>
-        <Breadcrumb title={"Home"}  subtitle={"Dokumente"}/>
+        <Breadcrumb title={"Übersicht"}  subtitle={"Dokumente"}/>
           <Documents />
         </Sidebar>
       </>

@@ -7,7 +7,7 @@
   background-color: $bbt-grey-5;
   padding: $unit-1;
   word-break: break-word;
-  margin: toRem(100) auto auto auto;
+  padding-top: toRem(100);
   
   .no-access {
     display: flex;
