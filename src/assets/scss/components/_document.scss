@@ -1,0 +1,10 @@
+// Document
+.document {
+  margin-top: toRem(32);
+
+  &__box {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $unit-factor;
+  }
+}

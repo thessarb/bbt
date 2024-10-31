@@ -60,8 +60,9 @@
             color: $bbt-secondary-grey;
           }
 
-          .icon-dots-three-vertical {
-            background-color: $bbt-secondary-grey;
+          .icon-dots-three-vertical,
+          .icon-caret-up-down {
+            background-color: $bbt-grey-50;
             cursor: pointer;
           }
 
@@ -95,19 +96,22 @@
         }
 
         td {
+          position: relative;
           display: flex;
           flex-direction: column;
           gap: $unit-0;
           padding: toRem(16) $unit-factor;
           margin: auto;
-          position: relative;
           text-align: left !important;
+          color: $bbt-text;
           word-wrap: break-word;
           border-bottom: toRem(1) solid $bbt-grey-10;
+
           &.green-text {
             color: $bbt-primary-green;
             text-decoration: underline;
           }
+
           .button {
             &:first-child {
               margin-left: -$unit-factor;
