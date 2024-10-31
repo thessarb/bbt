@@ -1,0 +1,46 @@
+// Plan View Modal
+.release-form {
+  .modal-content {
+    background-color: $bbt-grey-5;
+  }
+
+  .modal-body {
+    padding: $unit-1 0 !important;
+    margin-right: toRem(9);
+    background-color: $bbt-grey-5;
+    overflow-y: auto;
+
+    // Custom scrollbar styling
+    &::-webkit-scrollbar {
+      width: toRem(6);
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $bbt-grey-5;
+      border-radius: toRem(3);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $bbt-grey-30;
+      border-radius: toRem(3);
+    }
+  }
+
+  .second-confirmation {
+    display: flex;
+    flex-direction: column;
+    padding: $unit-1;
+    color: $bbt-text;
+
+    &__text {
+      margin-bottom: $unit-1;
+    }
+
+    &__admin {
+      &--email {
+        color: $bbt-primary-green;
+        margin-left: $unit-0;
+      }
+    }
+  }
+}

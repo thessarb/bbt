@@ -1,0 +1,65 @@
+// Checkbox
+.form-checkbox {
+  display: flex;
+  gap: $unit-factor;
+  cursor: pointer;
+
+  input[type="checkbox"] {
+    right: 0;
+    left: auto;
+    width: toRem(18);
+    height: toRem(18);
+    padding: 0;
+    margin: 0 !important;
+    border: toRem(2) solid $bbt-grey-50;
+    box-shadow: none;
+    box-sizing: border-box;
+    -webkit-appearance: inherit;
+    appearance: inherit;
+    cursor: pointer;
+    transition: .35s ease;
+
+    &:checked {
+      border: toRem(6) solid $bbt-primary-green;
+      transition: .35s ease;
+
+      &:hover {
+        border: toRem(6) solid $bbt-primary-green;
+        transition: .35s ease;
+      }
+
+      &:disabled {
+        border: toRem(2) solid $bbt-green-50;
+        transition: .35s ease;
+      }
+    }
+
+    &:not(:checked) {
+      background: $bbt-grey-5;
+    }
+
+    &:hover {
+      border: toRem(2) solid $bbt-secondary-grey;
+      transition: .35s ease;
+    }
+
+    &:disabled {
+      border: toRem(2) solid $bbt-grey-30;
+      transition: .35s ease;
+    }
+
+    &.input-error {
+      border: toRem(2) solid $bbt-red-100;
+
+      &:hover,
+      &:focus {
+        border: toRem(2) solid $bbt-red-100;
+        transition: .35s ease;
+      }
+
+      &:focus {
+        color: $bbt-red-100;
+      }
+    }
+  }
+}
