@@ -69,7 +69,7 @@ const Ansprechpartner = () => {
                 <table role="table">
                     <thead>
                         <tr role="row">
-                            <th role="columnheader">
+                            <th role="columnheader" className="no-actions">
                                 <div className="body-normal__semibold">
                                     Funktion
                                     <i
@@ -87,7 +87,7 @@ const Ansprechpartner = () => {
                                     )}
                                 </div>
                             </th>
-                            <th role="columnheader">
+                            <th role="columnheader" className="no-actions">
                                 <div className="body-normal__semibold">
                                     Name
                                     <i
@@ -105,7 +105,7 @@ const Ansprechpartner = () => {
                                     )}
                                 </div>
                             </th>
-                            <th role="columnheader">
+                            <th role="columnheader" className="no-actions">
                                 <div className="body-normal__semibold">
                                     Werk
                                     <i
@@ -123,7 +123,7 @@ const Ansprechpartner = () => {
                                     )}
                                 </div>
                             </th>
-                            <th role="columnheader">
+                            <th role="columnheader" className="no-actions">
                                 <div className="body-normal__semibold">
                                     Telefon
                                     <i
@@ -141,7 +141,7 @@ const Ansprechpartner = () => {
                                     )}
                                 </div>
                             </th>
-                            <th role="columnheader">
+                            <th role="columnheader" className="no-actions">
                                 <div className="body-normal__semibold">
                                     E-Mail
                                     <i
@@ -159,27 +159,25 @@ const Ansprechpartner = () => {
                                     )}
                                 </div>
                             </th>
-                            <th role="columnheader"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td role="cell" className="body-normal__regular" data-label={"Funktion"}>
+                            <td role="cell" className="body-normal__regular no-actions" data-label={"Funktion"}>
                                 Disponent
                             </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Name"}>
+                            <td role="cell" className="body-normal__regular no-actions" data-label={"Name"}>
                                 Reuther, Ulf{" "}
                             </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Werk"}>
+                            <td role="cell" className="body-normal__regular no-actions" data-label={"Werk"}>
                                 Hennigsdorf{" "}
                             </td>
-                            <td role="cell" className="body-normal__regular green-text" data-label={"Telefon"}>
+                            <td role="cell" className="body-normal__regular green-text no-actions" data-label={"Telefon"}>
                                 +49 1234 567897{" "}
                             </td>
-                            <td role="cell" className="body-normal__regular green-text" data-label={"E-Mail"}>
+                            <td role="cell" className="body-normal__regular green-text no-actions" data-label={"E-Mail"}>
                                 ulf.reuther@thomas-gruppe.de
                             </td>
-                            <td role="cell" className="table-list__button" data-label={" "}></td>
                         </tr>
                     </tbody>
                 </table>
