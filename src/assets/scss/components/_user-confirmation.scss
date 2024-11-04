@@ -1,0 +1,9 @@
+// User Confirmation
+.user-confirmation {
+  padding: $unit-1;
+  color: $bbt-text;
+
+  &__email {
+    margin: 0 toRem(4);
+  }
+}
