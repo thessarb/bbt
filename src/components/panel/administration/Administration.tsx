@@ -68,8 +68,7 @@ const Administration = () => {
                                         id="inactive-users"
                                         className={`tab__content-item ${activeTab === 1 ? "active" : "close"}`}
                                 >
-                                    {/*{InactiveUsers ? <InactiveUsers/> : <ListNoResult/>}*/}
-                                    <ListNoResult/>
+                                    {InactiveUsers ? <InactiveUsers/> : <ListNoResult/>}
                                 </div>
                         )}
 
