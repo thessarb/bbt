@@ -1,0 +1,68 @@
+//Upload Plan
+.upload-plan {
+  padding: $unit-1 $unit-0 0 $unit-1;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $unit-1;
+    overflow: hidden;
+  }
+
+  &__title {
+    color: $bbt-black;
+  }
+
+  &__box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: $unit-1;
+
+    .form-checkbox {
+      input {
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  &__box-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: $bbt-text;
+
+    @media (min-width: 992px) {
+      width: calc(50% - $unit-factor);
+    }
+
+    &--content {
+      display: flex;
+      flex-direction: column;
+      gap: $unit-1;
+
+      @media (min-width: 768px) {
+        flex-direction: row;
+      }
+    }
+  }
+
+  &__select {
+    margin-bottom: $unit-1;
+
+    @media (min-width: 768px) {
+      width: calc(50% - $unit-factor);
+    }
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+  }
+
+  .divider {
+    & + .divider {
+      padding-top: 0;
+    }
+  }
+}

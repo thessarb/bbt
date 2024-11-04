@@ -6,6 +6,7 @@
     display: flex;
     position: relative;
     align-items: center;
+    gap: $unit-factor;
 
     input[type="radio"] {
       right: 0;
