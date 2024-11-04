@@ -2,7 +2,8 @@ import React, {useState} from "react";
 import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import PlanFreigebenForm from "./PlanFreigebenForm";
 import ListNoResult from "./ListNoResult";
-import Confirmation from "../../../confirmation";
+import LoadingComponent from "src/components/LoadingComponent";
+import Confirmation from "src/components/Confirmation";
 
 interface ThomasPlaneModalProps {
     showThomasModal: boolean;
@@ -13,7 +14,7 @@ function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneMo
     // Modal
     const [animateClose, setAnimateClose] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [confirmation2, setConfirmation2] = useState(false);
+    const [confirmation, setConfirmation] = useState(false);
 
     const handleClose = () => {
         setAnimateClose(true);
@@ -26,7 +27,7 @@ function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneMo
     const handleFileUpload = () => {
         setLoading(true);
         setTimeout(() => {
-            setConfirmation2(true);
+            setConfirmation(true);
             setLoading(false);
         }, 1000);
     };
@@ -41,7 +42,7 @@ function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneMo
                         backdrop="static"
                 >
                     <ModalHeader toggle={handleClose}>
-                        {confirmation2 ? (
+                        {confirmation ? (
                                 <span className="heading__semibold">Freigabe erteilt</span>
                         ) : (
                                 <span className="heading__semibold">Auftrag 80700: Pläne ansehen</span>
@@ -49,23 +50,10 @@ function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneMo
                     </ModalHeader>
                     <ModalBody>
                         {loading ? (
-                                <Confirmation/>
+                                <LoadingComponent/>
                         ) : (
-                                confirmation2 ? (
-                                        <div className="second-confirmation">
-                                        <span className="second-confirmation__text body-big__regular">
-                                            Vielen Dank für Ihre Freigabe. Wir haben folgende Personen über Ihre Freigabe informiert.
-                                        </span>
-
-                                            <span className="second-confirmation__admin body-big__medium">
-                                            Reuter, Ulf<span
-                                                    className="second-confirmation__admin--email body-big__regular">ulf.reuther@thomas-gruppe.de</span>
-                                        </span>
-                                            <span className="second-confirmation__admin body-big__medium">
-                                            Staiger, Jörg<span
-                                                    className="second-confirmation__admin--email body-big__regular">joerg.staiger@thomas-gruppe.de</span>
-                                        </span>
-                                        </div>
+                                confirmation ? (
+                                        <Confirmation />
                                 ) : (
                                         PlanFreigebenForm ? < PlanFreigebenForm/> : <ListNoResult/>
                                 )
@@ -76,7 +64,7 @@ function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneMo
                         {loading ? (
                                 " "
                         ) : (
-                                confirmation2 ? (
+                                confirmation ? (
                                         <button className="button button-secondary button--big button--light-grey"
                                                 onClick={handleClose}>
                                             <span className="button__text">Schließen</span>
