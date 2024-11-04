@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import FreigebenFormModal from "./FreigebenFormModal";
 import Select from "react-select";
 import CustomPagination from "../../../../helpers/CustomPaginate";
+import {Tooltip} from 'react-tooltip';
 
 function ThomasPlaneTable() {
     // pagination
@@ -129,11 +130,22 @@ function ThomasPlaneTable() {
                             </td>
 
                             <td role="cell" className="table-list__button" data-label={" "}>
-                                <div onClick={handleShow} className="button button-gost button--big button--grey">
+                                <div    data-tooltip-id="approval"
+                                        data-tooltip-content="Freigabe erteilen"
+                                        data-tooltip-place="top"
+                                        data-tooltip-offset={0}
+                                        onClick={handleShow}
+                                        className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-check-square-offset"></i>
+                                    <Tooltip id="approval" className="custom-tooltip"/>
                                 </div>
-                                <div className="button button-gost button--big button--grey">
+                                <div    data-tooltip-id="view-data"
+                                        data-tooltip-content="Datei ansehen"
+                                        data-tooltip-place="top"
+                                        data-tooltip-offset={0}
+                                        className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-eye"></i>
+                                    <Tooltip id="view-data" className="custom-tooltip"/>
                                 </div>
 
                                 {showThomasModal && <FreigebenFormModal showThomasModal={showThomasModal}
