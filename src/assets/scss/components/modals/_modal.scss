@@ -66,6 +66,7 @@
       display: flex;
       flex-wrap: wrap;
       line-height: toRem(28);
+      color: $bbt-text;
 
       .heading__regular {
         margin-right: $unit-0;
@@ -144,22 +145,26 @@
   }
 
   .modal-footer {
-    gap: $unit-1;
-    padding: $unit-1;
     display: flex;
     flex-wrap: wrap;
+    gap: $unit-1;
+    min-height: toRem(78);
+    padding: $unit-1;
     background-color: $bbt-grey-5;
     border: none;
     border-top: none;
     border-bottom-right-radius: toRem(4);
     border-bottom-left-radius: toRem(4);
+
     &.no-background {
       background-color: $bbt-white;
     }
+
     & > * {
       margin: 0;
     }
   }
+
   &--half {
     .modal-dialog {
       max-width: toRem(640);

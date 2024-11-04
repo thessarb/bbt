@@ -2,7 +2,8 @@ import React, {useState, useRef, useEffect} from "react";
 import CustomPagination from "src/helpers/CustomPaginate";
 import Select from "react-select";
 import FilterDialog from "src/helpers/TableFilters";
-// import PlanViewModal from "./PlanViewModal";
+import PlanViewModal from "./PlanViewModal";
+import { Tooltip } from 'react-tooltip';
 
 const Deadlines = () => {
     // pagination
@@ -342,11 +343,17 @@ const Deadlines = () => {
                                 <i className="icon-warning"></i>
                             </td>
                             <td role="cell" className="table-list__button" data-label={" "}>
-
-                                <button onClick={handleShow} className='button button-gost button--big button--grey'>
+                                <button
+                                        data-tooltip-id="view-plan"
+                                        data-tooltip-content="View plan"
+                                        data-tooltip-place="top"
+                                        data-tooltip-offset={0}
+                                        onClick={handleShow}
+                                        className='button button-gost button--big button--grey'>
                                     <i className="button__icon icon-note-pencil"></i>
+                                    <Tooltip id="view-plan" className="custom-tooltip"/>
                                 </button>
-                                {/*{show && <PlanViewModal show={show} setShow={setShow}/>}*/}
+                                {show && <PlanViewModal show={show} setShow={setShow}/>}
 
                             </td>
                         </tr>

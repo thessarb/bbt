@@ -1,163 +1,74 @@
-import React, { useState, useEffect, useRef } from "react";
-import CustomPagination from "src/helpers/CustomPaginate";
-import Select from "react-select";
+import React, {useState, useEffect, useRef} from "react";
+import ListNoResult from "../dashboard/deadlines/ListNoResult";
+import MessagesTable from "./MessagesTable";
+
 const Messages = () => {
-    const [page, setPage] = useState(1);
-    const [selectedOption, setSelectedOption] = useState<{
-        value: string;
-        label: string;
-    } | null>(null);
-
-    const mockData = {
-        total: 100,
-        current_page: 1,
-        per_page: 10,
-        last_page: 10,
+    // Tab
+    const [activeTab, setActiveTab] = useState(0);
+    const [visibleTab, setVisibleTab] = useState(activeTab);
+    const handleTabClick = (index: number) => {
+        setActiveTab(index);
     };
 
-    const [activeRowId, setActiveRowId] = useState<null | number>(null);
-    const rowRefs = useRef<{ [key: number]: HTMLTableRowElement | null }>({});
-
-    const handleRowClick = (index: number) => {
-        setActiveRowId(index === activeRowId ? null : index);
-    };
-
+    // Update visibleTab when activeTab changes
     useEffect(() => {
-        const mediaQuery = window.matchMedia("(min-width: 992px)");
-
-        const updateRowHeights = () => {
-            if (mediaQuery.matches) {
-                Object.keys(rowRefs.current).forEach((key) => {
-                    const row = rowRefs.current[parseInt(key)];
-                    const content = row?.querySelector(".collapsed") as HTMLElement | null;
-
-                    if (row && content) {
-                        const contentHeight = content.scrollHeight;
-                        if (parseInt(key) === activeRowId) {
-                            row.style.height = `${contentHeight}px`;
-                            content.style.maxHeight = `${contentHeight}px`;
-                        } else {
-                            row.style.height = "60px";
-                            content.style.maxHeight = "18px";
-                        }
-                    }
-                });
-            } else {
-                Object.keys(rowRefs.current).forEach((key) => {
-                    const row = rowRefs.current[parseInt(key)];
-                    const content = row?.querySelector(".collapsed") as HTMLElement | null;
-
-                    if (row && content) {
-                        const contentHeight = content.scrollHeight;
-                        if (parseInt(key) === activeRowId) {
-                            row.style.height = "auto";
-                            content.style.maxHeight = `${contentHeight}px`;
-                        } else {
-                            row.style.height = "auto";
-                            content.style.maxHeight = "18px";
-                        }
-                    }
-                });
-            }
-        };
-
-        updateRowHeights();
-        mediaQuery.addEventListener("change", updateRowHeights);
-
-        return () => {
-            mediaQuery.removeEventListener("change", updateRowHeights);
-        };
-    }, [activeRowId]);
+        setVisibleTab(activeTab);
+    }, [activeTab]);
 
     return (
-        <>
-            <div className="messages table-list table-list--accordion">
-                <table role="table">
-                    <thead>
-                    <tr role="row">
-                        <th role="columnheader"></th>
-                        <th role="columnheader">
-                            <div className="body-normal__semibold">
-                                Auftrag
-                                <i className="icon-dots-three-vertical"></i>
-                            </div>
-                        </th>
-                        <th role="columnheader">
-                            <div className="body-normal__semibold">
-                                Datum
-                                <i className="icon-dots-three-vertical"></i>
-                            </div>
-                        </th>
-                        <th role="columnheader">
-                            <div className="body-normal__semibold">
-                                Betreff
-                                <i className="icon-dots-three-vertical"></i>
-                            </div>
-                        </th>
-                        <th role="columnheader">
-                            <div className="body-normal__semibold">
-                                Kritisch
-                                <i className="icon-dots-three-vertical"></i>
-                            </div>
-                        </th>
-                        <th role="columnheader">
-                            <div className="contents body-normal__semibold">
-                                Inhalt
-                                <i className="icon-dots-three-vertical"></i>
-                            </div>
-                        </th>
-                        <th role="columnheader">
-                            <div className="body-normal__semibold"></div>
-                        </th>
-                    </tr>
-                    </thead>
+            <>
+                <div className="tab tab__messages">
+                    <div className="tab__header">
+                        <div className="tab__buttons">
+                            <button
+                                    className={`tab__item subheading__regular ${activeTab === 0 ? "active" : ""}`}
+                                    onClick={() => handleTabClick(0)}
+                            >
+                                <span className="button__text">Alle</span>
+                            </button>
+                            <button
+                                    className={`tab__item subheading__regular ${activeTab === 1 ? "active" : ""}`}
+                                    onClick={() => handleTabClick(1)}
+                            >
+                                <span className="button__text">Ungelesen</span>
+                            </button>
 
-                    <tbody>
-                    {[0, 1, 2].map((_, index) => (
-                        <tr
-                            key={index}
-                            ref={(el) => (rowRefs.current[index] = el)}
-                            className={`body-normal__regular ${activeRowId === index ? "active" : ""}`}
-                            onClick={() => handleRowClick(index)}
-                        >
-                            <td role="cell" className="body-normal__regular">
-                                <i className="icon-caret-right"></i>
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Auftrag"}>
-                                80700
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Datum"}>
-                                01.01.2024
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Betreff"}>
-                                RE-234-24
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Kritisch"}>
-                                <div className="button button-gost button--big button--red">
-                                    <i className="button__icon icon-warning"></i>
+                            <button
+                                    className={`tab__item subheading__regular ${activeTab === 2 ? "active" : ""}`}
+                                    onClick={() => handleTabClick(2)}
+                            >
+                                <span className="button__text">Gelesen</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div className="tab__content">
+                        {visibleTab === 0 && (
+                                <div
+                                        id="all-messages"
+                                        className={`tab__content-item ${activeTab === 0 ? "active" : "close"}`}
+                                >
+                                    {MessagesTable ? <MessagesTable/> : <ListNoResult/>}
                                 </div>
-                            </td>
-                            <td role="cell" className="contents" data-label={"Inhalt"}>
-                                    <span className="collapsed body-normal__regular">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad commodi illum itaque nesciunt qui quis quod unde? Ab alias delectus, itaque libero porro quaerat, quam quos repudiandae saepe suscipit totam!
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci cupiditate molestiae neque nisi odio perspiciatis. Blanditiis cum distinctio doloremque ipsam nam neque, nihil odit provident, quaerat quidem, sed tempora unde.
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci cupiditate molestiae neque nisi odio perspiciatis. Blanditiis cum distinctio doloremque ipsam nam neque, nihil odit provident, quaerat quidem, sed tempora unde.
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci cupiditate molestiae neque nisi odio perspiciatis. Blanditiis cum distinctio doloremque ipsam nam neque, nihil odit provident, quaerat quidem, sed tempora unde.
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci cupiditate molestiae neque nisi odio perspiciatis. Blanditiis cum distinctio doloremque ipsam nam neque, nihil odit provident, quaerat quidem, sed tempora unde.
-                                    </span>
-                            </td>
-                            <td role="cell" className="table-list__button" data-label={" "}>
-                                <div className="button button-gost button--big button--grey">
-                                    <i className="button__icon icon-download-simple"></i>
+                        )}
+                        {visibleTab === 1 && (
+                                <div
+                                        id="unread-messages"
+                                        className={`tab__content-item ${activeTab === 1 ? "active" : "close"}`}
+                                >
+                                    {MessagesTable ? <MessagesTable/> : <ListNoResult/>}
                                 </div>
-                            </td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
-            </div>
-        </>
+                        )}
+                        {visibleTab === 2 && (
+                                <div
+                                        id="read-messages"
+                                        className={`tab__content-item ${activeTab === 2 ? "active" : "close"}`}
+                                >
+                                    {MessagesTable ? <MessagesTable/> : <ListNoResult/>}
+                                </div>
+                        )}
+                    </div>
+                </div>
+            </>
     );
 };
 

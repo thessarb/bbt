@@ -11,7 +11,7 @@ const MessagesView: React.FC = () => {
         <title>Systemnachrichten</title>
       </Helmet>
       <Sidebar>
-      <Breadcrumb title={"Home"}  subtitle={"Systemnachrichten"}/>
+      <Breadcrumb title={"Übersicht"}  subtitle={"Systemnachrichten"}/>
         <Messages />
       </Sidebar>
     </>

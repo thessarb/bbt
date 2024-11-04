@@ -1,0 +1,78 @@
+/* Styles for the text area container */
+.text-area {
+  position: relative;
+  width: 100%;
+
+  /* Label Styles */
+  &__label {
+    display: flex;
+    gap: toRem(4);
+    margin-bottom: $unit-0;
+    color: $bbt-secondary-grey;
+
+    &--error {
+      color: $bbt-secondary-grey;
+    }
+
+    &--focused {
+      color: $bbt-primary-green;
+    }
+
+    &--required {
+      color: $bbt-orange-100; // color for asterisk
+    }
+  }
+
+  /* Textarea Styles */
+  &__content {
+    display: flex;
+    width: 100%;
+    height: toRem(74);
+    margin-bottom: $unit-0;
+    color: $bbt-secondary-grey;
+    background: transparent;
+    border: none;
+    border-bottom: toRem(1) solid $bbt-grey-50;
+    outline: none;
+    transition: border-color .35s;
+    resize: none; // Prevent resizing
+
+    &::placeholder {
+      color: $bbt-grey-50;
+    }
+
+    &:focus {
+      border-bottom-color: $bbt-secondary-grey;
+    }
+
+    /* Error State for Textarea */
+    &--error {
+      border-bottom-color: $bbt-red-100; // Red border for error
+    }
+  }
+
+  /* Counter Styles */
+  &__count {
+    display: flex;
+    gap: $unit-factor;
+    color: $bbt-grey-50;
+
+    &:has(:not(.text-area__count--error-message)) {
+      justify-content: flex-end;
+    }
+
+    &:has(.text-area__count--error-message) {
+      justify-content: space-between;
+    }
+
+    /* Error Message Styles */
+    &--error-message {
+      color: $bbt-red-100;
+    }
+
+    &--text {
+      display: block;
+      text-align: right;
+    }
+  }
+}

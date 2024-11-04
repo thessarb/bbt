@@ -1,0 +1,16 @@
+.divider {
+  display: flex;
+  flex-direction: column;
+  gap: $unit-0;
+  padding: $unit-1 0;
+
+  &__solid {
+    border: none;
+    border-top: toRem(1) solid $bbt-grey-50;
+  }
+
+  &__dotted {
+    border: none;
+    border-top: toRem(1) dashed $bbt-grey-50;
+  }
+}

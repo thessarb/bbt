@@ -1,0 +1,59 @@
+// Release Plan
+.release-plan {
+  padding: 0 $unit-0 0 $unit-1;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $unit-1;
+  }
+
+  &__component {
+    display: flex;
+    flex-direction: column;
+    gap: $unit-0;
+    padding: $unit-1 0;
+  }
+
+  &__title {
+    color: $bbt-black;
+  }
+
+  &__divider {
+    background: $bbt-grey-50;
+    height: toRem(1);
+  }
+
+  &__box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: $unit-1;
+
+    .form-checkbox {
+      input {
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  &__box-item {
+    display: flex;
+    width: 100%;
+    color: $bbt-text;
+
+    &--email {
+      color: $bbt-primary-green;
+    }
+
+    @media (min-width: 992px) {
+      width: calc(33.32% - ($unit-3 / 3));
+    }
+  }
+
+  &__select {
+    width: 50%;
+    margin-bottom: $unit-1;
+  }
+
+}

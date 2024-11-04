@@ -13,11 +13,12 @@ import AccessDenied from "./pages/accessdenied/AccessDenied";
 import Error404 from "./pages/notfound/Error404";
 import MessagesView from "./pages/messages/MessagesView";
 import OrderDetailsOverviewView from "./pages/orders/order_details/OrderDetailsOverview";
+import OrdersView from "./pages/orders/OrdersView";
 function App() {
     return (
         <div className="body">
             <BrowserRouter>
-                <LibraryView/>
+                <OrderDetailsOverviewView/>
             </BrowserRouter>
         </div>
     );
