@@ -1,6 +1,7 @@
-import Select from "react-select";
-import CustomPagination from "../../../helpers/CustomPaginate";
 import React, {useState} from "react";
+import Select from "react-select";
+import CustomPagination from "src/helpers/CustomPaginate";
+import PlaneHochladenModal from "src/components/Modal/PlaneHochladenModal";
 
 const Documents = () => {
     const [page, setPage] = useState(1);
@@ -16,6 +17,12 @@ const Documents = () => {
         last_page: 10,
     };
 
+    // Modal
+    const [showPlaneHochladenModal, setShowPlaneHochladenModal] = useState(false);
+    const handleShow = () => {
+        setShowPlaneHochladenModal(true);
+    };
+
     return (
             <div className="document">
                 <div className="document__box">
@@ -23,10 +30,11 @@ const Documents = () => {
                         <span className="button__text">Filter öffnen</span>
                         <i className="button__icon icon-funnel-simple"></i>
                     </div>
-                    <div className="document__box--new-plan button button--green button--big">
+                    <button onClick={handleShow} className="document__box--new-plan button button--green button--big">
                         <i className="button__icon icon-export"></i>
                         <span className="button__text">Neuen Plan hochladen</span>
-                    </div>
+                    </button>
+                    {showPlaneHochladenModal && <PlaneHochladenModal showPlaneHochladenModal={showPlaneHochladenModal} setShowPlaneHochladenModal={setShowPlaneHochladenModal} />}
                 </div>
 
                 <div className="table-list table-list--secondary">
