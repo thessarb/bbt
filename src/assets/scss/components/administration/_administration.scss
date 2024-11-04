@@ -1,0 +1,14 @@
+// Administration
+.administration {
+  &__box {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $unit-1;
+  }
+
+  &__tab {
+    .list-no-result {
+      margin: 0;
+    }
+  }
+}
