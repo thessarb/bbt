@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import Select from "react-select";
 import CustomPagination from "../../../../helpers/CustomPaginate";
+import {Tooltip} from "react-tooltip";
 
 function MainePlane() {
     // pagination
@@ -151,8 +152,14 @@ function MainePlane() {
                                         <div className="button button-gost button--big button--grey">
                                             <i className="button__icon icon-note-pencil"></i>
                                         </div>
-                                        <div className="button button-gost button--big button--grey">
+                                        <div
+                                                data-tooltip-id="new-window"
+                                                data-tooltip-content="Datei wird Datei  wird in neuem Browserfenser geöffnet"
+                                                data-tooltip-place="top"
+                                                data-tooltip-offset={0}
+                                                className="button button-gost button--big button--grey">
                                             <i className="button__icon icon-eye"></i>
+                                            <Tooltip id="new-window" className="custom-tooltip"/>
                                         </div>
                                     </td>
                                 </tr>
