@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import ListNoResult from "src/components/panel/dashboard/deadlines/ListNoResult";
-import Confirmation from "src/components/confirmation";
+import Confirmation from "src/components/Confirmation";
 import PlaneHochladenForm from "src/components/panel/documents/PlaneHochladenForm";
 
 interface PlaneHochladenModalProps {
