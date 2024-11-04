@@ -50,17 +50,17 @@ const Orders = () => {
         { value: "4", label: "Auftragsnummer 4" },
     ];
 
-    const filterOption = (option:any, inputValue:any) => {
+    const filterOption = (option: any, inputValue: any) => {
         return option.label.toLowerCase().includes(inputValue.toLowerCase());
     };
 
-    const handleSelect = (option:any) => {
+    const handleSelect = (option: any) => {
         setSelectedOption(option);
     };
 
     const CustomOption = (props: any) => {
         const { data, selectProps } = props;
-        const inputValue = selectProps.inputValue || ""; 
+        const inputValue = selectProps.inputValue || "";
 
         const highlightMatch = (label: string) => {
             const regex = new RegExp(`(${inputValue})`, "gi");
@@ -68,18 +68,16 @@ const Orders = () => {
 
             return parts.map((part, index) =>
                 part.toLowerCase() === inputValue.toLowerCase() ? (
-                    <span key={index} style={{ color: "#43B02A" }}>{part}</span>
+                    <span key={index} style={{ color: "#43B02A" }}>
+                        {part}
+                    </span>
                 ) : (
                     part
                 )
             );
         };
 
-        return (
-            <components.Option {...props}>
-                {highlightMatch(data.label)}
-            </components.Option>
-        );
+        return <components.Option {...props}>{highlightMatch(data.label)}</components.Option>;
     };
 
     const handleFilterChange = (filter: { searchTerm: string; order: string; selectedOptions: string[] }) => {
@@ -125,8 +123,8 @@ const Orders = () => {
 
     return (
         <>
-          <div className="custom-select-wrapper">
-                <i className="icon-magnifying-glass"/>
+            <div className="custom-select-wrapper">
+                <i className="icon-magnifying-glass" />
                 <Select
                     options={options}
                     placeholder="Tragen Sie die Auftragsnummer oder -name ein."
@@ -134,7 +132,7 @@ const Orders = () => {
                     classNamePrefix="react-select"
                     components={{ Option: CustomOption }}
                     onChange={handleSelect}
-                    filterOption={filterOption} 
+                    filterOption={filterOption}
                     isClearable
                     isSearchable
                 />
@@ -147,94 +145,29 @@ const Orders = () => {
                 <table role="table">
                     <thead>
                         <tr role="row">
-                            <th role="columnheader">
+                            <th role="columnheader" className="no-actions">
                                 <div className="body-normal__semibold">
-                                    Auftrag
-                                    <i
-                                        className="icon-dots-three-vertical"
-                                        onClick={() => setIsFilterDialogOpen("auftrag")}
-                                    ></i>
-                                    {isFilterDialogOpen === "auftrag" && (
-                                        <div ref={filterDialogRef}>
-                                            <FilterDialog
-                                                options={filterOptions}
-                                                onFilterChange={handleFilterChange}
-                                                closeFilter={() => closeFilterDialog}
-                                            />
-                                        </div>
-                                    )}
+                                    Auftrag <i className="icon-caret-up-down" />
                                 </div>
                             </th>
-                            <th role="columnheader">
+                            <th role="columnheader" className="no-actions">
                                 <div className="body-normal__semibold">
-                                    Name
-                                    <i
-                                        className="icon-dots-three-vertical"
-                                        onClick={() => setIsFilterDialogOpen("name")}
-                                    ></i>
-                                    {isFilterDialogOpen === "name" && (
-                                        <div ref={filterDialogRef}>
-                                            <FilterDialog
-                                                options={filterOptions}
-                                                onFilterChange={handleFilterChange}
-                                                closeFilter={() => closeFilterDialog}
-                                            />
-                                        </div>
-                                    )}
+                                    Name <i className="icon-caret-up-down" />
                                 </div>
                             </th>
-                            <th role="columnheader">
+                            <th role="columnheader" className="no-actions">
                                 <div className="body-normal__semibold">
-                                    Adresse
-                                    <i
-                                        className="icon-dots-three-vertical"
-                                        onClick={() => setIsFilterDialogOpen("adresse")}
-                                    ></i>
-                                    {isFilterDialogOpen === "adresse" && (
-                                        <div ref={filterDialogRef}>
-                                            <FilterDialog
-                                                options={filterOptions}
-                                                onFilterChange={handleFilterChange}
-                                                closeFilter={() => closeFilterDialog}
-                                            />
-                                        </div>
-                                    )}
+                                    Adresse <i className="icon-caret-up-down" />
                                 </div>
                             </th>
-                            <th role="columnheader">
+                            <th role="columnheader" className="no-actions">
                                 <div className="body-normal__semibold">
-                                    Verantwortlicher
-                                    <i
-                                        className="icon-dots-three-vertical"
-                                        onClick={() => setIsFilterDialogOpen("verantwortlicher")}
-                                    ></i>
-                                    {isFilterDialogOpen === "verantwortlicher" && (
-                                        <div ref={filterDialogRef}>
-                                            <FilterDialog
-                                                options={filterOptions}
-                                                onFilterChange={handleFilterChange}
-                                                closeFilter={() => closeFilterDialog}
-                                            />
-                                        </div>
-                                    )}
+                                    Verantwortlicher <i className="icon-caret-up-down" />
                                 </div>
                             </th>
-                            <th role="columnheader">
+                            <th role="columnheader" className="no-actions">
                                 <div className="body-normal__semibold">
-                                    Bauabschnitte
-                                    <i
-                                        className="icon-dots-three-vertical"
-                                        onClick={() => setIsFilterDialogOpen("bauabschnitte")}
-                                    ></i>
-                                    {isFilterDialogOpen === "bauabschnitte" && (
-                                        <div ref={filterDialogRef}>
-                                            <FilterDialog
-                                                options={filterOptions}
-                                                onFilterChange={handleFilterChange}
-                                                closeFilter={() => closeFilterDialog}
-                                            />
-                                        </div>
-                                    )}
+                                    Bauabschnitte <i className="icon-caret-up-down" />
                                 </div>
                             </th>
                             <th role="columnheader"></th>
@@ -242,23 +175,23 @@ const Orders = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td role="cell" className="body-normal__regular" data-label={"Auftrag"}>
+                            <td role="cell" className="body-normal__regular no-actions" data-label={"Auftrag"}>
                                 80700
                             </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Name"}>
+                            <td role="cell" className="body-normal__regular no-actions" data-label={"Name"}>
                                 München Isar
                             </td>
-                            <td role="cell" className="body-normal__regular address" data-label={"Adresse"}>
-                                <span>Biergartenallee</span> 
+                            <td role="cell" className="body-normal__regular address no-actions" data-label={"Adresse"}>
+                                <span>Biergartenallee</span>
                                 <span>1 80311 München</span>
                             </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Verantwortlicher"}>
+                            <td role="cell" className="body-normal__regular no-actions" data-label={"Verantwortlicher"}>
                                 Hauptverantwortliche des Kunden
                             </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Bauabschnitte"}>
+                            <td role="cell" className="body-normal__regular no-actions" data-label={"Bauabschnitte"}>
                                 8
                             </td>
-                            <td role="cell" className="table-list__button" data-label={" "}>
+                            <td role="cell" className="table-list__button no-actions" data-label={" "}>
                                 <div
                                     className="button button-gost button--big button--grey"
                                     onClick={() => navigate(PATHS.orderDetails)}
