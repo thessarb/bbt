@@ -15,7 +15,10 @@
     display: inline-block;
     width: $unit-4;
     height: $unit-2;
-
+    &.baubschnitte-toggle{
+      width: toRem(32);
+      height: $unit-1;
+    }
     & input {
       opacity: 0;
       width: 0;
@@ -47,6 +50,19 @@
       transition: .35s;
       border-radius: toRem(3);
     }
+    &.baubschnitte-slider {
+      &:before {
+        position: absolute;
+        content: "";
+        height: 16px; 
+        width: 16px;
+        left: 2px; 
+        bottom: 2px; 
+        background-color: $bbt-grey-50;
+        transition: transform .35s, background-color .35s;
+        border-radius: toRem(3);
+      }
+    }
   }
 
   &__input {
@@ -61,6 +77,12 @@
     &:checked + .toggle-switch__slider::before {
       transform: translateX(toRem(20));
     }
+
+    &.baubschnitte-input {
+      &:checked + .toggle-switch__slider::before {
+        transform: translateX(toRem(12));
+      }
+    }
   }
 
   &:hover {
@@ -73,3 +95,56 @@
     }
   }
 }
+
+// .toggle-switch {
+
+  
+
+//   &__slider {
+//     position: absolute;
+//     cursor: pointer;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     background-color: $bbt-grey-10;
+//     transition: background-color .4s;
+//     border-radius: 10px; // Adjusted for aesthetics
+
+//     &:before {
+//       position: absolute;
+//       content: "";
+//       height: 16px; // Adjusted for the new height
+//       width: 16px; // Adjusted for the new size
+//       left: 2px; // Center it within the toggle
+//       bottom: 2px; // Center it within the toggle
+//       background-color: $bbt-grey-50;
+//       transition: transform .35s, background-color .35s;
+//       border-radius: 50%; // Make it circular
+//     }
+//   }
+
+//   &__input {
+//     &:checked + .toggle-switch__slider {
+//       background-color: $bbt-green-20;
+
+//       &:before {
+//         background-color: $bbt-primary-green;
+//       }
+//     }
+
+//     &:checked + .toggle-switch__slider::before {
+//       transform: translateX(12px); // Adjusted for new dimensions
+//     }
+//   }
+
+//   &:hover {
+//     .toggle-switch__slider {
+//       background-color: $bbt-grey-20;
+
+//       &:before {
+//         background-color: $bbt-grey-70;
+//       }
+//     }
+//   }
+// }
