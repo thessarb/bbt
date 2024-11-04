@@ -1,7 +1,7 @@
 import React from "react";
-import Loading from "../helpers/Loading";
+import Loading from "src/helpers/Loading";
 
-const Confirmation = () => {
+const LoadingComponent = () => {
     return (
         <div className="confirmation">
             <Loading />
@@ -12,4 +12,4 @@ const Confirmation = () => {
     );
 };
 
-export default Confirmation;
+export default LoadingComponent;
