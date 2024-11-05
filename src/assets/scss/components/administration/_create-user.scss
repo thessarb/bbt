@@ -37,8 +37,8 @@
       overflow: hidden;
     }
 
-    &--title {
-      color: $bbt-black;
+    &--text {
+      color: $bbt-text;
     }
 
     &--box {
@@ -54,10 +54,20 @@
       }
     }
 
+    &:has(.create-user__form--select-box .react-select__control--menu-is-open) {
+      .create-user__form--select-box {
+        min-height: 210px;
+      }
+    }
+
     &--select-box {
       display: flex;
       flex-direction: column;
       gap: $unit-factor;
+
+      .react-select__indicators {
+        display: none;
+      }
     }
 
     &--box-item {
@@ -69,23 +79,47 @@
       @media (min-width: 992px) {
         width: calc(50% - $unit-factor);
       }
-
-      &--content {
-        display: flex;
-        flex-direction: column;
-        gap: $unit-1;
-
-        @media (min-width: 768px) {
-          flex-direction: row;
-        }
-      }
     }
 
-    &--select {
-      margin-bottom: $unit-1;
+    .table-list {
+      border-radius: unset;
+      box-shadow: unset;
 
-      @media (min-width: 768px) {
-        width: calc(50% - $unit-factor);
+      table {
+        background-color: $bbt-grey-5;
+
+        thead {
+          tr {
+            th {
+              height: unset;
+              padding: $unit-factor;
+
+              &:not(&:first-child, &:last-child) {
+                min-width: toRem(170);
+              }
+
+              &:first-child {
+                min-width: toRem(100);
+              }
+            }
+          }
+        }
+
+        tbody {
+          tr {
+            td {
+              padding: toRem(3) $unit-factor;
+
+              &:not(&:last-child) {
+                padding: $unit-factor;
+              }
+            }
+
+            @media (min-width: 992px) {
+              height: unset;
+            }
+          }
+        }
       }
     }
   }

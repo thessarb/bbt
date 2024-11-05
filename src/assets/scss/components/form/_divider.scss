@@ -4,6 +4,10 @@
   gap: $unit-0;
   padding: $unit-1 0;
 
+  &__title {
+    color: $bbt-black;
+  }
+
   &__solid {
     border: none;
     border-top: toRem(1) solid $bbt-grey-50;
