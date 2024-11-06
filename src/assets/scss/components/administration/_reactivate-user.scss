@@ -1,0 +1,11 @@
+// Reactivate User
+.reactivate-user {
+  .modal-body {
+    background-color: $bbt-grey-5;
+  }
+
+  &__text {
+    padding: $unit-1 0;
+    color: $bbt-text;
+  }
+}
