@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import ListNoResult from "../dashboard/deadlines/ListNoResult";
 import ActiveUsers from "./users/ActiveUsers";
 import InactiveUsers from "./users/InactiveUsers";
+import CreateUserModal from "./users/CreateUserModal";
 
 const Administration = () => {
     // Tab
@@ -23,6 +24,13 @@ const Administration = () => {
     }, [activeTab]);
 
 
+    // Create User Modal
+    const [showCreateUser , setShowCreateUser] = useState(false);
+    const handleShow = () => {
+        setShowCreateUser(true);
+    };
+
+
 
     return (
             <>
@@ -31,10 +39,11 @@ const Administration = () => {
                         <span className="button__text">Filter öffnen</span>
                         <i className="button__icon icon-funnel-simple"></i>
                     </div>
-                    <button className="button button--green button--big">
+                    <button onClick={handleShow} className="button button--green button--big">
                         <i className="button__icon icon-user-plus"></i>
                         <span className="button__text">Neuen Benutzer anlegen</span>
                     </button>
+                    {showCreateUser && <CreateUserModal show={showCreateUser} setShow={setShowCreateUser}/>}
                 </div>
 
                 <div className="tab administration__tab">
