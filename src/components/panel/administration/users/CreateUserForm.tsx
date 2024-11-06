@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Select, {SingleValue} from "react-select";
+import CreateUserTable from "./CreateUserTable";
 
 const options = [
-    { value: 'chocolate', label: 'Chocolate with love ' },
-    { value: 'strawberry', label: 'Strawberry with test' },
-    { value: 'vanilla', label: 'Vanilla test' },
+    {value: 'chocolate', label: 'Chocolate with love '},
+    {value: 'strawberry', label: 'Strawberry with test'},
+    {value: 'vanilla', label: 'Vanilla test'},
 ];
 
 const CreateUserForm = () => {
@@ -13,17 +14,14 @@ const CreateUserForm = () => {
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
-
     const [isSurnameFocused, setIsSurnameFocused] = useState<boolean>(false);
     const [isNameFocused, setIsNameFocused] = useState<boolean>(false);
     const [isEmailFocused, setIsEmailFocused] = useState<boolean>(false);
     const [isPhoneFocused, setIsPhoneFocused] = useState<boolean>(false);
-
     const [isSurnameError, setIsSurnameError] = useState<boolean>(false);
     const [isNameError, setIsNameError] = useState<boolean>(false);
     const [isEmailError, setIsEmailError] = useState<boolean>(false);
     const [isPhoneError, setIsPhoneError] = useState<boolean>(false);
-
     const isInputRequired = true;
 
     const handleInputChange = (
@@ -37,13 +35,11 @@ const CreateUserForm = () => {
             setError(false);
         }
     };
-
     const handleInputFocus = (
             setFocus: React.Dispatch<React.SetStateAction<boolean>>
     ) => () => {
         setFocus(true);
     };
-
     const handleInputBlur = (
             value: string,
             setError: React.Dispatch<React.SetStateAction<boolean>>,
@@ -55,27 +51,63 @@ const CreateUserForm = () => {
         }
     };
 
-    // Select Fields
+    // Select option Fields
     const [selectedOption1, setSelectedOption1] = useState<{ value: string; label: string } | null>(null);
     const [selectedOption2, setSelectedOption2] = useState<{ value: string; label: string } | null>(null);
     const [selectedOption3, setSelectedOption3] = useState<{ value: string; label: string } | null>(null);
+    const [isSelectedOption1Focused, setIsSelectedOption1Focused] = useState<boolean>(false);
+    const [isSelectedOption2Focused, setIsSelectedOption2Focused] = useState<boolean>(false);
+    const [isSelectedOption3Focused, setIsSelectedOption3Focused] = useState<boolean>(false);
+    const [isSelectedOption1Error, setIsSelectedOption1Error] = useState<boolean>(false);
+    const [isSelectedOption2Error, setIsSelectedOption2Error] = useState<boolean>(false);
+    const [isSelectedOption3Error, setIsSelectedOption3Error] = useState<boolean>(false);
+    const isSelectedOptionRequired = true;
 
     const handleSelectChange1 = (newValue: SingleValue<{ value: string; label: string }>) => {
         setSelectedOption1(newValue);
+        if (isSelectedOptionRequired && !newValue) {
+            setIsSelectedOption1Error(true);
+        } else {
+            setIsSelectedOption1Error(false);
+        }
     };
     const handleSelectChange2 = (newValue: SingleValue<{ value: string; label: string }>) => {
         setSelectedOption2(newValue);
+        if (isSelectedOptionRequired && !newValue) {
+            setIsSelectedOption2Error(true);
+        } else {
+            setIsSelectedOption2Error(false);
+        }
     };
     const handleSelectChange3 = (newValue: SingleValue<{ value: string; label: string }>) => {
         setSelectedOption3(newValue);
+        if (isSelectedOptionRequired && !newValue) {
+            setIsSelectedOption3Error(true);
+        } else {
+            setIsSelectedOption3Error(false);
+        }
+    };
+
+    // Select Order
+    const [selectOrder, setSelectOrder] = useState<{ value: string; label: string } | null>(null);
+    const [isSelectOrderFocused, setIsSelectOrderFocused] = useState<boolean>(false);
+    const [isSelectOrderError, setIsSelectOrderError] = useState<boolean>(false);
+    const isSelectOrderRequired = false;
+    const handleSelectOrderChange = (newValue: SingleValue<{ value: string; label: string }>) => {
+        setSelectOrder(newValue);
+        if (isSelectOrderRequired && !newValue) {
+            setIsSelectOrderError(true);
+        } else {
+            setIsSelectOrderError(false);
+        }
     };
 
     return (
             <div className="create-user__form">
-                <form className="form" method="post">
+                <form className="form">
                     <div className="create-user__form--content">
                         <div className="divider">
-                            <span className="create-user__form--title body-small__regular">Persönliche Daten</span>
+                            <span className="divider__title body-small__regular">Persönliche Daten</span>
                             <span className="divider__solid"></span>
                         </div>
 
@@ -186,106 +218,178 @@ const CreateUserForm = () => {
                         </div>
 
                         <div className="divider">
-                            <span className="create-user__form--title body-small__regular">Kunden Daten</span>
+                            <span className="divider__title body-small__regular">Kunden Daten</span>
                             <span className="divider__solid"></span>
                         </div>
 
                         <div className="create-user__form--box">
                             {/* Funktion */}
                             <div className="create-user__form--box-item">
-                                <div className="form__field-select">
-                                    <label htmlFor="function"
-                                           className={`form__label caption__regular ${selectedOption1 ? "filled" : ""}`}>
+                                <div className="select-field">
+                                    <label htmlFor="function" className={`select-field__label caption__regular 
+                                    ${isSelectedOption1Error ? 'select-field__label--error' : isSelectedOption1Focused ? 'select-field__label--focused' : ''}
+                                `}>
                                         Funktion
-                                        <span className="form__label-mandatory">*</span>
+                                        {isSelectedOptionRequired &&
+                                                <span className="select-field__label--required">*</span>}
                                     </label>
 
                                     <Select
                                             id="function"
                                             classNamePrefix="react-select"
-                                            className={`form__select body-normal__regular ${selectedOption1 ? "filled" : ""}`}
+                                            className={`select-field__content body-normal__regular ${selectedOption1 ? "filled" : ""}`}
                                             placeholder="Wählen Sie eine Funktion aus"
                                             value={selectedOption1}
-                                            onChange={handleSelectChange1}
                                             options={options}
                                             isClearable={true}
                                             closeMenuOnSelect={true}
                                             name="function"
                                             isSearchable={true}
+                                            onChange={handleSelectChange1}
+                                            onFocus={() => setIsSelectedOption1Focused(true)}
+                                            onBlur={() => {
+                                                setIsSelectedOption1Focused(false);
+                                                if (isSelectedOptionRequired && !selectedOption1) {
+                                                    setIsSelectedOption1Error(true);
+                                                }
+                                            }}
                                     />
-                                    <span className="error-message caption__regular">Error message</span>
+
+                                    {isSelectedOption1Error &&
+                                            <div className="select-field--error-message caption__regular">This field is
+                                                required</div>}
                                 </div>
                             </div>
 
                             {/* Unternehmen */}
                             <div className="create-user__form--box-item">
-                                <div className="form__field-select">
-                                    <label htmlFor="company"
-                                           className={`form__label caption__regular ${selectedOption2 ? "filled" : ""}`}>
+                                <div className="select-field">
+                                    <label htmlFor="company" className={`select-field__label caption__regular 
+                                    ${isSelectedOption2Error ? 'select-field__label--error' : isSelectedOption2Focused ? 'select-field__label--focused' : ''}
+                                `}>
                                         Unternehmen
-                                        <span className="form__label-mandatory">*</span>
+                                        {isSelectedOptionRequired &&
+                                                <span className="select-field__label--required">*</span>}
                                     </label>
 
                                     <Select
                                             id="company"
                                             classNamePrefix="react-select"
-                                            className={`form__select body-normal__regular ${selectedOption2 ? "filled" : ""}`}
-                                            placeholder="Wählen Sie ein Unternehmen aus"
+                                            className={`select-field__content body-normal__regular ${selectedOption2 ? "filled" : ""}`}
+                                            placeholder="Wählen Sie eine Funktion aus"
                                             value={selectedOption2}
-                                            onChange={handleSelectChange2}
                                             options={options}
                                             isClearable={true}
                                             closeMenuOnSelect={true}
                                             name="company"
                                             isSearchable={true}
-                                            required
+                                            onChange={handleSelectChange2}
+                                            onFocus={() => setIsSelectedOption2Focused(true)}
+                                            onBlur={() => {
+                                                setIsSelectedOption2Focused(false);
+                                                if (isSelectedOptionRequired && !selectedOption2) {
+                                                    setIsSelectedOption2Error(true);
+                                                }
+                                            }}
                                     />
-                                    <span className="error-message caption__regular">Error message</span>
+
+                                    {isSelectedOption2Error &&
+                                            <div className="select-field--error-message caption__regular">This field is
+                                                required</div>}
                                 </div>
                             </div>
 
                             {/* Accounts */}
                             <div className="create-user__form--box-item">
-                                <div className="form__field-select">
-                                    <label htmlFor="account"
-                                           className={`form__label caption__regular ${selectedOption3 ? "filled" : ""}`}>
+                                <div className="select-field">
+                                    <label htmlFor="account" className={`select-field__label caption__regular 
+                                    ${isSelectedOption3Error ? 'select-field__label--error' : isSelectedOption3Focused ? 'select-field__label--focused' : ''}
+                                `}>
                                         Accounts
-                                        <span className="form__label-mandatory">*</span>
+                                        {isSelectedOptionRequired &&
+                                                <span className="select-field__label--required">*</span>}
                                     </label>
 
                                     <Select
                                             id="account"
                                             classNamePrefix="react-select"
-                                            className={`form__select body-normal__regular ${selectedOption3 ? "filled" : ""}`}
-                                            placeholder="Wählen Sie die verknüpften Accounts aus"
+                                            className={`select-field__content body-normal__regular ${selectedOption3 ? "filled" : ""}`}
+                                            placeholder="Wählen Sie eine Funktion aus"
                                             value={selectedOption3}
-                                            onChange={handleSelectChange3}
                                             options={options}
                                             isClearable={true}
                                             closeMenuOnSelect={true}
                                             name="account"
                                             isSearchable={true}
-                                            required
+                                            onChange={handleSelectChange3}
+                                            onFocus={() => setIsSelectedOption3Focused(true)}
+                                            onBlur={() => {
+                                                setIsSelectedOption3Focused(false);
+                                                if (isSelectedOptionRequired && !selectedOption3) {
+                                                    setIsSelectedOption3Error(true);
+                                                }
+                                            }}
                                     />
-                                    <span className="error-message caption__regular">Error message</span>
+
+                                    {isSelectedOption3Error &&
+                                            <div className="select-field--error-message caption__regular">This field is
+                                                required</div>}
                                 </div>
                             </div>
                         </div>
 
                         <div className="divider">
-                            <span className="create-user__form--title body-small__regular">Aufträge</span>
+                            <span className="divider__title body-small__regular">Aufträge</span>
                             <span className="divider__solid"></span>
                         </div>
 
                         <div className="create-user__form--select-box">
                             {/* Select order here */}
                             <div className="create-user__form--box-item">
-                                Select order here
+                                <div className="select-field">
+                                    <label htmlFor="order" className={`select-field__label caption__regular 
+                                    ${isSelectOrderError ? 'select-field__label--error' : isSelectOrderFocused ? 'select-field__label--focused' : ''}
+                                `}>
+                                        Auftrag
+                                        {isSelectOrderRequired &&
+                                                <span className="select-field__label--required">*</span>}
+                                    </label>
+
+                                    <div className="select-field__wrapper">
+                                        <i className="select-field__wrapper--icon icon-magnifying-glass"/>
+                                        <Select
+                                                id="order"
+                                                classNamePrefix="react-select"
+                                                className={`select-field__content body-normal__regular ${selectOrder ? "filled" : ""}`}
+                                                placeholder="Geben Sie die Auftragsnummer oder -name ein"
+                                                value={selectOrder}
+                                                options={options}
+                                                isClearable={true}
+                                                closeMenuOnSelect={true}
+                                                name="order"
+                                                isSearchable={true}
+                                                onChange={handleSelectOrderChange}
+                                                onFocus={() => setIsSelectOrderFocused(true)}
+                                                onBlur={() => {
+                                                    setIsSelectOrderFocused(false);
+                                                    if (isSelectOrderRequired && !selectOrder) {
+                                                        setIsSelectOrderError(true);
+                                                    }
+                                                }}
+                                        />
+                                    </div>
+
+                                    {isSelectOrderError &&
+                                            <div className="select-field--error-message caption__regular">This field is
+                                                required</div>}
+                                </div>
                             </div>
+
                             {/* Order table here */}
-                            <div className="create-user__form--order-table">
-                                Order table here
-                            </div>
+                            {selectOrder ?  <CreateUserTable />
+                                    : <span className="create-user__form--text body-normal__regular">Sie haben keine Aufträge zugewiesen</span>
+                            }
+
                         </div>
                     </div>
                 </form>

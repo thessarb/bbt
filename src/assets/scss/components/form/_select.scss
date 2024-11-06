@@ -1,0 +1,73 @@
+/* Select Field */
+.select-field {
+  position: relative;
+  width: 100%;
+
+  /* Label Styles */
+  &__label {
+    display: flex;
+    gap: toRem(4);
+    color: $bbt-secondary-grey;
+
+    &--error {
+      color: $bbt-secondary-grey;
+    }
+
+    &--focused {
+      color: $bbt-primary-green;
+    }
+
+    &--required {
+      color: $bbt-orange-100; // color for asterisk
+    }
+  }
+
+  /* select Input Styles */
+  &__wrapper {
+    position: relative;
+    display: flex;
+
+    &--icon {
+      position: absolute;
+      top: toRem(3);
+      left: 0;
+      width: $unit-1;
+      height: $unit-1;
+      background-color: $bbt-grey-50;
+    }
+
+    .react-select__value-container {
+      padding: 0 0 0 toRem(25);
+    }
+  }
+
+  &:has(.react-select__control:hover),
+  &:has(.react-select__single-value) {
+    .select-field__wrapper--icon {
+      background-color: $bbt-secondary-grey;
+    }
+  }
+
+  /* Textarea Styles */
+  &__content {
+    display: block;
+    width: 100%;
+
+    // Remove background color for autofilled fields
+    &:-webkit-autofill {
+      -webkit-text-fill-color: $bbt-text !important;
+      -webkit-box-shadow: 0 0 0px 1000px $bbt-grey-5 inset !important;
+    }
+
+    /* Error State for Textarea */
+    &--error {
+      border-bottom-color: $bbt-red-100; // Red border for error
+    }
+  }
+
+  /* Error Message Styles */
+  &--error-message {
+    margin-top: $unit-0;
+    color: $bbt-red-100;
+  }
+}
