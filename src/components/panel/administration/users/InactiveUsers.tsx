@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Select from "react-select";
 import CustomPagination from "../../../../helpers/CustomPaginate";
+import ReactivateUsersModal from "./ReactivateUsersModal";
 
 const InactiveUsers = () => {
     // Pagination
@@ -15,6 +16,12 @@ const InactiveUsers = () => {
         current_page: 1,
         per_page: 10,
         last_page: 10,
+    };
+
+    // Modal
+    const [show, setShow] = useState(false);
+    const handleShow = () => {
+        setShow(true);
     };
 
     return (
@@ -93,9 +100,10 @@ const InactiveUsers = () => {
                                 <div className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-note-pencil"></i>
                                 </div>
-                                <div className="button button-gost button--big button--grey">
+                                <div onClick={handleShow} className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-user-switch"></i>
                                 </div>
+                                {show && <ReactivateUsersModal show={show} setShow={setShow}/>}
                             </td>
                         </tr>
                         </tbody>
