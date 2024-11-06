@@ -13,6 +13,7 @@
   &__switch {
     position: relative;
     display: inline-block;
+    flex-shrink: 0;
     width: $unit-4;
     height: $unit-2;
     &.baubschnitte-toggle{
