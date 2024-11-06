@@ -45,7 +45,7 @@ function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneMo
                         {confirmation ? (
                                 <span className="heading__semibold">Freigabe erteilt</span>
                         ) : (
-                                <span className="heading__semibold">Auftrag 80700: Pläne ansehen</span>
+                                <span className="heading__semibold">Plan freigeben: D02 - Index 1</span>
                         )}
                     </ModalHeader>
                     <ModalBody>

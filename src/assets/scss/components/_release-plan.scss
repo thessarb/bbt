@@ -28,7 +28,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
-    gap: $unit-1;
+    column-gap: $unit-1;
+    row-gap: $unit-factor;
 
     .form-checkbox {
       input {
@@ -55,5 +56,4 @@
     width: 50%;
     margin-bottom: $unit-1;
   }
-
 }
