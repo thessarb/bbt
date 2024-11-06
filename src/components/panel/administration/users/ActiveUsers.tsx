@@ -1,7 +1,7 @@
 import Select from "react-select";
 import CustomPagination from "../../../../helpers/CustomPaginate";
 import React, {useState} from "react";
-
+import DeleteUsersModal from "./DeleteUsersModal";
 
 const ActiveUsers = () => {
     // Pagination
@@ -18,6 +18,11 @@ const ActiveUsers = () => {
         last_page: 10,
     };
 
+    // Modal
+    const [show, setShow] = useState(false);
+    const handleShow = () => {
+        setShow(true);
+    };
 
     return (
             <>
@@ -95,9 +100,10 @@ const ActiveUsers = () => {
                                 <div className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-note-pencil"></i>
                                 </div>
-                                <div className="button button-gost button--big button--grey">
+                                <div onClick={handleShow} className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-trash"></i>
                                 </div>
+                                {show && <DeleteUsersModal show={show} setShow={setShow}/>}
                             </td>
                         </tr>
                         </tbody>
