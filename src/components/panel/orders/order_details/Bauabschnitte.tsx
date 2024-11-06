@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import CustomPagination from "src/helpers/CustomPaginate";
 import Select from "react-select";
+import PlanViewModal from "src/components/panel/dashboard/deadlines/PlanViewModal";
+import PlaneHochladenModal from "src/components/Modal/PlaneHochladenModal";
+import { FALSE } from "sass";
 
 const Bauabschnitte = () => {
     const [expandedRow, setExpandedRow] = useState(null);
@@ -8,6 +11,15 @@ const Bauabschnitte = () => {
     const [innerNestedExpandedRow, setInnerNestedExpandedRow] = useState<{ [key: number]: { [key: number]: boolean } }>(
         {}
     );
+    const [isDropdownOpen, setDropdownOpen] = useState(false);
+    const [showPlanFreigeben, setShowPlanFreigeben] = useState(false);
+    const [showPlaneHochladenModal, setShowPlaneHochladenModal] = useState(false);
+    const [showAdditionalButtons, setShowAdditionalButtons] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+    const toggleDropdown = () => {
+        setDropdownOpen((prev) => !prev);
+    };
 
     const toggleRow = (index: any) => {
         setExpandedRow(expandedRow === index ? null : index);
@@ -174,8 +186,95 @@ const Bauabschnitte = () => {
         },
     ];
 
+    const handleOutsideClick = (event: MouseEvent) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+            setDropdownOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleOutsideClick);
+        return () => {
+            document.removeEventListener("mousedown", handleOutsideClick);
+        };
+    }, []);
+
     return (
         <>
+            <div className="baubschnitte-managment">
+                <div></div>
+                <div className="baubschnitte-managment__baubschnitte-buttons">
+                    <div className="toggle-switch">
+                        <label className="switch toggle-switch__switch baubschnitte-toggle">
+                            <input className="toggle-switch__input baubschnitte-input" type="checkbox" id="switch-1" />
+                            <span className="toggle-switch__slider baubschnitte-slider"></span>
+                        </label>
+                        <label htmlFor="switch-1" className="toggle-switch__text body-big__regular">
+                            Abgeschlossene Bauabschnitte einblenden
+                        </label>
+                    </div>
+                    {!showAdditionalButtons && (
+                        <button className="button button-secondary button--big button--grey" onClick={toggleDropdown}>
+                            <span className="button__text">Aktionen</span>
+                            <i className="button__icon icon-dots-three-vertical"></i>
+                        </button>
+                    )}
+                    {showAdditionalButtons && (
+                        <div className="baubschnitte-managment__baubschnitte-buttons--hidden-buttons">
+                            <button className="button button-primary button--big button--green">
+                            <i className="button__icon icon-arrow-square-out"></i>
+                                <span className="button__text">Excel exportieren</span>
+                            </button>
+                            <button className="button button-secondary button--big button--grey" onClick={()=> setShowAdditionalButtons(false)}>
+                                <span className="button__text">Export Abbrechen</span>
+                            </button>
+                        </div>
+                    )}
+
+                    {isDropdownOpen && (
+                        <div className={`baubschnitte-managment__dropdown ${isDropdownOpen ? 'is-visible' : ''}`} ref={dropdownRef}>
+                            <button
+                                className="button button-primary button--big button--orange"
+                                onClick={() => setShowPlanFreigeben(true)}
+                            >
+                                <i className="button__icon icon-share"></i>
+                                <span className="button__text">Pläne freigeben</span>
+                            </button>
+                            {showPlanFreigeben && (
+                                <PlanViewModal show={showPlanFreigeben} setShow={setShowPlanFreigeben} />
+                            )}
+                            <button
+                                className="button button-primary button--big button--green"
+                                onClick={() => setShowPlaneHochladenModal(true)}
+                            >
+                                <i className="button__icon icon-file-arrow-up"></i>
+                                <span className="button__text">Pläne hochladen</span>
+                            </button>
+                            {showPlaneHochladenModal && (
+                                <PlaneHochladenModal
+                                    showPlaneHochladenModal={showPlaneHochladenModal}
+                                    setShowPlaneHochladenModal={setShowPlaneHochladenModal}
+                                />
+                            )}
+                            <button className="button button-secondary button--big button--grey">
+                                <i className="button__icon icon-files"></i>
+                                <span className="button__text">Dokumente anzeigen</span>
+                            </button>
+                            <button
+                                className="button button-secondary button--big button--grey"
+                                onClick={() => {
+                                    setShowAdditionalButtons(true);
+                                    setDropdownOpen(false);
+                                }}
+                            >
+                                <i className="button__icon icon-arrow-square-out"></i>
+                                <span className="button__text">Excel exportieren</span>
+                            </button>
+                        </div>
+                    )}
+                </div>
+            </div>
+
             <div className="table-list-accordion">
                 <table>
                     <thead>

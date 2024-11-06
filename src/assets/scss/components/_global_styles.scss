@@ -10,7 +10,7 @@
   flex-wrap: wrap;
   margin-top: $unit-3;
   margin-bottom: $unit-1;
-  
+
   &__arrangment {
     display: flex;
     flex-direction: column;
@@ -24,5 +24,48 @@
   }
   @media (max-width: 1399px) {
     justify-content: space-between;
+  }
+}
+
+.baubschnitte-managment {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: $unit-2;
+  &__baubschnitte-buttons {
+    display: flex;
+    position: relative;
+    gap: toRem(7);
+    &--hidden-buttons {
+      display: flex;
+      gap: toRem(7);
+    }
+  }
+  &__dropdown {
+    position: absolute;
+    width: auto;
+    height: toRem(222);
+    margin-top: toRem(45);
+    margin-left: 252px;
+    padding: $unit-1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: $bbt-white;
+    border: 1px solid $bbt-white;
+    border-radius: 4px;
+    box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    gap: $unit-factor;
+    z-index: 11;
+    opacity: 0;
+    transform: translateY(-10px); 
+    transition: opacity 0.3s ease, transform 0.3s ease; 
+
+    &.is-visible {
+      opacity: 1;
+      transform: translateY(0); 
+    }
   }
 }
