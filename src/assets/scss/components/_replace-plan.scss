@@ -5,10 +5,15 @@
   }
 
   .modal-body {
-    padding: $unit-1 !important;
+    padding: $unit-1 0 $unit-1 $unit-1 !important;
     margin-right: toRem(9);
     background-color: $bbt-grey-5;
     overflow-y: auto;
+
+    &:has(.confirmation--secondary) {
+      padding: $unit-1 !important;
+      margin-right: unset;
+    }
 
     // Custom scrollbar styling
     &::-webkit-scrollbar {
