@@ -44,6 +44,14 @@ const PlaneHochladenForm: React.FC<PlaneHochladenFormProps> = ({ onUploadChange 
 
                             <PlaneHochladenFormItem upload={upload}/>
 
+                            {upload === "link" &&
+                                    <>
+                                        <div className="divider">
+                                            <span className="divider__solid"></span>
+                                        </div>
+                                    </>
+                            }
+
                         </div>
                     </form>
                 </div>
