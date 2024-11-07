@@ -17,6 +17,7 @@ const Bauabschnitte = () => {
     const [showBigFilter, setShowBigFilter] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
     const dropdownRefFilter = useRef<HTMLDivElement | null>(null);
+    const [filters, setFilters] = useState([{ id: 1 }]);
 
     const toggleDropdown = () => {
         setDropdownOpen((prev) => !prev);
@@ -191,6 +192,16 @@ const Bauabschnitte = () => {
         setShowBigFilter((prev) => !prev);
     };
 
+    const addFilter = () => {
+        if (filters.length < 5) {
+            setFilters((prev) => [...prev, { id: prev.length + 1 }]);
+        }
+    };
+
+    const deleteFilter = (id:any) => {
+        setFilters(filters.filter(filter => filter.id !== id)); 
+    };
+
     return (
         <>
             <div className="baubschnitte-managment">
@@ -204,23 +215,19 @@ const Bauabschnitte = () => {
                         )}
                     </button>
                     {showBigFilter && (
-                        <div
-                            className={`baubschnitte-managment__filter-managment--big-filter ${
-                                showBigFilter ? "is-visible" : ""
-                            }`}
-                            ref={dropdownRefFilter}
-                        >
-                            <div className="dropdown-header">
-                                <span className="body-normal__regular">Filter anwenden</span>
-                            </div>
-                            <div className="filters">
-                                <div className="form col-12 col-md-5 col-sm-3">
+                        <div className={`baubschnitte-managment__filter-managment--big-filter ${showBigFilter ? "is-visible" : ""}`} ref={dropdownRefFilter}>
+                        <div className="dropdown-header">
+                            <span className="body-normal__regular">Filter anwenden</span>
+                        </div>
+                        {filters.map((filter, index) => (
+                            <div key={filter.id} className="filters">
+                                <div className="form">
                                     <div className="form__field-select">
-                                        <label htmlFor="filter-select" className={`form__label caption__regular`}>
+                                        <label htmlFor={`filter-select-${index}`} className={`form__label caption__regular`}>
                                             Reihe
                                         </label>
                                         <Select
-                                            id="filter-select"
+                                            id={`filter-select-${index}`}
                                             classNamePrefix="react-select"
                                             className={`form__select body-normal__regular`}
                                             placeholder="Wählen Sie eine Tabellenreihe"
@@ -233,12 +240,12 @@ const Bauabschnitte = () => {
                                         <span className="error-message caption__regular">Error message</span>
                                     </div>
                                 </div>
-                                <div className="form__field col-12 col-md-5 col-sm-3">
-                                    <label htmlFor="filter" className={`form__label caption__regular`}>
+                                <div className="form__field">
+                                    <label htmlFor={`filter-${index}`} className={`form__label caption__regular`}>
                                         Wert
                                     </label>
                                     <input
-                                        id="filter"
+                                        id={`filter-${index}`}
                                         className="form__input body-normal__regular"
                                         type="text"
                                         placeholder="Nach welchem Wert möchten Sie filtern"
@@ -246,39 +253,40 @@ const Bauabschnitte = () => {
                                     />
                                 </div>
                                 <div className="delete-filter">
-                                    <button className="button button-gost button--big button--grey">
-                                        <i className="button__icon icon-trash" />
-                                    </button>
-                                </div>
+                                        <button className="button button-gost button--big button--grey" onClick={() => deleteFilter(filter.id)}>
+                                            <i className="button__icon icon-trash" />
+                                        </button>
+                                    </div>
                             </div>
-                            <div>
-                                <button className="button button-gost button--big button--green">
-                                    <i className="button__icon icon-plus" />
-                                    <span className="button__text">Weiteren Filter hinzufügen</span>
-                                </button>
-                            </div>
-                            <div className="no-background">
-                                <button className="button button-secondary button--big button--green">
-                                    <span className="button__text">Filter anwenden</span>
-                                </button>
-                            </div>
+                        ))}
+                        <div>
+                            <button className="button button-gost button--big button--green" onClick={addFilter}>
+                                <i className="button__icon icon-plus" />
+                                <span className="button__text">Weiteren Filter hinzufügen</span>
+                            </button>
                         </div>
+                        <div className="no-background">
+                            <button className="button button-secondary button--big button--green">
+                                <span className="button__text">Filter anwenden</span>
+                            </button>
+                        </div>
+                    </div>
                     )}
                     <span className="body-small__regular">Aktive Filter:</span>
                     <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
-                        Haus 2
+                        Haus 2 <i className="icon-x"/>
                     </span>
                     <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
-                        Haus 2
+                        Haus 2<i className="icon-x"/>
                     </span>
                     <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
-                        Haus 2
+                        Haus 2<i className="icon-x"/>
                     </span>
                     <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
-                        Haus 2
+                        Haus 2<i className="icon-x"/>
                     </span>
                     <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
-                        Haus 2
+                        Haus 2<i className="icon-x"/>
                     </span>
                 </div>
 

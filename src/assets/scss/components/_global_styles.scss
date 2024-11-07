@@ -29,9 +29,11 @@
 
 .baubschnitte-managment {
   &__filter-managment {
+    position: relative;
     button {
       margin-right: toRem(40);
     }
+
     .body-small__regular {
       font-size: 13px;
       line-height: 16.25px;
@@ -39,17 +41,19 @@
       color: $bbt-secondary-grey;
       margin-right: toRem(5);
     }
+
     &--big-filter {
       position: absolute;
-      top: 56%;
+      top: 100%;
+      left: 0;
       box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+      margin-top: 5px;
       background-color: $bbt-white;
-      z-index: 10;
+      z-index: 11;
       padding: $unit-1;
       width: toRem(700);
       height: auto;
       overflow: hidden;
-      z-index: 11;
       opacity: 0;
       transform: translateY(-10px);
       transition: opacity 0.3s ease, transform 0.3s ease;
@@ -71,11 +75,18 @@
         flex-direction: row;
         flex-wrap: wrap;
         gap: $unit-1;
-        padding-bottom: $unit-3;
+        padding-bottom: $unit-1;
+        align-items: end;
         .delete-filter {
           button {
             margin-right: unset;
           }
+        }
+        .form {
+          width: toRem(290);
+        }
+        .form__field {
+          width: toRem(290);
         }
       }
 
@@ -95,20 +106,31 @@
         transform: translateY(0);
       }
     }
+
     &--filtered {
       padding: toRem(8) $unit-factor toRem(8) $unit-factor;
-      margin-right: toRem(5);
+      margin-right: $unit-factor;
       border: 1px solid $bbt-primary-green;
       border-radius: $unit-1;
       color: $bbt-secondary-grey;
+
       &.body-small__medium {
         font-size: 13px;
         line-height: 16.25px;
         font-weight: 600;
         color: $bbt-secondary-grey;
+        display: inline-flex;
+        align-items: center;
+        gap: toRem(5);
+      }
+      .icon-x {
+        background-color: $bbt-secondary-grey;
+        width: toRem(12);
+        height: toRem(12);
       }
     }
   }
+
   &__baubschnitte-buttons {
     display: flex;
     position: relative;
@@ -118,6 +140,7 @@
       gap: toRem(7);
     }
   }
+
   &__dropdown {
     position: absolute;
     width: auto;
@@ -135,6 +158,7 @@
     overflow: hidden;
     gap: $unit-factor;
     z-index: 11;
+
     &.is-visible {
       opacity: 1;
       transform: translateY(0);
@@ -148,29 +172,75 @@
     justify-content: space-between;
     margin-bottom: $unit-2;
   }
+
   @media (max-width: 1200px) {
     display: flex;
-    width: 100%;
     flex-direction: column;
-    flex-wrap: wrap;
-    position: relative;
-    &__filter-managment {
-      margin-bottom: $unit-2;
-      display: grid;
-      button {
-        margin-bottom: $unit-1;
-      }
-      &--filtered {
-        margin-bottom: $unit-1;
-      }
-    }
+    gap: $unit-2;
 
     &__baubschnitte-buttons {
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
       margin-bottom: $unit-1;
+      margin-top: $unit-1;
       gap: $unit-2;
+    }
+    &__dropdown {
+      position: absolute;
+      top: 55%;
+      width: auto;
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 778px) {
+    &__filter-managment {
+      &--big-filter {
+        position: absolute;
+        top: 100%;
+        width: 100%;
+
+        .filters {
+          width: 100%;
+          display: grid;
+          flex-wrap: wrap;
+          gap: $unit-1;
+          padding-bottom: $unit-3;
+          .delete-filter {
+            button {
+              margin-right: unset;
+            }
+          }
+          .form {
+            width: auto;
+          }
+          .form__field {
+            width: auto;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 678px) {
+    &__filter-managment {
+      margin-bottom: $unit-2;
+      display: grid;
+      button {
+        margin-bottom: $unit-1;
+      }
+
+      &--filtered {
+        margin-top: $unit-factor;
+        width: fit-content;
+        &:last-child {
+          margin-bottom: $unit-0;
+        }
+      }
+      &--big-filter {
+        top: 14%;
+      }
     }
   }
 }
