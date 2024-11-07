@@ -1,0 +1,126 @@
+// Edit User
+.edit-user {
+  .modal-content {
+    background-color: $bbt-grey-5;
+  }
+
+  .modal-body {
+    padding: $unit-1 0 !important;
+    margin-right: toRem(9);
+    background-color: $bbt-grey-5;
+    overflow-y: auto;
+
+    // Custom scrollbar styling
+    &::-webkit-scrollbar {
+      width: toRem(6);
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $bbt-grey-5;
+      border-radius: toRem(3);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $bbt-grey-30;
+      border-radius: toRem(3);
+    }
+  }
+
+  &__form {
+    padding: 0 $unit-factor 0 $unit-1;
+
+    &--content {
+      display: flex;
+      flex-direction: column;
+      gap: $unit-1;
+      padding: 0 0 $unit-1;
+      overflow: hidden;
+    }
+
+    &--text {
+      color: $bbt-text;
+    }
+
+    &--box {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: start;
+      gap: $unit-1;
+
+      .form-checkbox {
+        input {
+          flex-shrink: 0;
+        }
+      }
+    }
+
+    &:has(.create-user__form--select-box .react-select__control--menu-is-open) {
+      .create-user__form--select-box {
+        min-height: 210px;
+      }
+    }
+
+    &--select-box {
+      display: flex;
+      flex-direction: column;
+      gap: $unit-factor;
+
+      .react-select__indicators {
+        display: none;
+      }
+    }
+
+    &--box-item {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      color: $bbt-text;
+
+      @media (min-width: 992px) {
+        width: calc(50% - $unit-factor);
+      }
+    }
+
+    .table-list {
+      border-radius: unset;
+      box-shadow: unset;
+
+      table {
+        background-color: $bbt-grey-5;
+
+        thead {
+          tr {
+            th {
+              height: unset;
+              padding: $unit-factor;
+
+              &:not(&:first-child, &:last-child) {
+                min-width: toRem(170);
+              }
+
+              &:first-child {
+                min-width: toRem(100);
+              }
+            }
+          }
+        }
+
+        tbody {
+          tr {
+            td {
+              padding: toRem(3) $unit-factor;
+
+              &:not(&:last-child) {
+                padding: $unit-factor;
+              }
+            }
+
+            @media (min-width: 992px) {
+              height: unset;
+            }
+          }
+        }
+      }
+    }
+  }
+}
