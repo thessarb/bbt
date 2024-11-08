@@ -1,0 +1,117 @@
+//Upload Plan
+.replace-plan {
+  .modal-content {
+    background-color: $bbt-grey-5;
+  }
+
+  .modal-body {
+    padding: $unit-1 !important;
+    margin-right: toRem(9);
+    background-color: $bbt-grey-5;
+    overflow-y: auto;
+
+    // Custom scrollbar styling
+    &::-webkit-scrollbar {
+      width: toRem(6);
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $bbt-grey-5;
+      border-radius: toRem(3);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $bbt-grey-30;
+      border-radius: toRem(3);
+    }
+  }
+
+  &__form {
+    padding: 0 $unit-factor 0 0;
+
+    &--content {
+      display: flex;
+      flex-direction: column;
+      gap: $unit-1;
+      overflow: hidden;
+    }
+
+    &--title {
+      color: $bbt-black;
+    }
+
+    &--box {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: start;
+      gap: $unit-1;
+
+      .form-checkbox,
+      .form-radio {
+        input {
+          flex-shrink: 0;
+        }
+      }
+      .form-radio {
+        label {
+          flex-shrink: 0;
+        }
+      }
+    }
+
+    &--select-box {
+      display: flex;
+      flex-direction: column;
+      gap: $unit-factor;
+    }
+
+    &--box-item {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      color: $bbt-text;
+
+      @media (min-width: 992px) {
+        width: calc(50% - $unit-factor);
+      }
+
+      &--content {
+        display: flex;
+        flex-direction: column;
+        gap: $unit-1;
+
+        @media (min-width: 768px) {
+          flex-direction: row;
+        }
+      }
+    }
+
+    &--select {
+      margin-bottom: $unit-1;
+
+      .input-field__label {
+        margin-bottom: $unit-factor;
+      }
+
+      @media (min-width: 768px) {
+        width: calc(50% - $unit-factor);
+      }
+    }
+
+    &--input {
+      margin-bottom: $unit-1;
+    }
+
+    &--input-index {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $unit-factor;
+
+      .input-field__content {
+        flex: 1;
+        width: auto;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

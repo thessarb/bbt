@@ -2,6 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import Select from "react-select";
 import CustomPagination from "../../../../helpers/CustomPaginate";
 import {Tooltip} from "react-tooltip";
+import PlaneErsetzenModal from "./PlaneErsetzenModal";
 
 function MainePlane() {
     // pagination
@@ -71,12 +72,18 @@ function MainePlane() {
         };
     }, [activeRowId]);
 
+    // Thomas Modal
+    const [showPlaneErsetzenModal, setShowPlaneErsetzenModal] = useState(false);
+    const handleShow = () => {
+        setShowPlaneErsetzenModal(true);
+    };
+
     return (
             <>
                 <div className="messages table-list table-list--accordion">
                     <table role="table">
                         <thead>
-                            <tr role="row">
+                        <tr role="row">
                             <th role="columnheader"></th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
@@ -115,27 +122,32 @@ function MainePlane() {
                         </thead>
 
                         <tbody>
-                        {[0, 1, 2].map((_, index) => (
+                        {[0].map((_, index) => (
                                 <tr
                                         key={index}
                                         ref={(el) => (rowRefs.current[index] = el)}
                                         className={`body-normal__regular ${activeRowId === index ? "active" : ""}`}
-                                        onClick={() => handleRowClick(index)}
+
                                 >
-                                    <td role="cell" className="body-normal__regular">
+                                    <td role="cell" className="body-normal__regular"
+                                        onClick={() => handleRowClick(index)}>
                                         <i className="icon-caret-right"></i>
                                     </td>
-                                    <td role="cell" className="body-normal__regular" data-label={"Name"}>
+                                    <td role="cell" className="body-normal__regular" data-label={"Name"}
+                                        onClick={() => handleRowClick(index)}>
                                         Elektroplan
                                     </td>
-                                    <td role="cell" className="body-normal__regular" data-label={"Index"}>
+                                    <td role="cell" className="body-normal__regular" data-label={"Index"}
+                                        onClick={() => handleRowClick(index)}>
                                         A
                                     </td>
-                                    <td role="cell" className="body-normal__regular" data-label={"Format"}>
+                                    <td role="cell" className="body-normal__regular" data-label={"Format"}
+                                        onClick={() => handleRowClick(index)}>
                                         PDF
                                     </td>
 
-                                    <td role="cell" className="contents" data-label={"Kommentar"}>
+                                    <td role="cell" className="contents" data-label={"Kommentar"}
+                                        onClick={() => handleRowClick(index)}>
                                         <span className="collapsed body-normal__regular">
                                             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad commodi illum itaque nesciunt qui quis quod unde? Ab alias delectus, itaque libero porro quaerat, quam quos repudiandae saepe suscipit totam!
@@ -145,13 +157,22 @@ function MainePlane() {
                                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci cupiditate molestiae neque nisi odio perspiciatis. Blanditiis cum distinctio doloremque ipsam nam neque, nihil odit provident, quaerat quidem, sed tempora unde.
                                         </span>
                                     </td>
-                                    <td role="cell" className="body-normal__regular" data-label={"Datum"}>
+                                    <td role="cell" className="body-normal__regular" data-label={"Datum"}
+                                        onClick={() => handleRowClick(index)}>
                                         01.07.2024
                                     </td>
                                     <td role="cell" className="table-list__button" data-label={" "}>
-                                        <div className="button button-gost button--big button--grey">
+                                        <div className="button button-gost button--big button--grey"
+                                             onClick={handleShow}>
                                             <i className="button__icon icon-note-pencil"></i>
                                         </div>
+                                        {showPlaneErsetzenModal &&
+                                                <PlaneErsetzenModal
+                                                        showPlaneErsetzenModal={showPlaneErsetzenModal}
+                                                        setShowPlaneErsetzenModal={setShowPlaneErsetzenModal}
+                                                        itemIndex = {index}
+                                                />
+                                        }
                                         <div
                                                 data-tooltip-id="new-window"
                                                 data-tooltip-content="Datei wird Datei  wird in neuem Browserfenser geöffnet"
