@@ -483,10 +483,13 @@
             color: $bbt-primary-green;
             transition: all 0.3s ease;
           }
-
           &.green-text {
             color: $bbt-primary-green;
             text-decoration: underline;
+          }
+          &.addition-checkbox{
+            display: flex;
+            gap: $unit-factor;
           }
         }
       }

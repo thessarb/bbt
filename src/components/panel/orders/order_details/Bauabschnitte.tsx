@@ -3,8 +3,11 @@ import CustomPagination from "src/helpers/CustomPaginate";
 import Select from "react-select";
 import PlanViewModal from "src/components/panel/dashboard/deadlines/PlanViewModal";
 import PlaneHochladenModal from "src/components/Modal/PlaneHochladenModal";
+import PATHS from "src/routes/Paths";
+import { useNavigate } from "react-router";
 
 const Bauabschnitte = () => {
+    const navigate = useNavigate();
     const [expandedRow, setExpandedRow] = useState(null);
     const [nestedExpandedRow, setNestedExpandedRow] = useState<{ [key: number]: number | null }>({});
     const [innerNestedExpandedRow, setInnerNestedExpandedRow] = useState<{ [key: number]: { [key: number]: boolean } }>(
@@ -198,8 +201,8 @@ const Bauabschnitte = () => {
         }
     };
 
-    const deleteFilter = (id:any) => {
-        setFilters(filters.filter(filter => filter.id !== id)); 
+    const deleteFilter = (id: any) => {
+        setFilters(filters.filter((filter) => filter.id !== id));
     };
 
     return (
@@ -215,78 +218,89 @@ const Bauabschnitte = () => {
                         )}
                     </button>
                     {showBigFilter && (
-                        <div className={`baubschnitte-managment__filter-managment--big-filter ${showBigFilter ? "is-visible" : ""}`} ref={dropdownRefFilter}>
-                        <div className="dropdown-header">
-                            <span className="body-normal__regular">Filter anwenden</span>
-                        </div>
-                        {filters.map((filter, index) => (
-                            <div key={filter.id} className="filters">
-                                <div className="form">
-                                    <div className="form__field-select">
-                                        <label htmlFor={`filter-select-${index}`} className={`form__label caption__regular`}>
-                                            Reihe
+                        <div
+                            className={`baubschnitte-managment__filter-managment--big-filter ${
+                                showBigFilter ? "is-visible" : ""
+                            }`}
+                            ref={dropdownRefFilter}
+                        >
+                            <div className="dropdown-header">
+                                <span className="body-normal__regular">Filter anwenden</span>
+                            </div>
+                            {filters.map((filter, index) => (
+                                <div key={filter.id} className="filters">
+                                    <div className="form">
+                                        <div className="form__field-select">
+                                            <label
+                                                htmlFor={`filter-select-${index}`}
+                                                className={`form__label caption__regular`}
+                                            >
+                                                Reihe
+                                            </label>
+                                            <Select
+                                                id={`filter-select-${index}`}
+                                                classNamePrefix="react-select"
+                                                className={`form__select body-normal__regular`}
+                                                placeholder="Wählen Sie eine Tabellenreihe"
+                                                isClearable={true}
+                                                closeMenuOnSelect={true}
+                                                name="company-type"
+                                                isSearchable={true}
+                                                required
+                                            />
+                                            <span className="error-message caption__regular">Error message</span>
+                                        </div>
+                                    </div>
+                                    <div className="form__field">
+                                        <label htmlFor={`filter-${index}`} className={`form__label caption__regular`}>
+                                            Wert
                                         </label>
-                                        <Select
-                                            id={`filter-select-${index}`}
-                                            classNamePrefix="react-select"
-                                            className={`form__select body-normal__regular`}
-                                            placeholder="Wählen Sie eine Tabellenreihe"
-                                            isClearable={true}
-                                            closeMenuOnSelect={true}
-                                            name="company-type"
-                                            isSearchable={true}
+                                        <input
+                                            id={`filter-${index}`}
+                                            className="form__input body-normal__regular"
+                                            type="text"
+                                            placeholder="Nach welchem Wert möchten Sie filtern"
                                             required
                                         />
-                                        <span className="error-message caption__regular">Error message</span>
                                     </div>
-                                </div>
-                                <div className="form__field">
-                                    <label htmlFor={`filter-${index}`} className={`form__label caption__regular`}>
-                                        Wert
-                                    </label>
-                                    <input
-                                        id={`filter-${index}`}
-                                        className="form__input body-normal__regular"
-                                        type="text"
-                                        placeholder="Nach welchem Wert möchten Sie filtern"
-                                        required
-                                    />
-                                </div>
-                                <div className="delete-filter">
-                                        <button className="button button-gost button--big button--grey" onClick={() => deleteFilter(filter.id)}>
+                                    <div className="delete-filter">
+                                        <button
+                                            className="button button-gost button--big button--grey"
+                                            onClick={() => deleteFilter(filter.id)}
+                                        >
                                             <i className="button__icon icon-trash" />
                                         </button>
                                     </div>
+                                </div>
+                            ))}
+                            <div>
+                                <button className="button button-gost button--big button--green" onClick={addFilter}>
+                                    <i className="button__icon icon-plus" />
+                                    <span className="button__text">Weiteren Filter hinzufügen</span>
+                                </button>
                             </div>
-                        ))}
-                        <div>
-                            <button className="button button-gost button--big button--green" onClick={addFilter}>
-                                <i className="button__icon icon-plus" />
-                                <span className="button__text">Weiteren Filter hinzufügen</span>
-                            </button>
+                            <div className="no-background">
+                                <button className="button button-secondary button--big button--green">
+                                    <span className="button__text">Filter anwenden</span>
+                                </button>
+                            </div>
                         </div>
-                        <div className="no-background">
-                            <button className="button button-secondary button--big button--green">
-                                <span className="button__text">Filter anwenden</span>
-                            </button>
-                        </div>
-                    </div>
                     )}
                     <span className="body-small__regular">Aktive Filter:</span>
                     <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
-                        Haus 2 <i className="icon-x"/>
+                        Haus 2 <i className="icon-x" />
                     </span>
                     <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
-                        Haus 2<i className="icon-x"/>
+                        Haus 2<i className="icon-x" />
                     </span>
                     <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
-                        Haus 2<i className="icon-x"/>
+                        Haus 2<i className="icon-x" />
                     </span>
                     <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
-                        Haus 2<i className="icon-x"/>
+                        Haus 2<i className="icon-x" />
                     </span>
                     <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
-                        Haus 2<i className="icon-x"/>
+                        Haus 2<i className="icon-x" />
                     </span>
                 </div>
 
@@ -349,7 +363,10 @@ const Bauabschnitte = () => {
                                     setShowPlaneHochladenModal={setShowPlaneHochladenModal}
                                 />
                             )}
-                            <button className="button button-secondary button--big button--grey">
+                            <button
+                                className="button button-secondary button--big button--grey"
+                                onClick={() => navigate(PATHS.documents)}
+                            >
                                 <i className="button__icon icon-files"></i>
                                 <span className="button__text">Dokumente anzeigen</span>
                             </button>
@@ -374,9 +391,11 @@ const Bauabschnitte = () => {
                         <tr>
                             <th>
                                 <div>
-                                    <label className="body-normal__semibold form-checkbox">
-                                        <input type="checkbox" />
-                                    </label>
+                                    {showAdditionalButtons && (
+                                        <label className="body-normal__semibold form-checkbox">
+                                            <input type="checkbox" />
+                                        </label>
+                                    )}
                                 </div>
                             </th>
                             <th>
@@ -446,9 +465,18 @@ const Bauabschnitte = () => {
                                     onClick={() => toggleRow(index)}
                                 >
                                     <td
-                                        className={`body-normal__regular ${expandedRow === index ? "expanded" : ""}`}
+                                        className={`body-normal__regular addition-checkbox ${
+                                            expandedRow === index ? "expanded" : ""
+                                        }`}
                                         data-label={""}
                                     >
+                                        {showAdditionalButtons && (
+                                            <div>
+                                                <label className="body-normal__semibold form-checkbox">
+                                                    <input type="checkbox" />
+                                                </label>
+                                            </div>
+                                        )}
                                         {expandedRow === index ? (
                                             <i className="icon-caret-right expanded" />
                                         ) : (
