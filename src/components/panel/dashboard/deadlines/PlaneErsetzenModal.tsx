@@ -1,70 +1,67 @@
 import React, {useState} from "react";
 import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
-import CreateUserForm from "./CreateUserForm";
+import ListNoResult from "src/components/panel/dashboard/deadlines/ListNoResult";
+import PlaneErsetzenForm from "./PlaneErsetzenForm";
 import LoadingComponent from "../../../LoadingComponent";
-import ListNoResult from "../../dashboard/deadlines/ListNoResult";
-import UserConfirmation from "../../../UserConfirmation";
 
-interface CreateUserModalProps {
-    show: boolean;
-    setShow: React.Dispatch<React.SetStateAction<boolean>>;
+interface PlaneErsetzenModalProps {
+    showPlaneErsetzenModal: boolean;
+    setShowPlaneErsetzenModal: React.Dispatch<React.SetStateAction<boolean>>;
+    itemIndex: number;
 }
 
-const CreateUserModal: React.FC<CreateUserModalProps> = ({ show, setShow }) => {
+const  PlaneErsetzenModal: React.FC<PlaneErsetzenModalProps>  = ({showPlaneErsetzenModal, setShowPlaneErsetzenModal, itemIndex}) => {
     // Modal
     const [animateClose, setAnimateClose] = useState(false);
-    const [confirmation, setConfirmation] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [confirmation2, setConfirmation2] = useState(false);
+
     const handleClose = () => {
         setAnimateClose(true);
         setTimeout(() => {
-            setShow(false);
+            setShowPlaneErsetzenModal(false);
             setAnimateClose(false);
         }, 350);
     };
 
-    const handleConfirmation = () => {
+    const handleFileUpload = () => {
         setLoading(true);
         setTimeout(() => {
-            setConfirmation(true);
+            setConfirmation2(true);
             setLoading(false);
-        }, 2000);
+        }, 1000);
     };
 
     return (
             <>
                 <Modal
-                        isOpen={show}
+                        isOpen={showPlaneErsetzenModal}
                         toggle={handleClose}
-                        className={`modal create-user ${animateClose ? "slide-up" : ""}`}
+                        className={`modal replace-plan ${animateClose ? "slide-up" : ""}`}
                         fade={true}
+                        backdrop="static"
                 >
                     <ModalHeader toggle={handleClose}>
-                        {loading ? (
-                                <span className="heading__semibold">Modal Loading</span>
-                        ) : (
-                                <span className="heading__semibold">Nutzer angelegt</span>
-                        )}
+                        <span className="heading__semibold">Plan ersetzen</span>
                     </ModalHeader>
                     <ModalBody>
-
                         {loading ? (
                                 <LoadingComponent/>
                         ) : (
-                                confirmation ? (
-                                        <UserConfirmation />
+                                confirmation2 ? (
+                                        <div className="second-confirmation__upload-plan body-big__regular">
+                                            Ihr Plan wurde erfolgreich hochgeladen.
+                                        </div>
                                 ) : (
-                                        CreateUserForm ? <CreateUserForm /> : <ListNoResult/>
+                                        PlaneErsetzenForm ? < PlaneErsetzenForm  itemIndex={itemIndex}/> : <ListNoResult/>
                                 )
                         )}
-
                     </ModalBody>
                     <ModalFooter>
-
                         {loading ? (
                                 " "
                         ) : (
-                                confirmation ? (
+                                confirmation2 ? (
                                         <button className="button button-secondary button--big button--light-grey"
                                                 onClick={handleClose}>
                                             <span className="button__text">Schließen</span>
@@ -75,19 +72,19 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({ show, setShow }) => {
                                                     onClick={handleClose}>
                                                 <span className="button__text">Abbrechen</span>
                                             </button>
+
                                             <button className="button button--big button--green"
-                                                    onClick={handleConfirmation}>
-                                                <i className="button__icon icon-user-plus"></i>
-                                                <span className="button__text">Nutzer anlegen</span>
+                                                    onClick={handleFileUpload}>
+                                                <i className="button__icon icon-file-arrow-up"></i>
+                                                <span className="button__text">Plan hochladen</span>
                                             </button>
                                         </>
                                 )
                         )}
-
                     </ModalFooter>
                 </Modal>
             </>
-    )
-};
+    );
+}
 
-export default CreateUserModal;
+export default PlaneErsetzenModal;

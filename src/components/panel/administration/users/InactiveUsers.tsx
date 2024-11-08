@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Select from "react-select";
 import CustomPagination from "../../../../helpers/CustomPaginate";
 import ReactivateUsersModal from "./ReactivateUsersModal";
+import EditUserModal from "./EditUserModal";
 
 const InactiveUsers = () => {
     // Pagination
@@ -18,10 +19,16 @@ const InactiveUsers = () => {
         last_page: 10,
     };
 
-    // Modal
+    // Modal Reactivate
     const [show, setShow] = useState(false);
     const handleShow = () => {
         setShow(true);
+    };
+
+    // Modal Edit User
+    const [showEditModal, setShowEditModal] = useState(false);
+    const handleShowEditModal = () => {
+        setShowEditModal(true);
     };
 
     return (
@@ -97,9 +104,10 @@ const InactiveUsers = () => {
                             </td>
 
                             <td role="cell" className="table-list__button" data-label={" "}>
-                                <div className="button button-gost button--big button--grey">
+                                <div onClick={handleShowEditModal} className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-note-pencil"></i>
                                 </div>
+                                {showEditModal && <EditUserModal showEditModal={showEditModal} setShowEditModal={setShowEditModal}/>}
                                 <div onClick={handleShow} className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-user-switch"></i>
                                 </div>
