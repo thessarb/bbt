@@ -77,9 +77,9 @@ function PlanViewModal({ show, setShow }: PlanViewModalProps) {
                                             <i className="button__icon icon-file-arrow-up"></i>
                                             <span className="button__text">Neuen Plan hochladen</span>
                                         </button>
-                                        {PlaneHochladenModal && <PlaneHochladenModal
+                                        {showPlaneHochladenModal && <PlaneHochladenModal
                                             showPlaneHochladenModal={showPlaneHochladenModal}
-                                            setShowPlaneHochladenModal={setShowPlaneHochladenModal}/>}
+                                            setShowPlaneHochladenModal={setShowPlaneHochladenModal} />}
                                     </>
                             )}
                         </div>
