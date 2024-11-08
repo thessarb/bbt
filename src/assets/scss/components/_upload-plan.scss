@@ -45,6 +45,11 @@
         flex-direction: row;
       }
     }
+
+    &--input {
+      width: 100%;
+      margin-bottom: $unit-1;
+    }
   }
 
   &__select {
