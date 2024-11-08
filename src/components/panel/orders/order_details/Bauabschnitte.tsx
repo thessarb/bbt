@@ -3,7 +3,6 @@ import CustomPagination from "src/helpers/CustomPaginate";
 import Select from "react-select";
 import PlanViewModal from "src/components/panel/dashboard/deadlines/PlanViewModal";
 import PlaneHochladenModal from "src/components/Modal/PlaneHochladenModal";
-import { FALSE } from "sass";
 
 const Bauabschnitte = () => {
     const [expandedRow, setExpandedRow] = useState(null);
@@ -15,7 +14,10 @@ const Bauabschnitte = () => {
     const [showPlanFreigeben, setShowPlanFreigeben] = useState(false);
     const [showPlaneHochladenModal, setShowPlaneHochladenModal] = useState(false);
     const [showAdditionalButtons, setShowAdditionalButtons] = useState(false);
+    const [showBigFilter, setShowBigFilter] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
+    const dropdownRefFilter = useRef<HTMLDivElement | null>(null);
+    const [filters, setFilters] = useState([{ id: 1 }]);
 
     const toggleDropdown = () => {
         setDropdownOpen((prev) => !prev);
@@ -186,23 +188,108 @@ const Bauabschnitte = () => {
         },
     ];
 
-    const handleOutsideClick = (event: MouseEvent) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-            setDropdownOpen(false);
+    const toggleFilterDropdown = () => {
+        setShowBigFilter((prev) => !prev);
+    };
+
+    const addFilter = () => {
+        if (filters.length < 5) {
+            setFilters((prev) => [...prev, { id: prev.length + 1 }]);
         }
     };
 
-    useEffect(() => {
-        document.addEventListener("mousedown", handleOutsideClick);
-        return () => {
-            document.removeEventListener("mousedown", handleOutsideClick);
-        };
-    }, []);
+    const deleteFilter = (id:any) => {
+        setFilters(filters.filter(filter => filter.id !== id)); 
+    };
 
     return (
         <>
             <div className="baubschnitte-managment">
-                <div></div>
+                <div className="baubschnitte-managment__filter-managment">
+                    <button className="button button-secondary button--big button--grey" onClick={toggleFilterDropdown}>
+                        <span className="button__text">Filter öffnen</span>
+                        {showBigFilter ? (
+                            <i className="button__icon icon-x" />
+                        ) : (
+                            <i className="button__icon icon-funnel-simple" />
+                        )}
+                    </button>
+                    {showBigFilter && (
+                        <div className={`baubschnitte-managment__filter-managment--big-filter ${showBigFilter ? "is-visible" : ""}`} ref={dropdownRefFilter}>
+                        <div className="dropdown-header">
+                            <span className="body-normal__regular">Filter anwenden</span>
+                        </div>
+                        {filters.map((filter, index) => (
+                            <div key={filter.id} className="filters">
+                                <div className="form">
+                                    <div className="form__field-select">
+                                        <label htmlFor={`filter-select-${index}`} className={`form__label caption__regular`}>
+                                            Reihe
+                                        </label>
+                                        <Select
+                                            id={`filter-select-${index}`}
+                                            classNamePrefix="react-select"
+                                            className={`form__select body-normal__regular`}
+                                            placeholder="Wählen Sie eine Tabellenreihe"
+                                            isClearable={true}
+                                            closeMenuOnSelect={true}
+                                            name="company-type"
+                                            isSearchable={true}
+                                            required
+                                        />
+                                        <span className="error-message caption__regular">Error message</span>
+                                    </div>
+                                </div>
+                                <div className="form__field">
+                                    <label htmlFor={`filter-${index}`} className={`form__label caption__regular`}>
+                                        Wert
+                                    </label>
+                                    <input
+                                        id={`filter-${index}`}
+                                        className="form__input body-normal__regular"
+                                        type="text"
+                                        placeholder="Nach welchem Wert möchten Sie filtern"
+                                        required
+                                    />
+                                </div>
+                                <div className="delete-filter">
+                                        <button className="button button-gost button--big button--grey" onClick={() => deleteFilter(filter.id)}>
+                                            <i className="button__icon icon-trash" />
+                                        </button>
+                                    </div>
+                            </div>
+                        ))}
+                        <div>
+                            <button className="button button-gost button--big button--green" onClick={addFilter}>
+                                <i className="button__icon icon-plus" />
+                                <span className="button__text">Weiteren Filter hinzufügen</span>
+                            </button>
+                        </div>
+                        <div className="no-background">
+                            <button className="button button-secondary button--big button--green">
+                                <span className="button__text">Filter anwenden</span>
+                            </button>
+                        </div>
+                    </div>
+                    )}
+                    <span className="body-small__regular">Aktive Filter:</span>
+                    <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
+                        Haus 2 <i className="icon-x"/>
+                    </span>
+                    <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
+                        Haus 2<i className="icon-x"/>
+                    </span>
+                    <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
+                        Haus 2<i className="icon-x"/>
+                    </span>
+                    <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
+                        Haus 2<i className="icon-x"/>
+                    </span>
+                    <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
+                        Haus 2<i className="icon-x"/>
+                    </span>
+                </div>
+
                 <div className="baubschnitte-managment__baubschnitte-buttons">
                     <div className="toggle-switch">
                         <label className="switch toggle-switch__switch baubschnitte-toggle">
@@ -222,17 +309,23 @@ const Bauabschnitte = () => {
                     {showAdditionalButtons && (
                         <div className="baubschnitte-managment__baubschnitte-buttons--hidden-buttons">
                             <button className="button button-primary button--big button--green">
-                            <i className="button__icon icon-arrow-square-out"></i>
+                                <i className="button__icon icon-arrow-square-out"></i>
                                 <span className="button__text">Excel exportieren</span>
                             </button>
-                            <button className="button button-secondary button--big button--grey" onClick={()=> setShowAdditionalButtons(false)}>
+                            <button
+                                className="button button-secondary button--big button--grey"
+                                onClick={() => setShowAdditionalButtons(false)}
+                            >
                                 <span className="button__text">Export Abbrechen</span>
                             </button>
                         </div>
                     )}
 
                     {isDropdownOpen && (
-                        <div className={`baubschnitte-managment__dropdown ${isDropdownOpen ? 'is-visible' : ''}`} ref={dropdownRef}>
+                        <div
+                            className={`baubschnitte-managment__dropdown ${isDropdownOpen ? "is-visible" : ""}`}
+                            ref={dropdownRef}
+                        >
                             <button
                                 className="button button-primary button--big button--orange"
                                 onClick={() => setShowPlanFreigeben(true)}
