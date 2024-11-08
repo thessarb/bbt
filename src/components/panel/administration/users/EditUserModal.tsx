@@ -4,13 +4,14 @@ import CreateUserForm from "./CreateUserForm";
 import LoadingComponent from "../../../LoadingComponent";
 import ListNoResult from "../../dashboard/deadlines/ListNoResult";
 import UserConfirmation from "../../../UserConfirmation";
+import EditUserForm from "./EditUserForm";
 
-interface CreateUserModalProps {
-    show: boolean;
-    setShow: React.Dispatch<React.SetStateAction<boolean>>;
+interface EditUserModalProps {
+    showEditModal: boolean;
+    setShowEditModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CreateUserModal: React.FC<CreateUserModalProps> = ({ show, setShow }) => {
+const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEditModal }) => {
     // Modal
     const [animateClose, setAnimateClose] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
@@ -18,7 +19,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({ show, setShow }) => {
     const handleClose = () => {
         setAnimateClose(true);
         setTimeout(() => {
-            setShow(false);
+            setShowEditModal(false);
             setAnimateClose(false);
         }, 350);
     };
@@ -34,16 +35,16 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({ show, setShow }) => {
     return (
             <>
                 <Modal
-                        isOpen={show}
+                        isOpen={showEditModal}
                         toggle={handleClose}
-                        className={`modal create-user ${animateClose ? "slide-up" : ""}`}
+                        className={`modal edit-user ${animateClose ? "slide-up" : ""}`}
                         fade={true}
                 >
                     <ModalHeader toggle={handleClose}>
                         {loading ? (
                                 <span className="heading__semibold">Modal Loading</span>
                         ) : (
-                                <span className="heading__semibold">Nutzer angelegt</span>
+                                <span className="heading__semibold">Nutzer bearbeiten</span>
                         )}
                     </ModalHeader>
                     <ModalBody>
@@ -54,7 +55,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({ show, setShow }) => {
                                 confirmation ? (
                                         <UserConfirmation />
                                 ) : (
-                                        CreateUserForm ? <CreateUserForm /> : <ListNoResult/>
+                                        EditUserForm ? <EditUserForm /> : <ListNoResult/>
                                 )
                         )}
 
@@ -78,7 +79,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({ show, setShow }) => {
                                             <button className="button button--big button--green"
                                                     onClick={handleConfirmation}>
                                                 <i className="button__icon icon-user-plus"></i>
-                                                <span className="button__text">Nutzer anlegen</span>
+                                                <span className="button__text">Nutzer aktualisieren</span>
                                             </button>
                                         </>
                                 )
@@ -90,4 +91,4 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({ show, setShow }) => {
     )
 };
 
-export default CreateUserModal;
+export default EditUserModal;

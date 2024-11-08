@@ -22,6 +22,16 @@
     }
   }
 
+  &__disabled {
+    position: absolute;
+    right: toRem(25);
+    top: 50%;
+    overflow-y: -50%;
+    width: toRem(12);
+    height: toRem(12);
+    background-color: $bbt-grey-50;
+  }
+
   /* select Input Styles */
   &__wrapper {
     position: relative;

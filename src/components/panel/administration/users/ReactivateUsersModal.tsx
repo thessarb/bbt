@@ -34,7 +34,7 @@ const ReactivateUsersModal: React.FC<ReactivateUsersModalProps> = ({ show, setSh
                         fade={true}
                 >
                     <ModalHeader toggle={handleClose}>
-                        <span className="heading__semibold">Nutzer deaktivieren</span>
+                        <span className="heading__semibold">Nutzer reaktiviert</span>
                     </ModalHeader>
                     <ModalBody>
                         {confirmation ?
@@ -46,14 +46,25 @@ const ReactivateUsersModal: React.FC<ReactivateUsersModalProps> = ({ show, setSh
 
                     </ModalBody>
                     <ModalFooter>
-                        <button className="button button-secondary button--big button--grey" onClick={handleClose}>
-                            <span className="button__text">Schließen</span>
-                        </button>
-                        {!confirmation &&
-                                <button className="button button--big button--green" onClick={handleConfirmation}>
-                                    <i className="button__icon icon-user-switch"></i>
-                                    <span className="button__text">Nutzer deaktivieren</span>
-                                </button>
+
+                        {confirmation ?
+                                <>
+                                    <button className="button button-secondary button--big button--grey"
+                                            onClick={handleClose}>
+                                        <span className="button__text">Schließen</span>
+                                    </button>
+                                </>
+                                :
+                                <>
+                                    <button className="button button-secondary button--big button--grey"
+                                            onClick={handleClose}>
+                                        <span className="button__text">Abbrechen</span>
+                                    </button>
+                                    <button className="button button--big button--green" onClick={handleConfirmation}>
+                                        <i className="button__icon icon-user-switch"></i>
+                                        <span className="button__text">Nutzer aktivieren</span>
+                                    </button>
+                                </>
                         }
 
                     </ModalFooter>

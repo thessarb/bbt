@@ -46,16 +46,25 @@ const DeleteUsersModal: React.FC<DeleteUsersModalProps> = ({ show, setShow }) =>
 
                     </ModalBody>
                     <ModalFooter>
-                        <button className="button button-secondary button--big button--grey" onClick={handleClose}>
-                            <span className="button__text">Schließen</span>
-                        </button>
-                        {!confirmation &&
-                                <button className="button button--big button--red" onClick={handleConfirmation}>
-                                    <i className="button__icon icon-user-minus"></i>
-                                    <span className="button__text">Nutzer deaktivieren</span>
-                                </button>
+                        {confirmation ?
+                                <>
+                                    <button className="button button-secondary button--big button--grey"
+                                            onClick={handleClose}>
+                                        <span className="button__text">Schließen</span>
+                                    </button>
+                                </>
+                                :
+                                <>
+                                    <button className="button button-secondary button--big button--grey"
+                                            onClick={handleClose}>
+                                        <span className="button__text">Abbrechen</span>
+                                    </button>
+                                    <button className="button button--big button--red" onClick={handleConfirmation}>
+                                        <i className="button__icon icon-user-minus"></i>
+                                        <span className="button__text">Nutzer deaktivieren</span>
+                                    </button>
+                                </>
                         }
-
                     </ModalFooter>
                 </Modal>
             </>
