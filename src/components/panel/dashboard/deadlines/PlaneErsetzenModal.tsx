@@ -1,25 +1,25 @@
 import React, {useState} from "react";
 import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
-import PlanFreigebenForm from "./PlanFreigebenForm";
-import ListNoResult from "./ListNoResult";
-import LoadingComponent from "src/components/LoadingComponent";
-import Confirmation from "src/components/Confirmation";
+import ListNoResult from "src/components/panel/dashboard/deadlines/ListNoResult";
+import PlaneErsetzenForm from "./PlaneErsetzenForm";
+import LoadingComponent from "../../../LoadingComponent";
 
-interface ThomasPlaneModalProps {
-    showThomasModal: boolean;
-    setShowThomasModal: React.Dispatch<React.SetStateAction<boolean>>;
+interface PlaneErsetzenModalProps {
+    showPlaneErsetzenModal: boolean;
+    setShowPlaneErsetzenModal: React.Dispatch<React.SetStateAction<boolean>>;
+    itemIndex: number;
 }
 
-function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneModalProps) {
+const  PlaneErsetzenModal: React.FC<PlaneErsetzenModalProps>  = ({showPlaneErsetzenModal, setShowPlaneErsetzenModal, itemIndex}) => {
     // Modal
     const [animateClose, setAnimateClose] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [confirmation, setConfirmation] = useState(false);
+    const [confirmation2, setConfirmation2] = useState(false);
 
     const handleClose = () => {
         setAnimateClose(true);
         setTimeout(() => {
-            setShowThomasModal(false);
+            setShowPlaneErsetzenModal(false);
             setAnimateClose(false);
         }, 350);
     };
@@ -27,7 +27,7 @@ function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneMo
     const handleFileUpload = () => {
         setLoading(true);
         setTimeout(() => {
-            setConfirmation(true);
+            setConfirmation2(true);
             setLoading(false);
         }, 1000);
     };
@@ -35,36 +35,33 @@ function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneMo
     return (
             <>
                 <Modal
-                        isOpen={showThomasModal}
+                        isOpen={showPlaneErsetzenModal}
                         toggle={handleClose}
-                        className={`modal release-form ${animateClose ? "fade-out" : ""}`}
+                        className={`modal replace-plan ${animateClose ? "slide-up" : ""}`}
                         fade={true}
                         backdrop="static"
                 >
                     <ModalHeader toggle={handleClose}>
-                        {confirmation ? (
-                                <span className="heading__semibold">Freigabe erteilt</span>
-                        ) : (
-                                <span className="heading__semibold">Plan freigeben: D02 - Index 1</span>
-                        )}
+                        <span className="heading__semibold">Plan ersetzen</span>
                     </ModalHeader>
                     <ModalBody>
                         {loading ? (
                                 <LoadingComponent/>
                         ) : (
-                                confirmation ? (
-                                        <Confirmation />
+                                confirmation2 ? (
+                                        <div className="second-confirmation__upload-plan body-big__regular">
+                                            Ihr Plan wurde erfolgreich hochgeladen.
+                                        </div>
                                 ) : (
-                                        PlanFreigebenForm ? < PlanFreigebenForm/> : <ListNoResult/>
+                                        PlaneErsetzenForm ? < PlaneErsetzenForm  itemIndex={itemIndex}/> : <ListNoResult/>
                                 )
                         )}
-
                     </ModalBody>
                     <ModalFooter>
                         {loading ? (
                                 " "
                         ) : (
-                                confirmation ? (
+                                confirmation2 ? (
                                         <button className="button button-secondary button--big button--light-grey"
                                                 onClick={handleClose}>
                                             <span className="button__text">Schließen</span>
@@ -73,12 +70,13 @@ function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneMo
                                         <>
                                             <button className="button button-secondary button--big button--light-grey"
                                                     onClick={handleClose}>
-                                                <span className="button__text">Schließen</span>
+                                                <span className="button__text">Abbrechen</span>
                                             </button>
+
                                             <button className="button button--big button--green"
                                                     onClick={handleFileUpload}>
-                                                <i className="button__icon icon-list-checks"></i>
-                                                <span className="button__text">Plan freigeben</span>
+                                                <i className="button__icon icon-file-arrow-up"></i>
+                                                <span className="button__text">Plan hochladen</span>
                                             </button>
                                         </>
                                 )
@@ -89,4 +87,4 @@ function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneMo
     );
 }
 
-export default FreigebenFormModal;
+export default PlaneErsetzenModal;

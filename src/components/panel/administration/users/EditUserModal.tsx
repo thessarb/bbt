@@ -1,66 +1,67 @@
 import React, {useState} from "react";
 import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
-import PlanFreigebenForm from "./PlanFreigebenForm";
-import ListNoResult from "./ListNoResult";
-import LoadingComponent from "src/components/LoadingComponent";
-import Confirmation from "src/components/Confirmation";
+import CreateUserForm from "./CreateUserForm";
+import LoadingComponent from "../../../LoadingComponent";
+import ListNoResult from "../../dashboard/deadlines/ListNoResult";
+import UserConfirmation from "../../../UserConfirmation";
+import EditUserForm from "./EditUserForm";
 
-interface ThomasPlaneModalProps {
-    showThomasModal: boolean;
-    setShowThomasModal: React.Dispatch<React.SetStateAction<boolean>>;
+interface EditUserModalProps {
+    showEditModal: boolean;
+    setShowEditModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneModalProps) {
+const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEditModal }) => {
     // Modal
     const [animateClose, setAnimateClose] = useState(false);
-    const [loading, setLoading] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
-
+    const [loading, setLoading] = useState(false);
     const handleClose = () => {
         setAnimateClose(true);
         setTimeout(() => {
-            setShowThomasModal(false);
+            setShowEditModal(false);
             setAnimateClose(false);
         }, 350);
     };
 
-    const handleFileUpload = () => {
+    const handleConfirmation = () => {
         setLoading(true);
         setTimeout(() => {
             setConfirmation(true);
             setLoading(false);
-        }, 1000);
+        }, 2000);
     };
 
     return (
             <>
                 <Modal
-                        isOpen={showThomasModal}
+                        isOpen={showEditModal}
                         toggle={handleClose}
-                        className={`modal release-form ${animateClose ? "fade-out" : ""}`}
+                        className={`modal edit-user ${animateClose ? "slide-up" : ""}`}
                         fade={true}
-                        backdrop="static"
                 >
                     <ModalHeader toggle={handleClose}>
-                        {confirmation ? (
-                                <span className="heading__semibold">Freigabe erteilt</span>
+                        {loading ? (
+                                <span className="heading__semibold">Modal Loading</span>
                         ) : (
-                                <span className="heading__semibold">Plan freigeben: D02 - Index 1</span>
+                                <span className="heading__semibold">Nutzer bearbeiten</span>
                         )}
                     </ModalHeader>
                     <ModalBody>
+
                         {loading ? (
                                 <LoadingComponent/>
                         ) : (
                                 confirmation ? (
-                                        <Confirmation />
+                                        <UserConfirmation />
                                 ) : (
-                                        PlanFreigebenForm ? < PlanFreigebenForm/> : <ListNoResult/>
+                                        EditUserForm ? <EditUserForm /> : <ListNoResult/>
                                 )
                         )}
 
                     </ModalBody>
                     <ModalFooter>
+
                         {loading ? (
                                 " "
                         ) : (
@@ -73,20 +74,21 @@ function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneMo
                                         <>
                                             <button className="button button-secondary button--big button--light-grey"
                                                     onClick={handleClose}>
-                                                <span className="button__text">Schließen</span>
+                                                <span className="button__text">Abbrechen</span>
                                             </button>
                                             <button className="button button--big button--green"
-                                                    onClick={handleFileUpload}>
-                                                <i className="button__icon icon-list-checks"></i>
-                                                <span className="button__text">Plan freigeben</span>
+                                                    onClick={handleConfirmation}>
+                                                <i className="button__icon icon-user-plus"></i>
+                                                <span className="button__text">Nutzer aktualisieren</span>
                                             </button>
                                         </>
                                 )
                         )}
+
                     </ModalFooter>
                 </Modal>
             </>
-    );
-}
+    )
+};
 
-export default FreigebenFormModal;
+export default EditUserModal;

@@ -1,7 +1,8 @@
 import Select from "react-select";
 import CustomPagination from "../../../../helpers/CustomPaginate";
 import React, {useState} from "react";
-
+import DeleteUsersModal from "./DeleteUsersModal";
+import EditUserModal from "./EditUserModal";
 
 const ActiveUsers = () => {
     // Pagination
@@ -18,6 +19,17 @@ const ActiveUsers = () => {
         last_page: 10,
     };
 
+    // Modal Delete
+    const [show, setShow] = useState(false);
+    const handleShow = () => {
+        setShow(true);
+    };
+
+    // Modal Edit User
+    const [showEditModal, setShowEditModal] = useState(false);
+    const handleShowEditModal = () => {
+        setShowEditModal(true);
+    };
 
     return (
             <>
@@ -92,12 +104,15 @@ const ActiveUsers = () => {
                             </td>
 
                             <td role="cell" className="table-list__button" data-label={" "}>
-                                <div className="button button-gost button--big button--grey">
+                                <div onClick={handleShowEditModal} className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-note-pencil"></i>
                                 </div>
-                                <div className="button button-gost button--big button--grey">
+                                {showEditModal && <EditUserModal showEditModal={showEditModal} setShowEditModal={setShowEditModal}/>}
+
+                                <div onClick={handleShow} className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-trash"></i>
                                 </div>
+                                {show && <DeleteUsersModal show={show} setShow={setShow}/>}
                             </td>
                         </tr>
                         </tbody>
