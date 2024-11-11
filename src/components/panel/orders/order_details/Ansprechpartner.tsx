@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {useState, useEffect, useRef} from "react";
 import Select from "react-select";
-import { useNavigate } from "react-router";
+import {useNavigate} from "react-router";
 import CustomPagination from "src/helpers/CustomPaginate";
 import FilterDialog from "src/helpers/TableFilters";
 import PATHS from "src/routes/Paths";
+import {Tooltip} from "react-tooltip";
 
 const Ansprechpartner = () => {
     const navigate = useNavigate();
@@ -29,10 +30,10 @@ const Ansprechpartner = () => {
     });
 
     const options = [
-        { value: "1", label: "Auftragsnummer 1" },
-        { value: "2", label: "Auftragsname 2" },
-        { value: "3", label: "Auftragsname 3" },
-        { value: "4", label: "Auftragsnummer 4" },
+        {value: "1", label: "Auftragsnummer 1"},
+        {value: "2", label: "Auftragsname 2"},
+        {value: "3", label: "Auftragsname 3"},
+        {value: "4", label: "Auftragsnummer 4"},
     ];
 
     const handleFilterChange = (filter: { searchTerm: string; order: string; selectedOptions: string[] }) => {
@@ -64,26 +65,26 @@ const Ansprechpartner = () => {
     }, [isFilterDialogOpen]);
 
     return (
-        <>
-            <div className="table-list table-list--secondary">
-                <table role="table">
-                    <thead>
+            <>
+                <div className="table-list table-list--secondary">
+                    <table role="table">
+                        <thead>
                         <tr role="row">
                             <th role="columnheader" className="no-actions">
                                 <div className="body-normal__semibold">
                                     Funktion
                                     <i
-                                        className="icon-dots-three-vertical"
-                                        onClick={() => setIsFilterDialogOpen("funktion")}
+                                            className="icon-dots-three-vertical"
+                                            onClick={() => setIsFilterDialogOpen("funktion")}
                                     ></i>
                                     {isFilterDialogOpen === "funktion" && (
-                                        <div ref={filterDialogRef}>
-                                            <FilterDialog
-                                                options={filterOptions}
-                                                onFilterChange={handleFilterChange}
-                                                closeFilter={() => closeFilterDialog}
-                                            />
-                                        </div>
+                                            <div ref={filterDialogRef}>
+                                                <FilterDialog
+                                                        options={filterOptions}
+                                                        onFilterChange={handleFilterChange}
+                                                        closeFilter={() => closeFilterDialog}
+                                                />
+                                            </div>
                                     )}
                                 </div>
                             </th>
@@ -91,17 +92,17 @@ const Ansprechpartner = () => {
                                 <div className="body-normal__semibold">
                                     Name
                                     <i
-                                        className="icon-dots-three-vertical"
-                                        onClick={() => setIsFilterDialogOpen("name")}
+                                            className="icon-dots-three-vertical"
+                                            onClick={() => setIsFilterDialogOpen("name")}
                                     ></i>
                                     {isFilterDialogOpen === "name" && (
-                                        <div ref={filterDialogRef}>
-                                            <FilterDialog
-                                                options={filterOptions}
-                                                onFilterChange={handleFilterChange}
-                                                closeFilter={() => closeFilterDialog}
-                                            />
-                                        </div>
+                                            <div ref={filterDialogRef}>
+                                                <FilterDialog
+                                                        options={filterOptions}
+                                                        onFilterChange={handleFilterChange}
+                                                        closeFilter={() => closeFilterDialog}
+                                                />
+                                            </div>
                                     )}
                                 </div>
                             </th>
@@ -109,17 +110,17 @@ const Ansprechpartner = () => {
                                 <div className="body-normal__semibold">
                                     Werk
                                     <i
-                                        className="icon-dots-three-vertical"
-                                        onClick={() => setIsFilterDialogOpen("werk")}
+                                            className="icon-dots-three-vertical"
+                                            onClick={() => setIsFilterDialogOpen("werk")}
                                     ></i>
                                     {isFilterDialogOpen === "werk" && (
-                                        <div ref={filterDialogRef}>
-                                            <FilterDialog
-                                                options={filterOptions}
-                                                onFilterChange={handleFilterChange}
-                                                closeFilter={() => closeFilterDialog}
-                                            />
-                                        </div>
+                                            <div ref={filterDialogRef}>
+                                                <FilterDialog
+                                                        options={filterOptions}
+                                                        onFilterChange={handleFilterChange}
+                                                        closeFilter={() => closeFilterDialog}
+                                                />
+                                            </div>
                                     )}
                                 </div>
                             </th>
@@ -127,17 +128,17 @@ const Ansprechpartner = () => {
                                 <div className="body-normal__semibold">
                                     Telefon
                                     <i
-                                        className="icon-dots-three-vertical"
-                                        onClick={() => setIsFilterDialogOpen("telefon")}
+                                            className="icon-dots-three-vertical"
+                                            onClick={() => setIsFilterDialogOpen("telefon")}
                                     ></i>
                                     {isFilterDialogOpen === "telefon" && (
-                                        <div ref={filterDialogRef}>
-                                            <FilterDialog
-                                                options={filterOptions}
-                                                onFilterChange={handleFilterChange}
-                                                closeFilter={() => closeFilterDialog}
-                                            />
-                                        </div>
+                                            <div ref={filterDialogRef}>
+                                                <FilterDialog
+                                                        options={filterOptions}
+                                                        onFilterChange={handleFilterChange}
+                                                        closeFilter={() => closeFilterDialog}
+                                                />
+                                            </div>
                                     )}
                                 </div>
                             </th>
@@ -145,23 +146,23 @@ const Ansprechpartner = () => {
                                 <div className="body-normal__semibold">
                                     E-Mail
                                     <i
-                                        className="icon-dots-three-vertical"
-                                        onClick={() => setIsFilterDialogOpen("e-Mail")}
+                                            className="icon-dots-three-vertical"
+                                            onClick={() => setIsFilterDialogOpen("e-Mail")}
                                     ></i>
                                     {isFilterDialogOpen === "e-Mail" && (
-                                        <div ref={filterDialogRef}>
-                                            <FilterDialog
-                                                options={filterOptions}
-                                                onFilterChange={handleFilterChange}
-                                                closeFilter={() => closeFilterDialog}
-                                            />
-                                        </div>
+                                            <div ref={filterDialogRef}>
+                                                <FilterDialog
+                                                        options={filterOptions}
+                                                        onFilterChange={handleFilterChange}
+                                                        closeFilter={() => closeFilterDialog}
+                                                />
+                                            </div>
                                     )}
                                 </div>
                             </th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         <tr>
                             <td role="cell" className="body-normal__regular no-actions" data-label={"Funktion"}>
                                 Disponent
@@ -172,17 +173,32 @@ const Ansprechpartner = () => {
                             <td role="cell" className="body-normal__regular no-actions" data-label={"Werk"}>
                                 Hennigsdorf{" "}
                             </td>
-                            <td role="cell" className="body-normal__regular green-text no-actions" data-label={"Telefon"}>
-                                +49 1234 567897{" "}
+                            <td role="cell" className="body-normal__regular green-text no-actions"
+                                data-label={"Telefon"}>
+
+                                <span data-tooltip-id="tooltip"
+                                      data-tooltip-content="Telefonnummer anrufen"
+                                      data-tooltip-place="top"
+                                      data-tooltip-offset={10}
+                                >
+                                    +49 1234 567897{" "}
+                                </span>
                             </td>
-                            <td role="cell" className="body-normal__regular green-text no-actions" data-label={"E-Mail"}>
-                                ulf.reuther@thomas-gruppe.de
+                            <td role="cell" className="body-normal__regular green-text no-actions"
+                                data-label={"E-Mail"}>
+                                <span data-tooltip-id="tooltip"
+                                      data-tooltip-content="E-Mail senden"
+                                      data-tooltip-place="top"
+                                      data-tooltip-offset={10}
+                                >
+                                    ulf.reuther@thomas-gruppe.de
+                                </span>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
-            </div>
-        </>
+                        </tbody>
+                    </table>
+                </div>
+            </>
     );
 };
 export default Ansprechpartner;

@@ -131,7 +131,13 @@ function MainePlane() {
                                 >
                                     <td role="cell" className="body-normal__regular"
                                         onClick={() => handleRowClick(index)}>
-                                        <i className="icon-caret-right"></i>
+                                        <div data-tooltip-id="open-details"
+                                             data-tooltip-content={activeRowId === index ? "Details schließen" : "Details öffnen"}
+                                             data-tooltip-place="top"
+                                             data-tooltip-offset={10}
+                                        >
+                                            <i className="icon-caret-right"></i>
+                                        </div>
                                     </td>
                                     <td role="cell" className="body-normal__regular" data-label={"Name"}
                                         onClick={() => handleRowClick(index)}>
@@ -145,7 +151,6 @@ function MainePlane() {
                                         onClick={() => handleRowClick(index)}>
                                         PDF
                                     </td>
-
                                     <td role="cell" className="contents" data-label={"Kommentar"}
                                         onClick={() => handleRowClick(index)}>
                                         <span className="collapsed body-normal__regular">
@@ -162,7 +167,11 @@ function MainePlane() {
                                         01.07.2024
                                     </td>
                                     <td role="cell" className="table-list__button" data-label={" "}>
-                                        <div className="button button-gost button--big button--grey"
+                                        <div data-tooltip-id="edit-plan"
+                                             data-tooltip-content="Plan bearbeiten"
+                                             data-tooltip-place="top"
+                                             data-tooltip-offset={5}
+                                             className="button button-gost button--big button--grey"
                                              onClick={handleShow}>
                                             <i className="button__icon icon-note-pencil"></i>
                                         </div>
@@ -170,17 +179,15 @@ function MainePlane() {
                                                 <PlaneErsetzenModal
                                                         showPlaneErsetzenModal={showPlaneErsetzenModal}
                                                         setShowPlaneErsetzenModal={setShowPlaneErsetzenModal}
-                                                        itemIndex = {index}
+                                                        itemIndex={index}
                                                 />
                                         }
-                                        <div
-                                                data-tooltip-id="new-window"
-                                                data-tooltip-content="Datei wird Datei  wird in neuem Browserfenser geöffnet"
-                                                data-tooltip-place="top"
-                                                data-tooltip-offset={0}
-                                                className="button button-gost button--big button--grey">
+                                        <div data-tooltip-id="open-file"
+                                             data-tooltip-content="Datei in einem neuen Fenster öffnen"
+                                             data-tooltip-place="top"
+                                             data-tooltip-offset={5}
+                                             className="button button-gost button--big button--grey">
                                             <i className="button__icon icon-eye"></i>
-                                            <Tooltip id="new-window" className="custom-tooltip"/>
                                         </div>
                                     </td>
                                 </tr>
@@ -217,12 +224,16 @@ function MainePlane() {
                                     required
                             />
                             <span className="error-message caption__regular">
-              Error message
-            </span>
+                              Error message
+                            </span>
                         </div>
                     </div>
                     <CustomPagination data={mockData} setActivePage={(e) => setPage(e)}/>
                 </div>
+
+                <Tooltip id="edit-plan" className="custom-tooltip"/>
+                <Tooltip id="open-file" className="custom-tooltip"/>
+                <Tooltip id="open-details" className="custom-tooltip"/>
             </>
     );
 }

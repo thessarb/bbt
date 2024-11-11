@@ -6,6 +6,7 @@ import Select from "react-select";
 import FilterDialog from "src/helpers/TableFilters";
 // @ts-ignore
 import ReadMessageModal from "../../../Modal/ReadMessageModal";
+import {Tooltip} from "react-tooltip";
 
 const UnreadMessages = () => {
     const [page, setPage] = useState(1);
@@ -255,7 +256,12 @@ const UnreadMessages = () => {
                                 <i className="icon-warning"></i>
                             </td>
                             <td role="cell" className="table-list__button">
-                                <button onClick={handleShow} className='button button-gost button--big button--grey'>
+                                <button
+                                        data-tooltip-id="tooltip"
+                                        data-tooltip-content="Nachricht lesen"
+                                        data-tooltip-place="top"
+                                        data-tooltip-offset={10}
+                                        onClick={handleShow} className='button button-gost button--big button--grey'>
                                     <i className="button__icon icon-envelope-simple"></i>
                                 </button>
                                 {show && <ReadMessageModal show={show} setShow={setShow}/>}

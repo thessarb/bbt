@@ -12,14 +12,15 @@
 //  <Tooltip id="my-tooltip" className="custom-tooltip" />
 
 .modal,
+.body,
 .page-content {
   .custom-tooltip {
-    padding: $unit-0 ;
+    padding: $unit-0;
     font-family: $font--boxed-regular;
     font-weight: 500;
-    font-size: 10px ;
+    font-size: 10px;
     line-height: 12px;
-    color: $bbt-white ;
+    color: $bbt-white;
     border-radius: toRem(4);
     background: $bbt-secondary-grey;
   }

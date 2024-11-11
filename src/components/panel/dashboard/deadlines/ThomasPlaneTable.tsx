@@ -130,22 +130,21 @@ function ThomasPlaneTable() {
                             </td>
 
                             <td role="cell" className="table-list__button" data-label={" "}>
-                                <div    data-tooltip-id="approval"
-                                        data-tooltip-content="Freigabe erteilen"
-                                        data-tooltip-place="top"
-                                        data-tooltip-offset={0}
-                                        onClick={handleShow}
-                                        className="button button-gost button--big button--grey">
+                                <div data-tooltip-id="give-approval"
+                                     data-tooltip-content="Freigabe erteilen"
+                                     data-tooltip-place="top"
+                                     data-tooltip-offset={5}
+                                     onClick={handleShow}
+                                     className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-check-square-offset"></i>
-                                    <Tooltip id="approval" className="custom-tooltip"/>
+
                                 </div>
-                                <div    data-tooltip-id="view-data"
-                                        data-tooltip-content="Datei ansehen"
-                                        data-tooltip-place="top"
-                                        data-tooltip-offset={0}
-                                        className="button button-gost button--big button--grey">
+                                <div data-tooltip-id="open-file"
+                                     data-tooltip-content="Datei in einem neuen Fenster öffnen"
+                                     data-tooltip-place="top"
+                                     data-tooltip-offset={5}
+                                     className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-eye"></i>
-                                    <Tooltip id="view-data" className="custom-tooltip"/>
                                 </div>
 
                                 {showThomasModal && <FreigebenFormModal showThomasModal={showThomasModal}
@@ -190,6 +189,9 @@ function ThomasPlaneTable() {
                     </div>
                     <CustomPagination data={mockData} setActivePage={(e) => setPage(e)}/>
                 </div>
+
+                <Tooltip id="give-approval" className="custom-tooltip"/>
+                <Tooltip id="open-file" className="custom-tooltip"/>
             </>
     );
 }
