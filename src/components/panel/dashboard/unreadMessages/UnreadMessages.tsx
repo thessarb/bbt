@@ -27,184 +27,52 @@ const UnreadMessages = () => {
         setShow(true);
     };
 
-    // Filter
-    const [isFilterDialogOpen, setIsFilterDialogOpen] = useState<string | null>(
-            null
-    );
-
-    const [filterDialogPosition, setFilterDialogPosition] = useState<{
-        top: number;
-        left: number;
-    } | null>(null);
-
-    const [filterData, setFilterData] = useState<{
-        searchTerm: string;
-        order: string;
-        selectedOptions: string[];
-    }>({
-        searchTerm: "",
-        order: "asc",
-        selectedOptions: [],
-    });
-
-    const handleFilterChange = (filter: {
-        searchTerm: string;
-        order: string;
-        selectedOptions: string[];
-    }) => {
-        setFilterData(filter);
-    };
-
-    const filterOptions = ["Option 1", "Option 2"];
-
-    const closeFilterDialog = () => setIsFilterDialogOpen(null);
-
-    const filterDialogRef = useRef<HTMLDivElement | null>(null);
-
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (
-                    filterDialogRef.current &&
-                    !filterDialogRef.current.contains(event.target as Node)
-            ) {
-                closeFilterDialog();
-            }
-        };
-
-        if (isFilterDialogOpen) {
-            document.addEventListener("mousedown", handleClickOutside);
-        } else {
-            document.removeEventListener("mousedown", handleClickOutside);
-        }
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [isFilterDialogOpen]);
 
     return (
             <>
                 <div className="table-list">
                     <div className="table-list__title">
-          <span className="table-list__title-left subheading__regular">
-            Ungelesene Systemnachrichten
-          </span>
-                        <Link
-                                to={PATHS.messages}
-                                className="table-list__title-right button button--green button-gost"
-                        >
+                        <span className="table-list__title-left subheading__regular">
+                            Ungelesene Systemnachrichten
+                        </span>
+                        <Link to={PATHS.messages} className="table-list__title-right button button--green button-gost link-component">
                             Alle Systemnachrichten lesen
                         </Link>
                     </div>
                     <table role="table">
                         <thead>
-                        <tr role="row">
+                            <tr role="row">
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Auftrag
-                                    <i
-                                            className="icon-dots-three-vertical"
-                                            onClick={() => setIsFilterDialogOpen("auftrag")}
-                                    ></i>
-                                    {isFilterDialogOpen === "auftrag" && (
-                                            <div ref={filterDialogRef}>
-                                                <FilterDialog
-                                                        options={filterOptions}
-                                                        onFilterChange={handleFilterChange}
-                                                        closeFilter={() => closeFilterDialog}
-                                                />
-                                            </div>
-                                    )}{" "}
+                                    <i className="icon-caret-up-down"></i>
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Auftragsname
-                                    <i
-                                            className="icon-dots-three-vertical"
-                                            onClick={() => setIsFilterDialogOpen("auftragsname")}
-                                    ></i>
-                                    {isFilterDialogOpen === "auftragsname" && (
-                                            <div ref={filterDialogRef}>
-                                                <FilterDialog
-                                                        options={filterOptions}
-                                                        onFilterChange={handleFilterChange}
-                                                        closeFilter={() => closeFilterDialog}
-                                                />
-                                            </div>
-                                    )}{" "}
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Betreff
-                                    <i
-                                            className="icon-dots-three-vertical"
-                                            onClick={() => setIsFilterDialogOpen("betreff")}
-                                    ></i>
-                                    {isFilterDialogOpen === "betreff" && (
-                                            <div ref={filterDialogRef}>
-                                                <FilterDialog
-                                                        options={filterOptions}
-                                                        onFilterChange={handleFilterChange}
-                                                        closeFilter={() => closeFilterDialog}
-                                                />
-                                            </div>
-                                    )}{" "}
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Inhalt
-                                    <i
-                                            className="icon-dots-three-vertical"
-                                            onClick={() => setIsFilterDialogOpen("inhalt")}
-                                    ></i>
-                                    {isFilterDialogOpen === "inhalt" && (
-                                            <div ref={filterDialogRef}>
-                                                <FilterDialog
-                                                        options={filterOptions}
-                                                        onFilterChange={handleFilterChange}
-                                                        closeFilter={() => closeFilterDialog}
-                                                />
-                                            </div>
-                                    )}
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Datum
-                                    <i
-                                            className="icon-dots-three-vertical"
-                                            onClick={() => setIsFilterDialogOpen("datum")}
-                                    ></i>
-                                    {isFilterDialogOpen === "datum" && (
-                                            <div ref={filterDialogRef}>
-                                                <FilterDialog
-                                                        options={filterOptions}
-                                                        onFilterChange={handleFilterChange}
-                                                        closeFilter={() => closeFilterDialog}
-                                                />
-                                            </div>
-                                    )}
+                                    <i className="icon-caret-up-down"></i>
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Dringlichkeit
-                                    <i
-                                            className="icon-dots-three-vertical"
-                                            onClick={() => setIsFilterDialogOpen("dringlichkeit")}
-                                    ></i>
-                                    {isFilterDialogOpen === "dringlichkeit" && (
-                                            <div ref={filterDialogRef}>
-                                                <FilterDialog
-                                                        options={filterOptions}
-                                                        onFilterChange={handleFilterChange}
-                                                        closeFilter={() => closeFilterDialog}
-                                                />
-                                            </div>
-                                    )}
+                                    <i className="icon-caret-up-down"></i>
                                 </div>
                             </th>
                         </tr>
@@ -217,7 +85,9 @@ const UnreadMessages = () => {
                                     className="body-normal__regular"
                                     data-label={"Auftrag"}
                             >
-                                80700
+                                <Link to={`order-nr-here/80700`} className="link-component">
+                                    80700
+                                </Link>
                             </td>
                             <td
                                     role="cell"
