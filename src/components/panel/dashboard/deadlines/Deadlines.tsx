@@ -47,7 +47,6 @@ const Deadlines = () => {
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Auftragsname
-
                                 </div>
                             </th>
                             <th role="columnheader">
@@ -214,8 +213,8 @@ const Deadlines = () => {
                                     required
                             />
                             <span className="error-message caption__regular">
-              Error message
-            </span>
+                              Error message
+                            </span>
                         </div>
                     </div>
                     <CustomPagination data={mockData} setActivePage={(e) => setPage(e)}/>

@@ -17,6 +17,13 @@ const Messages = () => {
 
     return (
             <>
+                <div className="filter-container">
+                    <div className="button button-secondary button--grey button--big">
+                        <span className="button__text">Filter öffnen</span>
+                        <i className="button__icon icon-funnel-simple"></i>
+                    </div>
+                </div>
+
                 <div className="tab tab__messages">
                     <div className="tab__header">
                         <div className="tab__buttons">

@@ -538,12 +538,13 @@ const Bauabschnitte = () => {
                                         {item.rating}
                                     </td>
                                     <td
-                                        className={`body-normal__regular no-actions green-text centered ${
+                                        className={`body-normal__regular no-actions centered ${
                                             expandedRow === index ? "expanded" : ""
                                         }`}
                                         data-label={"Wunschlieferung"}
                                     >
-                                        {item.rating} <i className="icon-circle green-circle" />
+                                        <span className="link-component">{item.rating}</span>
+                                        <i className="icon-circle green-circle" />
                                     </td>
                                 </tr>
 
@@ -657,13 +658,15 @@ const Bauabschnitte = () => {
                                                                         {subItem.details}
                                                                     </td>
                                                                     <td
-                                                                        className={`body-normal__regular  ${
-                                                                            nestedExpandedRow[index] === nestedIndex
-                                                                                ? "expanded"
-                                                                                : ""
-                                                                        }`}
+                                                                            className={`body-normal__regular  ${
+                                                                                    nestedExpandedRow[index] === nestedIndex
+                                                                                            ? "expanded"
+                                                                                            : ""
+                                                                            }`}
                                                                     >
-                                                                        {subItem.details}
+                                                                        <span className="link-component">
+                                                                            {subItem.details}
+                                                                        </span>
                                                                     </td>
                                                                 </tr>
                                                                 {nestedExpandedRow[index] === nestedIndex && (

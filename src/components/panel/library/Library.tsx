@@ -3,6 +3,7 @@ import Select from "react-select";
 import CustomPagination from "src/helpers/CustomPaginate";
 import FileViewerModal from "../../Modal/FileViewerModal";
 import FilterDialog from "src/helpers/TableFilters";
+import PlaneHochladenModal from "../../Modal/PlaneHochladenModal";
 
 const Library = () => {
     const [page, setPage] = useState(1);
@@ -19,9 +20,9 @@ const Library = () => {
     };
 
     // Modal
-    const [show, setShow] = useState(false);
-    const handleShow = () => {
-        setShow(true);
+    const [showPlaneHochladenModal, setShowPlaneHochladenModal] = useState(false);
+    const handleShowPlaneHochladenModal = () => {
+        setShowPlaneHochladenModal(true);
     };
 
     const [isFilterDialogOpen, setIsFilterDialogOpen] = useState<string | null>(null);
@@ -70,69 +71,46 @@ const Library = () => {
     }, [isFilterDialogOpen]);
 
     return (
-        <>
-            <div className="library table-list table-list--secondary">
-                <table role="table">
-                    <thead>
+            <>
+                <div className="filter-container">
+                    <div className="button button-secondary button--grey button--big">
+                        <span className="button__text">Filter öffnen</span>
+                        <i className="button__icon icon-funnel-simple"></i>
+                    </div>
+                    <button onClick={handleShowPlaneHochladenModal}
+                            className="filter-container--new-plan button button--green button--big">
+                        <i className="button__icon icon-export"></i>
+                        <span className="button__text">Neue Dokument hochladen</span>
+                    </button>
+                    {showPlaneHochladenModal && <PlaneHochladenModal showPlaneHochladenModal={showPlaneHochladenModal}
+                                                                     setShowPlaneHochladenModal={setShowPlaneHochladenModal}/>}
+                </div>
+
+                <div className="library table-list table-list--secondary">
+                    <table role="table">
+                        <thead>
                         <tr role="row">
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Art
-                                    <i
-                                        className="icon-dots-three-vertical"
-                                        onClick={() => setIsFilterDialogOpen("art")}
-                                    ></i>
-                                    {isFilterDialogOpen === "art" && (
-                                        <div ref={filterDialogRef}>
-                                            <FilterDialog
-                                                options={filterOptions}
-                                                onFilterChange={handleFilterChange}
-                                                closeFilter={() => closeFilterDialog}
-                                            />
-                                        </div>
-                                    )}
+                                    <i className="icon-caret-up-down"></i>
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Datum
-                                    <i
-                                        className="icon-dots-three-vertical"
-                                        onClick={() => setIsFilterDialogOpen("datum")}
-                                    ></i>
-                                    {isFilterDialogOpen === "datum" && (
-                                        <div ref={filterDialogRef}>
-                                            <FilterDialog
-                                                options={filterOptions}
-                                                onFilterChange={handleFilterChange}
-                                                closeFilter={() => closeFilterDialog}
-                                            />
-                                        </div>
-                                    )}
+                                    <i className="icon-caret-up-down"></i>
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Beschreibung
-                                    <i
-                                        className="icon-dots-three-vertical"
-                                        onClick={() => setIsFilterDialogOpen("beschreibung")}
-                                    ></i>
-                                    {isFilterDialogOpen === "beschreibung" && (
-                                        <div ref={filterDialogRef}>
-                                            <FilterDialog
-                                                options={filterOptions}
-                                                onFilterChange={handleFilterChange}
-                                                closeFilter={() => closeFilterDialog}
-                                            />
-                                        </div>
-                                    )}
                                 </div>
                             </th>
                             <th role="columnheader"></th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         <tr>
                             <td role="cell" className="body-normal__regular" data-label={"Art"}>
                                 Montageanleitung
@@ -148,45 +126,44 @@ const Library = () => {
                                 <div className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-download-simple"></i>
                                 </div>
-                                <div onClick={handleShow} className="button button-gost button--big button--grey">
+                                <div className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-eye"></i>
                                 </div>
-                                {show && <FileViewerModal show={show} setShow={setShow} />}
                             </td>
                         </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div className="pagination-container">
-                <div className="form">
-                    <div className="form__field-select">
-                        <label
-                            htmlFor="pagination"
-                            className={`form__label caption__regular ${selectedOption ? "filled" : ""}`}
-                        >
-                            Einträge pro Seite
-                        </label>
-
-                        <Select
-                            id="pagination"
-                            classNamePrefix="react-select"
-                            className={`form__select body-normal__regular ${selectedOption ? "filled" : ""}`}
-                            placeholder={false}
-                            value={5}
-                            // options={options}
-                            isClearable={true}
-                            closeMenuOnSelect={true}
-                            name="company-type"
-                            isSearchable={true}
-                            required
-                        />
-                        <span className="error-message caption__regular">Error message</span>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
-                <CustomPagination data={mockData} setActivePage={(e) => setPage(e)} />
-            </div>
-        </>
+
+                <div className="pagination-container">
+                    <div className="form">
+                        <div className="form__field-select">
+                            <label
+                                    htmlFor="pagination"
+                                    className={`form__label caption__regular ${selectedOption ? "filled" : ""}`}
+                            >
+                                Einträge pro Seite
+                            </label>
+
+                            <Select
+                                    id="pagination"
+                                    classNamePrefix="react-select"
+                                    className={`form__select body-normal__regular ${selectedOption ? "filled" : ""}`}
+                                    placeholder={false}
+                                    value={5}
+                                    // options={options}
+                                    isClearable={true}
+                                    closeMenuOnSelect={true}
+                                    name="company-type"
+                                    isSearchable={true}
+                                    required
+                            />
+                            <span className="error-message caption__regular">Error message</span>
+                        </div>
+                    </div>
+                    <CustomPagination data={mockData} setActivePage={(e) => setPage(e)}/>
+                </div>
+            </>
     );
 };
 

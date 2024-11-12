@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Select from "react-select";
 import CustomPagination from "src/helpers/CustomPaginate";
 import PlaneHochladenModal from "src/components/Modal/PlaneHochladenModal";
+import {Link} from "react-router-dom";
 
 const Documents = () => {
     const [page, setPage] = useState(1);
@@ -24,13 +25,13 @@ const Documents = () => {
     };
 
     return (
-            <div className="document">
-                <div className="document__box">
-                    <div className="document__box--filter button button-secondary button--grey button--big">
+            <>
+                <div className="filter-container">
+                    <div className="button button-secondary button--grey button--big">
                         <span className="button__text">Filter öffnen</span>
                         <i className="button__icon icon-funnel-simple"></i>
                     </div>
-                    <button onClick={handleShow} className="document__box--new-plan button button--green button--big">
+                    <button onClick={handleShow} className="filter-container--new-plan button button--green button--big">
                         <i className="button__icon icon-export"></i>
                         <span className="button__text">Neuen Plan hochladen</span>
                     </button>
@@ -77,7 +78,9 @@ const Documents = () => {
                         <tbody>
                             <tr>
                             <td role="cell" className="body-normal__regular" data-label={"Auftrag"}>
-                                80700
+                                <Link to={`order-nr-here/80700`} className="link-component">
+                                    80700
+                                </Link>
                             </td>
                             <td role="cell" className="body-normal__regular" data-label={"Auftragsname"}>
                                 Web Hennickendorf - Test
@@ -101,58 +104,7 @@ const Documents = () => {
                                 </div>
                             </td>
                         </tr>
-                            <tr>
-                            <td role="cell" className="body-normal__regular" data-label={"Auftrag"}>
-                                80700
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Auftragsname"}>
-                                Web Hennickendorf - Test
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Art"}>
-                                Lieferschein
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Nummer"}>
-                                34567
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Datum"}>
-                                01.01.2024
-                            </td>
 
-                            <td role="cell" className="table-list__button" data-label={" "}>
-                                <div className="button button-gost button--big button--grey">
-                                    <i className="button__icon icon-download-simple"></i>
-                                </div>
-                                <div className="button button-gost button--big button--grey">
-                                    <i className="button__icon icon-eye"></i>
-                                </div>
-                            </td>
-                        </tr>
-                            <tr>
-                            <td role="cell" className="body-normal__regular" data-label={"Auftrag"}>
-                                80700
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Auftragsname"}>
-                                Web Hennickendorf - Test
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Art"}>
-                                Lieferschein
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Nummer"}>
-                                34567
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Datum"}>
-                                01.01.2024
-                            </td>
-
-                            <td role="cell" className="table-list__button" data-label={" "}>
-                                <div className="button button-gost button--big button--grey">
-                                    <i className="button__icon icon-download-simple"></i>
-                                </div>
-                                <div className="button button-gost button--big button--grey">
-                                    <i className="button__icon icon-eye"></i>
-                                </div>
-                            </td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -184,7 +136,7 @@ const Documents = () => {
                     </div>
                     <CustomPagination data={mockData} setActivePage={(e) => setPage(e)}/>
                 </div>
-            </div>
+            </>
     )
 };
 

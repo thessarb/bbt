@@ -152,22 +152,22 @@ const Orders = () => {
                             </th>
                             <th role="columnheader" className="no-actions">
                                 <div className="body-normal__semibold">
-                                    Name <i className="icon-caret-up-down" />
+                                    Name
                                 </div>
                             </th>
                             <th role="columnheader" className="no-actions">
                                 <div className="body-normal__semibold">
-                                    Adresse <i className="icon-caret-up-down" />
+                                    Adresse
                                 </div>
                             </th>
                             <th role="columnheader" className="no-actions">
                                 <div className="body-normal__semibold">
-                                    Verantwortlicher <i className="icon-caret-up-down" />
+                                    Verantwortlicher
                                 </div>
                             </th>
                             <th role="columnheader" className="no-actions">
                                 <div className="body-normal__semibold">
-                                    Bauabschnitte <i className="icon-caret-up-down" />
+                                    Bauabschnitte
                                 </div>
                             </th>
                             <th role="columnheader"></th>

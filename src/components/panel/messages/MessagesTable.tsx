@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import {Link} from "react-router-dom";
 
 const MessagesTable = () => {
     const [page, setPage] = useState(1);
@@ -78,23 +79,25 @@ const MessagesTable = () => {
                         <th role="columnheader">
                             <div className="body-normal__semibold">
                                 Auftrag
-                                <i className="icon-dots-three-vertical"></i>
+                                <i className="icon-caret-up-down"></i>
                             </div>
                         </th>
                         <th role="columnheader">
                             <div className="body-normal__semibold">
                                 Datum
-                                <i className="icon-dots-three-vertical"></i>
+                                <i className="icon-caret-up-down"></i>
                             </div>
                         </th>
                         <th role="columnheader">
                             <div className="body-normal__semibold">
                                 Betreff
+                                <i className="icon-caret-up-down"></i>
                             </div>
                         </th>
                         <th role="columnheader">
                             <div className="body-normal__semibold">
                                 Kritisch
+                                <i className="icon-caret-up-down"></i>
                             </div>
                         </th>
                         <th role="columnheader">
@@ -114,26 +117,28 @@ const MessagesTable = () => {
                                     key={index}
                                     ref={(el) => (rowRefs.current[index] = el)}
                                     className={`body-normal__regular ${activeRowId === index ? "active" : ""}`}
-                                    onClick={() => handleRowClick(index)}
+
                             >
-                                <td role="cell" className="body-normal__regular">
+                                <td role="cell" className="body-normal__regular" onClick={() => handleRowClick(index)}>
                                     <i className="icon-caret-right"></i>
                                 </td>
                                 <td role="cell" className="body-normal__regular" data-label={"Auftrag"}>
-                                    80700
+                                    <Link to={`order-nr-here/80700`} className="link-component">
+                                        80700
+                                    </Link>
                                 </td>
-                                <td role="cell" className="body-normal__regular" data-label={"Datum"}>
+                                <td role="cell" className="body-normal__regular" data-label={"Datum"} onClick={() => handleRowClick(index)}>
                                     01.01.2024
                                 </td>
-                                <td role="cell" className="body-normal__regular" data-label={"Betreff"}>
+                                <td role="cell" className="body-normal__regular" data-label={"Betreff"} onClick={() => handleRowClick(index)}>
                                     RE-234-24
                                 </td>
-                                <td role="cell" className="body-normal__regular" data-label={"Kritisch"}>
+                                <td role="cell" className="body-normal__regular" data-label={"Kritisch"} onClick={() => handleRowClick(index)}>
                                     <div className="button button-gost button--big button--red">
                                         <i className="button__icon icon-warning"></i>
                                     </div>
                                 </td>
-                                <td role="cell" className="contents" data-label={"Inhalt"}>
+                                <td role="cell" className="contents" data-label={"Inhalt"} onClick={() => handleRowClick(index)}>
                                 <span className="collapsed body-normal__regular">
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad commodi illum itaque nesciunt qui quis quod unde? Ab alias delectus, itaque libero porro quaerat, quam quos repudiandae saepe suscipit totam!
