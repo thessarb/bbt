@@ -10,6 +10,11 @@
     background-color: $bbt-grey-5;
     overflow-y: auto;
 
+    &:has(.confirmation--secondary) {
+      padding: $unit-1 !important;
+      margin-right: unset;
+    }
+
     // Custom scrollbar styling
     &::-webkit-scrollbar {
       width: toRem(6);
@@ -23,28 +28,6 @@
     &::-webkit-scrollbar-thumb {
       background-color: $bbt-grey-30;
       border-radius: toRem(3);
-    }
-  }
-
-  .second-confirmation {
-    display: flex;
-    flex-direction: column;
-    padding: $unit-1;
-    color: $bbt-text;
-
-    &__text {
-      margin-bottom: $unit-1;
-    }
-
-    &__admin {
-      &--email {
-        color: $bbt-primary-green;
-        margin-left: $unit-0;
-      }
-    }
-
-    &__upload-plan {
-      padding: $unit-1;
     }
   }
 }

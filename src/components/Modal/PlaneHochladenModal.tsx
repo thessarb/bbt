@@ -3,6 +3,8 @@ import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import ListNoResult from "src/components/panel/dashboard/deadlines/ListNoResult";
 import Confirmation from "src/components/Confirmation";
 import PlaneHochladenForm from "src/components/panel/documents/PlaneHochladenForm";
+import PlanConfirmation from "../PlanConfirmation";
+import PlanConfirmationError from "../PlanConfirmationError";
 
 interface PlaneHochladenModalProps {
     showPlaneHochladenModal: boolean;
@@ -20,6 +22,7 @@ function PlaneHochladenModal({showPlaneHochladenModal, setShowPlaneHochladenModa
         setTimeout(() => {
             setShowPlaneHochladenModal(false);
             setAnimateClose(false);
+            setConfirmation2(false);
         }, 350);
     };
 
@@ -29,6 +32,10 @@ function PlaneHochladenModal({showPlaneHochladenModal, setShowPlaneHochladenModa
             setConfirmation2(true);
             setLoading(false);
         }, 1000);
+    };
+
+    const handleConfirm = () => {
+        setConfirmation2(false); // This function sets loading to false
     };
 
     // Radio button upload
@@ -54,9 +61,7 @@ function PlaneHochladenModal({showPlaneHochladenModal, setShowPlaneHochladenModa
                                 <Confirmation/>
                         ) : (
                                 confirmation2 ? (
-                                        <div className="second-confirmation__upload-plan body-big__regular">
-                                            Ihr Plan wurde erfolgreich hochgeladen.
-                                        </div>
+                                        PlanConfirmation ? <PlanConfirmation /> : <PlanConfirmationError onGoBack={handleConfirm}/>
                                 ) : (
                                         PlaneHochladenForm ? < PlaneHochladenForm onUploadChange={handleUploadChange}/> : <ListNoResult/>
                                 )
