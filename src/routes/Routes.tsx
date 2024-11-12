@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { accessData, isLogged } from "../helpers/AppConfig";
 import PATHS from "./Paths";
+import ProtectedRoute from "./ProtectedRoute";
 
 import LoginView from "src/pages/authentication/LoginView";
 import ForgotPasswordView from "src/pages/authentication/ForgotPasswordView";
@@ -17,133 +18,134 @@ import MessagesView from "src/pages/messages/MessagesView";
 import UsersListView from "src/pages/userManagement/usersListView";
 
 type RouteItem = {
-  path: string;
-  element: JSX.Element;
+    path: string;
+    element: JSX.Element;
 };
 
 const checkPrivateRoutes = (route: JSX.Element): JSX.Element => {
-  if (!isLogged()) {
-    return <Navigate to={PATHS.login} />;
-  } else {
-    return route;
-  }
+    if (!isLogged()) {
+        return <Navigate to={PATHS.login} />;
+    } else {
+        return route;
+    }
 };
 
 const PrivateRoutes: RouteItem[] = [
-  {
-    path: PATHS.dashboard,
-    element: checkPrivateRoutes(
-      // <ProtectedRoute roles={[]}>
-        <DashboardView />
-      // </ProtectedRoute>
-    ),
-  },
+    {
+        path: PATHS.dashboard,
+        element: checkPrivateRoutes(
+            <ProtectedRoute roles={[3, 4]}>
+                <DashboardView />
+            </ProtectedRoute>
+        ),
+    },
 
-  {
-    path: PATHS.orders,
-    element: checkPrivateRoutes(
-      // <ProtectedRoute roles={[]}>
-        <OrdersView />
-      // </ProtectedRoute>
-    ),
-  },
-  {
-    path: PATHS.administration,
-    element: checkPrivateRoutes(
-      // <ProtectedRoute roles={[]}>
-        <AdministrationView />
-      // </ProtectedRoute>
-    ),
-  },
-  {
-    path: PATHS.administrationOrder,
-    element: checkPrivateRoutes(
-      // <ProtectedRoute roles={[]}>
-        <AdministrationOrderView />
-      // </ProtectedRoute>
-    ),
-  },
-  {
-    path: PATHS.documents,
-    element: checkPrivateRoutes(
-      // <ProtectedRoute roles={[]}>
-        <DocumentsView />
-      // </ProtectedRoute>
-    ),
-  },
-  {
-    path: PATHS.library,
-    element: checkPrivateRoutes(
-      // <ProtectedRoute roles={[]}>
-        <LibraryView />
-      // </ProtectedRoute>
-    ),
-  },
-  {
-    path: PATHS.messages,
-    element: checkPrivateRoutes(
-      // <ProtectedRoute roles={[]}>
-        <MessagesView />
-      // </ProtectedRoute>
-    ),
-  },
-  {
-    path: PATHS.userManagement,
-    element: checkPrivateRoutes(
-      // <ProtectedRoute roles={[]}>
-        <UsersListView />
-      // </ProtectedRoute>
-    ),
-  },
-  {
-    path: PATHS.orderDetails,
-    element: checkPrivateRoutes(
-      // <ProtectedRoute roles={[]}>
-        <OrderDetailsOverviewView />
-      // </ProtectedRoute>
-    ),
-  },
+    {
+        path: PATHS.orders,
+        element: checkPrivateRoutes(
+            <ProtectedRoute roles={[3, 4]}>
+                <OrdersView />
+            </ProtectedRoute>
+        ),
+    },
+    // {
+    //     path: PATHS.administration,
+    //     element: checkPrivateRoutes(
+    //         <ProtectedRoute roles={[1]}>
+    //             <AdministrationView />
+    //         </ProtectedRoute>
+    //     ),
+    // },
+    {
+        path: PATHS.administrationOrder,
+        element: checkPrivateRoutes(
+            <ProtectedRoute roles={[3, 4]}>
+                <AdministrationOrderView />
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: PATHS.documents,
+        element: checkPrivateRoutes(
+            <ProtectedRoute roles={[3, 4]}>
+                <DocumentsView />
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: PATHS.library,
+        element: checkPrivateRoutes(
+            <ProtectedRoute roles={[3, 4]}>
+                <LibraryView />
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: PATHS.messages,
+        element: checkPrivateRoutes(
+            <ProtectedRoute roles={[3, 4]}>
+                <MessagesView />
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: PATHS.userManagement,
+        element: checkPrivateRoutes(
+            <ProtectedRoute roles={[1]}>
+                <UsersListView />
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: PATHS.orderDetails,
+        element: checkPrivateRoutes(
+            <ProtectedRoute roles={[3, 4]}>
+                <OrderDetailsOverviewView />
+            </ProtectedRoute>
+        ),
+    },
 ];
 
 const checkPublicRoutes = (route: JSX.Element): JSX.Element => {
-  let path = "/";
+    let path = "/";
 
-  const roleId: number = Number(accessData("roleId"));
-  if (roleId) {
-    switch (roleId) {
-      case 1:
-        path = PATHS.dashboard;
-        break;
-      case 3:
-        path = PATHS.dashboard;
-        break;
+    const roleId: number = Number(accessData("roleId"));
+    if (roleId) {
+        switch (roleId) {
+            case 1:
+                path = PATHS.userManagement;
+                break;
+            case 3:
+            case 4:
+                path = PATHS.dashboard;
+                break;
+        }
     }
-  }
 
-  if (isLogged()) {
-    return <Navigate to={path} replace />;
-  } else {
-    return route;
-  }
+    if (isLogged()) {
+        return <Navigate to={path} replace />;
+    } else {
+        return route;
+    }
 };
 
 const PublicRoutes: RouteItem[] = [
-  {
-    path: PATHS.homepage,
-    element: <Navigate to={PATHS.login} />,
-  },
-  {
-    path: PATHS.login,
-    element: checkPublicRoutes(<LoginView />),
-  },
-  {
-    path: PATHS.forgotPassword,
-    element: checkPublicRoutes(<ForgotPasswordView />),
-  },
-  {
-    path: PATHS.resetPasswordParam,
-    element: checkPublicRoutes(<ResetPasswordView />),
-  },
+    {
+        path: PATHS.homepage,
+        element: <Navigate to={PATHS.login} />,
+    },
+    {
+        path: PATHS.login,
+        element: checkPublicRoutes(<LoginView />),
+    },
+    {
+        path: PATHS.forgotPassword,
+        element: checkPublicRoutes(<ForgotPasswordView />),
+    },
+    {
+        path: PATHS.resetPasswordParam,
+        element: checkPublicRoutes(<ResetPasswordView />),
+    },
 ];
 
 export { PrivateRoutes, PublicRoutes };

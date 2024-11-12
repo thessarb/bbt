@@ -1,19 +1,19 @@
 import React, { Fragment, useEffect, useState, useRef } from "react";
-// import { useUserdata } from "src/store/UserData";
+import { useUserdata } from "src/store/UserData";
 import SimpleBar from "simplebar-react";
 import SidebarButton from "./SidebarButton";
 import SidebarItems, { useSidebarItems } from "./SidebarItems";
 
 const SidebarContent: React.FC = () => {
-  // const userData = useUserdata((state: any) => state.userData);
-
+  const userData = useUserdata((state: any) => state.userData);
+  console.log(userData)
   const simplebarRef = useRef<any>();
   const sidebarRef = useRef<any>();
 
   const [sidebar, setSidebar] = useState(false);
 
   useEffect(() => {
-    // if (Object.keys(userData).length > 0) {
+    if (Object.keys(userData).length > 0) {
       setSidebar(true);
       if (sidebarRef.current.querySelector(".active")) {
         const activeItem = sidebarRef.current.querySelector(".active");
@@ -25,7 +25,7 @@ const SidebarContent: React.FC = () => {
         const btn = activeDiv.parentElement.querySelector("button");
         btn.classList.remove("collapsed");
       }
-    // }
+    }
   }, [sidebarRef.current, sidebar]);
 
   return (
@@ -34,11 +34,11 @@ const SidebarContent: React.FC = () => {
         <div id="sidebar-menu" ref={sidebarRef}>
            {useSidebarItems().map((item, index) => (
             <SidebarButton
-              key={index}
-              path={item.path ? item.path : ""}
-              icon={item.icon}
-              name={item.name}
-              // permissions={item.roles}
+            key={index}
+            path={item.path ? item.path : ""}
+            icon={item.icon}
+            name={item.name}
+            roles={item.roles}
             />
          ))}  
         </div>

@@ -2,6 +2,11 @@ import React, { Fragment, useState, useRef, useEffect } from "react";
 import PATHS from "src/routes/Paths";
 import NotificationDropdown from "../Common/NotificationDropdown";
 import UserDropdown from "../Common/UserDropdown";
+
+import { makeApiCall } from "src/api/apiRequests";
+import API_PATHS from "src/api/apiPaths";
+import API_HEADERS from "src/api/apiConfig";
+import * as AppConfig from "../../../helpers/AppConfig";
 interface HeaderProps {
   sidebarStatus: boolean;
   toggleSidebar: (status: boolean) => void;
@@ -20,6 +25,19 @@ const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
 
   const userBoxRef = useRef<HTMLDivElement | null>(null);
   const notificationRef = useRef<HTMLDivElement | null>(null);
+
+  const logout = async () => {
+    try {
+      await makeApiCall<ResponseType>(
+        API_PATHS.logout,
+        "POST",
+        API_HEADERS.authenticated
+      );
+      AppConfig.deleteAccessToken();
+    } catch (error: any) {
+      AppConfig.deleteAccessToken();
+    }
+  };
 
   const handleToggle = () => {
     toggleSidebar(!sidebarStatus);
@@ -120,7 +138,7 @@ const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
               <UserDropdown isOpen={isUserDropdownOpen} />
             </div>
             <div>
-              <button className="button button--big button--light-grey">
+              <button className="button button--big button--light-grey" onClick={() => logout()}>
                 <i className="button__icon icon-sign-out"></i>
               </button>
             </div>
