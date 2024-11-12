@@ -3,6 +3,7 @@ import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import ListNoResult from "src/components/panel/dashboard/deadlines/ListNoResult";
 import PlaneErsetzenForm from "./PlaneErsetzenForm";
 import LoadingComponent from "../../../LoadingComponent";
+import PlanConfirmation from "../../../PlanConfirmation";
 
 interface PlaneErsetzenModalProps {
     showPlaneErsetzenModal: boolean;
@@ -49,9 +50,7 @@ const  PlaneErsetzenModal: React.FC<PlaneErsetzenModalProps>  = ({showPlaneErset
                                 <LoadingComponent/>
                         ) : (
                                 confirmation2 ? (
-                                        <div className="second-confirmation__upload-plan body-big__regular">
-                                            Ihr Plan wurde erfolgreich hochgeladen.
-                                        </div>
+                                        <PlanConfirmation />
                                 ) : (
                                         PlaneErsetzenForm ? < PlaneErsetzenForm  itemIndex={itemIndex}/> : <ListNoResult/>
                                 )

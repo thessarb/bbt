@@ -3,6 +3,7 @@ import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import ThomasPlaneTable from "./ThomasPlaneTable";
 import MainePlane from "./MainePlane";
 import ListNoResult from "./ListNoResult";
+import PlaneHochladenModal from "../../../Modal/PlaneHochladenModal";
 
 interface PlanViewModalProps {
     show: boolean;
@@ -18,6 +19,12 @@ function PlanViewModal({ show, setShow }: PlanViewModalProps) {
             setShow(false);
             setAnimateClose(false);
         }, 350);
+    };
+
+    // Modal Plane Hochladen
+    const [showPlaneHochladenModal, setShowPlaneHochladenModal] = useState(false);
+    const handlePlaneHochladenModalShow = () => {
+        setShowPlaneHochladenModal(true);
     };
 
     // Tab
@@ -65,21 +72,26 @@ function PlanViewModal({ show, setShow }: PlanViewModalProps) {
                                 </button>
                             </div>
                             {activeTab === 1 && (
-                                <button className="tab__upload button button--big button--green">
-                                    <i className="button__icon icon-file-arrow-up"></i>
-                                    <span className="button__text">Neuen Plan hochladen</span>
-                                </button>
+                                    <>
+                                        <button onClick={handlePlaneHochladenModalShow} className="tab__upload button button--big button--green">
+                                            <i className="button__icon icon-file-arrow-up"></i>
+                                            <span className="button__text">Neuen Plan hochladen</span>
+                                        </button>
+                                        {showPlaneHochladenModal && <PlaneHochladenModal
+                                            showPlaneHochladenModal={showPlaneHochladenModal}
+                                            setShowPlaneHochladenModal={setShowPlaneHochladenModal} />}
+                                    </>
                             )}
                         </div>
 
                         <div className="tab__content">
                             {visibleTab === 0 && (
-                                <div
-                                    id="thomas-plane"
-                                    className={`tab__content-item ${activeTab === 0 ? "active" : "close"}`}
-                                >
-                                    {ThomasPlaneTable ? <ThomasPlaneTable /> : <ListNoResult />}
-                                </div>
+                                    <div
+                                            id="thomas-plane"
+                                            className={`tab__content-item ${activeTab === 0 ? "active" : "close"}`}
+                                    >
+                                        {ThomasPlaneTable ? <ThomasPlaneTable/> : <ListNoResult/>}
+                                    </div>
                             )}
 
                             {visibleTab === 1 && (

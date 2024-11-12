@@ -1,5 +1,5 @@
 .order-text {
-  margin-top: toRem(27);
+  margin-top: $unit-3;
   margin-bottom: $unit-5;
 }
 
@@ -241,6 +241,32 @@
       &--big-filter {
         top: 14%;
       }
+    }
+  }
+}
+
+.baubschnitte-legend {
+  padding-bottom: $unit-3;
+  &__erläuterungen {
+    padding-bottom: toRem(9);
+    .body-small__regular {
+      font-size: 13px;
+      line-height: 16.25px;
+      font-weight: 500;
+      color: $bbt-secondary-grey;
+      margin-right: toRem(5);
+    }
+  }
+  &__explanation {
+    display: inline-flex;
+    gap: toRem(17);
+    .caption__regular {
+      display: flex;
+      align-items: center;
+    }
+    .icon-circle {
+      margin-left: unset;
+      margin-right: toRem(5);
     }
   }
 }
