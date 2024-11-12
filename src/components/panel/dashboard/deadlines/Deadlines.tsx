@@ -85,7 +85,8 @@ const Deadlines = () => {
             Fristen
           </span>
                     </div>
-                    <table role="table">
+                    <div className="table-list__scroll">
+                        <table role="table">
                         <thead>
                         <tr role="row">
                             <th role="columnheader">
@@ -360,6 +361,7 @@ const Deadlines = () => {
 
                         </tbody>
                     </table>
+                    </div>
                 </div>
                 <div className="pagination-container">
                     <div className="form">

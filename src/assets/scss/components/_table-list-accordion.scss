@@ -1,0 +1,135 @@
+.table-list-accordion {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	margin-bottom: $unit-2;
+	background-color: transparent;
+	box-shadow: none;
+	width: 100%;
+	flex-wrap: wrap;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+
+	table {
+		overflow: visible;
+
+		thead {
+			background-color: $bbt-grey-10;
+			border: 1px solid $bbt-grey-10;
+			border-bottom: toRem(10) solid $bbt-grey-5;
+			border-radius: 4px;
+
+			tr {
+				th {
+					height: $unit-5;
+					padding: 0 $unit-factor;
+					text-align: left;
+
+					&:first-child {
+						border-top-left-radius: toRem(4);
+						border-bottom-left-radius: toRem(4);
+					}
+
+					&:last-child {
+						border-top-right-radius: toRem(4);
+						border-bottom-right-radius: toRem(4);
+					}
+
+					.body-normal__semibold {
+						display: flex;
+						gap: $unit-0;
+						color: $bbt-secondary-grey;
+					}
+
+					.icon-dots-three-vertical,
+					.icon-caret-up-down {
+						background-color: $bbt-grey-50;
+						cursor: pointer;
+					}
+
+					@media (min-width: 992px) {
+						min-width: toRem(120);
+						&:first-child,
+						&:last-child {
+							min-width: auto;
+						}
+					}
+				}
+			}
+		}
+
+		tbody {
+			tr {
+				background-color: $bbt-white;
+				border: toRem(1) solid $bbt-white;
+				position: relative;
+				box-shadow: 2px 4px 8px 0 rgba(0, 0, 0, 0.1);
+
+				&:last-child {
+					border-bottom: none;
+				}
+
+				&.expanded {
+					border-top: none;
+					border-bottom: none;
+					border-right: none;
+					border-left: toRem(1) solid $bbt-primary-green;
+				}
+
+				&:last-child {
+					border-bottom: toRem(1) solid $bbt-grey-10;
+				}
+
+				td {
+					padding: toRem(16) $unit-factor;
+					margin: auto;
+					text-align: left !important;
+					color: $bbt-text;
+					word-break: break-word;
+					background-color: $bbt-white;
+
+					.icon-caret-right {
+						font-size: 18px;
+						background-color: $bbt-secondary-grey;
+						cursor: pointer;
+						text-align: center;
+						width: toRem(24);
+						display: inline-block;
+						transition: transform 0.4s ease, background-color 0.4s ease;
+					}
+
+					.icon-caret-right.expanded {
+						transform: rotate(90deg);
+						background-color: $bbt-primary-green;
+					}
+
+					&.centered {
+						align-items: center;
+						display: flex;
+					}
+
+					&.expanded {
+						border: none;
+						height: toRem(70);
+						color: $bbt-primary-green;
+						transition: all 0.3s ease;
+					}
+
+					&.green-text {
+						color: $bbt-primary-green;
+						text-decoration: underline;
+					}
+
+					&.addition-checkbox {
+						display: flex;
+						gap: $unit-factor;
+					}
+				}
+			}
+
+			.spacer {
+				height: $unit-factor;
+			}
+		}
+	}
+}
