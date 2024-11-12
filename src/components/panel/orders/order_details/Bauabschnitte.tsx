@@ -795,7 +795,7 @@ const Bauabschnitte = () => {
                 </table>
             </div>
 
-            <div className="pagination-container">
+            <div className="pagination-container pagination-container__bottom">
                 <div className="form">
                     <div className="form__field-select">
                         <label
@@ -822,6 +822,19 @@ const Bauabschnitte = () => {
                     </div>
                 </div>
                 <CustomPagination data={mockData} setActivePage={(e) => setPage(e)} />
+            </div>
+            <div className="baubschnitte-legend">
+                <div className="baubschnitte-legend__erläuterungen">
+                    <span className="body-small__regular">Erläuterungen</span>
+                </div>
+                <div className="baubschnitte-legend__explanation">
+                    <span className="caption__regular">
+                        <i className="icon-circle green-circle" /> Wunschlieferdatum bestätigt
+                    </span>
+                    <span className="caption__regular">
+                        <i className="icon-circle yellow-circle" /> Voraussichtlicher Liefertermin
+                    </span>
+                </div>
             </div>
         </>
     );
