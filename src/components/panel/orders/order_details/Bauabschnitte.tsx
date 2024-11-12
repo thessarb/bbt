@@ -867,24 +867,12 @@ const Bauabschnitte = () => {
                     </table>
                 </div>
 
-                <div className="pagination-container">
+                <div className="pagination-container pagination-container__bottom">
                     <div className="form">
                         <div className="form__field-select">
-                            <label
-                                    htmlFor="pagination"
-                                    className={`form__label caption__regular ${selectedOption ? "filled" : ""}`}
-                            >
+                            <label htmlFor="pagination" className={`form__label caption__regular ${selectedOption ? "filled" : ""}`}>
                                 Einträge pro Seite
                             </label>
-            <div className="pagination-container pagination-container__bottom">
-                <div className="form">
-                    <div className="form__field-select">
-                        <label
-                            htmlFor="pagination"
-                            className={`form__label caption__regular ${selectedOption ? "filled" : ""}`}
-                        >
-                            Einträge pro Seite
-                        </label>
 
                             <Select
                                     id="pagination"
@@ -904,39 +892,21 @@ const Bauabschnitte = () => {
                     </div>
                     <CustomPagination data={mockData} setActivePage={(e) => setPage(e)}/>
                 </div>
-            </>
-                        <Select
-                            id="pagination"
-                            classNamePrefix="react-select"
-                            className={`form__select body-normal__regular ${selectedOption ? "filled" : ""}`}
-                            placeholder={false}
-                            value={5}
-                            // options={options}
-                            isClearable={true}
-                            closeMenuOnSelect={true}
-                            name="company-type"
-                            isSearchable={true}
-                            required
-                        />
-                        <span className="error-message caption__regular">Error message</span>
+
+                <div className="baubschnitte-legend">
+                    <div className="baubschnitte-legend__erläuterungen">
+                        <span className="body-small__regular">Erläuterungen</span>
+                    </div>
+                    <div className="baubschnitte-legend__explanation">
+                        <span className="caption__regular">
+                            <i className="icon-circle green-circle"/> Wunschlieferdatum bestätigt
+                        </span>
+                        <span className="caption__regular">
+                            <i className="icon-circle yellow-circle"/> Voraussichtlicher Liefertermin
+                        </span>
                     </div>
                 </div>
-                <CustomPagination data={mockData} setActivePage={(e) => setPage(e)} />
-            </div>
-            <div className="baubschnitte-legend">
-                <div className="baubschnitte-legend__erläuterungen">
-                    <span className="body-small__regular">Erläuterungen</span>
-                </div>
-                <div className="baubschnitte-legend__explanation">
-                    <span className="caption__regular">
-                        <i className="icon-circle green-circle" /> Wunschlieferdatum bestätigt
-                    </span>
-                    <span className="caption__regular">
-                        <i className="icon-circle yellow-circle" /> Voraussichtlicher Liefertermin
-                    </span>
-                </div>
-            </div>
-        </>
+            </>
     );
 };
 export default Bauabschnitte;
