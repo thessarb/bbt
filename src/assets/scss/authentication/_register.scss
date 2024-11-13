@@ -14,6 +14,15 @@
     box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.10);
   }
 
+  .input-field {
+    &__content {
+      &:-webkit-autofill {
+        -webkit-text-fill-color: $bbt-text !important;
+        -webkit-box-shadow: 0 0 0px 1000px $bbt-white inset !important;
+      }
+    }
+  }
+
   &__title {
     display: block;
     margin-bottom: toRem(15);

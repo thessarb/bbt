@@ -18,6 +18,7 @@ import DocumentsView from "src/pages/documents/DocumentsView";
 import LibraryView from "src/pages/library/LibraryView";
 import MessagesView from "src/pages/messages/MessagesView";
 import UsersListView from "src/pages/userManagement/usersListView";
+import RegisterConfirmationView from "../pages/authentication/RegisterConfirmationView";
 
 type RouteItem = {
     path: string;
@@ -143,6 +144,10 @@ const PublicRoutes: RouteItem[] = [
     {
         path: PATHS.inviteRequest,
         element: checkPublicRoutes(<RegisterView />),
+    },
+    {
+        path: PATHS.registerConfirmation,
+        element: checkPublicRoutes(<RegisterConfirmationView />),
     },
     {
         path: PATHS.forgotPassword,

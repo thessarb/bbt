@@ -3,6 +3,7 @@ const PATHS = {
 
   login: "/login",
   inviteRequest: "/neuer-zugang",
+  registerConfirmation: "/neuer-zugang-bestatigung",
   forgotPassword: "/passwort-vergessen",
   resetPasswordParam: "/passwort-zurücksetzen/:token",
   thankYou: "/vielen-dank",

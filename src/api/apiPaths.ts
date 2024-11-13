@@ -4,6 +4,7 @@ import { apiBaseUrl } from "../helpers/AppConfig";
 const API_PATHS = {
   login: apiBaseUrl + "login",
   logout: apiBaseUrl + "logout",
+  register: apiBaseUrl + "request-access",
   profile: apiBaseUrl + "user/profile",
   forgotPassword: apiBaseUrl + "forgot-password/check/user",
   resetPassword: (token: string | undefined) =>
