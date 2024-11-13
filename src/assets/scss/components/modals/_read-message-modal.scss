@@ -1,11 +1,25 @@
 // Read Message Modal
 .read-message {
+  .modal-title {
+    display: flex;
+    align-items: center;
+    gap: $unit-1;
+
+    .subheading__regular {
+      color: $bbt-grey-50;
+    }
+  }
+
   .modal-body {
     padding: $unit-1 0;
     background-color: $bbt-grey-5;
   }
 
   &__description {
+    display: flex;
+    flex-direction: column;
+    gap: $unit-1;
     padding: $unit-1;
+    color: $bbt-text;
   }
 }
