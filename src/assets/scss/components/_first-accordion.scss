@@ -1,0 +1,119 @@
+.first-accordion {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	margin-bottom: $unit-factor;
+	background-color: transparent;
+	box-shadow: none;
+
+	table {
+		overflow: visible;
+
+		thead {
+			border-bottom: none;
+
+			tr {
+				background-color: $bbt-grey-10;
+				border: 1px solid $bbt-grey-10;
+				border-radius: 4px;
+				box-shadow: none;
+
+				th {
+					height: $unit-5;
+					padding: 0 $unit-factor;
+					text-align: left;
+					height: toRem(36);
+
+					&:first-child {
+						border-top-left-radius: toRem(4);
+						border-bottom-left-radius: toRem(4);
+					}
+
+					&:last-child {
+						border-top-right-radius: toRem(4);
+						border-bottom-right-radius: toRem(4);
+					}
+
+					.body-normal__semibold {
+						display: flex;
+						gap: $unit-0;
+						color: $bbt-secondary-grey;
+					}
+
+					.icon-dots-three-vertical,
+					.icon-caret-up-down {
+						background-color: $bbt-grey-50;
+						cursor: pointer;
+					}
+
+					@media (min-width: 992px) {
+						min-width: toRem(120);
+						&:first-child,
+						&:last-child {
+							min-width: auto;
+						}
+					}
+				}
+			}
+		}
+
+		tbody {
+			tr {
+				background-color: $bbt-white;
+				border: toRem(1) solid $bbt-white;
+				box-shadow: none;
+
+				&.opened {
+					border-top: none;
+					border-bottom: none;
+					border-right: none;
+					border-left: toRem(1) solid $bbt-primary-green;
+				}
+
+				td {
+					margin: auto;
+					text-align: left !important;
+					color: $bbt-text;
+					background-color: $bbt-white;
+					height: toRem(38);
+					border-bottom: 1px solid $bbt-grey-20;
+					padding: $unit-factor;
+					min-width: auto;
+					word-break: break-word;
+
+					.body-normal__regular {
+						font-size: 13px;
+					}
+
+					.icon-caret-right {
+						font-size: 18px;
+						background-color: $bbt-secondary-grey;
+						cursor: pointer;
+						text-align: center;
+						width: toRem(24);
+						display: inline-block;
+						transition: transform 0.3s ease, background-color 0.3s ease;
+					}
+
+					.icon-caret-right.expanded {
+						transform: rotate(90deg);
+						background-color: $bbt-primary-green;
+					}
+
+					&.expanded {
+						border: none;
+						height: toRem(70);
+						color: $bbt-primary-green;
+						transition: all 0.3s ease;
+						box-shadow: none;
+					}
+
+					&.green-text {
+						color: $bbt-primary-green;
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+	}
+}

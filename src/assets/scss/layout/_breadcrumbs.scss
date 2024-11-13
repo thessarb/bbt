@@ -8,14 +8,28 @@
   }
 
   &__home {
+    position: relative;
     text-align: left;
     color: $bbt-primary-green;
     font-family: $font--boxed-regular;
     font-weight: 500;
     font-size: 14px;
     line-height: 22px;
-	text-decoration: underline;
     cursor: pointer;
+    padding-bottom: toRem(2);
+
+    &:after {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      content: "";
+      width: 100%;
+      border-bottom: 1px solid $bbt-primary-green;
+    }
+  }
+
+  &__slant {
+    color: $bbt-grey-40;
   }
 
   &__title {

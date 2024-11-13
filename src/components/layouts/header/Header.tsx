@@ -3,6 +3,10 @@ import PATHS from "src/routes/Paths";
 import NotificationDropdown from "../Common/NotificationDropdown";
 import UserDropdown from "../Common/UserDropdown";
 import {Tooltip} from "react-tooltip";
+import { makeApiCall } from "src/api/apiRequests";
+import API_PATHS from "src/api/apiPaths";
+import API_HEADERS from "src/api/apiConfig";
+import * as AppConfig from "../../../helpers/AppConfig";
 
 interface HeaderProps {
     sidebarStatus: boolean;
@@ -20,6 +24,19 @@ const Header: React.FC<HeaderProps> = ({sidebarStatus, toggleSidebar}) => {
 
     const userBoxRef = useRef<HTMLDivElement | null>(null);
     const notificationRef = useRef<HTMLDivElement | null>(null);
+
+    const logout = async () => {
+        try {
+          await makeApiCall<ResponseType>(
+            API_PATHS.logout,
+            "POST",
+            API_HEADERS.authenticated
+          );
+          AppConfig.deleteAccessToken();
+        } catch (error: any) {
+          AppConfig.deleteAccessToken();
+        }
+    };
 
     const handleToggle = () => {
         toggleSidebar(!sidebarStatus);
@@ -70,67 +87,67 @@ const Header: React.FC<HeaderProps> = ({sidebarStatus, toggleSidebar}) => {
         };
     }, [isNotificationDropdownOpen, isUserDropdownOpen]);
 
-    return (
-            <Fragment>
-                <header id="page-topbar">
-                    <div className="navbar-header">
-                        <div>
-                            <div className="navbar-header__navbar-brand-box navbar-header__logo">
-                                <a href={PATHS.dashboard} className="logo" rel="noreferrer">
-                                    <img src={ThommasGroupeLogo} alt="ThommasGroupe"/>
-                                </a>
-                            </div>
-                        </div>
-                        <div className="navbar-header__hamburger">
-                            <div>
-                                <button
-                                        data-tooltip-id="tooltip"
-                                        data-tooltip-content="Menü öffnen"
-                                        data-tooltip-place="top"
-                                        data-tooltip-offset={5}
-                                        className="button button--big button--green"
-                                        onClick={handleToggle}
-                                >
-                                    <i className="button__icon icon-list"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="navbar-header__main-navbar">
-                            <div
-                                    data-tooltip-id="tooltip"
-                                    data-tooltip-content="Benachrichtigungen öffnen"
-                                    data-tooltip-place="top"
-                                    data-tooltip-offset={0}
-                                    className="navbar-header__notification"
-                                    ref={notificationRef}
-                                    onClick={handleNotificationClick}
-                            >
-                                <i className="icon-notification"></i>
-                                {isNotificationDropdownOpen && <div className="overlay"/>}
-                                <NotificationDropdown isOpen={isNotificationDropdownOpen}/>
-                            </div>
-                            <div className="navbar-header__user-box" ref={userBoxRef} onClick={handleUserBoxClick}>
-                                <span className="caption__regular navbar-header__user-text">Eingeloggt als:</span>
-                                <span className="body-normal__regular">Vorname Nachname</span>
-                                {isUserDropdownOpen && <div className="overlay"/>}
-                                <UserDropdown isOpen={isUserDropdownOpen}/>
-                            </div>
-                            <div>
-                                <button
-                                        data-tooltip-id="tooltip"
-                                        data-tooltip-content="Abmelden"
-                                        data-tooltip-place="top"
-                                        data-tooltip-offset={5}
-                                        className="button button--big button--light-grey"
-                                >
-                                    <i className="button__icon icon-sign-out"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </header>
-            </Fragment>
-    );
+  return (
+    <Fragment>
+      <header id="page-topbar">
+        <div className="navbar-header">
+          <div>
+            <div className="navbar-header__navbar-brand-box navbar-header__logo">
+              <a href={PATHS.dashboard} className="logo" rel="noreferrer">
+                <img src={ThommasGroupeLogo} alt="ThommasGroupe" />
+              </a>
+            </div>
+          </div>
+          <div className="navbar-header__hamburger">
+            <div>
+              <button
+                data-tooltip-id="tooltip"
+                data-tooltip-content="Menü öffnen"
+                data-tooltip-place="top"
+                data-tooltip-offset={5}
+                className="button button--big button--green"
+                onClick={handleToggle}
+              >
+                <i className="button__icon icon-list"></i>
+              </button>
+            </div>
+          </div>
+          <div className="navbar-header__main-navbar">
+            <div
+              data-tooltip-id="tooltip"
+              data-tooltip-content="Benachrichtigungen öffnen"
+              data-tooltip-place="top"
+              data-tooltip-offset={0}
+              className="navbar-header__notification"
+              ref={notificationRef}
+              onClick={handleNotificationClick}
+            >
+              <i className="icon-notification"></i>
+              {isNotificationDropdownOpen && <div className="overlay" />}
+              <NotificationDropdown isOpen={isNotificationDropdownOpen} />
+            </div>
+            <div className="navbar-header__user-box" ref={userBoxRef} onClick={handleUserBoxClick}>
+              <span className="caption__regular navbar-header__user-text">Eingeloggt als:</span>
+              <span className="body-normal__regular">Vorname Nachname</span>
+              {isUserDropdownOpen && <div className="overlay" />}
+              <UserDropdown isOpen={isUserDropdownOpen} />
+            </div>
+            <div>
+              <button
+                      data-tooltip-id="tooltip"
+                      data-tooltip-content="Abmelden"
+                      data-tooltip-place="top"
+                      data-tooltip-offset={5}
+                      className="button button--big button--light-grey"
+                      onClick={() => logout()}>
+                <i className="button__icon icon-sign-out"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+    </Fragment>
+  );
 };
 
 export default Header;

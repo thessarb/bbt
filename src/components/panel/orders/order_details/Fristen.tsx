@@ -69,8 +69,9 @@ const Fristen = () => {
     return (
         <>
             <div className="table-list">
-                <table role="table">
-                    <thead>
+                <div className="table-list__scroll">
+                    <table role="table">
+                        <thead>
                         <tr role="row">
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
@@ -217,8 +218,8 @@ const Fristen = () => {
                                 </div>
                             </th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         <tr>
                             <td role="cell" className="body-normal__regular" data-label={"Ba"}>
                                 1
@@ -253,11 +254,12 @@ const Fristen = () => {
                                         onClick={handleShow} className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-note-pencil"></i>
                                 </button>
-                                {show && <PlanViewModal show={show} setShow={setShow} />}
+                                {show && <PlanViewModal show={show} setShow={setShow}/>}
                             </td>
                         </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div className="pagination-container">
                 <div className="form">
@@ -285,7 +287,7 @@ const Fristen = () => {
                         <span className="error-message caption__regular">Error message</span>
                     </div>
                 </div>
-                <CustomPagination data={mockData} setActivePage={(e) => setPage(e)} />
+                <CustomPagination data={mockData} setActivePage={(e) => setPage(e)}/>
             </div>
         </>
     );
