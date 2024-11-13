@@ -1,15 +1,25 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import PATHS from "../../routes/Paths";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import { makeApiCall } from "src/api/apiRequests";
+import API_PATHS from "src/api/apiPaths";
+import API_HEADERS from "src/api/apiConfig";
+import PATHS from "src/routes/Paths";
+import ValidationMessage from "src/helpers/ValidationMessage";
 
 const ThommasGroupeLogo = require("../../assets/images/logo/Group.svg").default;
 
 const ResetPassword: React.FC = () => {
-    const [password, setPassword] = useState<string>("");
+    const { token } = useParams();
+    const navigate = useNavigate();
+    const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState<string>("");
     const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
     const [isRepeatPasswordValid, setIsRepeatPasswordValid] = useState<boolean>(false);
-    const navigate = useNavigate();
+    const [userName, setUserName] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [validations, setValidations] = useState<Record<string, string>>({});
 
     // Function to validate the password based on specified criteria
     const validatePassword = (password: string): boolean => {
@@ -18,6 +28,47 @@ const ResetPassword: React.FC = () => {
         const hasLowerCase = /[a-z]/.test(password);
         const hasSpecialChar = /[§$%&@+?]/.test(password);
         return minLength && hasUpperCase && hasLowerCase && hasSpecialChar;
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response: any = await makeApiCall<ResponseType>(
+                    API_PATHS.resetPassword(token),
+                    "GET",
+                    API_HEADERS.unauthenticated
+                );
+
+                setUserName(response.user.email);
+            } catch (error: any) {
+                navigate(PATHS.login);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const resetPassword = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+        e.preventDefault();
+
+        const passwordData = {
+            password: password,
+            password_confirmation: confirmPassword,
+        };
+
+        try {
+            const response: any = await makeApiCall<ResponseType>(
+                API_PATHS.resetPassword(token),
+                "POST",
+                API_HEADERS.unauthenticated,
+                passwordData
+            );
+            navigate(PATHS.login);
+        } catch (error: any) {
+            if (error.response.status === 404 || error.response.status === 422) {
+                setValidations(error.response.data);
+            }
+        }
     };
 
     // Handler for password input change
@@ -56,12 +107,13 @@ const ResetPassword: React.FC = () => {
                     <img src={ThommasGroupeLogo} alt="ThommasGroupe" />
                 </div>
 
-                <span className="reset-password__title body-normal__semibold">
-                    Passwort zurücksetzen
-                </span>
+                <span className="reset-password__title body-normal__semibold">Passwort zurücksetzen</span>
 
                 <div className="form__field reset-password__password">
-                    <label htmlFor="password-login" className={`form__label caption__regular ${password ? "filled" : ""}`}>
+                    <label
+                        htmlFor="password-login"
+                        className={`form__label caption__regular ${password ? "filled" : ""}`}
+                    >
                         Passwort
                         <span className="form__label-mandatory">*</span>
                     </label>
@@ -78,7 +130,10 @@ const ResetPassword: React.FC = () => {
                 </div>
 
                 <div className="form__field reset-password__password-repeat">
-                    <label htmlFor="password-repeat" className={`form__label caption__regular ${repeatPassword ? "filled" : ""}`}>
+                    <label
+                        htmlFor="password-repeat"
+                        className={`form__label caption__regular ${repeatPassword ? "filled" : ""}`}
+                    >
                         Passwort wiederholen
                         <span className="form__label-mandatory">*</span>
                     </label>
@@ -91,7 +146,9 @@ const ResetPassword: React.FC = () => {
                         type="password"
                         required
                     />
-                    {!isRepeatPasswordValid && <span className="error-message caption__regular">Passwörter stimmen nicht überein</span>}
+                    {!isRepeatPasswordValid && (
+                        <span className="error-message caption__regular">Passwörter stimmen nicht überein</span>
+                    )}
                 </div>
 
                 <p className="reset-password__content-title body-small__regular">
@@ -100,17 +157,31 @@ const ResetPassword: React.FC = () => {
 
                 <div className="reset-password__content">
                     <div className={`reset-password__content-item ${password.length >= 8 ? "valid" : ""}`}>
-                        <i className={`reset-password__content-icon ${password.length >= 8 ? "icon-check" : "icon-x"}`}></i>
+                        <i
+                            className={`reset-password__content-icon ${password.length >= 8 ? "icon-check" : "icon-x"}`}
+                        ></i>
                         <p className="reset-password__content-amount caption__regular">Mindestlänge 8 Zeichen</p>
                     </div>
-                    <div className={`reset-password__content-item ${/[A-Z]/.test(password) && /[a-z]/.test(password) ? "valid" : ""}`}>
-                        <i className={`reset-password__content-icon ${/[A-Z]/.test(password) && /[a-z]/.test(password) ? "icon-check" : "icon-x"}`}></i>
+                    <div
+                        className={`reset-password__content-item ${
+                            /[A-Z]/.test(password) && /[a-z]/.test(password) ? "valid" : ""
+                        }`}
+                    >
+                        <i
+                            className={`reset-password__content-icon ${
+                                /[A-Z]/.test(password) && /[a-z]/.test(password) ? "icon-check" : "icon-x"
+                            }`}
+                        ></i>
                         <p className="reset-password__content-amount caption__regular">Groß- und Kleinbuchstaben</p>
                     </div>
                     <div className={`reset-password__content-item ${/[§$%&@+?]/.test(password) ? "valid" : ""}`}>
-                        <i className={`reset-password__content-icon ${/[§$%&@+?]/.test(password) ? "icon-check" : "icon-x"}`}></i>
+                        <i
+                            className={`reset-password__content-icon ${
+                                /[§$%&@+?]/.test(password) ? "icon-check" : "icon-x"
+                            }`}
+                        ></i>
                         <p className="reset-password__content-amount caption__regular">
-                            Verwenden Sie ein Sonderzeichen: §$%&@+?
+                            Verwenden Sie ein Sonderzeichen: <strong>§$%&@+?</strong>
                         </p>
                     </div>
                 </div>

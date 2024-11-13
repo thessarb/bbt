@@ -3,6 +3,7 @@ import CustomPagination from "src/helpers/CustomPaginate";
 import Select from "react-select";
 import FilterDialog from "src/helpers/TableFilters";
 import PlanViewModal from "../../dashboard/deadlines/PlanViewModal";
+import {Tooltip} from "react-tooltip";
 
 const Fristen = () => {
     const [page, setPage] = useState(1);
@@ -39,8 +40,9 @@ const Fristen = () => {
     return (
         <>
             <div className="table-list">
-                <table role="table">
-                    <thead>
+                <div className="table-list__scroll">
+                    <table role="table">
+                        <thead>
                         <tr role="row">
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
@@ -84,8 +86,8 @@ const Fristen = () => {
                                 </div>
                             </th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         <tr>
                             <td role="cell" className="body-normal__regular" data-label={"Ba"}>
                                 1
@@ -112,14 +114,20 @@ const Fristen = () => {
                                 <i className="icon-warning"></i>
                             </td>
                             <td role="cell" className="table-list__button" data-label={" "}>
-                                <button onClick={handleShow} className="button button-gost button--big button--grey">
+                                <button
+                                        data-tooltip-id="tooltip"
+                                        data-tooltip-content="Plan bearbeiten"
+                                        data-tooltip-place="top"
+                                        data-tooltip-offset={5}
+                                        onClick={handleShow} className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-note-pencil"></i>
                                 </button>
-                                {show && <PlanViewModal show={show} setShow={setShow} />}
+                                {show && <PlanViewModal show={show} setShow={setShow}/>}
                             </td>
                         </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div className="pagination-container">
                 <div className="form">
@@ -147,7 +155,7 @@ const Fristen = () => {
                         <span className="error-message caption__regular">Error message</span>
                     </div>
                 </div>
-                <CustomPagination data={mockData} setActivePage={(e) => setPage(e)} />
+                <CustomPagination data={mockData} setActivePage={(e) => setPage(e)}/>
             </div>
         </>
     );

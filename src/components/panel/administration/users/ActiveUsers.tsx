@@ -3,6 +3,7 @@ import CustomPagination from "../../../../helpers/CustomPaginate";
 import React, {useState} from "react";
 import DeleteUsersModal from "./DeleteUsersModal";
 import EditUserModal from "./EditUserModal";
+import {Tooltip} from "react-tooltip";
 
 const ActiveUsers = () => {
     // Pagination
@@ -104,13 +105,21 @@ const ActiveUsers = () => {
                             </td>
 
                             <td role="cell" className="table-list__button" data-label={" "}>
-                                <div onClick={handleShowEditModal} className="button button-gost button--big button--grey">
+                                <div data-tooltip-id="tooltip"
+                                     data-tooltip-content="Nutzer bearbeiten"
+                                     data-tooltip-place="top"
+                                     data-tooltip-offset={5}
+                                     onClick={handleShowEditModal} className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-note-pencil"></i>
                                 </div>
                                 {showEditModal && <EditUserModal showEditModal={showEditModal} setShowEditModal={setShowEditModal}/>}
 
-                                <div onClick={handleShow} className="button button-gost button--big button--grey">
-                                    <i className="button__icon icon-trash"></i>
+                                <div data-tooltip-id="tooltip"
+                                     data-tooltip-content="Nutzer deaktivieren"
+                                     data-tooltip-place="top"
+                                     data-tooltip-offset={5}
+                                     onClick={handleShow} className="button button-gost button--big button--grey">
+                                    <i className="button__icon icon-user-minus"></i>
                                 </div>
                                 {show && <DeleteUsersModal show={show} setShow={setShow}/>}
                             </td>

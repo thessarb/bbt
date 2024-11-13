@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
-import Select, { components } from "react-select";
-import { useNavigate } from "react-router";
+import React, {useState, useEffect, useRef} from "react";
+import Select, {components} from "react-select";
+import {useNavigate} from "react-router";
 import CustomPagination from "src/helpers/CustomPaginate";
 import FilterDialog from "src/helpers/TableFilters";
 import PATHS from "src/routes/Paths";
+import {Tooltip} from "react-tooltip";
 
 const Orders = () => {
     const navigate = useNavigate();
@@ -44,10 +45,10 @@ const Orders = () => {
     });
 
     const options = [
-        { value: "1", label: "Auftragsnummer 1" },
-        { value: "2", label: "Auftragsname 2" },
-        { value: "3", label: "Auftragsname 3" },
-        { value: "4", label: "Auftragsnummer 4" },
+        {value: "1", label: "Auftragsnummer 1"},
+        {value: "2", label: "Auftragsname 2"},
+        {value: "3", label: "Auftragsname 3"},
+        {value: "4", label: "Auftragsnummer 4"},
     ];
 
     const filterOption = (option: any, inputValue: any) => {
@@ -59,7 +60,7 @@ const Orders = () => {
     };
 
     const CustomOption = (props: any) => {
-        const { data, selectProps } = props;
+        const {data, selectProps} = props;
         const inputValue = selectProps.inputValue || "";
 
         const highlightMatch = (label: string) => {
@@ -67,13 +68,13 @@ const Orders = () => {
             const parts = label.split(regex);
 
             return parts.map((part, index) =>
-                part.toLowerCase() === inputValue.toLowerCase() ? (
-                    <span key={index} style={{ color: "#43B02A" }}>
+                    part.toLowerCase() === inputValue.toLowerCase() ? (
+                            <span key={index} style={{color: "#43B02A"}}>
                         {part}
                     </span>
-                ) : (
-                    part
-                )
+                    ) : (
+                            part
+                    )
             );
         };
 
@@ -122,32 +123,32 @@ const Orders = () => {
     }, []);
 
     return (
-        <>
-            <div className="custom-select-wrapper">
-                <i className="icon-magnifying-glass" />
-                <Select
-                    options={options}
-                    placeholder="Tragen Sie die Auftragsnummer oder -name ein."
-                    className="custom-select"
-                    classNamePrefix="react-select"
-                    components={{ Option: CustomOption }}
-                    onChange={handleSelect}
-                    filterOption={filterOption}
-                    isClearable
-                    isSearchable
-                />
-            </div>
-            <p className="order-text subheading__regular">
-                Bitte tragen Sie Ihre Auftragsnummer oder -name ein und bestätigen Sie mit ENTER oder wählen einen
-                Auftrag aus der Liste aus.
-            </p>
-            <div className="table-list table-list--secondary">
-                <table role="table">
-                    <thead>
+            <>
+                <div className="custom-select-wrapper">
+                    <i className="icon-magnifying-glass"/>
+                    <Select
+                            options={options}
+                            placeholder="Tragen Sie die Auftragsnummer oder -name ein."
+                            className="custom-select"
+                            classNamePrefix="react-select"
+                            components={{Option: CustomOption}}
+                            onChange={handleSelect}
+                            filterOption={filterOption}
+                            isClearable
+                            isSearchable
+                    />
+                </div>
+                <p className="order-text subheading__regular">
+                    Bitte tragen Sie Ihre Auftragsnummer oder -name ein und bestätigen Sie mit ENTER oder wählen einen
+                    Auftrag aus der Liste aus.
+                </p>
+                <div className="table-list table-list--secondary">
+                    <table role="table">
+                        <thead>
                         <tr role="row">
                             <th role="columnheader" className="no-actions">
                                 <div className="body-normal__semibold">
-                                    Auftrag <i className="icon-caret-up-down" />
+                                    Auftrag <i className="icon-caret-up-down"/>
                                 </div>
                             </th>
                             <th role="columnheader" className="no-actions">
@@ -172,8 +173,8 @@ const Orders = () => {
                             </th>
                             <th role="columnheader"></th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         <tr>
                             <td role="cell" className="body-normal__regular no-actions" data-label={"Auftrag"}>
                                 80700
@@ -192,46 +193,49 @@ const Orders = () => {
                                 8
                             </td>
                             <td role="cell" className="table-list__button no-actions" data-label={" "}>
-                                <div
-                                    className="button button-gost button--big button--grey"
-                                    onClick={() => navigate(PATHS.orderDetails)}
+                                <div data-tooltip-id="tooltip"
+                                     data-tooltip-content="Auftrag anzeigen"
+                                     data-tooltip-place="top"
+                                     data-tooltip-offset={10}
+                                     className="button button-gost button--big button--grey"
+                                     onClick={() => navigate(PATHS.orderDetails)}
                                 >
                                     <i className="button__icon icon-arrow-right"></i>
                                 </div>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div className="pagination-container">
-                <div className="form">
-                    <div className="form__field-select">
-                        <label
-                            htmlFor="pagination"
-                            className={`form__label caption__regular ${selectedOption ? "filled" : ""}`}
-                        >
-                            Einträge pro Seite
-                        </label>
-
-                        <Select
-                            id="pagination"
-                            classNamePrefix="react-select"
-                            className={`form__select body-normal__regular ${selectedOption ? "filled" : ""}`}
-                            placeholder={false}
-                            value={5}
-                            // options={options}
-                            isClearable={true}
-                            closeMenuOnSelect={true}
-                            name="company-type"
-                            isSearchable={true}
-                            required
-                        />
-                        <span className="error-message caption__regular">Error message</span>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
-                <CustomPagination data={mockData} setActivePage={(e) => setPage(e)} />
-            </div>
-        </>
+                <div className="pagination-container">
+                    <div className="form">
+                        <div className="form__field-select">
+                            <label
+                                    htmlFor="pagination"
+                                    className={`form__label caption__regular ${selectedOption ? "filled" : ""}`}
+                            >
+                                Einträge pro Seite
+                            </label>
+
+                            <Select
+                                    id="pagination"
+                                    classNamePrefix="react-select"
+                                    className={`form__select body-normal__regular ${selectedOption ? "filled" : ""}`}
+                                    placeholder={false}
+                                    value={5}
+                                    // options={options}
+                                    isClearable={true}
+                                    closeMenuOnSelect={true}
+                                    name="company-type"
+                                    isSearchable={true}
+                                    required
+                            />
+                            <span className="error-message caption__regular">Error message</span>
+                        </div>
+                    </div>
+                    <CustomPagination data={mockData} setActivePage={(e) => setPage(e)}/>
+                </div>
+            </>
     );
 };
 

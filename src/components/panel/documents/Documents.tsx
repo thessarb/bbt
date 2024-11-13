@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Select from "react-select";
 import CustomPagination from "src/helpers/CustomPaginate";
 import PlaneHochladenModal from "src/components/Modal/PlaneHochladenModal";
+import {Tooltip} from "react-tooltip";
 import {Link} from "react-router-dom";
 
 const Documents = () => {
@@ -41,7 +42,7 @@ const Documents = () => {
                 <div className="table-list table-list--secondary">
                     <table role="table">
                         <thead>
-                            <tr role="row">
+                        <tr role="row">
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Auftrag
@@ -96,10 +97,18 @@ const Documents = () => {
                             </td>
 
                             <td role="cell" className="table-list__button" data-label={" "}>
-                                <div className="button button-gost button--big button--grey">
+                                <div data-tooltip-id="tooltip"
+                                     data-tooltip-content="Datei herunterladen"
+                                     data-tooltip-place="top"
+                                     data-tooltip-offset={5}
+                                     className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-download-simple"></i>
                                 </div>
-                                <div className="button button-gost button--big button--grey">
+                                <div data-tooltip-id="tooltip"
+                                     data-tooltip-content="Datei in einem neuen Fenster öffnen"
+                                     data-tooltip-place="top"
+                                     data-tooltip-offset={5}
+                                     className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-eye"></i>
                                 </div>
                             </td>
@@ -113,7 +122,7 @@ const Documents = () => {
                     <div className="form">
                         <div className="form__field-select">
                             <label htmlFor="pagination"
-                                    className={`form__label caption__regular ${selectedOption ? "filled" : ""}`}
+                                   className={`form__label caption__regular ${selectedOption ? "filled" : ""}`}
                             >
                                 Einträge pro Seite
                             </label>

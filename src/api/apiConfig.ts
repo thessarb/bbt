@@ -2,15 +2,16 @@ import * as AppConfig from "../helpers/AppConfig";
 
 const API_HEADERS = {
   unauthenticated: {
-    "api-key": AppConfig.apiKey,
+    "Accept-Language": "de",
   },
   authenticated: {
     authorization: `Bearer ${AppConfig.accessData("token")}`,
-    "api-key": AppConfig.apiKey,
+    "Accept-Language": "de",
+
   },
   blob: {
     Authorization: `Bearer ${AppConfig.accessData("token")}`,
-    "api-key": AppConfig.apiKey,
+    "Accept-Language": "de",
     responseType: "blob",
   },
 };

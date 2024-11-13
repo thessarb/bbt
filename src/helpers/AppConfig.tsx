@@ -2,7 +2,7 @@ import CryptoJS from "crypto-js";
 import PATHS from "src/routes/Paths";
 
 // Api key from backend
-export const apiKey = process.env.REACT_APP_API_KEY;
+// export const apiKey = process.env.REACT_APP_API_KEY;
 
 // Api base url
 export const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
@@ -14,7 +14,7 @@ export const authKey = process.env.REACT_APP_AUTH_KEY_TOKEN;
 export const baseUrl = process.env.REACT_APP_BASE_URL;
 
 // Pusher key
-export const pusherKey = process.env.REACT_APP_PUSHER_KEY;
+// export const pusherKey = process.env.REACT_APP_PUSHER_KEY;
 
 
 // Set access token

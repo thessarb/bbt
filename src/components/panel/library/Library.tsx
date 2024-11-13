@@ -4,6 +4,7 @@ import CustomPagination from "src/helpers/CustomPaginate";
 import FileViewerModal from "../../Modal/FileViewerModal";
 import FilterDialog from "src/helpers/TableFilters";
 import PlaneHochladenModal from "../../Modal/PlaneHochladenModal";
+import {Tooltip} from "react-tooltip";
 
 const Library = () => {
     const [page, setPage] = useState(1);
@@ -123,10 +124,18 @@ const Library = () => {
                             </td>
 
                             <td role="cell" className="table-list__button" data-label={" "}>
-                                <div className="button button-gost button--big button--grey">
+                                <div data-tooltip-id="tooltip"
+                                     data-tooltip-content="Datei herunterladen"
+                                     data-tooltip-place="top"
+                                     data-tooltip-offset={5}
+                                     className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-download-simple"></i>
                                 </div>
-                                <div className="button button-gost button--big button--grey">
+                                <div data-tooltip-id="tooltip"
+                                     data-tooltip-content="Datei in einem neuen Fenster öffnen"
+                                     data-tooltip-place="top"
+                                     data-tooltip-offset={5}
+                                     className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-eye"></i>
                                 </div>
                             </td>

@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {useState, useEffect, useRef} from "react";
+import {Tooltip} from "react-tooltip";
 import {Link} from "react-router-dom";
 
 const MessagesTable = () => {
@@ -117,10 +118,15 @@ const MessagesTable = () => {
                                     key={index}
                                     ref={(el) => (rowRefs.current[index] = el)}
                                     className={`body-normal__regular ${activeRowId === index ? "active" : ""}`}
-
                             >
                                 <td role="cell" className="body-normal__regular" onClick={() => handleRowClick(index)}>
-                                    <i className="icon-caret-right"></i>
+                                    <div data-tooltip-id="tooltip"
+                                         data-tooltip-content={activeRowId === index ? "Details schließen" : "Details öffnen"}
+                                         data-tooltip-place="top"
+                                         data-tooltip-offset={10}
+                                    >
+                                        <i className="icon-caret-right"></i>
+                                    </div>
                                 </td>
                                 <td role="cell" className="body-normal__regular" data-label={"Auftrag"}>
                                     <Link to={`order-nr-here/80700`} className="link-component">
@@ -149,7 +155,11 @@ const MessagesTable = () => {
                                 </span>
                                 </td>
                                 <td role="cell" className="table-list__button" data-label={" "}>
-                                    <div className="button button-gost button--big button--grey">
+                                    <div data-tooltip-id="tooltip"
+                                         data-tooltip-content="Datei herunterladen"
+                                         data-tooltip-place="top"
+                                         data-tooltip-offset={5}
+                                         className="button button-gost button--big button--grey">
                                         <i className="button__icon icon-download-simple"></i>
                                     </div>
                                 </td>

@@ -6,6 +6,7 @@ import Select from "react-select";
 import FilterDialog from "src/helpers/TableFilters";
 // @ts-ignore
 import ReadMessageModal from "../../../Modal/ReadMessageModal";
+import {Tooltip} from "react-tooltip";
 
 const UnreadMessages = () => {
     const [page, setPage] = useState(1);
@@ -29,16 +30,17 @@ const UnreadMessages = () => {
 
 
     return (
-            <>
-                <div className="table-list">
-                    <div className="table-list__title">
-                        <span className="table-list__title-left subheading__regular">
-                            Ungelesene Systemnachrichten
-                        </span>
-                        <Link to={PATHS.messages} className="table-list__title-right button button--green button-gost link-component">
-                            Alle Systemnachrichten lesen
-                        </Link>
-                    </div>
+        <>
+            <div className="table-list">
+                <div className="table-list__title">
+                    <span className="table-list__title-left subheading__regular">
+                    Ungelesene Systemnachrichten
+                    </span>
+                    <Link to={PATHS.messages} className="table-list__title-right button button--green button-gost">
+                        Alle Systemnachrichten lesen
+                    </Link>
+                </div>
+                <div className="table-list__scroll">
                     <table role="table">
                         <thead>
                             <tr role="row">
@@ -125,7 +127,11 @@ const UnreadMessages = () => {
                                 <i className="icon-warning"></i>
                             </td>
                             <td role="cell" className="table-list__button">
-                                <button onClick={handleShow} className='button button-gost button--big button--grey'>
+                                <button data-tooltip-id="tooltip"
+                                        data-tooltip-content="Nachricht lesen"
+                                        data-tooltip-place="top"
+                                        data-tooltip-offset={10}
+                                        onClick={handleShow} className='button button-gost button--big button--grey'>
                                     <i className="button__icon icon-envelope-simple"></i>
                                 </button>
                                 {show && <ReadMessageModal show={show} setShow={setShow}/>}
@@ -134,41 +140,42 @@ const UnreadMessages = () => {
                         </tbody>
                     </table>
                 </div>
-                <div className="pagination-container">
-                    <div className="form">
-                        <div className="form__field-select">
-                            <label
-                                    htmlFor="pagination"
-                                    className={`form__label caption__regular ${
-                                            selectedOption ? "filled" : ""
-                                    }`}
-                            >
-                                Einträge pro Seite
-                            </label>
+            </div>
+            <div className="pagination-container">
+                <div className="form">
+                    <div className="form__field-select">
+                        <label
+                                htmlFor="pagination"
+                                className={`form__label caption__regular ${
+                                        selectedOption ? "filled" : ""
+                                }`}
+                        >
+                            Einträge pro Seite
+                        </label>
 
-                            <Select
-                                    id="pagination"
-                                    classNamePrefix="react-select"
-                                    className={`form__select body-normal__regular ${
-                                            selectedOption ? "filled" : ""
-                                    }`}
-                                    placeholder={false}
-                                    value={5}
-                                    // options={options}
-                                    isClearable={true}
-                                    closeMenuOnSelect={true}
-                                    name="company-type"
-                                    isSearchable={true}
-                                    required
-                            />
-                            <span className="error-message caption__regular">
-                                Error message
-                            </span>
-                        </div>
+                        <Select
+                                id="pagination"
+                                classNamePrefix="react-select"
+                                className={`form__select body-normal__regular ${
+                                        selectedOption ? "filled" : ""
+                                }`}
+                                placeholder={false}
+                                value={5}
+                                // options={options}
+                                isClearable={true}
+                                closeMenuOnSelect={true}
+                                name="company-type"
+                                isSearchable={true}
+                                required
+                        />
+                        <span className="error-message caption__regular">
+                            Error message
+                        </span>
                     </div>
-                    <CustomPagination data={mockData} setActivePage={(e) => setPage(e)}/>
                 </div>
-            </>
+                <CustomPagination data={mockData} setActivePage={(e) => setPage(e)}/>
+            </div>
+        </>
     );
 };
 

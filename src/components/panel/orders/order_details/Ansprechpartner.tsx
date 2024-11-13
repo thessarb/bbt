@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {useState, useEffect, useRef} from "react";
 import Select from "react-select";
-import { useNavigate } from "react-router";
+import {useNavigate} from "react-router";
 import CustomPagination from "src/helpers/CustomPaginate";
 import FilterDialog from "src/helpers/TableFilters";
 import PATHS from "src/routes/Paths";
+import {Tooltip} from "react-tooltip";
 import {Link} from "react-router-dom";
 
 const Ansprechpartner = () => {
@@ -29,10 +30,10 @@ const Ansprechpartner = () => {
     });
 
     const options = [
-        { value: "1", label: "Auftragsnummer 1" },
-        { value: "2", label: "Auftragsname 2" },
-        { value: "3", label: "Auftragsname 3" },
-        { value: "4", label: "Auftragsnummer 4" },
+        {value: "1", label: "Auftragsnummer 1"},
+        {value: "2", label: "Auftragsname 2"},
+        {value: "3", label: "Auftragsname 3"},
+        {value: "4", label: "Auftragsnummer 4"},
     ];
 
     return (
@@ -80,12 +81,20 @@ const Ansprechpartner = () => {
                                 Hennigsdorf{" "}
                             </td>
                             <td role="cell" className="body-normal__regular no-actions" data-label={"Telefon"}>
-                                <span  className="link-component">
+                                <span data-tooltip-id="tooltip"
+                                      data-tooltip-content="Telefonnummer anrufen"
+                                      data-tooltip-place="top"
+                                      data-tooltip-offset={10}
+                                      className="link-component">
                                     +49 1234 567897{" "}
                                 </span>
                             </td>
                             <td role="cell" className="body-normal__regular no-actions" data-label={"E-Mail"}>
-                                <span className="link-component">
+                                <span data-tooltip-id="tooltip"
+                                      data-tooltip-content="E-Mail senden"
+                                      data-tooltip-place="top"
+                                      data-tooltip-offset={10}
+                                      className="link-component">
                                     ulf.reuther@thomas-gruppe.de
                                 </span>
                             </td>

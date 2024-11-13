@@ -35,7 +35,7 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
       ".button-gost"
     );
     if (!isButtonClick) {
-      event.stopPropagation(); 
+      event.stopPropagation();
     }
   };
 
@@ -43,47 +43,39 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
     setHasOpened(true);
   }
 
-  return (
-    <div
-      ref={dropdownRef}
-      onClick={handleClickInside}
-      className={`user-info-dropdown user-info-dropdown__notification ${
-        isOpen ? "open" : hasOpened ? "close" : ""
-      }`}
-    >
-      <div className="user-info-dropdown__header heading__semibold">
-        <span>Systemnachrichten</span>
-        <button
-          className="button button-gost button--big button--grey"
-          onClick={() => setToggleHandle(true)}
+    return (
+        <div
+            ref={dropdownRef}
+            onClick={handleClickInside}
+            className={`headerdropdown headerdropdown__notifications ${
+                isOpen ? "open" : hasOpened ? "close" : ""
+            }`}
         >
-          <i className="button__icon icon-x"></i>
-        </button>
-      </div>
-      <div className="user-info-dropdown__body">
-        {notificationsList.map((notification, index) => (
-          <div key={notification.id}>
-            <p className="user-info-dropdown__user caption__regular">
-              {notification.time}
-            </p>
-            <p className="user-info-dropdown__user-name body-big__medium">
-              Auftrag 80700
-            </p>
-            <span className="user-info-dropdown__message body-normal__regular">
-              {notification.text}
-            </span>
-            {index < notificationsList.length - 1 && <hr />}
-          </div>
-        ))}
-        <button
-          className="button button--big button--green user-info-dropdown__button-end"
-          onClick={() => navigate(PATHS.messages)}
-        >
-          <span className="button__text">Alle Systemnachrichten ansehen</span>
-        </button>
-      </div>
-    </div>
-  );
+            <div className="headerdropdown__header heading__semibold">
+                <span>Systemnachrichten</span>
+                <button className="button button-gost button--big button--grey" onClick={() => setToggleHandle(true)}>
+                    <i className="button__icon icon-x"></i>
+                </button>
+            </div>
+            <div className="headerdropdown__body">
+              {notificationsList.map((notification, index) => (
+                  <div className="headerdropdown__notification" key={notification.id}>
+                      <span className="headerdropdown__subtitle caption__regular">
+                        {notification.time}
+                      </span>
+                    <span className="headerdropdown__title body-big__medium">Auftrag 80700</span>
+                    <p className="headerdropdown__message body-normal__regular">
+                      {notification.text}
+                    </p>
+                    {index < notificationsList.length - 1}
+                  </div>
+              ))}
+                <button className="button button--big button--green headerdropdown__button-end" onClick={() => navigate(PATHS.messages)}>
+                    <span className="button__text">Alle Systemnachrichten ansehen</span>
+                </button>
+            </div>
+        </div>
+    );
 };
 
 export default NotificationDropdown;
