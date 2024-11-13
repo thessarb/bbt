@@ -5,7 +5,7 @@ interface ValidationMessageProps {
 }
 
 const ValidationMessage: React.FC<ValidationMessageProps> = ({ message }) => {
-  return <span className="caption__regular error-message">{message}</span>;
+  return <div className="caption__regular input-field--error-message">{message}</div>;
 };
 
 export default ValidationMessage;

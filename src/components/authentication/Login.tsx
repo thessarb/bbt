@@ -15,6 +15,7 @@ const Login = () => {
     const [isEmailFilled, setIsEmailFilled] = useState(false);
     const [isPasswordFilled, setIsPasswordFilled] = useState(false);
     const [validations, setValidations] = useState<Record<string, string>>({});
+    const [t, setT] = useState("");
 
     const userLogin = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
@@ -51,6 +52,8 @@ const Login = () => {
         } catch (error: any) {
             if (error.response && error.response.status === 422) {
                 setValidations(error.response.data);
+            } else if (error.response.status !== 422) {
+                setT("Es existiert kein Konto mit dieser E-Mail-Adresse.");
             }
         }
     };
@@ -65,6 +68,32 @@ const Login = () => {
         setIsPasswordFilled(e.target.value !== "");
     };
 
+    // Input state and handlers
+    const [indexValue, setIndexValue] = useState("");
+    const [isInputFocused, setIsInputFocused] = useState(false);
+    const [isInputError, setIsInputError] = useState(false);
+    const isInputRequired = true; // Set this to true for required fields
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value);
+        if (isInputRequired && e.target.value.trim() === "") {
+            setIsInputError(true);
+        } else {
+            setIsInputError(false);
+        }
+    };
+
+    const handleInputFocus = () => {
+        setIsInputFocused(true);
+    };
+
+    const handleInputBlur = () => {
+        setIsInputFocused(false);
+        if (isInputRequired && indexValue.trim() === "") {
+            setIsInputError(true);
+        }
+    };
+
     return (
         <>
             <div className="login">
@@ -73,7 +102,7 @@ const Login = () => {
                         <img src={ThommasGroupeLogo} alt="ThommasGroupe" />
                     </div>
 
-                    <div className={`form__field login__username ${validations.email ? "error" : ""}`}>
+                    {/* <div className={`form__field login__username ${validations.email ? "error" : ""}`}>
                         <label
                             htmlFor="username-login"
                             className={`form__label caption__regular ${isEmailFilled ? "filled" : ""}`}
@@ -95,6 +124,44 @@ const Login = () => {
                         {(validations.email || validations.error) && (
                             <ValidationMessage message={validations.email ? validations.email[0] : validations.error} />
                         )}
+                    </div> */}
+                    <div className="input-field login__username">
+                        <label
+                            htmlFor={`index`}
+                            className={`input-field__label caption__regular 
+                                           ${
+                                               isInputError
+                                                   ? "input-field__label--error"
+                                                   : isInputFocused
+                                                   ? "input-field__label--focused"
+                                                   : ""
+                                           }
+                                           `}
+                        >
+                            Login
+                            {isInputRequired ? <span className="input-field__label--required">*</span> : ""}
+                        </label>
+                        <input
+                            id={`index`}
+                            className={`input-field__content body-normal__regular ${
+                                isInputError ? "input-field__content--error" : ""
+                            }`}
+                            type="text"
+                            name={`index`}
+                            placeholder="Bitte geben Sie die Adresse zum Planserver an"
+                            value={email}
+                            onChange={handleInputChange}
+                            onFocus={handleInputFocus}
+                            onBlur={handleInputBlur}
+                        />
+                        {/* {isInputError && (
+                            <div className="input-field--error-message caption__regular">This field is required</div>
+                        )} */}
+                         {(isInputError || validations.email || validations.error) && (
+                            <ValidationMessage message={validations.email ? validations.email[0] : validations.error} />
+                        )}
+                                                {t && <span className="error-message body-small__regular">{t}</span>}
+
                     </div>
 
                     <div className={`form__field login__password ${validations.email ? "error" : ""}`}>
