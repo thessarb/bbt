@@ -110,7 +110,7 @@ const ResetPassword: React.FC = () => {
                     <div className={`reset-password__content-item ${/[§$%&@+?]/.test(password) ? "valid" : ""}`}>
                         <i className={`reset-password__content-icon ${/[§$%&@+?]/.test(password) ? "icon-check" : "icon-x"}`}></i>
                         <p className="reset-password__content-amount caption__regular">
-                            Verwenden Sie ein Sonderzeichen: §$%&@+?
+                            Verwenden Sie ein Sonderzeichen: <strong>§$%&@+?</strong>
                         </p>
                     </div>
                 </div>

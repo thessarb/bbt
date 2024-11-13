@@ -16,7 +16,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ title, subtitle, detailstitle }
           {title ? (
             <div>
               <span onClick={() => navigate(PATHS.dashboard)} className="body-normal__regular breadcrumb__home">{title}</span>
-              <span className="body-normal__regular">{" "}/</span>
+              <span className="body-normal__regular breadcrumb__slant">{" "}/</span>
               <span className="body-normal__regular breadcrumb__title">{" "}{subtitle}</span>
               {/* <span className="body-normal__regular">{" "}/</span>
               <span className="body-normal__regular breadcrumb__title">{" "}{detailstitle}</span> */}
