@@ -5,7 +5,7 @@ const PATHS = {
   inviteRequest: "/neuer-zugang",
   forgotPassword: "/passwort-vergessen",
   resetPasswordParam: "/passwort-zurücksetzen/:token",
-
+  thankYou: "/vielen-dank",
   dashboard: "/dashboard",
   orders: "/auftrage",
   orderDetails: "/auftrage/:id",
