@@ -11,7 +11,7 @@
     padding: $unit-3;
     background-color: $bbt-white;
     border-radius: toRem(4);
-    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.10);
+    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.1);
   }
 
   &__username {
@@ -33,6 +33,14 @@
     color: $bbt-primary-green;
     text-decoration: none;
     cursor: pointer;
+  }
+  .input-field {
+    &__content {
+      &:-webkit-autofill {
+        -webkit-text-fill-color: $bbt-text !important;
+        -webkit-box-shadow: 0 0 0px 1000px $bbt-white inset !important;
+      }
+    }
   }
 
   // Button

@@ -7,6 +7,7 @@ import LoginView from "src/pages/authentication/LoginView";
 import ForgotPasswordView from "src/pages/authentication/ForgotPasswordView";
 import ResetPasswordView from "src/pages/authentication/ResetPasswordView";
 import ThankYouView from "src/pages/authentication/ThankYouView";
+import RegisterView from "src/pages/authentication/RegisterView";
 
 import DashboardView from "src/pages/dashboard/DashboardView";
 import OrdersView from "src/pages/orders/OrdersView";
@@ -138,6 +139,10 @@ const PublicRoutes: RouteItem[] = [
     {
         path: PATHS.login,
         element: checkPublicRoutes(<LoginView />),
+    },
+    {
+        path: PATHS.inviteRequest,
+        element: checkPublicRoutes(<RegisterView />),
     },
     {
         path: PATHS.forgotPassword,
