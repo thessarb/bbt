@@ -1,6 +1,5 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import Sidebar from "../../components/layouts/sidebar/Sidebar";
 import ForgotPassword from "src/components/authentication/ForgotPassword";
 
 const ForgotPasswordView: React.FC = () => {
