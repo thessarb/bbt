@@ -18,6 +18,8 @@ const Login = () => {
     const [isPasswordFocused, setIsPasswordFocused] = useState<boolean>(false);
     const [isEmailError, setIsEmailError] = useState<boolean>(false);
     const [isPasswordError, setIsPasswordError] = useState<boolean>(false);
+    const [passwordIsRequired, setPasswordIsRequired] = useState("Password is required!");
+    const [emaildIsRequired, setEmailIsRequired] = useState("Email is required!");
 
     const isInputRequired = true;
     const [validations, setValidations] = useState<Record<string, string>>({});
@@ -127,9 +129,11 @@ const Login = () => {
                             onFocus={handleInputFocus(setIsEmailFocused)}
                             onBlur={handleInputBlur(email, setIsEmailError, setIsEmailFocused)}
                         />
-                        {(validations.email || validations.error) && (
+                        {validations.email || validations.error ? (
                             <ValidationMessage message={validations.email ? validations.email[0] : validations.error} />
-                        )}
+                        ) : isEmailError ? (
+                            <ValidationMessage message={emaildIsRequired} />
+                        ) : ("")}
                     </div>
 
                     <div className="input-field login__password">
@@ -161,11 +165,13 @@ const Login = () => {
                             onFocus={handleInputFocus(setIsPasswordFocused)}
                             onBlur={handleInputBlur(password, setIsPasswordError, setIsPasswordFocused)}
                         />
-                        {validations.password && (
+                        {validations.password ? (
                             <ValidationMessage
                                 message={validations.password ? validations.password[0] : validations.error}
                             />
-                        )}
+                        ) : isPasswordError ? (
+                            <ValidationMessage message={passwordIsRequired} />
+                        ) : ("")}
                         {validations.message && <ValidationMessageInvalid message={validations.message} />}
                     </div>
 

@@ -5,13 +5,18 @@ import { makeApiCall } from "src/api/apiRequests";
 import API_PATHS from "src/api/apiPaths";
 import API_HEADERS from "src/api/apiConfig";
 import ValidationMessage from "src/helpers/ValidationMessage";
+import ValidationMessageInvalid from "src/helpers/ValidationMessageInvalid";
 
 const ThommasGroupeLogo: string = require("../../assets/images/logo/Group.svg").default;
 
 const ForgotPassword = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
-    const [isEmailFilled, setIsEmailFilled] = useState(false);
+    const [isEmailFocused, setIsEmailFocused] = useState<boolean>(false);
+    const [isEmailError, setIsEmailError] = useState<boolean>(false);
+    const [emaildIsRequired, setEmailIsRequired] = useState("Email is required!");
+
+    const isInputRequired = true;
     const [validations, setValidations] = useState<Record<string, string>>({});
 
     const forgotPassword = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -31,18 +36,42 @@ const ForgotPassword = () => {
 
             setEmail("");
             setValidations({});
-            navigate(PATHS.thankYou)
+            navigate(PATHS.thankYou);
         } catch (error: any) {
-            if (error.response.status === 422) {
+            if (error.response.status === 404 || error.response.status === 401 || error.response.status === 422) {
                 setValidations(error.response.data);
             }
         }
     };
 
-    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value);
-        setIsEmailFilled(e.target.value !== "");
+    const handleInputChange =
+        (
+            setter: React.Dispatch<React.SetStateAction<string>>,
+            setError: React.Dispatch<React.SetStateAction<boolean>>
+        ) =>
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            setter(e.target.value);
+            if (isInputRequired && e.target.value.trim() === "") {
+                setError(true);
+            } else {
+                setError(false);
+            }
+        };
+    const handleInputFocus = (setFocus: React.Dispatch<React.SetStateAction<boolean>>) => () => {
+        setFocus(true);
     };
+    const handleInputBlur =
+        (
+            value: string,
+            setError: React.Dispatch<React.SetStateAction<boolean>>,
+            setFocus: React.Dispatch<React.SetStateAction<boolean>>
+        ) =>
+        () => {
+            setFocus(false);
+            if (isInputRequired && value.trim() === "") {
+                setError(true);
+            }
+        };
 
     return (
         <>
@@ -52,30 +81,44 @@ const ForgotPassword = () => {
                         <img src={ThommasGroupeLogo} alt="ThommasGroupe" />
                     </div>
                     <span className="forgot-password__title body-normal__semibold">Passwort vergessen?</span>
-                    <div className={`form__field forgot-password__username ${validations.email ? "error" : ""}`}>
+
+                    <div className="input-field forgot-password__username">
                         <label
-                            htmlFor="username"
-                            className={`form__label caption__regular ${isEmailFilled ? "filled" : ""}`}
+                            htmlFor={`email`}
+                            className={`input-field__label caption__regular 
+                                           ${
+                                               isEmailError
+                                                   ? "input-field__label--error"
+                                                   : isEmailFocused
+                                                   ? "input-field__label--focused"
+                                                   : ""
+                                           }
+                                           `}
                         >
                             E-Mail
-                            <span className="form__label-mandatory">*</span>
+                            {isInputRequired ? <span className="input-field__label--required">*</span> : ""}
                         </label>
-
                         <input
-                            id="email"
-                            className="form__input body-normal__regular"
-                            name="email"
-                            value={email}
+                            id={`email`}
+                            className={`input-field__content body-normal__regular ${
+                                isEmailError ? "input-field__content--error" : ""
+                            }`}
+                            type="text"
+                            name={`email`}
                             placeholder="Geben Sie Ihre E-Mail-Adresse ein."
-                            onChange={handleEmailChange}
+                            value={email}
+                            onChange={handleInputChange(setEmail, setIsEmailError)}
+                            onFocus={handleInputFocus(setIsEmailFocused)}
+                            onBlur={handleInputBlur(email, setIsEmailError, setIsEmailFocused)}
                         />
-                        {(validations.email || validations.error) && (
+                        {validations.email || validations.error ? (
                             <ValidationMessage message={validations.email ? validations.email[0] : validations.error} />
+                        ) : isEmailError ? (
+                            <ValidationMessage message={emaildIsRequired} />
+                        ) : (
+                            ""
                         )}
-                    </div>
-
-                    <div className="form-error-message body-small__regular">
-                        Es existiert kein Konto mit dieser E-Mail-Adresse.
+                        {validations.message && <ValidationMessageInvalid message={validations.message} />}
                     </div>
 
                     <Link to={PATHS.inviteRequest} className="forgot-password__button-register caption__regular">
