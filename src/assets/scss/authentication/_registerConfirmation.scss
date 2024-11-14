@@ -1,0 +1,37 @@
+.register-confirmation{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+
+  .form {
+    width: toRem(398);
+    height: auto;
+    padding: $unit-3;
+    background-color: $bbt-white;
+    border-radius: toRem(4);
+    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.10);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: toRem(16);
+    margin-bottom: toRem(33);
+    color: $bbt-black;
+  }
+
+  &__title {
+    color: $bbt-text;
+  }
+
+  &__author {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__author-team {
+    font-weight: 700;
+  }
+}
