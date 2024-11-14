@@ -177,7 +177,7 @@ const Login = () => {
 
                     <div className="login__forgot-pasword caption__regular">
                         Sie haben Ihr Passwort vergessen?
-                        <Link to={PATHS.forgotPassword} className="login__forgot-pasword-link caption__regular">
+                        <Link to={PATHS.forgotPassword} className="login__forgot-pasword-link link-component caption__regular">
                             Klicken Sie hier.
                         </Link>
                     </div>
@@ -185,7 +185,7 @@ const Login = () => {
                     <div className="login__button">
                         <Link to={PATHS.inviteRequest} className="login__button-register caption__regular">
                             <span className="login__button-register-text">Sie haben noch keinen Zugang?</span>
-                            <span className="login__button-register-link">Zugang anfragen</span>
+                            <span className="link-component">Zugang anfragen</span>
                         </Link>
 
                         <button
