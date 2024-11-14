@@ -5,6 +5,7 @@ import API_PATHS from "src/api/apiPaths";
 import API_HEADERS from "src/api/apiConfig";
 import PATHS from "src/routes/Paths";
 import ValidationMessage from "src/helpers/ValidationMessage";
+import ValidationMessageInvalid from "src/helpers/ValidationMessageInvalid";
 
 const ThommasGroupeLogo = require("../../assets/images/logo/Group.svg").default;
 
@@ -12,14 +13,23 @@ const ResetPassword: React.FC = () => {
     const { token } = useParams();
     const navigate = useNavigate();
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [isConfirmPasswordFocused, setIsConfirmPasswordFocused] = useState<boolean>(false);
+    const [isPasswordFocused, setIsPasswordFocused] = useState<boolean>(false);
+    const [isConfirmPasswordError, setIsConfirmPasswordError] = useState<boolean>(false);
+    const [isPasswordError, setIsPasswordError] = useState<boolean>(false);
+    const [passwordIsRequired, setPasswordIsRequired] = useState("Password is required!");
+    const [confirmPasswordIsRequired, setConfirmPasswordIsRequired] = useState("Password is required!");
+
     const [repeatPassword, setRepeatPassword] = useState<string>("");
     const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
     const [isRepeatPasswordValid, setIsRepeatPasswordValid] = useState<boolean>(false);
     const [userName, setUserName] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [validations, setValidations] = useState<Record<string, string>>({});
+
+    const isInputRequired = true;
 
     // Function to validate the password based on specified criteria
     const validatePassword = (password: string): boolean => {
@@ -34,7 +44,7 @@ const ResetPassword: React.FC = () => {
         const fetchData = async () => {
             try {
                 const response: any = await makeApiCall<ResponseType>(
-                    API_PATHS.resetPassword(token),
+                    API_PATHS.getPasswordData(token),
                     "GET",
                     API_HEADERS.unauthenticated
                 );
@@ -71,84 +81,123 @@ const ResetPassword: React.FC = () => {
         }
     };
 
-    // Handler for password input change
-    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        const newPassword = e.target.value;
-        setPassword(newPassword);
-        setIsPasswordValid(validatePassword(newPassword));
-        setIsRepeatPasswordValid(newPassword === repeatPassword);
+    const handleInputChange =
+        (
+            setter: React.Dispatch<React.SetStateAction<string>>,
+            setError: React.Dispatch<React.SetStateAction<boolean>>
+        ) =>
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            setter(e.target.value);
+            if (isInputRequired && e.target.value.trim() === "") {
+                setError(true);
+            } else {
+                setError(false);
+            }
+        };
+    const handleInputFocus = (setFocus: React.Dispatch<React.SetStateAction<boolean>>) => () => {
+        setFocus(true);
     };
-
-    // Handler for repeat password input change
-    const handleRepeatPasswordChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        const newRepeatPassword = e.target.value;
-        setRepeatPassword(newRepeatPassword);
-        setIsRepeatPasswordValid(newRepeatPassword === password);
-    };
-
-    // Check if the form is valid for submission
-    const isFormValid = isPasswordValid && isRepeatPasswordValid;
-
-    // Handle form submission
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-        e.preventDefault();
-        if (isFormValid) {
-            // Add form submission logic here (e.g., API call)
-            console.log("Password reset successfully.");
-            // Optionally navigate to another page after successful reset
-            // navigate(PATHS.login);
-        }
-    };
+    const handleInputBlur =
+        (
+            value: string,
+            setError: React.Dispatch<React.SetStateAction<boolean>>,
+            setFocus: React.Dispatch<React.SetStateAction<boolean>>
+        ) =>
+        () => {
+            setFocus(false);
+            if (isInputRequired && value.trim() === "") {
+                setError(true);
+            }
+        };
 
     return (
         <div className="reset-password">
-            <form className="form" method="post" onSubmit={handleSubmit}>
+            <form className="form" method="post" onSubmit={() => resetPassword}>
                 <div className="form__logo">
                     <img src={ThommasGroupeLogo} alt="ThommasGroupe" />
                 </div>
 
                 <span className="reset-password__title body-normal__semibold">Passwort zurücksetzen</span>
 
-                <div className="form__field reset-password__password">
+                <div className="input-field reset-password__password">
                     <label
-                        htmlFor="password-login"
-                        className={`form__label caption__regular ${password ? "filled" : ""}`}
+                        htmlFor={`password`}
+                        className={`input-field__label caption__regular 
+                                           ${
+                                               isPasswordError
+                                                   ? "input-field__label--error"
+                                                   : isPasswordFocused
+                                                   ? "input-field__label--focused"
+                                                   : ""
+                                           }
+                                           `}
                     >
                         Passwort
-                        <span className="form__label-mandatory">*</span>
+                        {isInputRequired ? <span className="input-field__label--required">*</span> : ""}
                     </label>
                     <input
-                        id="password-login"
-                        className="form__input body-normal__regular"
-                        onChange={handlePasswordChange}
-                        type="password"
-                        name="password"
+                        id={`password`}
+                        className={`input-field__content body-normal__regular ${
+                            isPasswordError ? "input-field__content--error" : ""
+                        }`}
+                        type="text"
+                        name={`password`}
                         placeholder="Geben Sie Ihr Passwort ein."
-                        required
+                        value={password}
+                        onChange={handleInputChange(setPassword, setIsPasswordError)}
+                        onFocus={handleInputFocus(setIsPasswordFocused)}
+                        onBlur={handleInputBlur(password, setIsPasswordError, setIsPasswordFocused)}
                     />
-                    {!isPasswordValid && <span className="error-message caption__regular">Ungültiges Passwort</span>}
+                    {validations.password ? (
+                        <ValidationMessage
+                            message={validations.password ? validations.password[0] : validations.error}
+                        />
+                    ) : isPasswordError ? (
+                        <ValidationMessage message={passwordIsRequired} />
+                    ) : (
+                        ""
+                    )}
                 </div>
 
-                <div className="form__field reset-password__password-repeat">
+                <div className="input-field reset-password__password-repeat">
                     <label
-                        htmlFor="password-repeat"
-                        className={`form__label caption__regular ${repeatPassword ? "filled" : ""}`}
+                        htmlFor={`passwordVerify`}
+                        className={`input-field__label caption__regular 
+                                           ${
+                                               isConfirmPasswordError
+                                                   ? "input-field__label--error"
+                                                   : isConfirmPasswordFocused
+                                                   ? "input-field__label--focused"
+                                                   : ""
+                                           }
+                                           `}
                     >
                         Passwort wiederholen
-                        <span className="form__label-mandatory">*</span>
+                        {isInputRequired ? <span className="input-field__label--required">*</span> : ""}
                     </label>
                     <input
-                        id="password-repeat"
-                        className="form__input body-normal__regular"
-                        onChange={handleRepeatPasswordChange}
-                        placeholder="Geben Sie Ihr Passwort ein."
+                        id={`passwordVerify`}
+                        className={`input-field__content body-normal__regular ${
+                            isConfirmPasswordError ? "input-field__content--error" : ""
+                        }`}
+                        type="text"
                         name="passwordVerify"
-                        type="password"
-                        required
+                        placeholder="Geben Sie Ihr Passwort ein."
+                        value={confirmPassword}
+                        onChange={handleInputChange(setConfirmPassword, setIsConfirmPasswordError)}
+                        onFocus={handleInputFocus(setIsConfirmPasswordFocused)}
+                        onBlur={handleInputBlur(confirmPassword, setIsConfirmPasswordError, setIsConfirmPasswordFocused)}
                     />
-                    {!isRepeatPasswordValid && (
-                        <span className="error-message caption__regular">Passwörter stimmen nicht überein</span>
+                    {validations.password ? (
+                        <ValidationMessage
+                            message={validations.password ? validations.password[0] : validations.error}
+                        />
+                    ) : isConfirmPasswordError ? (
+                        <ValidationMessage message={confirmPasswordIsRequired} />
+                    ) : (
+                        ""
                     )}
+                    {validations.message && <ValidationMessageInvalid message={validations.message} />}
                 </div>
 
                 <p className="reset-password__content-title body-small__regular">
