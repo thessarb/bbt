@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import PlaneHochladenFormItem from "src/components/panel/documents/PlaneHochladenFormItem";
+import PlaneUploadFormItem from "./PlaneUploadFormItem";
 
 interface PlaneHochladenFormProps {
     onUploadChange: (value: string) => void;
 }
 
-const PlaneHochladenForm: React.FC<PlaneHochladenFormProps> = ({ onUploadChange }) => {
+const PlaneUploadForm: React.FC<PlaneHochladenFormProps> = ({ onUploadChange }) => {
 
     // Radio buttons
     const [upload, setUpload] = useState("upload");
@@ -42,7 +42,7 @@ const PlaneHochladenForm: React.FC<PlaneHochladenFormProps> = ({ onUploadChange 
                                 </label>
                             </div>
 
-                            <PlaneHochladenFormItem upload={upload}/>
+                            <PlaneUploadFormItem upload={upload}/>
 
                             {upload === "link" &&
                                     <>
@@ -59,4 +59,4 @@ const PlaneHochladenForm: React.FC<PlaneHochladenFormProps> = ({ onUploadChange 
     );
 };
 
-export default PlaneHochladenForm;
+export default PlaneUploadForm;

@@ -2,7 +2,7 @@ import React, {useState, useRef, useEffect} from "react";
 import CustomPagination from "src/helpers/CustomPaginate";
 import Select from "react-select";
 import PlanViewModal from "src/components/panel/dashboard/deadlines/PlanViewModal";
-import PlaneHochladenModal from "src/components/Modal/PlaneHochladenModal";
+import PlaneUploadModal from "../../../Modal/PlaneUploadModal";
 import PATHS from "src/routes/Paths";
 import {useNavigate} from "react-router";
 import {Tooltip} from "react-tooltip";
@@ -384,7 +384,7 @@ const Bauabschnitte = () => {
                                         <span className="button__text">Pläne hochladen</span>
                                     </button>
                                     {showPlaneHochladenModal && (
-                                            <PlaneHochladenModal
+                                            <PlaneUploadModal
                                                     showPlaneHochladenModal={showPlaneHochladenModal}
                                                     setShowPlaneHochladenModal={setShowPlaneHochladenModal}
                                             />

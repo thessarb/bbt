@@ -14,14 +14,13 @@ export default function AccessDenied() {
           Kein Zugriff
         </div>
         </div>
-        <h2>
-          Du hast leider nicht die notwendige Berechtigungen für diese Seite.
-        </h2>
-      <button
-        className="button button-secondary button--big button--green"
+        <span className="access-denied__title">
+          Sie haben leider nicht die notwendige Berechtigungen für diese Seite.
+        </span>
+      <button className="button button-secondary button--big button--green"
         onClick={() => navigate(-1)}
       >
-        <i className="button_icon icon-arrow-left"/>
+        <i className="button__icon icon-arrow-left"/>
         <span className="button__text">Zurück</span>
       </button>
     </div>

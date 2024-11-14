@@ -3,7 +3,7 @@ import Select from "react-select";
 import CustomPagination from "src/helpers/CustomPaginate";
 import FileViewerModal from "../../Modal/FileViewerModal";
 import FilterDialog from "src/helpers/TableFilters";
-import PlaneHochladenModal from "../../Modal/PlaneHochladenModal";
+import PlaneUploadModal from "../../Modal/PlaneUploadModal";
 import {Tooltip} from "react-tooltip";
 
 const Library = () => {
@@ -83,8 +83,8 @@ const Library = () => {
                         <i className="button__icon icon-export"></i>
                         <span className="button__text">Neue Dokument hochladen</span>
                     </button>
-                    {showPlaneHochladenModal && <PlaneHochladenModal showPlaneHochladenModal={showPlaneHochladenModal}
-                                                                     setShowPlaneHochladenModal={setShowPlaneHochladenModal}/>}
+                    {showPlaneHochladenModal && <PlaneUploadModal showPlaneHochladenModal={showPlaneHochladenModal}
+                                                                  setShowPlaneHochladenModal={setShowPlaneHochladenModal}/>}
                 </div>
 
                 <div className="library table-list table-list--secondary">

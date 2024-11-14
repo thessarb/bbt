@@ -1,32 +1,27 @@
 .access-denied {
-  align-items: center;
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: 100vh;
+  padding: toRem(100) $unit-1 $unit-1;
   text-align: center;
   background-color: $bbt-grey-5;
-  padding: $unit-1;
   word-break: break-word;
-  padding-top: toRem(100);
-  
+
   .no-access {
     display: flex;
     align-items: center;
     gap: toRem(6);
+
     .background-grey {
-      padding-top: toRem(2);
-      padding-right: toRem(6);
-      padding-bottom: toRem(2);
-      padding-left: toRem(6);
+      padding: toRem(2) toRem(6);
       border-radius: toRem(2);
       color: $bbt-white;
       background-color: $bbt-secondary-grey;
     }
+
     .background-light-grey {
-      padding-top: toRem(2);
-      padding-right: toRem(6);
-      padding-bottom: toRem(2);
-      padding-left: toRem(6);
+      padding: toRem(2) toRem(6);
       border-radius: toRem(2);
       color: $bbt-grey-60;
       background-color: $bbt-grey-20;
@@ -34,13 +29,13 @@
   }
 
   &__code {
-    color: $bbt-primary-green;
+    margin-bottom: toRem(60);
+    font-family: $font--boxed-medium;
     font-size: toRem(96);
     line-height: toRem(120);
     font-weight: 600;
+    color: $bbt-primary-green;
     word-break: break-word;
-    font-family: $font--boxed-medium;
-    margin-bottom: toRem(60);
 
     @media (min-width: 488px) {
       font-size: 96px;
@@ -53,13 +48,13 @@
     }
   }
 
-  h2 {
+  &__title {
+    margin-bottom: toRem(100);
+    font-family: $font--boxed-regular;
     font-size: 36px;
     line-height: 45px;
     font-weight: 500;
     color: $bbt-secondary-grey;
-    margin-bottom: toRem(100);
-    font-family: $font--boxed-regular;
 
     @media (min-width: 488px) {
       font-size: 36px;
@@ -69,52 +64,6 @@
     }
     @media (max-width: 488px) {
       font-size: 16px;
-    }
-  }
-
-  button {
-    &:hover {
-      color: $bbt-green-50;
-      background-color: transparent;
-      border: toRem(1) solid $bbt-green-50;
-
-      .icon-arrow-left {
-        background-color: $bbt-green-50;
-      }
-    }
-    &:focus {
-      color: $bbt-primary-green;
-      background-color: $bbt-white;
-      border: toRem(1) solid $bbt-primary-green;
-      box-shadow: 0 0 10px 0 rgba(67, 176, 42, 0.5);
-
-      .icon-arrow-left {
-        background-color: $bbt-primary-green;
-      }
-    }
-    &:active {
-      color: $bbt-primary-green;
-      background-color: $bbt-white;
-      border: toRem(1) solid $bbt-primary-green;
-      box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.5) inset;
-
-      .icon-arrow-left {
-        background-color: $bbt-primary-green;
-      }
-    }
-    &:disabled {
-      color: $bbt-green-40;
-      background-color: transparent;
-      border: toRem(1) solid $bbt-green-10;
-      box-shadow: none;
-      cursor: not-allowed;
-
-      .icon-arrow-left {
-        background-color: $bbt-green-40;
-      }
-    }
-    .icon-arrow-left {
-      background-color: $bbt-primary-green;
     }
   }
 }

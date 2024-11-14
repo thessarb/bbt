@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import FreigebenFormModal from "./FreigebenFormModal";
+import ReleaseFormModal from "./ReleaseFormModal";
 import Select from "react-select";
 import CustomPagination from "../../../../helpers/CustomPaginate";
 import {Tooltip} from 'react-tooltip';
@@ -140,8 +140,8 @@ function ThomasPlaneTable() {
                                     <i className="button__icon icon-eye"></i>
                                 </div>
 
-                                {showThomasModal && <FreigebenFormModal showThomasModal={showThomasModal}
-                                                                        setShowThomasModal={setShowThomasModal}/>}
+                                {showThomasModal && <ReleaseFormModal showThomasModal={showThomasModal}
+                                                                      setShowThomasModal={setShowThomasModal}/>}
                             </td>
                         </tr>
                         </tbody>

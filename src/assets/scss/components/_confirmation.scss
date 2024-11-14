@@ -64,4 +64,21 @@
       margin-left: $unit-0;
     }
   }
+
+  &__replace {
+    display: flex;
+    gap: toRem(4);
+    padding: $unit-1 0;
+    color: $bbt-text;
+  }
+
+  // User Confirmation
+  &__user {
+    padding: $unit-1;
+    color: $bbt-text;
+
+    &--email {
+      margin: 0 toRem(4);
+    }
+  }
 }

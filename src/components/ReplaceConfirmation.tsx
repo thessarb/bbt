@@ -1,6 +1,6 @@
-const ErsetzenConfirmation = () => {
+const ReplaceConfirmation = () => {
     return (
-            <div className="plan-replace-confirmation">
+            <div className="confirmation__replace">
                 <span className="body-big__regular">
                     Es existiert bereits ein Plan mit dem Namen
                 </span>
@@ -14,4 +14,4 @@ const ErsetzenConfirmation = () => {
     );
 };
 
-export default ErsetzenConfirmation;
+export default ReplaceConfirmation;

@@ -12,7 +12,7 @@ interface PlaneHochladenFormItemProps {
     upload: string;
 }
 
-const PlaneHochladenFormItem: React.FC<PlaneHochladenFormItemProps> = ({ upload}) => {
+const PlaneUploadFormItem: React.FC<PlaneHochladenFormItemProps> = ({ upload}) => {
     // Select option Fields
     const [selectedOption1, setSelectedOption1] = useState<{ value: string; label: string } | null>(null);
     const [selectedOption2, setSelectedOption2] = useState<{ value: string; label: string } | null>(null);
@@ -344,4 +344,4 @@ const PlaneHochladenFormItem: React.FC<PlaneHochladenFormItemProps> = ({ upload}
     );
 };
 
-export default PlaneHochladenFormItem;
+export default PlaneUploadFormItem;

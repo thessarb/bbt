@@ -2,10 +2,10 @@ import React from "react";
 
 const UserConfirmation = () => {
     return (
-            <div className="user-confirmation">
+            <div className="confirmation__user">
                 <div className="body-big__regular">
                     Eine Nachricht mit den Anmeldedaten wurde an
-                    <span className="user-confirmation__email body-big__medium">
+                    <span className="confirmation__user--email body-big__medium">
                         “thomas.mueller@thomas-gruppe.de”
                     </span>
                     versendet.

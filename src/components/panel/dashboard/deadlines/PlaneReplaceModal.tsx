@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import ListNoResult from "src/components/panel/dashboard/deadlines/ListNoResult";
-import PlaneErsetzenForm from "./PlaneErsetzenForm";
+import PlaneReplaceForm from "./PlaneReplaceForm";
 import LoadingComponent from "../../../LoadingComponent";
 import PlanConfirmation from "../../../PlanConfirmation";
-import ErsetzenConfirmation from "../../../ErsetzenConfirmation";
+import ReplaceConfirmation from "../../../ReplaceConfirmation";
 
 interface PlaneErsetzenModalProps {
     showPlaneErsetzenModal: boolean;
@@ -12,11 +12,7 @@ interface PlaneErsetzenModalProps {
     itemIndex: number;
 }
 
-const PlaneErsetzenModal: React.FC<PlaneErsetzenModalProps> = ({
-                                                                   showPlaneErsetzenModal,
-                                                                   setShowPlaneErsetzenModal,
-                                                                   itemIndex
-                                                               }) => {
+const PlaneReplaceModal: React.FC<PlaneErsetzenModalProps> = ({showPlaneErsetzenModal, setShowPlaneErsetzenModal, itemIndex}) => {
     // Modal
     const [animateClose, setAnimateClose] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -61,11 +57,11 @@ const PlaneErsetzenModal: React.FC<PlaneErsetzenModalProps> = ({
                         {loading ? (
                                 <LoadingComponent/>
                         ) : (
-                                confirmation ? <ErsetzenConfirmation/> :
+                                confirmation ? <ReplaceConfirmation/> :
                                         confirmation2 ? (
                                                 <PlanConfirmation/>
                                         ) : (
-                                                PlaneErsetzenForm ? < PlaneErsetzenForm itemIndex={itemIndex}/> :
+                                                PlaneReplaceForm ? < PlaneReplaceForm itemIndex={itemIndex}/> :
                                                         <ListNoResult/>
                                         )
                         )}
@@ -116,4 +112,4 @@ const PlaneErsetzenModal: React.FC<PlaneErsetzenModalProps> = ({
     );
 }
 
-export default PlaneErsetzenModal;
+export default PlaneReplaceModal;
