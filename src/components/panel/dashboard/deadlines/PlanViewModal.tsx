@@ -3,7 +3,7 @@ import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import ThomasPlaneTable from "./ThomasPlaneTable";
 import MainePlane from "./MainePlane";
 import ListNoResult from "./ListNoResult";
-import PlaneHochladenModal from "../../../Modal/PlaneHochladenModal";
+import PlaneUploadModal from "../../../Modal/PlaneUploadModal";
 
 interface PlanViewModalProps {
     show: boolean;
@@ -77,7 +77,7 @@ function PlanViewModal({ show, setShow }: PlanViewModalProps) {
                                             <i className="button__icon icon-file-arrow-up"></i>
                                             <span className="button__text">Neuen Plan hochladen</span>
                                         </button>
-                                        {showPlaneHochladenModal && <PlaneHochladenModal
+                                        {showPlaneHochladenModal && <PlaneUploadModal
                                             showPlaneHochladenModal={showPlaneHochladenModal}
                                             setShowPlaneHochladenModal={setShowPlaneHochladenModal} />}
                                     </>

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Select from "react-select";
 import CustomPagination from "src/helpers/CustomPaginate";
-import PlaneHochladenModal from "src/components/Modal/PlaneHochladenModal";
+import PlaneUploadModal from "../../Modal/PlaneUploadModal";
 import {Tooltip} from "react-tooltip";
 import {Link} from "react-router-dom";
 
@@ -36,7 +36,7 @@ const Documents = () => {
                         <i className="button__icon icon-export"></i>
                         <span className="button__text">Neuen Plan hochladen</span>
                     </button>
-                    {showPlaneHochladenModal && <PlaneHochladenModal showPlaneHochladenModal={showPlaneHochladenModal} setShowPlaneHochladenModal={setShowPlaneHochladenModal} />}
+                    {showPlaneHochladenModal && <PlaneUploadModal showPlaneHochladenModal={showPlaneHochladenModal} setShowPlaneHochladenModal={setShowPlaneHochladenModal} />}
                 </div>
 
                 <div className="table-list table-list--secondary">

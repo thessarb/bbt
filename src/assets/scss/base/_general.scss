@@ -1,0 +1,48 @@
+// Body
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: stretch;
+  flex-direction: column;
+  color: $bbt-text;
+  background-color: $bbt-grey-5;
+}
+
+// Mani content
+.main-content {
+  width: 100%;
+  min-height: calc(100vh - $unit-7);
+
+  .page-content {
+    padding: toRem(105) $unit-1 $unit-1;
+  }
+}
+
+// Overlay when notification modal is open
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $bbt-black;
+  opacity: 0.2;
+  z-index: 2;
+}
+
+// No-Scroll
+.no-scroll {
+  overflow: hidden;
+  height: 100%;
+}
+
+//Links
+.link-component {
+  color: $bbt-primary-green;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-underline-offset: toRem(1);
+  text-underline-position: from-font;
+  cursor: pointer;
+}

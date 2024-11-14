@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import Select from "react-select";
 import CustomPagination from "../../../../helpers/CustomPaginate";
 import {Tooltip} from "react-tooltip";
-import PlaneErsetzenModal from "./PlaneErsetzenModal";
+import PlaneReplaceModal from "./PlaneReplaceModal";
 
 function MainePlane() {
     // pagination
@@ -171,7 +171,7 @@ function MainePlane() {
                                             <i className="button__icon icon-note-pencil"></i>
                                         </div>
                                         {showPlaneErsetzenModal &&
-                                                <PlaneErsetzenModal
+                                                <PlaneReplaceModal
                                                         showPlaneErsetzenModal={showPlaneErsetzenModal}
                                                         setShowPlaneErsetzenModal={setShowPlaneErsetzenModal}
                                                         itemIndex={index}

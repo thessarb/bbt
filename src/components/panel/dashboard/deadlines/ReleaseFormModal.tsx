@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
-import PlanFreigebenForm from "./PlanFreigebenForm";
+import PlanReleaseForm from "./PlanReleaseForm";
 import ListNoResult from "./ListNoResult";
 import LoadingComponent from "src/components/LoadingComponent";
 import Confirmation from "src/components/Confirmation";
@@ -10,7 +10,7 @@ interface ThomasPlaneModalProps {
     setShowThomasModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneModalProps) {
+function ReleaseFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneModalProps) {
     // Modal
     const [animateClose, setAnimateClose] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -55,7 +55,7 @@ function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneMo
                                 confirmation ? (
                                         <Confirmation />
                                 ) : (
-                                        PlanFreigebenForm ? < PlanFreigebenForm/> : <ListNoResult/>
+                                        PlanReleaseForm ? < PlanReleaseForm/> : <ListNoResult/>
                                 )
                         )}
 
@@ -89,4 +89,4 @@ function FreigebenFormModal({showThomasModal, setShowThomasModal}: ThomasPlaneMo
     );
 }
 
-export default FreigebenFormModal;
+export default ReleaseFormModal;

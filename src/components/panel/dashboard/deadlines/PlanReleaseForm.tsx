@@ -15,7 +15,7 @@ const options = [
     {value: 'vanilla', label: 'Vanilla test'},
 ];
 
-const PlanFreigebenForm = () => {
+const PlanReleaseForm = () => {
 
     // Select
     const [selectedOption, setSelectedOption] = useState<{ value: string; label: string } | null>(null);
@@ -488,4 +488,4 @@ const PlanFreigebenForm = () => {
     );
 };
 
-export default PlanFreigebenForm;
+export default PlanReleaseForm;

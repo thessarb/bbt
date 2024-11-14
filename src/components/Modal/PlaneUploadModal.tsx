@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import ListNoResult from "src/components/panel/dashboard/deadlines/ListNoResult";
 import Confirmation from "src/components/Confirmation";
-import PlaneHochladenForm from "src/components/panel/documents/PlaneHochladenForm";
+import PlaneUploadForm from "../panel/documents/PlaneUploadForm";
 import PlanConfirmation from "../PlanConfirmation";
 import PlanConfirmationError from "../PlanConfirmationError";
 
@@ -11,7 +11,7 @@ interface PlaneHochladenModalProps {
     setShowPlaneHochladenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function PlaneHochladenModal({showPlaneHochladenModal, setShowPlaneHochladenModal}: PlaneHochladenModalProps) {
+function PlaneUploadModal({showPlaneHochladenModal, setShowPlaneHochladenModal}: PlaneHochladenModalProps) {
     // Modal
     const [animateClose, setAnimateClose] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -63,7 +63,7 @@ function PlaneHochladenModal({showPlaneHochladenModal, setShowPlaneHochladenModa
                                 confirmation2 ? (
                                         PlanConfirmation ? <PlanConfirmation /> : <PlanConfirmationError onGoBack={handleConfirm}/>
                                 ) : (
-                                        PlaneHochladenForm ? < PlaneHochladenForm onUploadChange={handleUploadChange}/> : <ListNoResult/>
+                                        PlaneUploadForm ? < PlaneUploadForm onUploadChange={handleUploadChange}/> : <ListNoResult/>
                                 )
                         )}
 
@@ -100,4 +100,4 @@ function PlaneHochladenModal({showPlaneHochladenModal, setShowPlaneHochladenModa
     );
 }
 
-export default PlaneHochladenModal;
+export default PlaneUploadModal;

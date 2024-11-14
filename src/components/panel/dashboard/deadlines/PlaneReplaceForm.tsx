@@ -12,7 +12,7 @@ interface PlaneErsetzenFormProps {
     itemIndex: number;
 }
 
-const PlaneErsetzenForm: React.FC<PlaneErsetzenFormProps> = ({itemIndex}) => {
+const PlaneReplaceForm: React.FC<PlaneErsetzenFormProps> = ({itemIndex}) => {
 
     // Select option Fields
     const [selectedOption1, setSelectedOption1] = useState<{ value: string; label: string } | null>(null);
@@ -348,4 +348,4 @@ const PlaneErsetzenForm: React.FC<PlaneErsetzenFormProps> = ({itemIndex}) => {
     );
 };
 
-export default PlaneErsetzenForm;
+export default PlaneReplaceForm;
