@@ -3,7 +3,7 @@ import CustomPagination from "src/helpers/CustomPaginate";
 import Select from "react-select";
 import FilterDialog from "src/helpers/TableFilters";
 import PlanViewModal from "./PlanViewModal";
-import { Tooltip } from 'react-tooltip';
+import {Tooltip} from 'react-tooltip';
 
 const Deadlines = () => {
     // pagination
@@ -345,17 +345,15 @@ const Deadlines = () => {
                             </td>
                             <td role="cell" className="table-list__button" data-label={" "}>
                                 <button
-                                        data-tooltip-id="view-plan"
-                                        data-tooltip-content="View plan"
+                                        data-tooltip-id="tooltip"
+                                        data-tooltip-content="Freigabe erteilen"
                                         data-tooltip-place="top"
-                                        data-tooltip-offset={0}
+                                        data-tooltip-offset={5}
                                         onClick={handleShow}
                                         className='button button-gost button--big button--grey'>
                                     <i className="button__icon icon-note-pencil"></i>
-                                    <Tooltip id="view-plan" className="custom-tooltip"/>
                                 </button>
                                 {show && <PlanViewModal show={show} setShow={setShow}/>}
-
                             </td>
                         </tr>
 
@@ -391,8 +389,8 @@ const Deadlines = () => {
                                     required
                             />
                             <span className="error-message caption__regular">
-              Error message
-            </span>
+                              Error message
+                            </span>
                         </div>
                     </div>
                     <CustomPagination data={mockData} setActivePage={(e) => setPage(e)}/>

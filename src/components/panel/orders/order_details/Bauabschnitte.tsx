@@ -1,17 +1,18 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, {useState, useRef, useEffect} from "react";
 import CustomPagination from "src/helpers/CustomPaginate";
 import Select from "react-select";
 import PlanViewModal from "src/components/panel/dashboard/deadlines/PlanViewModal";
 import PlaneHochladenModal from "src/components/Modal/PlaneHochladenModal";
 import PATHS from "src/routes/Paths";
-import { useNavigate } from "react-router";
+import {useNavigate} from "react-router";
+import {Tooltip} from "react-tooltip";
 
 const Bauabschnitte = () => {
     const navigate = useNavigate();
     const [expandedRow, setExpandedRow] = useState(null);
     const [nestedExpandedRow, setNestedExpandedRow] = useState<{ [key: number]: number | null }>({});
     const [innerNestedExpandedRow, setInnerNestedExpandedRow] = useState<{ [key: number]: { [key: number]: boolean } }>(
-        {}
+            {}
     );
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const [showPlanFreigeben, setShowPlanFreigeben] = useState(false);
@@ -20,7 +21,7 @@ const Bauabschnitte = () => {
     const [showBigFilter, setShowBigFilter] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
     const dropdownRefFilter = useRef<HTMLDivElement | null>(null);
-    const [filters, setFilters] = useState([{ id: 1 }]);
+    const [filters, setFilters] = useState([{id: 1}]);
 
     const toggleDropdown = () => {
         setDropdownOpen((prev) => !prev);
@@ -197,7 +198,7 @@ const Bauabschnitte = () => {
 
     const addFilter = () => {
         if (filters.length < 5) {
-            setFilters((prev) => [...prev, { id: prev.length + 1 }]);
+            setFilters((prev) => [...prev, {id: prev.length + 1}]);
         }
     };
 
@@ -206,226 +207,255 @@ const Bauabschnitte = () => {
     };
 
     return (
-        <>
-            <div className="baubschnitte-managment">
-                <div className="baubschnitte-managment__filter-managment">
-                    <button className="button button-secondary button--big button--grey" onClick={toggleFilterDropdown}>
-                        <span className="button__text">Filter öffnen</span>
-                        {showBigFilter ? (
-                            <i className="button__icon icon-x" />
-                        ) : (
-                            <i className="button__icon icon-funnel-simple" />
-                        )}
-                    </button>
-                    {showBigFilter && (
-                        <div
-                            className={`baubschnitte-managment__filter-managment--big-filter ${
-                                showBigFilter ? "is-visible" : ""
-                            }`}
-                            ref={dropdownRefFilter}
-                        >
-                            <div className="dropdown-header">
-                                <span className="body-normal__regular">Filter anwenden</span>
-                            </div>
-                            {filters.map((filter, index) => (
-                                <div key={filter.id} className="filters">
-                                    <div className="form">
-                                        <div className="form__field-select">
-                                            <label
-                                                htmlFor={`filter-select-${index}`}
-                                                className={`form__label caption__regular`}
-                                            >
-                                                Reihe
-                                            </label>
-                                            <Select
-                                                id={`filter-select-${index}`}
-                                                classNamePrefix="react-select"
-                                                className={`form__select body-normal__regular`}
-                                                placeholder="Wählen Sie eine Tabellenreihe"
-                                                isClearable={true}
-                                                closeMenuOnSelect={true}
-                                                name="company-type"
-                                                isSearchable={true}
-                                                required
-                                            />
-                                            <span className="error-message caption__regular">Error message</span>
-                                        </div>
+            <>
+                <div className="baubschnitte-managment">
+                    <div className="baubschnitte-managment__filter-managment">
+                        <button className="button button-secondary button--big button--grey"
+                                onClick={toggleFilterDropdown}>
+                            <span className="button__text">Filter öffnen</span>
+                            {showBigFilter ? (
+                                    <i className="button__icon icon-x"/>
+                            ) : (
+                                    <i className="button__icon icon-funnel-simple"/>
+                            )}
+                        </button>
+                        {showBigFilter && (
+                                <div
+                                        className={`baubschnitte-managment__filter-managment--big-filter ${
+                                                showBigFilter ? "is-visible" : ""
+                                        }`}
+                                        ref={dropdownRefFilter}
+                                >
+                                    <div className="dropdown-header">
+                                        <span className="body-normal__regular">Filter anwenden</span>
                                     </div>
-                                    <div className="form__field">
-                                        <label htmlFor={`filter-${index}`} className={`form__label caption__regular`}>
-                                            Wert
-                                        </label>
-                                        <input
-                                            id={`filter-${index}`}
-                                            className="form__input body-normal__regular"
-                                            type="text"
-                                            placeholder="Nach welchem Wert möchten Sie filtern"
-                                            required
-                                        />
+                                    {filters.map((filter, index) => (
+                                            <div key={filter.id} className="filters">
+                                                <div className="form">
+                                                    <div className="form__field-select">
+                                                        <label
+                                                                htmlFor={`filter-select-${index}`}
+                                                                className={`form__label caption__regular`}
+                                                        >
+                                                            Reihe
+                                                        </label>
+                                                        <Select
+                                                                id={`filter-select-${index}`}
+                                                                classNamePrefix="react-select"
+                                                                className={`form__select body-normal__regular`}
+                                                                placeholder="Wählen Sie eine Tabellenreihe"
+                                                                isClearable={true}
+                                                                closeMenuOnSelect={true}
+                                                                name="company-type"
+                                                                isSearchable={true}
+                                                                required
+                                                        />
+                                                        <span className="error-message caption__regular">Error message</span>
+                                                    </div>
+                                                </div>
+                                                <div className="form__field">
+                                                    <label htmlFor={`filter-${index}`}
+                                                           className={`form__label caption__regular`}>
+                                                        Wert
+                                                    </label>
+                                                    <input
+                                                            id={`filter-${index}`}
+                                                            className="form__input body-normal__regular"
+                                                            type="text"
+                                                            placeholder="Nach welchem Wert möchten Sie filtern"
+                                                            required
+                                                    />
+                                                </div>
+                                                <div className="delete-filter">
+                                                    <button
+                                                            className="button button-gost button--big button--grey"
+                                                            onClick={() => deleteFilter(filter.id)}
+                                                    >
+                                                        <i className="button__icon icon-trash"/>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                    ))}
+                                    <div>
+                                        <button className="button button-gost button--big button--green"
+                                                onClick={addFilter}>
+                                            <i className="button__icon icon-plus"/>
+                                            <span className="button__text">Weiteren Filter hinzufügen</span>
+                                        </button>
                                     </div>
-                                    <div className="delete-filter">
-                                        <button
-                                            className="button button-gost button--big button--grey"
-                                            onClick={() => deleteFilter(filter.id)}
-                                        >
-                                            <i className="button__icon icon-trash" />
+                                    <div className="no-background">
+                                        <button className="button button-secondary button--big button--green">
+                                            <span className="button__text">Filter anwenden</span>
                                         </button>
                                     </div>
                                 </div>
-                            ))}
-                            <div>
-                                <button className="button button-gost button--big button--green" onClick={addFilter}>
-                                    <i className="button__icon icon-plus" />
-                                    <span className="button__text">Weiteren Filter hinzufügen</span>
-                                </button>
-                            </div>
-                            <div className="no-background">
-                                <button className="button button-secondary button--big button--green">
-                                    <span className="button__text">Filter anwenden</span>
-                                </button>
-                            </div>
-                        </div>
-                    )}
-                    <span className="body-small__regular">Aktive Filter:</span>
-                    <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
-                        Haus 2 <i className="icon-x" />
+                        )}
+                        <span className="body-small__regular">Aktive Filter:</span>
+                        <span data-tooltip-id="tooltip"
+                              data-tooltip-content="Filter löschen"
+                              data-tooltip-place="top"
+                              data-tooltip-offset={10}
+                              className="baubschnitte-managment__filter-managment--filtered body-small__medium">
+                        Haus 2 <i className="icon-x"/>
                     </span>
-                    <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
-                        Haus 2<i className="icon-x" />
+                        <span data-tooltip-id="tooltip"
+                              data-tooltip-content="Filter löschen"
+                              data-tooltip-place="top"
+                              data-tooltip-offset={10}
+                              className="baubschnitte-managment__filter-managment--filtered body-small__medium">
+                        Haus 2<i className="icon-x"/>
                     </span>
-                    <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
-                        Haus 2<i className="icon-x" />
+                        <span data-tooltip-id="tooltip"
+                              data-tooltip-content="Filter löschen"
+                              data-tooltip-place="top"
+                              data-tooltip-offset={10}
+                              className="baubschnitte-managment__filter-managment--filtered body-small__medium">
+                        Haus 2<i className="icon-x"/>
                     </span>
-                    <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
-                        Haus 2<i className="icon-x" />
+                        <span data-tooltip-id="tooltip"
+                              data-tooltip-content="Filter löschen"
+                              data-tooltip-place="top"
+                              data-tooltip-offset={10}
+                              className="baubschnitte-managment__filter-managment--filtered body-small__medium">
+                        Haus 2<i className="icon-x"/>
                     </span>
-                    <span className="baubschnitte-managment__filter-managment--filtered body-small__medium">
-                        Haus 2<i className="icon-x" />
+                        <span data-tooltip-id="tooltip"
+                              data-tooltip-content="Filter löschen"
+                              data-tooltip-place="top"
+                              data-tooltip-offset={10}
+                              className="baubschnitte-managment__filter-managment--filtered body-small__medium">
+                        Haus 2<i className="icon-x"/>
                     </span>
-                </div>
-
-                <div className="baubschnitte-managment__baubschnitte-buttons">
-                    <div className="toggle-switch">
-                        <label className="switch toggle-switch__switch baubschnitte-toggle">
-                            <input className="toggle-switch__input baubschnitte-input" type="checkbox" id="switch-1" />
-                            <span className="toggle-switch__slider baubschnitte-slider"></span>
-                        </label>
-                        <label htmlFor="switch-1" className="toggle-switch__text body-big__regular">
-                            Abgeschlossene Bauabschnitte einblenden
-                        </label>
                     </div>
-                    {!showAdditionalButtons && (
-                        <button className="button button-secondary button--big button--grey" onClick={toggleDropdown}>
-                            <span className="button__text">Aktionen</span>
-                            <i className="button__icon icon-dots-three-vertical"></i>
-                        </button>
-                    )}
-                    {showAdditionalButtons && (
-                        <div className="baubschnitte-managment__baubschnitte-buttons--hidden-buttons">
-                            <button className="button button-primary button--big button--green">
-                                <i className="button__icon icon-arrow-square-out"></i>
-                                <span className="button__text">Excel exportieren</span>
-                            </button>
-                            <button
-                                className="button button-secondary button--big button--grey"
-                                onClick={() => setShowAdditionalButtons(false)}
-                            >
-                                <span className="button__text">Export Abbrechen</span>
-                            </button>
-                        </div>
-                    )}
 
-                    {isDropdownOpen && (
-                        <div
-                            className={`baubschnitte-managment__dropdown ${isDropdownOpen ? "is-visible" : ""}`}
-                            ref={dropdownRef}
-                        >
-                            <button
-                                className="button button-primary button--big button--orange"
-                                onClick={() => setShowPlanFreigeben(true)}
-                            >
-                                <i className="button__icon icon-share"></i>
-                                <span className="button__text">Pläne freigeben</span>
-                            </button>
-                            {showPlanFreigeben && (
-                                <PlanViewModal show={showPlanFreigeben} setShow={setShowPlanFreigeben} />
-                            )}
-                            <button
-                                className="button button-primary button--big button--green"
-                                onClick={() => setShowPlaneHochladenModal(true)}
-                            >
-                                <i className="button__icon icon-file-arrow-up"></i>
-                                <span className="button__text">Pläne hochladen</span>
-                            </button>
-                            {showPlaneHochladenModal && (
-                                <PlaneHochladenModal
-                                    showPlaneHochladenModal={showPlaneHochladenModal}
-                                    setShowPlaneHochladenModal={setShowPlaneHochladenModal}
-                                />
-                            )}
-                            <button
-                                className="button button-secondary button--big button--grey"
-                                onClick={() => navigate(PATHS.documents)}
-                            >
-                                <i className="button__icon icon-files"></i>
-                                <span className="button__text">Dokumente anzeigen</span>
-                            </button>
-                            <button
-                                className="button button-secondary button--big button--grey"
-                                onClick={() => {
-                                    setShowAdditionalButtons(true);
-                                    setDropdownOpen(false);
-                                }}
-                            >
-                                <i className="button__icon icon-arrow-square-out"></i>
-                                <span className="button__text">Excel exportieren</span>
-                            </button>
+                    <div className="baubschnitte-managment__baubschnitte-buttons">
+                        <div className="toggle-switch">
+                            <label className="switch toggle-switch__switch baubschnitte-toggle">
+                                <input className="toggle-switch__input baubschnitte-input" type="checkbox"
+                                       id="switch-1"/>
+                                <span className="toggle-switch__slider baubschnitte-slider"></span>
+                            </label>
+                            <label htmlFor="switch-1" className="toggle-switch__text body-big__regular">
+                                Abgeschlossene Bauabschnitte einblenden
+                            </label>
                         </div>
-                    )}
+                        {!showAdditionalButtons && (
+                                <button className="button button-secondary button--big button--grey"
+                                        onClick={toggleDropdown}>
+                                    <span className="button__text">Aktionen</span>
+                                    <i className="button__icon icon-dots-three-vertical"></i>
+                                </button>
+                        )}
+                        {showAdditionalButtons && (
+                                <div className="baubschnitte-managment__baubschnitte-buttons--hidden-buttons">
+                                    <button className="button button-primary button--big button--green">
+                                        <i className="button__icon icon-arrow-square-out"></i>
+                                        <span className="button__text">Excel exportieren</span>
+                                    </button>
+                                    <button
+                                            className="button button-secondary button--big button--grey"
+                                            onClick={() => setShowAdditionalButtons(false)}
+                                    >
+                                        <span className="button__text">Export Abbrechen</span>
+                                    </button>
+                                </div>
+                        )}
+
+                        {isDropdownOpen && (
+                                <div
+                                        className={`baubschnitte-managment__dropdown ${isDropdownOpen ? "is-visible" : ""}`}
+                                        ref={dropdownRef}
+                                >
+                                    <button
+                                            className="button button-primary button--big button--orange"
+                                            onClick={() => setShowPlanFreigeben(true)}
+                                    >
+                                        <i className="button__icon icon-share"></i>
+                                        <span className="button__text">Pläne freigeben</span>
+                                    </button>
+                                    {showPlanFreigeben && (
+                                            <PlanViewModal show={showPlanFreigeben} setShow={setShowPlanFreigeben}/>
+                                    )}
+                                    <button
+                                            className="button button-primary button--big button--green"
+                                            onClick={() => setShowPlaneHochladenModal(true)}
+                                    >
+                                        <i className="button__icon icon-file-arrow-up"></i>
+                                        <span className="button__text">Pläne hochladen</span>
+                                    </button>
+                                    {showPlaneHochladenModal && (
+                                            <PlaneHochladenModal
+                                                    showPlaneHochladenModal={showPlaneHochladenModal}
+                                                    setShowPlaneHochladenModal={setShowPlaneHochladenModal}
+                                            />
+                                    )}
+                                    <button
+                                            className="button button-secondary button--big button--grey"
+                                            onClick={() => navigate(PATHS.documents)}
+                                    >
+                                        <i className="button__icon icon-files"></i>
+                                        <span className="button__text">Dokumente anzeigen</span>
+                                    </button>
+                                    <button
+                                            className="button button-secondary button--big button--grey"
+                                            onClick={() => {
+                                                setShowAdditionalButtons(true);
+                                                setDropdownOpen(false);
+                                            }}
+                                    >
+                                        <i className="button__icon icon-arrow-square-out"></i>
+                                        <span className="button__text">Excel exportieren</span>
+                                    </button>
+                                </div>
+                        )}
+                    </div>
                 </div>
-            </div>
 
-            <div className="table-list-accordion">
-                <table>
-                    <thead>
+                <div className="table-list-accordion">
+                    <table>
+                        <thead>
                         <tr>
                             <th>
                                 <div>
                                     {showAdditionalButtons && (
-                                        <label className="body-normal__semibold form-checkbox">
-                                            <input type="checkbox" />
-                                        </label>
+                                            <label className="body-normal__semibold form-checkbox">
+                                                <input data-tooltip-id="tooltip"
+                                                       data-tooltip-content="Reihe auswählen"
+                                                       data-tooltip-place="top"
+                                                       data-tooltip-offset={10}
+                                                       type="checkbox"/>
+                                            </label>
                                     )}
                                 </div>
                             </th>
                             <th>
                                 <div className="body-normal__semibold">
                                     BA
-                                    <i className="icon-caret-up-down" />
+                                    <i className="icon-caret-up-down"/>
                                 </div>
                             </th>
                             <th>
                                 <div className="body-normal__semibold">
                                     Haus
-                                    <i className="icon-caret-up-down" />
+                                    <i className="icon-caret-up-down"/>
                                 </div>
                             </th>
                             <th>
                                 <div className="body-normal__semibold">
                                     Geschoss
-                                    <i className="icon-caret-up-down" />
+                                    <i className="icon-caret-up-down"/>
                                 </div>
                             </th>
                             <th>
                                 <div className="body-normal__semibold">
                                     Ebene
-                                    <i className="icon-caret-up-down" />
+                                    <i className="icon-caret-up-down"/>
                                 </div>
                             </th>
                             <th>
                                 <div className="body-normal__semibold">
                                     Produkt
-                                    <i className="icon-caret-up-down" />
+                                    <i className="icon-caret-up-down"/>
                                 </div>
                             </th>
                             <th>
@@ -434,409 +464,449 @@ const Bauabschnitte = () => {
                             <th>
                                 <div className="body-normal__semibold">
                                     Status
-                                    <i className="icon-caret-up-down" />
+                                    <i className="icon-caret-up-down"/>
                                 </div>
                             </th>
                             <th>
                                 <div className="body-normal__semibold">
                                     Planung
-                                    <i className="icon-caret-up-down" />
+                                    <i className="icon-caret-up-down"/>
                                 </div>
                             </th>
                             <th>
                                 <div className="body-normal__semibold">
                                     Soll-Freigabe
-                                    <i className="icon-caret-up-down" />
+                                    <i className="icon-caret-up-down"/>
                                 </div>
                             </th>
                             <th>
                                 <div className="body-normal__semibold">
                                     Wunschlieferung
-                                    <i className="icon-caret-up-down" />
+                                    <i className="icon-caret-up-down"/>
                                 </div>
                             </th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         {data.map((item, index) => (
-                            <React.Fragment key={item.id}>
-                                <tr
-                                    className={`${expandedRow === index ? "expanded" : ""}`}
-                                    onClick={() => toggleRow(index)}
-                                >
-                                    <td
-                                        className={`body-normal__regular addition-checkbox ${
-                                            expandedRow === index ? "expanded" : ""
-                                        }`}
-                                        data-label={""}
-                                    >
-                                        {showAdditionalButtons && (
-                                            <div>
-                                                <label className="body-normal__semibold form-checkbox">
-                                                    <input type="checkbox" />
-                                                </label>
-                                            </div>
-                                        )}
-                                        {expandedRow === index ? (
-                                            <i className="icon-caret-right expanded" />
-                                        ) : (
-                                            <i className="icon-caret-right" />
-                                        )}
-                                    </td>
-                                    <td
-                                        className={`body-normal__regular ${expandedRow === index ? "expanded" : ""}`}
-                                        data-label={"BA"}
-                                    >
-                                        {item.id}
-                                    </td>
-                                    <td
-                                        className={`body-normal__regular ${expandedRow === index ? "expanded" : ""}`}
-                                        data-label={"Haus"}
-                                    >
-                                        {item.name}
-                                    </td>
-                                    <td
-                                        className={`body-normal__regular ${expandedRow === index ? "expanded" : ""}`}
-                                        data-label={"Geschoss"}
-                                    >
-                                        {item.category}
-                                    </td>
-                                    <td
-                                        className={`body-normal__regular ${expandedRow === index ? "expanded" : ""}`}
-                                        data-label={"Ebene"}
-                                    >
-                                        {item.description}
-                                    </td>
-                                    <td
-                                        className={`body-normal__regular ${expandedRow === index ? "expanded" : ""}`}
-                                        data-label={"Produkt"}
-                                    >
-                                        {item.price}
-                                    </td>
-                                    <td
-                                        className={`body-normal__regular ${expandedRow === index ? "expanded" : ""}`}
-                                        data-label={"Plan Nr."}
-                                    >
-                                        <div className="text-icon">{item.stock}</div>
-                                    </td>
-                                    <td
-                                        className={`body-normal__regular ${expandedRow === index ? "expanded" : ""}`}
-                                        data-label={"Status"}
-                                    >
-                                        <div className="tag tag--orange">{item.supplier}</div>
-                                    </td>
-                                    <td
-                                        className={`body-normal__regular ${expandedRow === index ? "expanded" : ""}`}
-                                        data-label={"Planung"}
-                                    >
-                                        {item.rating}
-                                    </td>
-                                    <td
-                                        className={`body-normal__regular ${expandedRow === index ? "expanded" : ""}`}
-                                        data-label={"Soll-Freigabe"}
-                                    >
-                                        {item.rating}
-                                    </td>
-                                    <td
-                                        className={`body-normal__regular no-actions green-text centered ${
-                                            expandedRow === index ? "expanded" : ""
-                                        }`}
-                                        data-label={"Wunschlieferung"}
-                                    >
-                                        {item.rating} <i className="icon-circle green-circle" />
-                                    </td>
-                                </tr>
-
-                                {expandedRow === index && (
+                                <React.Fragment key={item.id}>
                                     <tr
-                                        className={`${expandedRow === index ? "expanded" : ""}`}
-                                        onClick={() => toggleRow(index)}
+                                            className={`${expandedRow === index ? "expanded" : ""}`}
+                                            onClick={() => toggleRow(index)}
                                     >
-                                        <td colSpan={11}>
-                                            <div className="first-accordion">
-                                                <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <th>
-                                                                <div className="body-normal__semibold"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div className="body-normal__semibold">Arrow</div>
-                                                            </th>
-                                                            <th>
-                                                                <div className="body-normal__semibold">
-                                                                    Sub-Plan Nr.
-                                                                </div>
-                                                            </th>
-                                                            <th>
-                                                                <div className="body-normal__semibold">Details</div>
-                                                            </th>
-                                                            <th>
-                                                                <div className="body-normal__semibold">Details</div>
-                                                            </th>
-                                                            <th>
-                                                                <div className="body-normal__semibold">Details</div>
-                                                            </th>
-                                                            <th>
-                                                                <div className="body-normal__semibold">
-                                                                    Additional Info
-                                                                </div>
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {item.subRecords.map((subItem, nestedIndex) => (
-                                                            <React.Fragment key={subItem.id}>
-                                                                <tr
-                                                                    className={`${
-                                                                        nestedExpandedRow[index] === nestedIndex
-                                                                            ? "opened"
-                                                                            : ""
-                                                                    }`}
-                                                                    onClick={(e) => {
-                                                                        e.stopPropagation();
-                                                                        toggleNestedRow(index, nestedIndex);
-                                                                    }}
-                                                                >
-                                                                    <td
-                                                                        className={`body-normal__regular ${
-                                                                            nestedExpandedRow[index] === nestedIndex
-                                                                                ? "expanded"
-                                                                                : ""
-                                                                        }`}
-                                                                    >
-                                                                        {nestedExpandedRow[index] === nestedIndex ? (
-                                                                            <i className="icon-caret-right expanded" />
-                                                                        ) : (
-                                                                            <i className="icon-caret-right" />
-                                                                        )}
-                                                                    </td>
-                                                                    <td
-                                                                        className={`body-normal__regular ${
-                                                                            nestedExpandedRow[index] === nestedIndex
-                                                                                ? "expanded"
-                                                                                : ""
-                                                                        }`}
-                                                                    >
-                                                                        {subItem.id}
-                                                                    </td>
-                                                                    <td
-                                                                        className={`body-normal__regular ${
-                                                                            nestedExpandedRow[index] === nestedIndex
-                                                                                ? "expanded"
-                                                                                : ""
-                                                                        }`}
-                                                                    >
-                                                                        {subItem.details}
-                                                                    </td>
-                                                                    <td
-                                                                        className={`body-normal__regular ${
-                                                                            nestedExpandedRow[index] === nestedIndex
-                                                                                ? "expanded"
-                                                                                : ""
-                                                                        }`}
-                                                                    >
-                                                                        {subItem.details}
-                                                                    </td>
-                                                                    <td
-                                                                        className={`body-normal__regular ${
-                                                                            nestedExpandedRow[index] === nestedIndex
-                                                                                ? "expanded"
-                                                                                : ""
-                                                                        }`}
-                                                                    >
-                                                                        {subItem.details}
-                                                                    </td>
-                                                                    <td
-                                                                        className={`body-normal__regular  ${
-                                                                            nestedExpandedRow[index] === nestedIndex
-                                                                                ? "expanded"
-                                                                                : ""
-                                                                        }`}
-                                                                    >
-                                                                        {subItem.details}
-                                                                    </td>
-                                                                    <td
-                                                                        className={`body-normal__regular  ${
-                                                                            nestedExpandedRow[index] === nestedIndex
-                                                                                ? "expanded"
-                                                                                : ""
-                                                                        }`}
-                                                                    >
-                                                                        {subItem.details}
-                                                                    </td>
-                                                                </tr>
-                                                                {nestedExpandedRow[index] === nestedIndex && (
-                                                                    <>
-                                                                        <tr
-                                                                            className={`${
-                                                                                expandedRow === index ? "expanded" : ""
-                                                                            }`}
-                                                                        >
-                                                                            <td colSpan={7}>
-                                                                                <div className="second-accordion">
-                                                                                    <table>
-                                                                                        <thead>
-                                                                                            <tr>
-                                                                                                <th>
-                                                                                                    <div className="body-normal__semibold">
-                                                                                                        Nr.
-                                                                                                    </div>
-                                                                                                </th>
-                                                                                                <th>
-                                                                                                    <div className="body-normal__semibold">
-                                                                                                        Ebene
-                                                                                                    </div>
-                                                                                                </th>
-                                                                                                <th>
-                                                                                                    <div className="body-normal__semibold">
-                                                                                                        Länge
-                                                                                                    </div>
-                                                                                                </th>
-                                                                                                <th>
-                                                                                                    <div className="body-normal__semibold">
-                                                                                                        Breite
-                                                                                                    </div>
-                                                                                                </th>
-                                                                                                <th>
-                                                                                                    <div className="body-normal__semibold">
-                                                                                                        Gewicht
-                                                                                                    </div>
-                                                                                                </th>
-                                                                                                <th>
-                                                                                                    <div className="body-normal__semibold">
-                                                                                                        Montagenummer
-                                                                                                    </div>
-                                                                                                </th>
-                                                                                            </tr>
-                                                                                        </thead>
-                                                                                        <tbody>
-                                                                                            {subItem.innerRecords.map(
-                                                                                                (innerItem) => (
-                                                                                                    <tr
-                                                                                                        key={
-                                                                                                            innerItem.id
-                                                                                                        }
-                                                                                                        onClick={(
-                                                                                                            e
-                                                                                                        ) => {
-                                                                                                            e.stopPropagation();
-                                                                                                            toggleInnerNestedRow(
-                                                                                                                index,
-                                                                                                                nestedIndex
-                                                                                                            );
-                                                                                                        }}
-                                                                                                    >
-                                                                                                        <td>
-                                                                                                            <div className="body-normal__regular">
-                                                                                                                {
-                                                                                                                    innerItem.nr
-                                                                                                                }
-                                                                                                            </div>
-                                                                                                        </td>
+                                        <td
+                                                className={`body-normal__regular addition-checkbox ${
+                                                        expandedRow === index ? "expanded" : ""
+                                                }`}
+                                                data-label={""}
+                                        >
+                                            {showAdditionalButtons && (
+                                                    <div>
+                                                        <label className="body-normal__semibold form-checkbox">
+                                                            <input data-tooltip-id="tooltip"
+                                                                   data-tooltip-content="Reihe auswählen"
+                                                                   data-tooltip-place="top"
+                                                                   data-tooltip-offset={10} type="checkbox"/>
+                                                        </label>
+                                                    </div>
+                                            )}
+                                            {expandedRow === index ? (
+                                                    <div data-tooltip-id="tooltip"
+                                                         data-tooltip-content="Details schließen"
+                                                         data-tooltip-place="top"
+                                                         data-tooltip-offset={10}
+                                                    >
+                                                        <i className="icon-caret-right expanded"/>
+                                                    </div>
+                                            ) : (
+                                                    <div data-tooltip-id="tooltip"
+                                                         data-tooltip-content="Details öffnen"
+                                                         data-tooltip-place="top"
+                                                         data-tooltip-offset={10}
+                                                    >
+                                                        <i className="icon-caret-right"/>
+                                                    </div>
+                                            )}
+                                        </td>
+                                        <td
+                                                className={`body-normal__regular ${expandedRow === index ? "expanded" : ""}`}
+                                                data-label={"BA"}
+                                        >
+                                            {item.id}
+                                        </td>
+                                        <td
+                                                className={`body-normal__regular ${expandedRow === index ? "expanded" : ""}`}
+                                                data-label={"Haus"}
+                                        >
+                                            {item.name}
+                                        </td>
+                                        <td
+                                                className={`body-normal__regular ${expandedRow === index ? "expanded" : ""}`}
+                                                data-label={"Geschoss"}
+                                        >
+                                            {item.category}
+                                        </td>
+                                        <td
+                                                className={`body-normal__regular ${expandedRow === index ? "expanded" : ""}`}
+                                                data-label={"Ebene"}
+                                        >
+                                            {item.description}
+                                        </td>
+                                        <td
+                                                className={`body-normal__regular ${expandedRow === index ? "expanded" : ""}`}
+                                                data-label={"Produkt"}
+                                        >
+                                            {item.price}
+                                        </td>
+                                        <td
+                                                className={`body-normal__regular ${expandedRow === index ? "expanded" : ""}`}
+                                                data-label={"Plan Nr."}
+                                        >
+                                            <div className="text-icon">{item.stock}</div>
+                                        </td>
+                                        <td
+                                                className={`body-normal__regular ${expandedRow === index ? "expanded" : ""}`}
+                                                data-label={"Status"}
+                                        >
+                                            <div className="tag tag--orange">{item.supplier}</div>
+                                        </td>
+                                        <td
+                                                className={`body-normal__regular ${expandedRow === index ? "expanded" : ""}`}
+                                                data-label={"Planung"}
+                                        >
+                                            {item.rating}
+                                        </td>
+                                        <td
+                                                className={`body-normal__regular ${expandedRow === index ? "expanded" : ""}`}
+                                                data-label={"Soll-Freigabe"}
+                                        >
+                                            {item.rating}
+                                        </td>
+                                        <td
+                                                className={`body-normal__regular no-actions green-text centered ${
+                                                        expandedRow === index ? "expanded" : ""
+                                                }`}
+                                                data-label={"Wunschlieferung"}
+                                        >
+                                            <div data-tooltip-id="tooltip"
+                                                 data-tooltip-content="Neues Wunschlieferdatum senden"
+                                                 data-tooltip-place="top"
+                                                 data-tooltip-offset={10}
+                                            >
+                                                {item.rating}
+                                            </div>
 
-                                                                                                        <td>
-                                                                                                            <div className="body-normal__regular">
-                                                                                                                {
-                                                                                                                    innerItem.ebene
-                                                                                                                }
-                                                                                                            </div>
-                                                                                                        </td>
-                                                                                                        <td>
-                                                                                                            <div className="body-normal__regular">
-                                                                                                                {
-                                                                                                                    innerItem.laenge
-                                                                                                                }
-                                                                                                            </div>
-                                                                                                        </td>
-                                                                                                        <td>
-                                                                                                            <div className="body-normal__regular">
-                                                                                                                {
-                                                                                                                    innerItem.breite
-                                                                                                                }
-                                                                                                            </div>
-                                                                                                        </td>
-                                                                                                        <td>
-                                                                                                            <div className="body-normal__regular">
-                                                                                                                {
-                                                                                                                    innerItem.gewicht
-                                                                                                                }
-                                                                                                            </div>
-                                                                                                        </td>
-                                                                                                        <td>
-                                                                                                            <div className="body-normal__regular">
-                                                                                                                {
-                                                                                                                    innerItem.montagenummer
-                                                                                                                }
-                                                                                                            </div>
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                )
-                                                                                            )}
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </>
-                                                                )}
-                                                            </React.Fragment>
-                                                        ))}
-                                                    </tbody>
-                                                </table>
+                                            <div data-tooltip-id="tooltip"
+                                                 data-tooltip-content="Bestätigter Liefertermin"
+                                                 data-tooltip-place="top"
+                                                 data-tooltip-offset={10}
+                                            >
+                                                <i className="icon-circle green-circle"/>
                                             </div>
                                         </td>
                                     </tr>
-                                )}
-                                <div className="spacer"></div>
-                            </React.Fragment>
+
+                                    {expandedRow === index && (
+                                            <tr
+                                                    className={`${expandedRow === index ? "expanded" : ""}`}
+                                                    onClick={() => toggleRow(index)}
+                                            >
+                                                <td colSpan={11}>
+                                                    <div className="first-accordion">
+                                                        <table>
+                                                            <thead>
+                                                            <tr>
+                                                                <th>
+                                                                    <div className="body-normal__semibold"></div>
+                                                                </th>
+                                                                <th>
+                                                                    <div className="body-normal__semibold">Arrow</div>
+                                                                </th>
+                                                                <th>
+                                                                    <div className="body-normal__semibold">
+                                                                        Sub-Plan Nr.
+                                                                    </div>
+                                                                </th>
+                                                                <th>
+                                                                    <div className="body-normal__semibold">Details</div>
+                                                                </th>
+                                                                <th>
+                                                                    <div className="body-normal__semibold">Details</div>
+                                                                </th>
+                                                                <th>
+                                                                    <div className="body-normal__semibold">Details</div>
+                                                                </th>
+                                                                <th>
+                                                                    <div className="body-normal__semibold">
+                                                                        Additional Info
+                                                                    </div>
+                                                                </th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            {item.subRecords.map((subItem, nestedIndex) => (
+                                                                    <React.Fragment key={subItem.id}>
+                                                                        <tr
+                                                                                className={`${
+                                                                                        nestedExpandedRow[index] === nestedIndex
+                                                                                                ? "opened"
+                                                                                                : ""
+                                                                                }`}
+                                                                                onClick={(e) => {
+                                                                                    e.stopPropagation();
+                                                                                    toggleNestedRow(index, nestedIndex);
+                                                                                }}
+                                                                        >
+                                                                            <td
+                                                                                    className={`body-normal__regular ${
+                                                                                            nestedExpandedRow[index] === nestedIndex
+                                                                                                    ? "expanded"
+                                                                                                    : ""
+                                                                                    }`}
+                                                                            >
+
+                                                                                {nestedExpandedRow[index] === nestedIndex ? (
+                                                                                        <div data-tooltip-id="tooltip"
+                                                                                             data-tooltip-content="Details schließen"
+                                                                                             data-tooltip-place="top"
+                                                                                             data-tooltip-offset={10}
+                                                                                        >
+                                                                                            <i className="icon-caret-right expanded"/>
+                                                                                        </div>
+                                                                                ) : (
+                                                                                        <div data-tooltip-id="tooltip"
+                                                                                             data-tooltip-content="Details öffnen"
+                                                                                             data-tooltip-place="top"
+                                                                                             data-tooltip-offset={10}
+                                                                                        >
+                                                                                            <i className="icon-caret-right"/>
+                                                                                        </div>
+                                                                                )}
+                                                                            </td>
+                                                                            <td
+                                                                                    className={`body-normal__regular ${
+                                                                                            nestedExpandedRow[index] === nestedIndex
+                                                                                                    ? "expanded"
+                                                                                                    : ""
+                                                                                    }`}
+                                                                            >
+                                                                                {subItem.id}
+                                                                            </td>
+                                                                            <td
+                                                                                    className={`body-normal__regular ${
+                                                                                            nestedExpandedRow[index] === nestedIndex
+                                                                                                    ? "expanded"
+                                                                                                    : ""
+                                                                                    }`}
+                                                                            >
+                                                                                {subItem.details}
+                                                                            </td>
+                                                                            <td
+                                                                                    className={`body-normal__regular ${
+                                                                                            nestedExpandedRow[index] === nestedIndex
+                                                                                                    ? "expanded"
+                                                                                                    : ""
+                                                                                    }`}
+                                                                            >
+                                                                                {subItem.details}
+                                                                            </td>
+                                                                            <td
+                                                                                    className={`body-normal__regular ${
+                                                                                            nestedExpandedRow[index] === nestedIndex
+                                                                                                    ? "expanded"
+                                                                                                    : ""
+                                                                                    }`}
+                                                                            >
+                                                                                {subItem.details}
+                                                                            </td>
+                                                                            <td
+                                                                                    className={`body-normal__regular  ${
+                                                                                            nestedExpandedRow[index] === nestedIndex
+                                                                                                    ? "expanded"
+                                                                                                    : ""
+                                                                                    }`}
+                                                                            >
+                                                                                {subItem.details}
+                                                                            </td>
+                                                                            <td
+                                                                                    className={`body-normal__regular  ${
+                                                                                            nestedExpandedRow[index] === nestedIndex
+                                                                                                    ? "expanded"
+                                                                                                    : ""
+                                                                                    }`}
+                                                                            >
+                                                                                {subItem.details}
+                                                                            </td>
+                                                                        </tr>
+                                                                        {nestedExpandedRow[index] === nestedIndex && (
+                                                                                <>
+                                                                                    <tr
+                                                                                            className={`${
+                                                                                                    expandedRow === index ? "expanded" : ""
+                                                                                            }`}
+                                                                                    >
+                                                                                        <td colSpan={7}>
+                                                                                            <div className="second-accordion">
+                                                                                                <table>
+                                                                                                    <thead>
+                                                                                                    <tr>
+                                                                                                        <th>
+                                                                                                            <div className="body-normal__semibold">
+                                                                                                                Nr.
+                                                                                                            </div>
+                                                                                                        </th>
+                                                                                                        <th>
+                                                                                                            <div className="body-normal__semibold">
+                                                                                                                Ebene
+                                                                                                            </div>
+                                                                                                        </th>
+                                                                                                        <th>
+                                                                                                            <div className="body-normal__semibold">
+                                                                                                                Länge
+                                                                                                            </div>
+                                                                                                        </th>
+                                                                                                        <th>
+                                                                                                            <div className="body-normal__semibold">
+                                                                                                                Breite
+                                                                                                            </div>
+                                                                                                        </th>
+                                                                                                        <th>
+                                                                                                            <div className="body-normal__semibold">
+                                                                                                                Gewicht
+                                                                                                            </div>
+                                                                                                        </th>
+                                                                                                        <th>
+                                                                                                            <div className="body-normal__semibold">
+                                                                                                                Montagenummer
+                                                                                                            </div>
+                                                                                                        </th>
+                                                                                                    </tr>
+                                                                                                    </thead>
+                                                                                                    <tbody>
+                                                                                                    {subItem.innerRecords.map(
+                                                                                                            (innerItem) => (
+                                                                                                                    <tr
+                                                                                                                            key={
+                                                                                                                                innerItem.id
+                                                                                                                            }
+                                                                                                                            onClick={(
+                                                                                                                                    e
+                                                                                                                            ) => {
+                                                                                                                                e.stopPropagation();
+                                                                                                                                toggleInnerNestedRow(
+                                                                                                                                        index,
+                                                                                                                                        nestedIndex
+                                                                                                                                );
+                                                                                                                            }}
+                                                                                                                    >
+                                                                                                                        <td>
+                                                                                                                            <div className="body-normal__regular">
+                                                                                                                                {
+                                                                                                                                    innerItem.nr
+                                                                                                                                }
+                                                                                                                            </div>
+                                                                                                                        </td>
+
+                                                                                                                        <td>
+                                                                                                                            <div className="body-normal__regular">
+                                                                                                                                {
+                                                                                                                                    innerItem.ebene
+                                                                                                                                }
+                                                                                                                            </div>
+                                                                                                                        </td>
+                                                                                                                        <td>
+                                                                                                                            <div className="body-normal__regular">
+                                                                                                                                {
+                                                                                                                                    innerItem.laenge
+                                                                                                                                }
+                                                                                                                            </div>
+                                                                                                                        </td>
+                                                                                                                        <td>
+                                                                                                                            <div className="body-normal__regular">
+                                                                                                                                {
+                                                                                                                                    innerItem.breite
+                                                                                                                                }
+                                                                                                                            </div>
+                                                                                                                        </td>
+                                                                                                                        <td>
+                                                                                                                            <div className="body-normal__regular">
+                                                                                                                                {
+                                                                                                                                    innerItem.gewicht
+                                                                                                                                }
+                                                                                                                            </div>
+                                                                                                                        </td>
+                                                                                                                        <td>
+                                                                                                                            <div className="body-normal__regular">
+                                                                                                                                {
+                                                                                                                                    innerItem.montagenummer
+                                                                                                                                }
+                                                                                                                            </div>
+                                                                                                                        </td>
+                                                                                                                    </tr>
+                                                                                                            )
+                                                                                                    )}
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </>
+                                                                        )}
+                                                                    </React.Fragment>
+                                                            ))}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                    )}
+                                    <div className="spacer"></div>
+                                </React.Fragment>
                         ))}
-                    </tbody>
-                </table>
-            </div>
+                        </tbody>
+                    </table>
+                </div>
 
-            <div className="pagination-container pagination-container__bottom">
-                <div className="form">
-                    <div className="form__field-select">
-                        <label
-                            htmlFor="pagination"
-                            className={`form__label caption__regular ${selectedOption ? "filled" : ""}`}
-                        >
-                            Einträge pro Seite
-                        </label>
+                <div className="pagination-container pagination-container__bottom">
+                    <div className="form">
+                        <div className="form__field-select">
+                            <label htmlFor="pagination" className={`form__label caption__regular ${selectedOption ? "filled" : ""}`}>
+                                Einträge pro Seite
+                            </label>
 
-                        <Select
-                            id="pagination"
-                            classNamePrefix="react-select"
-                            className={`form__select body-normal__regular ${selectedOption ? "filled" : ""}`}
-                            placeholder={false}
-                            value={5}
-                            // options={options}
-                            isClearable={true}
-                            closeMenuOnSelect={true}
-                            name="company-type"
-                            isSearchable={true}
-                            required
-                        />
-                        <span className="error-message caption__regular">Error message</span>
+                            <Select
+                                    id="pagination"
+                                    classNamePrefix="react-select"
+                                    className={`form__select body-normal__regular ${selectedOption ? "filled" : ""}`}
+                                    placeholder={false}
+                                    value={5}
+                                    // options={options}
+                                    isClearable={true}
+                                    closeMenuOnSelect={true}
+                                    name="company-type"
+                                    isSearchable={true}
+                                    required
+                            />
+                            <span className="error-message caption__regular">Error message</span>
+                        </div>
+                    </div>
+                    <CustomPagination data={mockData} setActivePage={(e) => setPage(e)}/>
+                </div>
+
+                <div className="baubschnitte-legend">
+                    <div className="baubschnitte-legend__erläuterungen">
+                        <span className="body-small__regular">Erläuterungen</span>
+                    </div>
+                    <div className="baubschnitte-legend__explanation">
+                        <span className="caption__regular">
+                            <i className="icon-circle green-circle"/> Wunschlieferdatum bestätigt
+                        </span>
+                        <span className="caption__regular">
+                            <i className="icon-circle yellow-circle"/> Voraussichtlicher Liefertermin
+                        </span>
                     </div>
                 </div>
-                <CustomPagination data={mockData} setActivePage={(e) => setPage(e)} />
-            </div>
-            <div className="baubschnitte-legend">
-                <div className="baubschnitte-legend__erläuterungen">
-                    <span className="body-small__regular">Erläuterungen</span>
-                </div>
-                <div className="baubschnitte-legend__explanation">
-                    <span className="caption__regular">
-                        <i className="icon-circle green-circle" /> Wunschlieferdatum bestätigt
-                    </span>
-                    <span className="caption__regular">
-                        <i className="icon-circle yellow-circle" /> Voraussichtlicher Liefertermin
-                    </span>
-                </div>
-            </div>
-        </>
+            </>
     );
 };
 export default Bauabschnitte;

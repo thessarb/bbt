@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Select from "react-select";
 import CustomPagination from "src/helpers/CustomPaginate";
 import PlaneHochladenModal from "src/components/Modal/PlaneHochladenModal";
+import {Tooltip} from "react-tooltip";
 
 const Documents = () => {
     const [page, setPage] = useState(1);
@@ -34,13 +35,14 @@ const Documents = () => {
                         <i className="button__icon icon-export"></i>
                         <span className="button__text">Neuen Plan hochladen</span>
                     </button>
-                    {showPlaneHochladenModal && <PlaneHochladenModal showPlaneHochladenModal={showPlaneHochladenModal} setShowPlaneHochladenModal={setShowPlaneHochladenModal} />}
+                    {showPlaneHochladenModal && <PlaneHochladenModal showPlaneHochladenModal={showPlaneHochladenModal}
+                                                                     setShowPlaneHochladenModal={setShowPlaneHochladenModal}/>}
                 </div>
 
                 <div className="table-list table-list--secondary">
                     <table role="table">
                         <thead>
-                            <tr role="row">
+                        <tr role="row">
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Auftrag
@@ -75,7 +77,7 @@ const Documents = () => {
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                        <tr>
                             <td role="cell" className="body-normal__regular" data-label={"Auftrag"}>
                                 80700
                             </td>
@@ -93,62 +95,18 @@ const Documents = () => {
                             </td>
 
                             <td role="cell" className="table-list__button" data-label={" "}>
-                                <div className="button button-gost button--big button--grey">
+                                <div data-tooltip-id="tooltip"
+                                     data-tooltip-content="Datei herunterladen"
+                                     data-tooltip-place="top"
+                                     data-tooltip-offset={5}
+                                     className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-download-simple"></i>
                                 </div>
-                                <div className="button button-gost button--big button--grey">
-                                    <i className="button__icon icon-eye"></i>
-                                </div>
-                            </td>
-                        </tr>
-                            <tr>
-                            <td role="cell" className="body-normal__regular" data-label={"Auftrag"}>
-                                80700
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Auftragsname"}>
-                                Web Hennickendorf - Test
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Art"}>
-                                Lieferschein
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Nummer"}>
-                                34567
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Datum"}>
-                                01.01.2024
-                            </td>
-
-                            <td role="cell" className="table-list__button" data-label={" "}>
-                                <div className="button button-gost button--big button--grey">
-                                    <i className="button__icon icon-download-simple"></i>
-                                </div>
-                                <div className="button button-gost button--big button--grey">
-                                    <i className="button__icon icon-eye"></i>
-                                </div>
-                            </td>
-                        </tr>
-                            <tr>
-                            <td role="cell" className="body-normal__regular" data-label={"Auftrag"}>
-                                80700
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Auftragsname"}>
-                                Web Hennickendorf - Test
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Art"}>
-                                Lieferschein
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Nummer"}>
-                                34567
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Datum"}>
-                                01.01.2024
-                            </td>
-
-                            <td role="cell" className="table-list__button" data-label={" "}>
-                                <div className="button button-gost button--big button--grey">
-                                    <i className="button__icon icon-download-simple"></i>
-                                </div>
-                                <div className="button button-gost button--big button--grey">
+                                <div data-tooltip-id="tooltip"
+                                     data-tooltip-content="Datei in einem neuen Fenster öffnen"
+                                     data-tooltip-place="top"
+                                     data-tooltip-offset={5}
+                                     className="button button-gost button--big button--grey">
                                     <i className="button__icon icon-eye"></i>
                                 </div>
                             </td>
@@ -161,7 +119,7 @@ const Documents = () => {
                     <div className="form">
                         <div className="form__field-select">
                             <label htmlFor="pagination"
-                                    className={`form__label caption__regular ${selectedOption ? "filled" : ""}`}
+                                   className={`form__label caption__regular ${selectedOption ? "filled" : ""}`}
                             >
                                 Einträge pro Seite
                             </label>

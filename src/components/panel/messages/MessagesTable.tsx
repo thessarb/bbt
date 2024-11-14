@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {useState, useEffect, useRef} from "react";
+import {Tooltip} from "react-tooltip";
 
 const MessagesTable = () => {
     const [page, setPage] = useState(1);
@@ -69,91 +70,101 @@ const MessagesTable = () => {
     }, [activeRowId]);
 
     return (
-        <>
-            <div className="messages table-list table-list--accordion">
-                <table role="table">
-                    <thead>
-                    <tr role="row">
-                        <th role="columnheader"></th>
-                        <th role="columnheader">
-                            <div className="body-normal__semibold">
-                                Auftrag
-                                <i className="icon-dots-three-vertical"></i>
-                            </div>
-                        </th>
-                        <th role="columnheader">
-                            <div className="body-normal__semibold">
-                                Datum
-                                <i className="icon-dots-three-vertical"></i>
-                            </div>
-                        </th>
-                        <th role="columnheader">
-                            <div className="body-normal__semibold">
-                                Betreff
-                            </div>
-                        </th>
-                        <th role="columnheader">
-                            <div className="body-normal__semibold">
-                                Kritisch
-                            </div>
-                        </th>
-                        <th role="columnheader">
-                            <div className="contents body-normal__semibold">
-                                Inhalt
-                            </div>
-                        </th>
-                        <th role="columnheader">
-                            <div className="body-normal__semibold"></div>
-                        </th>
-                    </tr>
-                    </thead>
+            <>
+                <div className="messages table-list table-list--accordion">
+                    <table role="table">
+                        <thead>
+                        <tr role="row">
+                            <th role="columnheader"></th>
+                            <th role="columnheader">
+                                <div className="body-normal__semibold">
+                                    Auftrag
+                                    <i className="icon-dots-three-vertical"></i>
+                                </div>
+                            </th>
+                            <th role="columnheader">
+                                <div className="body-normal__semibold">
+                                    Datum
+                                    <i className="icon-dots-three-vertical"></i>
+                                </div>
+                            </th>
+                            <th role="columnheader">
+                                <div className="body-normal__semibold">
+                                    Betreff
+                                </div>
+                            </th>
+                            <th role="columnheader">
+                                <div className="body-normal__semibold">
+                                    Kritisch
+                                </div>
+                            </th>
+                            <th role="columnheader">
+                                <div className="contents body-normal__semibold">
+                                    Inhalt
+                                </div>
+                            </th>
+                            <th role="columnheader">
+                                <div className="body-normal__semibold"></div>
+                            </th>
+                        </tr>
+                        </thead>
 
-                    <tbody>
-                    {[0, 1, 2].map((_, index) => (
-                            <tr
-                                    key={index}
-                                    ref={(el) => (rowRefs.current[index] = el)}
-                                    className={`body-normal__regular ${activeRowId === index ? "active" : ""}`}
-                                    onClick={() => handleRowClick(index)}
-                            >
-                                <td role="cell" className="body-normal__regular">
-                                    <i className="icon-caret-right"></i>
-                                </td>
-                                <td role="cell" className="body-normal__regular" data-label={"Auftrag"}>
-                                    80700
-                                </td>
-                                <td role="cell" className="body-normal__regular" data-label={"Datum"}>
-                                    01.01.2024
-                                </td>
-                                <td role="cell" className="body-normal__regular" data-label={"Betreff"}>
-                                    RE-234-24
-                                </td>
-                                <td role="cell" className="body-normal__regular" data-label={"Kritisch"}>
-                                    <div className="button button-gost button--big button--red">
-                                        <i className="button__icon icon-warning"></i>
-                                    </div>
-                                </td>
-                                <td role="cell" className="contents" data-label={"Inhalt"}>
-                                <span className="collapsed body-normal__regular">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad commodi illum itaque nesciunt qui quis quod unde? Ab alias delectus, itaque libero porro quaerat, quam quos repudiandae saepe suscipit totam!
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci cupiditate molestiae neque nisi odio perspiciatis. Blanditiis cum distinctio doloremque ipsam nam neque, nihil odit provident, quaerat quidem, sed tempora unde.
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci cupiditate molestiae neque nisi odio perspiciatis. Blanditiis cum distinctio doloremque ipsam nam neque, nihil odit provident, quaerat quidem, sed tempora unde.
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci cupiditate molestiae neque nisi odio perspiciatis. Blanditiis cum distinctio doloremque ipsam nam neque, nihil odit provident, quaerat quidem, sed tempora unde.
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci cupiditate molestiae neque nisi odio perspiciatis. Blanditiis cum distinctio doloremque ipsam nam neque, nihil odit provident, quaerat quidem, sed tempora unde.
-                                </span>
-                                </td>
-                                <td role="cell" className="table-list__button" data-label={" "}>
-                                    <div className="button button-gost button--big button--grey">
-                                        <i className="button__icon icon-download-simple"></i>
-                                    </div>
-                                </td>
-                            </tr>
-                    ))}
-                    </tbody>
-                </table>
-            </div>
-        </>
+                        <tbody>
+                        {[0, 1, 2].map((_, index) => (
+                                <tr
+                                        key={index}
+                                        ref={(el) => (rowRefs.current[index] = el)}
+                                        className={`body-normal__regular ${activeRowId === index ? "active" : ""}`}
+                                        onClick={() => handleRowClick(index)}
+                                >
+                                    <td role="cell" className="body-normal__regular">
+                                        <div data-tooltip-id="tooltip"
+                                             data-tooltip-content={activeRowId === index ? "Details schließen" : "Details öffnen"}
+                                             data-tooltip-place="top"
+                                             data-tooltip-offset={10}
+                                        >
+                                            <i className="icon-caret-right"></i>
+                                        </div>
+                                    </td>
+                                    <td role="cell" className="body-normal__regular" data-label={"Auftrag"}>
+                                        80700
+                                    </td>
+                                    <td role="cell" className="body-normal__regular" data-label={"Datum"}>
+                                        01.01.2024
+                                    </td>
+                                    <td role="cell" className="body-normal__regular" data-label={"Betreff"}>
+                                        RE-234-24
+                                    </td>
+                                    <td role="cell" className="body-normal__regular" data-label={"Kritisch"}>
+                                        <div className="button button-gost button--big button--red">
+                                            <i className="button__icon icon-warning"></i>
+                                        </div>
+                                    </td>
+                                    <td role="cell" className="contents" data-label={"Inhalt"}>
+                                        <span className="collapsed body-normal__regular">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad commodi illum itaque nesciunt qui quis quod unde? Ab alias delectus, itaque libero porro quaerat, quam quos repudiandae saepe suscipit totam!
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci cupiditate molestiae neque nisi odio perspiciatis. Blanditiis cum distinctio doloremque ipsam nam neque, nihil odit provident, quaerat quidem, sed tempora unde.
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci cupiditate molestiae neque nisi odio perspiciatis. Blanditiis cum distinctio doloremque ipsam nam neque, nihil odit provident, quaerat quidem, sed tempora unde.
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci cupiditate molestiae neque nisi odio perspiciatis. Blanditiis cum distinctio doloremque ipsam nam neque, nihil odit provident, quaerat quidem, sed tempora unde.
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci cupiditate molestiae neque nisi odio perspiciatis. Blanditiis cum distinctio doloremque ipsam nam neque, nihil odit provident, quaerat quidem, sed tempora unde.
+                                        </span>
+                                    </td>
+                                    <td role="cell" className="table-list__button" data-label={" "}>
+                                        <div data-tooltip-id="tooltip"
+                                             data-tooltip-content="Datei herunterladen"
+                                             data-tooltip-place="top"
+                                             data-tooltip-offset={5}
+                                             className="button button-gost button--big button--grey">
+                                            <i className="button__icon icon-download-simple"></i>
+                                        </div>
+                                    </td>
+                                </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
+            </>
     );
 };
 

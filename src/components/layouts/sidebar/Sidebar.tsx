@@ -1,8 +1,9 @@
-import React, { Fragment, ReactNode, useRef, useEffect } from "react";
-import { SidebarStatus } from "src/store/sidebar/SidebarStatus";
+import React, {Fragment, ReactNode, useRef, useEffect} from "react";
+import {SidebarStatus} from "src/store/sidebar/SidebarStatus";
 import Header from "../header/Header";
 import SidebarContent from "./SidebarContent";
 import Footer from "../footer/Footer";
+import {Tooltip} from "react-tooltip";
 import { RoleCheck } from "src/helpers/RoleCheck";
 
 const ThommasGroupeLogo: string = require("../../../assets/images/logo/Logo.svg").default;
@@ -55,6 +56,10 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
                         </div>
                         <div>
                             <button
+                                data-tooltip-id="tooltip"
+                                data-tooltip-content="Menu schließen"
+                                data-tooltip-place="top"
+                                data-tooltip-offset={10}
                                 className="button button-secondary button--big button--light-grey"
                                 onClick={() => addSidebarStatus(!sidebarStatus)}
                             >
@@ -65,11 +70,13 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
                     <div className="caption__medium vertical-menu__caption-color">
                         {RoleCheck("1") ? <span>Adminbereich</span> : <span>Menu</span>}
                     </div>
+                    <Tooltip id="tooltip" className="custom-tooltip"/>
                     <SidebarContent />
                 </div>
             </div>
             <div className="main-content">
                 <div className="page-content">{children}</div>
+                <Tooltip id="tooltip" className="custom-tooltip"/>
             </div>
             <Footer />
         </Fragment>
