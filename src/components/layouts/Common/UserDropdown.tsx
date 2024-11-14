@@ -41,7 +41,7 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ isOpen }) => {
                 <span className="headerdropdown__title body-big__medium">Vorname Nachname{" "}</span>
                 <span className="headerdropdown__email body-normal__regular">vorname.nachname@firma.de</span>
                 <p className="headerdropdown__date body-small__regular">Registriert: 10.09.2024</p>
-                <span className="headerdropdown__password body-normal__regular">Passwort ändern</span>
+                <span onClick={() => setModalVisible(true)} className="headerdropdown__password body-normal__regular">Passwort ändern</span>
                 {modalVisible && (
                     <ChangePassword
                         onShowModal={modalVisible}
