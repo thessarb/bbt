@@ -88,31 +88,26 @@ function MainePlane() {
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Name
-                                    <i className="icon-dots-three-vertical"></i>
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Index
-                                    <i className="icon-dots-three-vertical"></i>
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Format
-                                    <i className="icon-dots-three-vertical"></i>
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Kommentar
-                                    <i className="icon-dots-three-vertical"></i>
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="contents body-normal__semibold">
                                     Datum
-                                    <i className="icon-dots-three-vertical"></i>
                                 </div>
                             </th>
                             <th role="columnheader">

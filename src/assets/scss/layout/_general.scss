@@ -4,6 +4,7 @@
   width: 100%;
   align-items: stretch;
   flex-direction: column;
+  color: $bbt-text;
   background-color: $bbt-grey-5;
 }
 
@@ -12,6 +13,6 @@
   min-height: calc(100vh - $unit-7);
   
   .page-content {
-    padding: 105px $unit-1 $unit-1;
+    padding: toRem(105) $unit-1 $unit-1;
   }
 }

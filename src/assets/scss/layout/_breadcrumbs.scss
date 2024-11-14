@@ -1,40 +1,14 @@
 .breadcrumb {
-  margin-bottom: $unit-3!important;
+  margin-bottom: toRem(32)!important;
+  color: $bbt-text;
 
-  &__page-title-box {
+  &__container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: $unit-0;
   }
 
-  &__home {
-    position: relative;
-    text-align: left;
-    color: $bbt-primary-green;
-    font-family: $font--boxed-regular;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 22px;
-    cursor: pointer;
-    padding-bottom: toRem(2);
-
-    &:after {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      content: "";
-      width: 100%;
-      border-bottom: 1px solid $bbt-primary-green;
-    }
-  }
-
-  &__slant {
+  &__divider {
     color: $bbt-grey-40;
-  }
-
-  &__title {
-    text-align: left;
-    color: $bbt-secondary-grey;
-    cursor: auto;
   }
 }

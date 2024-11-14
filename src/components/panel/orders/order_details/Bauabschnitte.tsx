@@ -735,7 +735,9 @@ const Bauabschnitte = () => {
                                                                                                     : ""
                                                                                     }`}
                                                                             >
-                                                                                {subItem.details}
+                                                                                <span className="link-component">
+                                                                                    {subItem.details}
+                                                                                </span>
                                                                             </td>
                                                                         </tr>
                                                                         {nestedExpandedRow[index] === nestedIndex && (

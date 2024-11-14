@@ -12,15 +12,15 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ title, subtitle, detailstitle }
   const navigate = useNavigate();
   return (
     <div className="row breadcrumb">
-        <div className="breadcrumb__page-title-box">
+        <div className="breadcrumb__container body-normal__regular">
           {title ? (
-            <div>
-              <span onClick={() => navigate(PATHS.dashboard)} className="body-normal__regular breadcrumb__home">{title}</span>
-              <span className="body-normal__regular breadcrumb__slant">{" "}/</span>
-              <span className="body-normal__regular breadcrumb__title">{" "}{subtitle}</span>
+            <>
+              <span onClick={() => navigate(PATHS.dashboard)} className="link-component">{title}</span>
+              <span className="breadcrumb__divider">{" "}/</span>
+              <span className="">{" "}{subtitle}</span>
               {/* <span className="body-normal__regular">{" "}/</span>
               <span className="body-normal__regular breadcrumb__title">{" "}{detailstitle}</span> */}
-            </div>
+            </>
           ) : (
             ""
           )}

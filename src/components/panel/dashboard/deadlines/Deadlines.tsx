@@ -3,6 +3,7 @@ import CustomPagination from "src/helpers/CustomPaginate";
 import Select from "react-select";
 import FilterDialog from "src/helpers/TableFilters";
 import PlanViewModal from "./PlanViewModal";
+import {Link} from "react-router-dom";
 import {Tooltip} from 'react-tooltip';
 
 const Deadlines = () => {
@@ -26,64 +27,13 @@ const Deadlines = () => {
         setShow(true);
     };
 
-    // Filter
-    const [isFilterDialogOpen, setIsFilterDialogOpen] = useState<string | null>(
-            null
-    );
-
-    const [filterData, setFilterData] = useState<{
-        searchTerm: string;
-        order: string;
-        selectedOptions: string[];
-    }>({
-        searchTerm: "",
-        order: "asc",
-        selectedOptions: [],
-    });
-
-
-    const handleFilterChange = (filter: {
-        searchTerm: string;
-        order: string;
-        selectedOptions: string[];
-    }) => {
-        setFilterData(filter);
-    };
-
-    const filterOptions = ["Option 1", "Option 2"];
-
-    const closeFilterDialog = () => setIsFilterDialogOpen(null);
-
-    const filterDialogRef = useRef<HTMLDivElement | null>(null);
-
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (
-                    filterDialogRef.current &&
-                    !filterDialogRef.current.contains(event.target as Node)
-            ) {
-                closeFilterDialog();
-            }
-        };
-
-        if (isFilterDialogOpen) {
-            document.addEventListener("mousedown", handleClickOutside);
-        } else {
-            document.removeEventListener("mousedown", handleClickOutside);
-        }
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [isFilterDialogOpen]);
-
     return (
             <>
                 <div className="table-list">
                     <div className="table-list__title">
-          <span className="table-list__title-left subheading__regular">
-            Fristen
-          </span>
+                        <span className="table-list__title-left subheading__regular">
+                            Fristen
+                        </span>
                     </div>
                     <div className="table-list__scroll">
                         <table role="table">
@@ -92,181 +42,53 @@ const Deadlines = () => {
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Auftrag
-                                    <i
-                                            className="icon-dots-three-vertical"
-                                            onClick={() => setIsFilterDialogOpen("auftrag")}
-                                    ></i>
-                                    {isFilterDialogOpen === "auftrag" && (
-                                            <div ref={filterDialogRef}>
-                                                <FilterDialog
-                                                        options={filterOptions}
-                                                        onFilterChange={handleFilterChange}
-                                                        closeFilter={() => closeFilterDialog}
-                                                />
-                                            </div>
-                                    )}
+                                    <i className="icon-caret-up-down"></i>
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Auftragsname
-                                    <i
-                                            className="icon-dots-three-vertical"
-                                            onClick={() => setIsFilterDialogOpen("auftragsname")}
-                                    ></i>
-                                    {isFilterDialogOpen === "auftragsname" && (
-                                            <div ref={filterDialogRef}>
-                                                <FilterDialog
-                                                        options={filterOptions}
-                                                        onFilterChange={handleFilterChange}
-                                                        closeFilter={() => closeFilterDialog}
-                                                />
-                                            </div>
-                                    )}
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     BA
-                                    <i
-                                            className="icon-dots-three-vertical"
-                                            onClick={() => setIsFilterDialogOpen("ba")}
-                                    ></i>
-                                    {isFilterDialogOpen === "ba" && (
-                                            <div ref={filterDialogRef}>
-                                                <FilterDialog
-                                                        options={filterOptions}
-                                                        onFilterChange={handleFilterChange}
-                                                        closeFilter={() => closeFilterDialog}
-                                                />
-                                            </div>
-                                    )}
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Haus
-                                    <i
-                                            className="icon-dots-three-vertical"
-                                            onClick={() => setIsFilterDialogOpen("haus")}
-                                    ></i>
-                                    {isFilterDialogOpen === "haus" && (
-                                            <div ref={filterDialogRef}>
-                                                <FilterDialog
-                                                        options={filterOptions}
-                                                        onFilterChange={handleFilterChange}
-                                                        closeFilter={() => closeFilterDialog}
-                                                />
-                                            </div>
-                                    )}
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Geschoss
-                                    <i
-                                            className="icon-dots-three-vertical"
-                                            onClick={() => setIsFilterDialogOpen("geschoss")}
-                                    ></i>
-                                    {isFilterDialogOpen === "geschoss" && (
-                                            <div ref={filterDialogRef}>
-                                                <FilterDialog
-                                                        options={filterOptions}
-                                                        onFilterChange={handleFilterChange}
-                                                        closeFilter={() => closeFilterDialog}
-                                                />
-                                            </div>
-                                    )}
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Ebene
-                                    <i
-                                            className="icon-dots-three-vertical"
-                                            onClick={() => setIsFilterDialogOpen("ebene")}
-                                    ></i>
-                                    {isFilterDialogOpen === "ebene" && (
-                                            <div ref={filterDialogRef}>
-                                                <FilterDialog
-                                                        options={filterOptions}
-                                                        onFilterChange={handleFilterChange}
-                                                        closeFilter={() => closeFilterDialog}
-                                                />
-                                            </div>
-                                    )}
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Produkt
-                                    <i
-                                            className="icon-dots-three-vertical"
-                                            onClick={() => setIsFilterDialogOpen("produkt")}
-                                    ></i>
-                                    {isFilterDialogOpen === "produkt" && (
-                                            <div ref={filterDialogRef} className="position">
-                                                <FilterDialog
-                                                        options={filterOptions}
-                                                        onFilterChange={handleFilterChange}
-                                                        closeFilter={() => closeFilterDialog}
-                                                />
-                                            </div>
-                                    )}
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Zu erledigen
-                                    <i
-                                            className="icon-dots-three-vertical"
-                                            onClick={() => setIsFilterDialogOpen("zu_erledigen")}
-                                    ></i>
-                                    {isFilterDialogOpen === "zu_erledigen" && (
-                                            <div ref={filterDialogRef} className="position">
-                                                <FilterDialog
-                                                        options={filterOptions}
-                                                        onFilterChange={handleFilterChange}
-                                                        closeFilter={() => closeFilterDialog}
-                                                />
-                                            </div>
-                                    )}
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Frist
-                                    <i
-                                            className="icon-dots-three-vertical"
-                                            onClick={() => setIsFilterDialogOpen("frist")}
-                                    ></i>
-                                    {isFilterDialogOpen === "frist" && (
-                                            <div ref={filterDialogRef} className="position">
-                                                <FilterDialog
-                                                        options={filterOptions}
-                                                        onFilterChange={handleFilterChange}
-                                                        closeFilter={() => closeFilterDialog}
-                                                />
-                                            </div>
-                                    )}
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Dringlichkeit
-                                    <i
-                                            className="icon-dots-three-vertical"
-                                            onClick={() => setIsFilterDialogOpen("dringlichkeit")}
-                                    ></i>
-                                    {isFilterDialogOpen === "dringlichkeit" && (
-                                            <div ref={filterDialogRef} className="position">
-                                                <FilterDialog
-                                                        options={filterOptions}
-                                                        onFilterChange={handleFilterChange}
-                                                        closeFilter={() => closeFilterDialog}
-                                                />
-                                            </div>
-                                    )}
+                                    <i className="icon-caret-up-down"></i>
                                 </div>
                             </th>
                         </tr>
@@ -278,7 +100,9 @@ const Deadlines = () => {
                                     className="body-normal__regular"
                                     data-label={"Auftrag"}
                             >
-                                80700
+                                <Link to={`order-nr-here/80700`} className="link-component">
+                                    80700
+                                </Link>
                             </td>
                             <td
                                     role="cell"
