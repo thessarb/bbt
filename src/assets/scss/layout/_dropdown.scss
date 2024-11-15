@@ -1,124 +1,137 @@
 .headerdropdown {
-	position: absolute;
-	right: $unit-1;
-	top: -500px;
-	width: calc(100% - $unit-3);
-	z-index: 3;
-	cursor: auto;
-	overflow: hidden;
-	background-color: $bbt-grey-5;
-	border: 1px solid $bbt-grey-50;
-	border-radius: 4px;
+  position: absolute;
+  right: $unit-1;
+  top: -500px;
+  width: calc(100% - $unit-3);
+  z-index: 3;
+  cursor: auto;
+  overflow: hidden;
+  background-color: $bbt-grey-5;
+  border: 1px solid $bbt-grey-50;
+  border-radius: 4px;
 
-	@media (min-width: 768px) {
-        right: $unit-6;
-        width: 540px;
-	}
+  @media (min-width: 768px) {
+    right: $unit-6;
+    width: 540px;
+  }
 
-	&.close {
-		animation: slideUp 0.3s ease forwards;
+  &.close {
+    animation: slideUp 0.3s ease forwards;
 
-		@keyframes slideUp {
-			0% {
-				top: 65px;
-				opacity: 1;
-			}
-			100% {
-				top: -450px;
-				opacity: 1;
-			}
-		}
-	}
+    @keyframes slideUp {
+      0% {
+        top: 65px;
+        opacity: 1;
+      }
+      100% {
+        top: -450px;
+        opacity: 1;
+      }
+    }
+  }
 
-	&.open {
-		animation: slideDown 0.3s ease forwards;
-		top: 65px;
+  &.open {
+    animation: slideDown 0.3s ease forwards;
+    top: 65px;
 
-		@keyframes slideDown {
-			0% {
-				top: -450px;
-				opacity: 1;
-			}
-			100% {
-				top: 65px;
-				opacity: 1;
-			}
-		}
-	}
+    @keyframes slideDown {
+      0% {
+        top: -450px;
+        opacity: 1;
+      }
+      100% {
+        top: 65px;
+        opacity: 1;
+      }
+    }
+  }
 
-	&__notifications {
+  &__notifications {
+    @media (min-width: 768px) {
+      right: toRem(220);
+    }
+  }
 
-		@media (min-width: 768px) {
-			right: toRem(220);
-		}
-	}
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: toRem(78);
+    padding: 10px;
+    color: $bbt-secondary-grey;
+    border-bottom: 1px solid $bbt-grey-50;
 
-	&__header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		height: toRem(78);
-		padding: 10px;
-		color: $bbt-secondary-grey;
-		border-bottom: 1px solid $bbt-grey-50;
+    @media (min-width: 768px) {
+      padding: $unit-1;
+    }
+  }
 
-		@media (min-width: 768px) {
-            padding: $unit-1;
-		}
+  &__subtitle {
+    margin-bottom: 5px;
+    margin-top: 20px;
+    color: $bbt-secondary-grey;
+  }
 
-	}
+  &__title {
+    color: $bbt-secondary-grey;
+  }
 
-	&__subtitle {
-		margin-bottom: 5px;
-		margin-top: 20px;
-		color: $bbt-secondary-grey;
-	}
+  &__email {
+    color: $bbt-primary-green;
+  }
 
-	&__title {
-		color: $bbt-secondary-grey;
-	}
+  &__message {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    color: $bbt-secondary-grey;
+  }
 
-	&__email {
-		color: $bbt-primary-green;
-	}
+  &__notification {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid $bbt-grey-10;
+    &:last-of-type {
+      border: none;
+    }
+  }
 
-	&__message {
-		margin-top: 5px;
-		margin-bottom: 20px;
-		color: $bbt-secondary-grey;
-	}
+  &__password {
+    color: $bbt-primary-green;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: $unit-1;
+  }
 
-	&__notification {
-		display: flex;
-		flex-direction: column;
+  &__date {
+    border-bottom: 1px solid $bbt-grey-10;
+    padding-bottom: $unit-1;
+    margin-top: 5px;
+    margin-bottom: 20px;
+  }
 
-		&:first-child {
-			border-bottom: 1px solid $bbt-grey-10;
-		}
-	}
+  &__button-end {
+    display: flex;
+    justify-content: end;
+    margin-top: $unit-3;
+    margin-left: auto;
+  }
 
-	&__password {
-		color: $bbt-primary-green;
-		cursor: pointer;
-		text-decoration: none;
-		margin-top: $unit-1;
-	}
+  &__body {
+    padding: $unit-1;
+    &--notification {
+      max-height: toRem(200);
+	  &.overflow {
+		overflow-y: auto;
 
-	&__date {
-		border-bottom: 1px solid $bbt-grey-10;
-		padding-bottom: $unit-1;
-		margin-top: 5px;
-		margin-bottom: 20px;
-	}
+      &::-webkit-scrollbar {
+        width: toRem(6);
+      }
 
-	&__button-end {
-		display: flex;
-		justify-content: end;
-		margin-top: $unit-3;
-		margin-left: auto;
-	}
-
-	&__body {
-		padding: $unit-1;
-	}
+      &::-webkit-scrollbar-thumb {
+        background-color: $bbt-grey-50;
+        border-radius: toRem(4); 
+      }
+	  }
+    }
+  }
 }
