@@ -102,6 +102,10 @@
         box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.5) inset;
       }
     }
+
+    &.header-no-background {
+      background-color: $bbt-white;
+    }
   }
 
   .modal-body {
@@ -118,7 +122,7 @@
       .validate-password {
         width: 50%;
         .title {
-          margin-top: $unit-factor;
+          margin-top: toRem(6);
         }
         .item {
           display: flex;
@@ -138,6 +142,14 @@
 
           &.icon-x {
             background-color: $bbt-red-100;
+          }
+        }
+        .input-field {
+          &__content {
+            &:-webkit-autofill {
+              -webkit-text-fill-color: $bbt-text !important;
+              -webkit-box-shadow: 0 0 0px 1000px $bbt-white inset !important;
+            }
           }
         }
       }
