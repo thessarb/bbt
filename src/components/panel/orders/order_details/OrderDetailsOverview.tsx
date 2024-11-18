@@ -49,7 +49,7 @@ const OrderDetailsOverview = () => {
 
             return parts.map((part, index) =>
                     part.toLowerCase() === inputValue.toLowerCase() ? (
-                            <span key={index} style={{color: "#43B02A"}}>{part}</span>
+                            <span key={index} className="primary-green">{part}</span>
                     ) : (
                             part
                     )

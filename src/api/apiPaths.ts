@@ -7,8 +7,8 @@ const API_PATHS = {
   register: apiBaseUrl + "request-access",
   profile: apiBaseUrl + "user/profile",
   forgotPassword: apiBaseUrl + "forgot-password/check/user",
-  resetPassword: (token: string | undefined) =>
-    apiBaseUrl + `forgot-password/update/${token}`,
+  updatePassword: (resetToken: string | undefined) =>
+    apiBaseUrl + `forgot-password/update/${resetToken}`,
   getPasswordData: (token: string | undefined) =>
     apiBaseUrl + `forgot-password/reset/view/${token}`,
 };
