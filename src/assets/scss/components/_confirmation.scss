@@ -81,4 +81,31 @@
       margin: 0 toRem(4);
     }
   }
+
+  &__password {
+    display: flex;
+    flex-direction: column;
+    gap: $unit-1;
+    padding: $unit-1 0;
+    color: $bbt-text;
+
+    &--icon {
+      width: toRem(24);
+      height: toRem(24);
+
+      &.icon-check {
+        background-color: $bbt-primary-green;
+      }
+    }
+
+    &--box {
+      display: flex;
+      align-items: center;
+      gap: $unit-factor;
+      padding: $unit-1 $unit-factor;
+      color: $bbt-primary-green;
+      background-color: $bbt-green-10;
+      border-radius: toRem(4);
+    }
+  }
 }

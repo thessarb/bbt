@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useRef} from "react";
 import Select, {components} from "react-select";
-import Fristen from "./Fristen";
-import Bauabschnitte from "./Bauabschnitte";
-import Ansprechpartner from "./Ansprechpartner";
+import Fristen from "./Deadline";
+import Bauabschnitte from "./OrderProducts";
+import Ansprechpartner from "./ContactPerson";
 
 const OrderDetailsOverview = () => {
     const [searchTerm, setSearchTerm] = useState("");

@@ -11,6 +11,7 @@ const API_PATHS = {
     apiBaseUrl + `forgot-password/update/${resetToken}`,
   getPasswordData: (token: string | undefined) =>
     apiBaseUrl + `forgot-password/reset/view/${token}`,
+  updateProfile: apiBaseUrl + "user/profile/change-password",
   notificationList: apiBaseUrl + "notification/list",
 };
 

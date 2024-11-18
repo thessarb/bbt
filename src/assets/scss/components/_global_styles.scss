@@ -276,6 +276,25 @@
   margin-bottom: $unit-1;
 }
 
-.primary-green{
+.primary-green {
   color: $bbt-primary-green;
+}
+
+.success-message {
+  &__success-text {
+    display: flex;
+    height: $unit-5;
+    background: $bbt-green-10;
+    align-items: center;
+    color: $bbt-primary-green;
+    gap: $unit-factor;
+    padding: $unit-factor;
+    margin-bottom: $unit-1;
+    margin-top: $unit-1;
+    .icon-check {
+      background: $bbt-primary-green;
+      width: toRem(24);
+      height: toRem(24);
+    }
+  }
 }
