@@ -1,9 +1,12 @@
 import React, { Fragment, useState, useRef, useEffect } from "react";
 import ChangePassword from "./ChangePassword";
+import { useUserdata } from "src/store/UserData";
+import moment from "moment";
 interface UserDropdownProps {
     isOpen: boolean;
 }
 const UserDropdown: React.FC<UserDropdownProps> = ({ isOpen }) => {
+    const userData = useUserdata((state: any) => state.userData);
     const [toggleHandle, setToggleHandle] = useState<boolean>(false);
     const [hasOpened, setHasOpened] = useState<boolean>(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -22,9 +25,7 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ isOpen }) => {
 
     return (
         <div
-            className={`headerdropdown ${
-                isOpen ? "open" : hasOpened ? "close" : ""
-            }`}
+            className={`headerdropdown ${isOpen ? "open" : hasOpened ? "close" : ""}`}
             ref={dropdownRef}
             onClick={handleClickInside}
         >
@@ -35,19 +36,20 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ isOpen }) => {
                 </button>
             </div>
             <div className="headerdropdown__body">
-                <p className="headerdropdown__subtitle caption__regular">
-                  Eingeloggt als:
+                <p className="headerdropdown__subtitle caption__regular">Eingeloggt als:</p>
+                <span className="headerdropdown__title body-big__medium">
+                    {(userData.firstname ? userData.firstname : "-") +
+                        " " +
+                        (userData.lastname ? userData.lastname : "-")}{" "}
+                </span>
+                <span className="headerdropdown__email body-normal__regular">
+                    {userData.email ? userData.email : "-"}
+                </span>
+                <p className="headerdropdown__date body-small__regular">
+                    Registriert: {userData.created_at ? moment(userData.created_at).format("DD-MM-yyyy") : "-"}
                 </p>
-                <span className="headerdropdown__title body-big__medium">Vorname Nachname{" "}</span>
-                <span className="headerdropdown__email body-normal__regular">vorname.nachname@firma.de</span>
-                <p className="headerdropdown__date body-small__regular">Registriert: 10.09.2024</p>
                 <span className="headerdropdown__password body-normal__regular">Passwort ändern</span>
-                {modalVisible && (
-                    <ChangePassword
-                        onShowModal={modalVisible}
-                        setShowModal={(e) => setModalVisible(e)}
-                    />
-                )}
+                {modalVisible && <ChangePassword onShowModal={modalVisible} setShowModal={(e) => setModalVisible(e)} />}
             </div>
         </div>
     );
