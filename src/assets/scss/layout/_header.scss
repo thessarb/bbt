@@ -74,11 +74,24 @@
   }
 
   &__notification {
+    position: relative;
     padding: $unit-factor;
     display: flex;
     align-items: center;
     vertical-align: middle;
     cursor: pointer;
+    &--notification-badge {
+      position: absolute;
+      top: toRem(10); 
+      left: toRem(20); 
+      padding: toRem(3);
+      width: toRem(6); 
+      height: toRem(6);
+      background-color: $bbt-primary-green;
+      border-radius: 60%;
+      border: 2px solid $bbt-white;
+      z-index: 2;
+    }
   }
 
   &__user-box {
