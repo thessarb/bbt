@@ -13,6 +13,9 @@
   @media (min-width: 768px) {
     right: $unit-6;
     width: 540px;
+    &__notifications {
+      right: 0px;
+    }
   }
 
   &.close {
@@ -20,7 +23,7 @@
 
     @keyframes slideUp {
       0% {
-        top: 65px;
+        top: toRem(65);
         opacity: 1;
       }
       100% {
@@ -32,23 +35,33 @@
 
   &.open {
     animation: slideDown 0.3s ease forwards;
-    top: 65px;
-
-    @keyframes slideDown {
-      0% {
-        top: -450px;
-        opacity: 1;
-      }
-      100% {
-        top: 65px;
-        opacity: 1;
+    &.user {
+      top: toRem(65);
+      @keyframes slideDown {
+        0% {
+          top: -450px;
+          opacity: 1;
+        }
+        100% {
+          top: toRem(65);
+          opacity: 1;
+        }
       }
     }
-  }
 
-  &__notifications {
-    @media (min-width: 768px) {
-      right: toRem(220);
+    &.notification {
+      animation: slideNotificationDown 0.3s ease forwards;
+      top: 50px;
+      @keyframes slideNotificationDown {
+        0% {
+          top: -450px;
+          opacity: 1;
+        }
+        100% {
+          top: toRem(50);
+          opacity: 1;
+        }
+      }
     }
   }
 
@@ -120,18 +133,18 @@
     padding: $unit-1;
     &--notification {
       max-height: toRem(200);
-	  &.overflow {
-		overflow-y: auto;
+      &.overflow {
+        overflow-y: auto;
 
-      &::-webkit-scrollbar {
-        width: toRem(6);
-      }
+        &::-webkit-scrollbar {
+          width: toRem(6);
+        }
 
-      &::-webkit-scrollbar-thumb {
-        background-color: $bbt-grey-50;
-        border-radius: toRem(4); 
+        &::-webkit-scrollbar-thumb {
+          background-color: $bbt-grey-50;
+          border-radius: toRem(4);
+        }
       }
-	  }
     }
   }
 }
