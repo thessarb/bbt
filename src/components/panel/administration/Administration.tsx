@@ -40,7 +40,7 @@ const Administration = () => {
                         <i className="button__icon icon-funnel-simple"></i>
                     </div>
                     <button onClick={handleShow} className="button button--green button--big">
-                        <i className="button__icon icon-user-plus"></i>
+                        <span><i className="button__icon icon-user-plus"></i></span>
                         <span className="button__text">Neuen Benutzer anlegen</span>
                     </button>
                     {showCreateUser && <CreateUserModal show={showCreateUser} setShow={setShowCreateUser}/>}
