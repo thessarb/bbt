@@ -25,7 +25,7 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ isOpen }) => {
 
     return (
         <div
-            className={`headerdropdown ${isOpen ? "open" : hasOpened ? "close" : ""}`}
+            className={`headerdropdown ${isOpen ? "open user" : hasOpened ? "close" : ""}`}
             ref={dropdownRef}
             onClick={handleClickInside}
         >

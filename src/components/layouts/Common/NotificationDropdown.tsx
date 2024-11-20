@@ -59,7 +59,7 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen }) =
         <div
             ref={dropdownRef}
             onClick={handleClickInside}
-            className={`headerdropdown headerdropdown__notifications ${isOpen ? "open" : hasOpened ? "close" : ""}`}
+            className={`headerdropdown headerdropdown__notifications ${isOpen ? "open notification" : hasOpened ? "close" : ""}`}
         >
             <div className="headerdropdown__header heading__semibold">
                 <span>Systemnachrichten</span>
