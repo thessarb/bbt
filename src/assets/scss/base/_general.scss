@@ -46,3 +46,10 @@
   text-underline-position: from-font;
   cursor: pointer;
 }
+
+// loading container
+.loading-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

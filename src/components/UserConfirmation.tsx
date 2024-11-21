@@ -1,12 +1,15 @@
 import React from "react";
+interface UserConfirmationProps {
+    email: string;
+}
 
-const UserConfirmation = () => {
+const UserConfirmation: React.FC<UserConfirmationProps> = ({email}) => {
     return (
             <div className="confirmation__user">
                 <div className="body-big__regular">
                     Eine Nachricht mit den Anmeldedaten wurde an
                     <span className="confirmation__user--email body-big__medium">
-                        “thomas.mueller@thomas-gruppe.de”
+                        {`“${email}”`}
                     </span>
                     versendet.
                 </div>

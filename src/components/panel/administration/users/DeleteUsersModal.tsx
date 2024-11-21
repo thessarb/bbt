@@ -1,13 +1,20 @@
 import React, {useState} from "react";
 import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import DeleteUserConfirmation from "./DeleteUserConfirmation";
+import API_PATHS from "../../../../api/apiPaths";
+import {makeApiCall} from "../../../../api/apiRequests";
+import API_HEADERS from "../../../../api/apiConfig";
 
 interface DeleteUsersModalProps {
     show: boolean;
+    userId: number;
+    name: string;
+    lastName: string;
     setShow: React.Dispatch<React.SetStateAction<boolean>>;
+    setRefreshList: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const DeleteUsersModal: React.FC<DeleteUsersModalProps> = ({ show, setShow }) => {
+const DeleteUsersModal: React.FC<DeleteUsersModalProps> = ({ show, setShow, userId, name,lastName, setRefreshList  }) => {
     // Modal
     const [animateClose, setAnimateClose] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
@@ -25,6 +32,23 @@ const DeleteUsersModal: React.FC<DeleteUsersModalProps> = ({ show, setShow }) =>
         }, 350);
     };
 
+
+    // Delete user
+    const [validations, setValidations] = useState<Record<string, string>>({});
+
+    const deleteUser = async (userId: number): Promise<void> => {
+        const request: any = API_PATHS.deleteUser(userId);
+        setConfirmation(true);
+
+        try {
+            const response: any = await makeApiCall<ResponseType>(request, "DELETE", API_HEADERS.authenticated);
+        } catch (error: any) {
+            if (error.response.status === 403) {
+                setValidations(error.response.data);
+            }
+        }
+    }
+
     return (
             <>
                 <Modal
@@ -38,9 +62,9 @@ const DeleteUsersModal: React.FC<DeleteUsersModalProps> = ({ show, setShow }) =>
                     </ModalHeader>
                     <ModalBody>
                         {confirmation ?
-                                <DeleteUserConfirmation /> :
+                                <DeleteUserConfirmation name={name} lastName={lastName}/> :
                                 <div className="delete-user__text body-big__regular">Möchten Sie den Benutzer <span
-                                        className="body-big__medium">“Thomas Müller”</span> wirklich deaktivieren?
+                                        className="body-big__medium">{`“${name} ${lastName}”`}</span> wirklich deaktivieren?
                                 </div>
                         }
 
@@ -59,7 +83,9 @@ const DeleteUsersModal: React.FC<DeleteUsersModalProps> = ({ show, setShow }) =>
                                             onClick={handleClose}>
                                         <span className="button__text">Abbrechen</span>
                                     </button>
-                                    <button className="button button--big button--red" onClick={handleConfirmation}>
+                                    <button className="button button--big button--red"
+                                            onClick={() => deleteUser(userId)}
+                                    >
                                         <i className="button__icon icon-user-minus"></i>
                                         <span className="button__text">Nutzer deaktivieren</span>
                                     </button>
