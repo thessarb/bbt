@@ -75,6 +75,19 @@
 		color: $bbt-secondary-grey;
 	}
 
+	&__order {
+		color: $bbt-primary-green;
+	}
+
+	&__order-date {
+		padding-top: 20px;
+
+		&:first-child {
+			padding-top: unset;
+
+		}
+	}
+
 	&__email {
 		color: $bbt-primary-green;
 		text-decoration: underline;
@@ -82,7 +95,6 @@
 	}
 
 	&__message {
-		margin-top: 5px;
 		margin-bottom: 20px;
 		color: $bbt-secondary-grey;
 	}
@@ -91,6 +103,7 @@
 		display: flex;
 		flex-direction: column;
 		border-bottom: 1px solid $bbt-grey-10;
+		gap: 5px;
 
 		&:last-of-type {
 			border: none;
