@@ -157,7 +157,7 @@ const Login = () => {
                             className={`input-field__content body-normal__regular ${
                                 isPasswordError ? "input-field__content--error" : ""
                             }`}
-                            type="text"
+                            type="password"
                             name={`password`}
                             placeholder="Geben Sie Ihr Passwort ein."
                             value={password}
