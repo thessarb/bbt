@@ -112,28 +112,26 @@ const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
         <Fragment>
             <header id="page-topbar">
                 <div className="navbar-header">
-                    <div>
-                        <div className="navbar-header__navbar-brand-box navbar-header__logo">
-                            <a href={PATHS.dashboard} className="logo" rel="noreferrer">
-                                <img src={ThommasGroupeLogo} alt="ThommasGroupe" />
-                            </a>
+                    <div className="navbar-header__brand">
+                        <a href={PATHS.dashboard} className="logo" rel="noreferrer">
+                            <img src={ThommasGroupeLogo} alt="ThommasGroupe"/>
+                        </a>
+                        <div className="navbar-header__hamburger">
+                            <div>
+                                <button
+                                    data-tooltip-id="tooltip"
+                                    data-tooltip-content="Menü öffnen"
+                                    data-tooltip-place="top"
+                                    data-tooltip-offset={5}
+                                    className="button button--big button--green"
+                                    onClick={handleToggle}
+                                >
+                                    <i className="button__icon icon-list"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div className="navbar-header__hamburger">
-                        <div>
-                            <button
-                                data-tooltip-id="tooltip"
-                                data-tooltip-content="Menü öffnen"
-                                data-tooltip-place="top"
-                                data-tooltip-offset={5}
-                                className="button button--big button--green"
-                                onClick={handleToggle}
-                            >
-                                <i className="button__icon icon-list"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div className="navbar-header__main-navbar">
+                    <div className="navbar-header__user">
                         <div
                             data-tooltip-id="tooltip"
                             data-tooltip-content="Benachrichtigungen öffnen"
@@ -152,7 +150,7 @@ const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
                             {isNotificationDropdownOpen && <div className="overlay" />}
                             <NotificationDropdown isOpen={isNotificationDropdownOpen} />
                         </div>
-                        <div className="navbar-header__user-box" ref={userBoxRef} onClick={handleUserBoxClick}>
+                        <div className="navbar-header__user-data" ref={userBoxRef} onClick={handleUserBoxClick}>
                             <span className="caption__regular navbar-header__user-text">Eingeloggt als:</span>
                             <span className="body-normal__regular">
                                 {(userData.firstname ? userData.firstname : "-") +

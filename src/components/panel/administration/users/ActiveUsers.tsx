@@ -35,7 +35,8 @@ const ActiveUsers = () => {
     return (
             <>
                 <div className="table-list table-list--secondary">
-                    <table role="table">
+                    <div className="table-list__scroll">
+                        <table role="table">
                         <thead>
                             <tr role="row">
                                 <th role="columnheader">
@@ -126,6 +127,7 @@ const ActiveUsers = () => {
                         </tr>
                         </tbody>
                     </table>
+                    </div>
                 </div>
 
                 <div className="pagination-container">

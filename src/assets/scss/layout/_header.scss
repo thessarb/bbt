@@ -1,105 +1,82 @@
-#page-topbar {
-  background-color: $bbt-white;
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 1;
-}
 .navbar-header {
-  align-items: center;
-  display: flex;
-  height: toRem(78);
-  justify-content: space-between;
-  margin: 0 auto;
-  border-bottom: 2px solid $bbt-grey-5;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 0 calc(2 * $unit-factor);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-height: toRem(78);
+	padding: 20px calc(2 * $unit-factor);
+	margin: 0 auto;
+	border-bottom: 2px solid $bbt-grey-5;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 
-  &__navbar-brand-box {
-    height: 100%;
-    display: flex;
-    gap: 0 toRem(6);
-    align-content: center;
-    align-items: center;
-    margin: 0;
+	&__brand {
+		display: flex;
+		align-items: center;
+		gap: toRem(6);
+		width: $unit-5;
+		height: 100%;
+		margin: 0;
 
-    a {
-      cursor: pointer;
-    }
+		@media (min-width: 576px) {
+			justify-content: flex-start;
+			width: auto;
+			gap: 20px;
+		}
 
-    @media (min-width: 300px) {
-      height: 100%;
-      align-items: center;
-      display: flex;
-      justify-content: flex-start;
-    }
-  }
+		a {
+			cursor: pointer;
+		}
 
-  &__main-navbar {
-    width: calc(100% - 250px);
-    display: flex;
-    height: 100%;
-    background: $bbt-white;
-    align-items: center;
-    justify-content: end;
-    gap: toRem(15);
+		img {
+			width: $unit-9;
 
-    @media (min-width: 300px) {
-      width: calc(100% - 250px);
-    }
-  }
+			@media (min-width: 768px) {
+				width: auto;
+			}
+		}
+	}
 
-  @media (min-width: 300px) {
-    &__navbar-brand-box {
-      width: auto;
-    }
-  }
+	&__hamburger {
+		display: flex;
+		justify-content: flex-start;
+	}
 
-  @media (max-width: 445px) {
-    &__navbar-brand-box {
-      width: $unit-5;
-    }
-    &__logo {
-      img {
-        width: $unit-9;
-        height: $unit-9;
-      }
-    }
-  }
+	&__user {
+		display: flex;
+		align-items: center;
+		justify-content: end;
+		gap: toRem(15);
+		width: calc(100% - 250px);
+		height: 100%;
+		background: $bbt-white;
+	}
 
-  &__hamburger {
-    display: flex;
-    justify-content: flex-start;
-  }
+	&__notification {
+		display: grid;
+		padding: $unit-factor;
+		vertical-align: middle;
+		cursor: pointer;
 
-  &__notification {
-    position: relative;
-    padding: $unit-factor;
-    display: flex;
-    align-items: center;
-    vertical-align: middle;
-    cursor: pointer;
-    &--notification-badge {
-      position: absolute;
-      top: toRem(10); 
-      left: toRem(20); 
-      padding: toRem(3);
-      width: toRem(6); 
-      height: toRem(6);
-      background-color: $bbt-primary-green;
-      border-radius: 60%;
-      border: 2px solid $bbt-white;
-      z-index: 2;
-    }
-  }
+		&--notification-badge {
+			position: absolute;
+			top: toRem(10);
+			left: toRem(20);
+			padding: toRem(3);
+			width: toRem(6);
+			height: toRem(6);
+			background-color: $bbt-primary-green;
+			border-radius: 60%;
+			border: 2px solid $bbt-white;
+			z-index: 2;
+		}
+	}
 
-  &__user-box {
-    display: grid;
-    cursor: pointer;
-  }
+	&__user-data {
+		display: grid;
+		cursor: pointer;
+	}
 
-  &__user-text {
-    color: $bbt-grey-50;
-  }
+	&__user-text {
+		color: $bbt-grey-50;
+	}
+
 }
