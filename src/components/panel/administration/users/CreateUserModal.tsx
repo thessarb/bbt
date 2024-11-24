@@ -11,9 +11,10 @@ import API_HEADERS from "../../../../api/apiConfig";
 interface CreateUserModalProps {
     show: boolean;
     setShow: React.Dispatch<React.SetStateAction<boolean>>;
+    setRefreshUsersList: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CreateUserModal: React.FC<CreateUserModalProps> = ({show, setShow}) => {
+const CreateUserModal: React.FC<CreateUserModalProps> = ({show, setShow, setRefreshUsersList}) => {
     // Modal
     const [animateClose, setAnimateClose] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
@@ -126,6 +127,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({show, setShow}) => {
                 setLoading(false);
             }
         }
+        setRefreshUsersList((prev) => !prev);
     };
 
     return (

@@ -9,7 +9,11 @@ import {makeApiCall} from "../../../../api/apiRequests";
 import API_HEADERS from "../../../../api/apiConfig";
 import Loading from "../../../../helpers/Loading";
 
-const InactiveUsers = () => {
+interface InactiveUsersProps {
+    refreshUsersList: boolean;
+}
+
+const InactiveUsers : React.FC<InactiveUsersProps> = ({ refreshUsersList }) => {
     // Pagination
     const [page, setPage] = useState(1);
     const [selectedOption, setSelectedOption] = useState<{
@@ -69,7 +73,7 @@ const InactiveUsers = () => {
 
     useEffect(() => {
         getInactiveUsers();
-    }, [refreshList]);
+    }, [refreshList, refreshUsersList]);
 
     return (
             <>

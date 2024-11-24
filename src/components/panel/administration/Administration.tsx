@@ -25,12 +25,11 @@ const Administration = () => {
 
 
     // Create User Modal
+    const [refreshUsersList, setRefreshUsersList] = useState( false);
     const [showCreateUser , setShowCreateUser] = useState(false);
     const handleShow = () => {
         setShowCreateUser(true);
     };
-
-
 
     return (
             <>
@@ -43,7 +42,7 @@ const Administration = () => {
                         <i className="button__icon icon-user-plus"></i>
                         <span className="button__text">Neuen Benutzer anlegen</span>
                     </button>
-                    {showCreateUser && <CreateUserModal show={showCreateUser} setShow={setShowCreateUser}/>}
+                    {showCreateUser && <CreateUserModal show={showCreateUser} setShow={setShowCreateUser} setRefreshUsersList={setRefreshUsersList} />}
                 </div>
 
                 <div className="tab administration__tab">
@@ -77,7 +76,7 @@ const Administration = () => {
                                         id="inactive-users"
                                         className={`tab__content-item ${activeTab === 1 ? "active" : "close"}`}
                                 >
-                                    {InactiveUsers ? <InactiveUsers/> : <ListNoResult/>}
+                                    {InactiveUsers ? <InactiveUsers refreshUsersList={refreshUsersList} /> : <ListNoResult/>}
                                 </div>
                         )}
 
