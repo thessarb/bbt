@@ -89,7 +89,6 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({show, setShow}) => {
     const roleOptions = [
         {id: 1, value: 'admin', label: 'Administration'},
         {id: 2, value: 'customer', label: 'Customer'},
-
         {id: 4, value: 'internal', label: 'Internal'},
         {id: 5, value: 'architect', label: 'Architect'},
     ];
@@ -138,11 +137,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({show, setShow}) => {
                         fade={true}
                 >
                     <ModalHeader toggle={handleClose}>
-                        {loading ? (
-                                <span className="heading__semibold">Modal Loading</span>
-                        ) : (
-                                <span className="heading__semibold">Nutzer angelegt</span>
-                        )}
+                        <span className="heading__semibold">Nutzer angelegt</span>
                     </ModalHeader>
 
                     <form className="form" method="post" onSubmit={(e) => createUser(e)}>
@@ -304,9 +299,12 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({show, setShow}) => {
                                                         {/* Funktion */}
                                                         <div className="create-user__form--box-item create-user__form--dropdown">
                                                             <div className="select-field">
-                                                                <label htmlFor="function" className={`select-field__label caption__regular 
-                                    ${isSelectedOption1Error ? 'select-field__label--error' : isSelectedOption1Focused ? 'select-field__label--focused' : ''}
-                                `}>
+                                                                <label
+                                                                        htmlFor="function"
+                                                                        className={`select-field__label caption__regular ${isSelectedOption1Error ? ' select-field__label--error' :
+                                                                                isSelectedOption1Focused ? ' select-field__label--focused' : ''}
+                                                                        `}
+                                                                >
                                                                     Funktion
                                                                     {isSelectedOptionRequired &&
                                                                             <span className="select-field__label--required">*</span>}

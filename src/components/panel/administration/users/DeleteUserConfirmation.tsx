@@ -8,8 +8,12 @@ const DeleteUserConfirmation: React.FC<DeleteUserConfirmationProps> = ({name, la
 
     return (
             <>
-                <div className="delete-user__text body-big__regular">Benutzer <span
-                        className="body-big__medium"> {`“${name} ${lastName}”`}</span> wurde deaktiviert.
+                <div className="delete-user__text body-big__regular">
+                    Benutzer
+                    <span className="body-big__medium">
+                        {` “${name} ${lastName}” `}
+                    </span>
+                    wurde deaktiviert.
                 </div>
             </>
     )

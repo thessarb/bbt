@@ -26,13 +26,6 @@ const DeleteUsersModal: React.FC<DeleteUsersModalProps> = ({ show, setShow, user
         }, 350);
     };
 
-    const handleConfirmation = () => {
-        setTimeout(() => {
-            setConfirmation(true);
-        }, 350);
-    };
-
-
     // Delete user
     const [validations, setValidations] = useState<Record<string, string>>({});
 
@@ -47,6 +40,7 @@ const DeleteUsersModal: React.FC<DeleteUsersModalProps> = ({ show, setShow, user
                 setValidations(error.response.data);
             }
         }
+        setRefreshList((prev) => !prev);
     }
 
     return (
@@ -63,8 +57,10 @@ const DeleteUsersModal: React.FC<DeleteUsersModalProps> = ({ show, setShow, user
                     <ModalBody>
                         {confirmation ?
                                 <DeleteUserConfirmation name={name} lastName={lastName}/> :
-                                <div className="delete-user__text body-big__regular">Möchten Sie den Benutzer <span
-                                        className="body-big__medium">{`“${name} ${lastName}”`}</span> wirklich deaktivieren?
+                                <div className="delete-user__text body-big__regular">
+                                    Möchten Sie den Benutzer
+                                    <span className="body-big__medium">{` “${name} ${lastName}” `}</span>
+                                    wirklich deaktivieren?
                                 </div>
                         }
 

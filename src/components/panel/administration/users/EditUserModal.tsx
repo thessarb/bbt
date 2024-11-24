@@ -91,7 +91,6 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEdi
     const roleOptions = [
         {id: 1, value: 'Administration', label: 'Administration'},
         {id: 2, value: 'Customer', label: 'Customer'},
-
         {id: 4, value: 'Internal', label: 'Internal'},
         {id: 5, value: 'Architect', label: 'Architect'},
     ];
@@ -115,7 +114,6 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEdi
             setRole({ id: response.response.role_id, value: response.response.role.name, label: response.response.role.name});
 
             setLoading(false);
-            setRefreshList(true);
         } catch (error: any) {
             console.error("Error fetching user:", error);
             setLoading(false);
@@ -160,6 +158,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEdi
                 setLoading(false);
             }
         }
+        setRefreshList((prev) => !prev);
     };
 
     return (

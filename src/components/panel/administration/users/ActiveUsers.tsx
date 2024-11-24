@@ -46,14 +46,13 @@ const ActiveUsers = () => {
     };
 
     // functionality
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
     const [pagination, setPagination] = useState<boolean>(true);
     const [userStatus, setUserStatus] = useState(1);
     const [usersList, setUsersList] = useState<any[]>([]);
     const [refreshList, setRefreshList] = useState(false);
 
     const getActiveUsers = async (): Promise<void> => {
-        setLoading(true);
         const searchParams: any = {
             pagination: pagination,
             status : userStatus
@@ -72,10 +71,6 @@ const ActiveUsers = () => {
     useEffect(() => {
         getActiveUsers();
     }, [refreshList]);
-
-
-
-
 
     return (
             <>
@@ -123,7 +118,7 @@ const ActiveUsers = () => {
                         </thead>
                         <tbody>
 
-                        {!loading &&
+                        {usersList &&
                                 (usersList.map((user, index) => (
                                         <tr key={user.id}>
                                             <td role="cell" className="body-normal__regular" data-label={"Funktion"}>

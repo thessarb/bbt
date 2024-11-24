@@ -21,6 +21,8 @@ const API_PATHS = {
         apiBaseUrl + `user/update/${userId}`,
     deleteUser: (userId: number) =>
         apiBaseUrl + `user/delete/${userId}`,
+    restoreUser: (userId: number) =>
+        apiBaseUrl + `user/restore/${userId}`,
 };
 
 export default API_PATHS;

@@ -26,8 +26,14 @@ const InactiveUsers = () => {
 
     // Modal Reactivate
     const [show, setShow] = useState(false);
-    const handleShow = () => {
+    const [reactivateUserId, setReactivateUserId] = useState(0);
+    const [name, setSetname] = useState('');
+    const [lastName, setLastName] = useState('');
+    const handleShow = (userId: number, name: string, lastName: string) => {
         setShow(true);
+        setSetname(name);
+        setLastName(lastName);
+        setReactivateUserId(userId);
     };
 
     // Modal Edit User
@@ -40,13 +46,12 @@ const InactiveUsers = () => {
     };
 
     // functionality
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
     const [pagination, setPagination] = useState<boolean>(true);
     const [userStatus, setUserStatus] = useState(2);
     const [usersList, setUsersList] = useState<any[]>([]);
-    const [refreshList, setRefreshList] = useState(false);
+    const [refreshList, setRefreshList] = useState( false);
     const getInactiveUsers = async (): Promise<void> => {
-        setLoading(true);
         const searchParams: any = {
             pagination: pagination,
             status : userStatus
@@ -111,7 +116,7 @@ const InactiveUsers = () => {
                         </tr>
                         </thead>
                         <tbody>
-                            {!loading &&
+                            {usersList &&
                                     (usersList.map((user, index) => (
                                             <tr key={user.id}>
                                                 <td role="cell" className="body-normal__regular" data-label={"Funktion"}>
@@ -156,22 +161,30 @@ const InactiveUsers = () => {
                                                          className="button button-gost button--big button--grey">
                                                         <i className="button__icon icon-note-pencil"></i>
                                                     </div>
-
                                                     <div data-tooltip-id="tooltip"
                                                          data-tooltip-content="Nutzer reaktivieren"
                                                          data-tooltip-place="top"
                                                          data-tooltip-offset={5}
-                                                         onClick={handleShow}
+                                                         onClick={() => handleShow(user.id, user.firstname, user.lastname )}
                                                          className="button button-gost button--big button--grey">
                                                         <i className="button__icon icon-user-switch"></i>
                                                     </div>
-                                                    {show && <ReactivateUsersModal show={show} setShow={setShow}/>}
                                                 </td>
                                             </tr>
                                     ))
                             )}
                         </tbody>
                     </table>
+                    {show && 
+                            <ReactivateUsersModal
+                                    show={show}
+                                    setShow={setShow}
+                                    userId={reactivateUserId}
+                                    name={name}
+                                    lastName={lastName}
+                                    setRefreshList={setRefreshList}
+                            />
+                    }
                     {showEditModal &&
                             <EditUserModal
                                     showEditModal={showEditModal}
