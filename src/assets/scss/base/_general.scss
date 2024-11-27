@@ -53,3 +53,12 @@
   justify-content: center;
   width: 100%;
 }
+
+#page-topbar {
+  background-color: $bbt-white;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}

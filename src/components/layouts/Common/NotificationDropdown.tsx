@@ -76,12 +76,19 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen }) =
                     ) : (
                         notificationsList.map((notification, index) => (
                             <div className="headerdropdown__notification" key={notification.id}>
-                                <span className="headerdropdown__subtitle caption__regular">
-                                    {notification.created_at
-                                        ? moment(notification.created_at).format("DD. MM. yyyy")
-                                        : "-"}
+                                <div className="headerdropdown__order-date">
+                                    <span className="caption__regular link-component headerdropdown__order">Auftrag 80700</span>
+                                    <span className="headerdropdown__subtitle caption__regular">
+                                         {notification.created_at ? moment(notification.created_at).format(" DD. MM. yyyy") : ""}
+                                    </span>
+                                </div>
+
+                                <span className="headerdropdown__subject heading__regular">
+                                    {notification.subject.length > 50
+                                        ? `${notification.subject.substring(0, 50)}...`
+                                        : notification.subject}
                                 </span>
-                                <span className="headerdropdown__title body-big__medium">Auftrag 80700</span>
+
                                 <p className="headerdropdown__message body-normal__regular">
                                     {notification.message.length > 50
                                         ? `${notification.message.substring(0, 50)}...`
