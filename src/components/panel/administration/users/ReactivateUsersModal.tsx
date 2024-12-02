@@ -1,13 +1,20 @@
 import React, {useState} from "react";
 import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import ReactivateUserConfirmation from "./ReactivateUserConfirmation";
+import API_PATHS from "../../../../api/apiPaths";
+import {makeApiCall} from "../../../../api/apiRequests";
+import API_HEADERS from "../../../../api/apiConfig";
 
 interface ReactivateUsersModalProps {
     show: boolean;
     setShow: React.Dispatch<React.SetStateAction<boolean>>;
+    userId: number;
+    name: string;
+    lastName: string;
+    setRefreshList: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ReactivateUsersModal: React.FC<ReactivateUsersModalProps> = ({ show, setShow }) => {
+const ReactivateUsersModal: React.FC<ReactivateUsersModalProps> = ({ show, setShow, userId, name,lastName, setRefreshList }) => {
     // Modal
     const [animateClose, setAnimateClose] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
@@ -19,11 +26,26 @@ const ReactivateUsersModal: React.FC<ReactivateUsersModalProps> = ({ show, setSh
         }, 350);
     };
 
-    const handleConfirmation = () => {
-        setTimeout(() => {
-            setConfirmation(true);
-        }, 350);
-    };
+    // Reactivate user
+    const [validations, setValidations] = useState<Record<string, string>>({});
+
+    const reactivateUser = async (userId: number): Promise<void> => {
+        const request: any = API_PATHS.restoreUser(userId);
+        setConfirmation(true);
+
+        try {
+            const response: any = await makeApiCall<ResponseType>(request, "PUT", API_HEADERS.authenticated);
+        } catch (error: any) {
+            if (error.response.status === 403) {
+                setValidations(error.response.data);
+            }
+            if (error.response.status === 404) {
+                setValidations(error.response.data);
+            }
+        }
+        setRefreshList((prev) => !prev);
+    }
+
 
     return (
             <>
@@ -38,9 +60,11 @@ const ReactivateUsersModal: React.FC<ReactivateUsersModalProps> = ({ show, setSh
                     </ModalHeader>
                     <ModalBody>
                         {confirmation ?
-                                <ReactivateUserConfirmation /> :
-                                <div className="reactivate-user__text body-big__regular">Möchten Sie den Benutzer <span
-                                        className="body-big__medium">“Thomas Müller”</span> wirklich wieder reaktivieren?
+                                <ReactivateUserConfirmation name={name} lastName={lastName}/> :
+                                <div className="reactivate-user__text body-big__regular">
+                                    Möchten Sie den Benutzer
+                                    <span className="body-big__medium">{` “${name} ${lastName}” `}</span>
+                                    wirklich wieder reaktivieren?
                                 </div>
                         }
 
@@ -60,7 +84,9 @@ const ReactivateUsersModal: React.FC<ReactivateUsersModalProps> = ({ show, setSh
                                             onClick={handleClose}>
                                         <span className="button__text">Abbrechen</span>
                                     </button>
-                                    <button className="button button--big button--green" onClick={handleConfirmation}>
+                                    <button className="button button--big button--green"
+                                            onClick={() => reactivateUser(userId)}
+                                    >
                                         <i className="button__icon icon-user-switch"></i>
                                         <span className="button__text">Nutzer aktivieren</span>
                                     </button>

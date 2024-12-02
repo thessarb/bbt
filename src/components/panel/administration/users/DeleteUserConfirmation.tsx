@@ -1,10 +1,19 @@
+import React from "react";
 
-const DeleteUserConfirmation = () => {
+interface DeleteUserConfirmationProps {
+    name: string;
+    lastName: string;
+}
+const DeleteUserConfirmation: React.FC<DeleteUserConfirmationProps> = ({name, lastName}) => {
 
     return (
             <>
-                <div className="delete-user__text body-big__regular">Benutzer <span
-                        className="body-big__medium">“Thomas Müller”</span> wurde deaktiviert.
+                <div className="delete-user__text body-big__regular">
+                    Benutzer
+                    <span className="body-big__medium">
+                        {` “${name} ${lastName}” `}
+                    </span>
+                    wurde deaktiviert.
                 </div>
             </>
     )

@@ -42,6 +42,7 @@
       flex-direction: column;
       gap: $unit-1;
       padding: $unit-1 0;
+      margin-right: toRem(-20);
     }
 
     &__error {

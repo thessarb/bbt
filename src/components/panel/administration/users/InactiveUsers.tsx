@@ -1,11 +1,19 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Select from "react-select";
 import CustomPagination from "../../../../helpers/CustomPaginate";
 import ReactivateUsersModal from "./ReactivateUsersModal";
 import EditUserModal from "./EditUserModal";
-import {Tooltip} from "react-tooltip";
+import SearchFilter from "../../../../helpers/SearchFilter";
+import API_PATHS from "../../../../api/apiPaths";
+import {makeApiCall} from "../../../../api/apiRequests";
+import API_HEADERS from "../../../../api/apiConfig";
+import Loading from "../../../../helpers/Loading";
 
-const InactiveUsers = () => {
+interface InactiveUsersProps {
+    refreshUsersList: boolean;
+}
+
+const InactiveUsers : React.FC<InactiveUsersProps> = ({ refreshUsersList }) => {
     // Pagination
     const [page, setPage] = useState(1);
     const [selectedOption, setSelectedOption] = useState<{
@@ -22,15 +30,50 @@ const InactiveUsers = () => {
 
     // Modal Reactivate
     const [show, setShow] = useState(false);
-    const handleShow = () => {
+    const [reactivateUserId, setReactivateUserId] = useState(0);
+    const [name, setSetname] = useState('');
+    const [lastName, setLastName] = useState('');
+    const handleShow = (userId: number, name: string, lastName: string) => {
         setShow(true);
+        setSetname(name);
+        setLastName(lastName);
+        setReactivateUserId(userId);
     };
 
     // Modal Edit User
     const [showEditModal, setShowEditModal] = useState(false);
-    const handleShowEditModal = () => {
+    const [userId, setUserId] = useState(0);
+
+    const handleShowEditModal = (userId: number) => {
         setShowEditModal(true);
+        setUserId(userId);
     };
+
+    // functionality
+    const [loading, setLoading] = useState<boolean>(true);
+    const [pagination, setPagination] = useState<boolean>(true);
+    const [userStatus, setUserStatus] = useState(2);
+    const [usersList, setUsersList] = useState<any[]>([]);
+    const [refreshList, setRefreshList] = useState( false);
+    const getInactiveUsers = async (): Promise<void> => {
+        const searchParams: any = {
+            pagination: pagination,
+            status : userStatus
+        };
+
+        const request: any = SearchFilter(searchParams, API_PATHS.userList);
+
+        try {
+            const response: any = await makeApiCall<ResponseType>(request, "GET", API_HEADERS.authenticated);
+            setUsersList(response.response.data);
+            setLoading(false);
+        } catch (error: any) {
+        }
+    };
+
+    useEffect(() => {
+        getInactiveUsers();
+    }, [refreshList, refreshUsersList]);
 
     return (
             <>
@@ -72,59 +115,91 @@ const InactiveUsers = () => {
                                     Telefon
                                 </div>
                             </th>
-                            <th role="columnheader">
-                                <div className="body-normal__semibold">
-                                    Account
-                                </div>
-                            </th>
+
                             <th role="columnheader"></th>
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                            <td role="cell" className="body-normal__regular" data-label={"Funktion"}>
-                                Kunde
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Firma"}>
-                                Müller GmbH
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Nachname"}>
-                                Müller
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Vorname"}>
-                                Timo
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"E-Mail"}>
-                                timo.mueller@web.de
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Telefon"}>
-                                +49 123 4566
-                            </td>
-                            <td role="cell" className="body-normal__regular" data-label={"Account"}>
-                                BBT
-                            </td>
+                            {usersList &&
+                                    (usersList.map((user, index) => (
+                                            <tr key={user.id}>
+                                                <td role="cell" className="body-normal__regular" data-label={"Funktion"}>
+                                                    {user.role.name}
+                                                </td>
+                                                <td role="cell" className="body-normal__regular" data-label={"Firma"}>
+                                                    {user.customer ? (user.customer.company ?
+                                                            (user.customer.company.company_name) : user.customer.company_name) : user.company_name
+                                                    }
+                                                </td>
+                                                <td role="cell" className="body-normal__regular" data-label={"Nachname"}>
+                                                    {user.lastname}
+                                                </td>
+                                                <td role="cell" className="body-normal__regular" data-label={"Vorname"}>
+                                                    {user.firstname}
+                                                </td>
+                                                <td role="cell" className="body-normal__regular" data-label={"E-Mail"}>
+                                                    {user.email}
+                                                </td>
+                                                <td role="cell" className="body-normal__regular" data-label={"Telefon"}>
+                                                    {user.phone || user.mobile ?
+                                                            <>
+                                                                {user.phone && user.phone}
+                                                                {user.mobile &&
+                                                                        <>
+                                                                            <br/>
+                                                                            user.mobile
+                                                                        </>
+                                                                }
 
-                            <td role="cell" className="table-list__button" data-label={" "}>
-                                <div data-tooltip-id="tooltip"
-                                     data-tooltip-content="Nutzer bearbeiten"
-                                     data-tooltip-place="top"
-                                     data-tooltip-offset={5}
-                                     onClick={handleShowEditModal} className="button button-gost button--big button--grey">
-                                    <i className="button__icon icon-note-pencil"></i>
-                                </div>
-                                {showEditModal && <EditUserModal showEditModal={showEditModal} setShowEditModal={setShowEditModal}/>}
-                                <div data-tooltip-id="tooltip"
-                                     data-tooltip-content="Nutzer reaktivieren"
-                                     data-tooltip-place="top"
-                                     data-tooltip-offset={5}
-                                     onClick={handleShow} className="button button-gost button--big button--grey">
-                                    <i className="button__icon icon-user-switch"></i>
-                                </div>
-                                {show && <ReactivateUsersModal show={show} setShow={setShow}/>}
-                            </td>
-                        </tr>
+                                                            </> :
+                                                            '-'
+                                                    }
+                                                </td>
+
+                                                <td role="cell" className="table-list__button" data-label={" "}>
+                                                    <div data-tooltip-id="tooltip"
+                                                         data-tooltip-content="Nutzer bearbeiten"
+                                                         data-tooltip-place="top"
+                                                         data-tooltip-offset={5}
+                                                         onClick={() => handleShowEditModal(user.id)}
+                                                         className="button button-gost button--big button--grey">
+                                                        <i className="button__icon icon-note-pencil"></i>
+                                                    </div>
+                                                    <div data-tooltip-id="tooltip"
+                                                         data-tooltip-content="Nutzer reaktivieren"
+                                                         data-tooltip-place="top"
+                                                         data-tooltip-offset={5}
+                                                         onClick={() => handleShow(user.id, user.firstname, user.lastname )}
+                                                         className="button button-gost button--big button--grey">
+                                                        <i className="button__icon icon-user-switch"></i>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                    ))
+                            )}
                         </tbody>
                     </table>
+                    {show && 
+                            <ReactivateUsersModal
+                                    show={show}
+                                    setShow={setShow}
+                                    userId={reactivateUserId}
+                                    name={name}
+                                    lastName={lastName}
+                                    setRefreshList={setRefreshList}
+                            />
+                    }
+                    {showEditModal &&
+                            <EditUserModal
+                                    showEditModal={showEditModal}
+                                    setShowEditModal={setShowEditModal}
+                                    userId={userId}
+                                    setRefreshList={setRefreshList}
+                            />
+                    }
+                    {loading && <div className="loading-container">
+                        <Loading/>
+                    </div>}
                 </div>
 
                 <div className="pagination-container">

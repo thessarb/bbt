@@ -51,6 +51,7 @@
 	}
 
 	&__notification {
+    position: relative;
 		display: grid;
 		padding: $unit-factor;
 		vertical-align: middle;

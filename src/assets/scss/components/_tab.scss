@@ -83,6 +83,25 @@
     &.close {
       animation: hideTab .35s forwards;
     }
+
+    &--customer {
+      display: flex;
+      align-items: center;
+      gap: toRem(10);
+      width: 100%;
+      height: toRem(60);
+      padding: toRem(10);
+      margin: toRem(20) 0 toRem(10);
+      color: $bbt-blue-100;
+      border-radius: toRem(4);
+      background: $bbt-blue-10;
+
+      &-icon {
+        width: toRem(24);
+        height: toRem(24);
+        background-color: $bbt-blue-100;
+      }
+    }
   }
 
   // Messages styles

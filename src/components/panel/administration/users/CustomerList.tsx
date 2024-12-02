@@ -1,15 +1,14 @@
 import Select from "react-select";
 import CustomPagination from "../../../../helpers/CustomPaginate";
 import React, {useEffect, useState} from "react";
-import DeleteUsersModal from "./DeleteUsersModal";
-import EditUserModal from "./EditUserModal";
 import SearchFilter from "../../../../helpers/SearchFilter";
 import API_PATHS from "../../../../api/apiPaths";
 import {makeApiCall} from "../../../../api/apiRequests";
 import API_HEADERS from "../../../../api/apiConfig";
 import Loading from "../../../../helpers/Loading";
+import ReactivateCustomerModal from "./ReactivateCustomerModal";
 
-const ActiveUsers = () => {
+const CustomerList = () => {
     // Pagination
     const [page, setPage] = useState(1);
     const [selectedOption, setSelectedOption] = useState<{
@@ -23,53 +22,43 @@ const ActiveUsers = () => {
         last_page: 10,
     };
 
-    // Modal Delete
+    // Modal Reactivate Customer
     const [show, setShow] = useState(false);
+    const [reactivateCostumerId, setReactivateCostumerId] = useState(0);
     const [name, setSetname] = useState('');
     const [lastName, setLastName] = useState('');
-    const [deleteUser, setDeleteUser] = useState(0);
-
-    const handleShow = (userId: number, name: string, lastName: string) => {
+    const handleShow = (customerId: number, name: string, lastName: string) => {
         setShow(true);
         setSetname(name);
         setLastName(lastName);
-        setDeleteUser(userId);
-    };
-
-    // Modal Edit User
-    const [showEditModal, setShowEditModal] = useState(false);
-    const [userId, setUserId] = useState(0);
-
-    const handleShowEditModal = (userId: number) => {
-        setShowEditModal(true);
-        setUserId(userId);
+        setReactivateCostumerId(customerId);
     };
 
     // functionality
     const [loading, setLoading] = useState<boolean>(true);
     const [pagination, setPagination] = useState<boolean>(true);
-    const [userStatus, setUserStatus] = useState(1);
-    const [usersList, setUsersList] = useState<any[]>([]);
+    const [customerStatus, setCustomerStatus] = useState(2);
+    const [customersList, setCustomersList] = useState<any[]>([]);
     const [refreshList, setRefreshList] = useState(false);
 
-    const getActiveUsers = async (): Promise<void> => {
+    const getActiveCustomers = async (): Promise<void> => {
         const searchParams: any = {
             pagination: pagination,
-            status : userStatus
+            status : customerStatus
         };
 
-        const request: any = SearchFilter(searchParams, API_PATHS.userList);
+        const request: any = SearchFilter(searchParams, API_PATHS.customerList);
 
         try {
             const response: any = await makeApiCall<ResponseType>(request, "GET", API_HEADERS.authenticated);
-            setUsersList(response.response.data);
+            setCustomersList(response.response.data);
             setLoading(false);
         } catch (error: any) {
         }
     };
 
     useEffect(() => {
-        getActiveUsers();
+        getActiveCustomers();
     }, [refreshList]);
 
     return (
@@ -78,12 +67,6 @@ const ActiveUsers = () => {
                     <table role="table">
                         <thead>
                         <tr role="row">
-                            <th role="columnheader">
-                                <div className="body-normal__semibold">
-                                    Funktion
-                                    <i className="icon-caret-up-down"></i>
-                                </div>
-                            </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Firma
@@ -118,36 +101,41 @@ const ActiveUsers = () => {
                         </thead>
                         <tbody>
 
-                        {usersList &&
-                                (usersList.map((user, index) => (
-                                        <tr key={user.id}>
-                                            <td role="cell" className="body-normal__regular" data-label={"Funktion"}>
-                                                {user.role.name}
-                                            </td>
+                        {customersList &&
+                                (customersList.map((customer, index) => (
+                                        <tr key={customer.id}>
                                             <td role="cell" className="body-normal__regular" data-label={"Firma"}>
-                                                {user.customer ? (user.customer.company ?
-                                                        (user.customer.company.company_name) : user.customer.company_name) : user.company_name
-                                                }                                            </td>
+                                                {customer.company ? customer.company.company_name : customer.company_name}
+                                            </td>
                                             <td role="cell" className="body-normal__regular" data-label={"Nachname"}>
-                                                {user.lastname}
+                                                {customer.lastname}
                                             </td>
                                             <td role="cell" className="body-normal__regular" data-label={"Vorname"}>
-                                                {user.firstname}
+                                                {customer.firstname}
                                             </td>
                                             <td role="cell" className="body-normal__regular" data-label={"E-Mail"}>
-                                                {user.email}
+                                                {customer.email}
                                             </td>
                                             <td role="cell" className="body-normal__regular" data-label={"Telefon"}>
-                                                {user.phone || user.mobile ?
+                                                {customer.mobile1 || customer.mobile2 || customer.mobile3 ?
                                                         <>
-                                                            {user.phone && user.phone}
-                                                            {user.mobile &&
+                                                            {customer.mobile1 &&
                                                                     <>
-                                                                        <br/>
-                                                                        user.mobile
+                                                                        {customer.mobile1}
                                                                     </>
                                                             }
-
+                                                            {customer.mobile2 &&
+                                                                    <>
+                                                                        <br/>
+                                                                        {customer.mobile2}
+                                                                    </>
+                                                            }
+                                                            {customer.mobile3 &&
+                                                                    <>
+                                                                        <br/>
+                                                                        {customer.mobile3}
+                                                                    </>
+                                                            }
                                                         </> :
                                                         '-'
                                                 }
@@ -155,45 +143,27 @@ const ActiveUsers = () => {
 
                                             <td role="cell" className="table-list__button" data-label={" "}>
                                                 <div data-tooltip-id="tooltip"
-                                                     data-tooltip-content="Nutzer bearbeiten"
+                                                     data-tooltip-content="Nutzer reaktivieren"
                                                      data-tooltip-place="top"
                                                      data-tooltip-offset={5}
-                                                     onClick={() => handleShowEditModal(user.id)}
+                                                     onClick={() => handleShow(customer.id, customer.firstname, customer.lastname)}
                                                      className="button button-gost button--big button--grey">
                                                     <i className="button__icon icon-note-pencil"></i>
                                                 </div>
-
-                                                <div data-tooltip-id="tooltip"
-                                                     data-tooltip-content="Nutzer deaktivieren"
-                                                     data-tooltip-place="top"
-                                                     data-tooltip-offset={5}
-                                                     onClick={() => handleShow(user.id, user.firstname, user.lastname )}
-                                                     className="button button-gost button--big button--grey">
-                                                    <i className="button__icon icon-user-minus"></i>
-                                                </div>
-
                                             </td>
                                         </tr>
-                                ))
-                        )}
+                                        ))
+                                )}
 
                         </tbody>
                     </table>
                     {show &&
-                            <DeleteUsersModal
-                                show={show}
-                                setShow={setShow}
-                                userId={deleteUser}
-                                name={name}
-                                lastName={lastName}
-                                setRefreshList={setRefreshList}
-                        />
-                    }
-                    {showEditModal &&
-                            <EditUserModal
-                                    showEditModal={showEditModal}
-                                    setShowEditModal={setShowEditModal}
-                                    userId={userId}
+                            <ReactivateCustomerModal
+                                    show={show}
+                                    setShow={setShow}
+                                    customerId={reactivateCostumerId}
+                                    name={name}
+                                    lastName={lastName}
                                     setRefreshList={setRefreshList}
                             />
                     }
@@ -233,4 +203,4 @@ const ActiveUsers = () => {
     )
 };
 
-export default ActiveUsers;
+export default CustomerList;
