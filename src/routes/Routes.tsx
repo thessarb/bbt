@@ -42,11 +42,18 @@ const PrivateRoutes: RouteItem[] = [
             </ProtectedRoute>
         ),
     },
-
+    {
+        path: PATHS.userManagement,
+        element: checkPrivateRoutes(
+            <ProtectedRoute roles={[1]}>
+                <UsersListView />
+            </ProtectedRoute>
+        ),
+    },
     {
         path: PATHS.orders,
         element: checkPrivateRoutes(
-            <ProtectedRoute roles={[3, 4]}>
+            <ProtectedRoute roles={[1, 3, 4]}>
                 <OrdersView />
             </ProtectedRoute>
         ),
@@ -86,23 +93,16 @@ const PrivateRoutes: RouteItem[] = [
     {
         path: PATHS.messages,
         element: checkPrivateRoutes(
-            <ProtectedRoute roles={[3, 4]}>
+            <ProtectedRoute roles={[1, 3, 4]}>
                 <MessagesView />
             </ProtectedRoute>
         ),
     },
+
     {
-        path: PATHS.userManagement,
+        path: PATHS.orderDetailsId,
         element: checkPrivateRoutes(
-            <ProtectedRoute roles={[1]}>
-                <UsersListView />
-            </ProtectedRoute>
-        ),
-    },
-    {
-        path: PATHS.orderDetails,
-        element: checkPrivateRoutes(
-            <ProtectedRoute roles={[3, 4]}>
+            <ProtectedRoute roles={[1, 3, 4]}>
                 <OrderDetailsOverviewView />
             </ProtectedRoute>
         ),

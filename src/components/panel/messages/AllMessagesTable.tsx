@@ -32,7 +32,7 @@ const MessagesTable: React.FC<MessagesTableProps> = ({ filters, applyFilters }) 
     const [paginate, setPaginate] = useState<any>([]);
     const [pagination, setPagination] = useState<boolean>(true);
     const [column, setColumn] = useState("");
-    const [orderColumn, setOrderColumn] = useState("desc");
+    const [orderColumn, setOrderColumn] = useState("asc");
     const [loading, setLoading] = useState<boolean>(false);
 
     const [selectedPageOption, setSelectedPageOption] = useState<{ value: string; label: string }>({

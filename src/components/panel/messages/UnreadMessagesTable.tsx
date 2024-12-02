@@ -9,7 +9,7 @@ import SearchFilter from "src/helpers/SearchFilter";
 import Loading from "src/helpers/Loading";
 import moment from "moment";
 import CustomPagination from "src/helpers/CustomPaginate";
-import Select, {SingleValue} from "react-select";
+import Select, { SingleValue } from "react-select";
 import ListNoResult from "../dashboard/deadlines/ListNoResult";
 
 interface Filter {
@@ -28,6 +28,8 @@ const UnreadMessagesTable: React.FC<UnreadMessagesTableProps> = ({ filters, appl
     const [status, setStatus] = useState("0");
     const [page, setPage] = useState<number>(1);
     const [rows, setRows] = useState<number>(5);
+    const [column, setColumn] = useState("");
+    const [orderColumn, setOrderColumn] = useState("asc");
     const [paginate, setPaginate] = useState<any>([]);
     const [pagination, setPagination] = useState<boolean>(true);
     const [loading, setLoading] = useState<boolean>(false);
@@ -54,6 +56,11 @@ const UnreadMessagesTable: React.FC<UnreadMessagesTableProps> = ({ filters, appl
             status: status,
         };
 
+        if (column) {
+            searchParams.column = column;
+            searchParams.order = orderColumn;
+        }
+
         filters.forEach((filter) => {
             if (filter.selectedOption?.value) {
                 searchParams[filter.selectedOption.value] = filter.inputValue;
@@ -73,7 +80,8 @@ const UnreadMessagesTable: React.FC<UnreadMessagesTableProps> = ({ filters, appl
                 current_page: response.response.current_page || 1,
                 per_page: rows,
                 last_page: Math.ceil((response.response.total || 0) / rows),
-            });            setLoading(false);
+            });
+            setLoading(false);
         } catch (error: any) {
             console.error("Error fetching notifications:", error);
         } finally {
@@ -83,14 +91,14 @@ const UnreadMessagesTable: React.FC<UnreadMessagesTableProps> = ({ filters, appl
 
     useEffect(() => {
         if (applyFilters > 0) {
-            setPage(1); 
+            setPage(1);
             getNotifications();
         }
     }, [applyFilters]);
-    
+
     useEffect(() => {
         getNotifications();
-    }, [page, rows]);
+    }, [page, rows, column, orderColumn]);
 
     const updateNotification = async (notificationId: number): Promise<void> => {
         try {
@@ -99,6 +107,7 @@ const UnreadMessagesTable: React.FC<UnreadMessagesTableProps> = ({ filters, appl
                 "PUT",
                 API_HEADERS.authenticated
             );
+            // getNotifications();
         } catch (error: any) {}
     };
 
@@ -112,9 +121,15 @@ const UnreadMessagesTable: React.FC<UnreadMessagesTableProps> = ({ filters, appl
     const handleRowsChange = (selected: { value: string; label: string } | null) => {
         if (selected) {
             setSelectedPageOption(selected);
-            setRows(Number(selected.value)); 
-            setPage(1); 
+            setRows(Number(selected.value));
+            setPage(1);
         }
+    };
+
+    const toggleOrder = (columnName: string) => {
+        setColumn(columnName);
+        setOrderColumn((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+        setPage(1); 
     };
 
     return (
@@ -127,25 +142,25 @@ const UnreadMessagesTable: React.FC<UnreadMessagesTableProps> = ({ filters, appl
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Auftrag
-                                    <i className="icon-caret-up-down"></i>
+                                    <i className="icon-caret-up-down" onClick={() => toggleOrder("notifiable_id")}></i>
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Datum
-                                    <i className="icon-caret-up-down"></i>
+                                    <i className="icon-caret-up-down" onClick={() => toggleOrder("created_at")}></i>
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Betreff
-                                    <i className="icon-caret-up-down"></i>
+                                    <i className="icon-caret-up-down" onClick={() => toggleOrder("subject")}></i>
                                 </div>
                             </th>
                             <th role="columnheader">
                                 <div className="body-normal__semibold">
                                     Kritisch
-                                    <i className="icon-caret-up-down"></i>
+                                    <i className="icon-caret-up-down" onClick={() => toggleOrder("type")}></i>
                                 </div>
                             </th>
                             <th role="columnheader">
@@ -158,7 +173,7 @@ const UnreadMessagesTable: React.FC<UnreadMessagesTableProps> = ({ filters, appl
                     </thead>
 
                     <tbody>
-                    {loading ? (
+                        {loading ? (
                             <tr>
                                 <td className="table-loading" colSpan={7}>
                                     <Loading />
@@ -171,85 +186,92 @@ const UnreadMessagesTable: React.FC<UnreadMessagesTableProps> = ({ filters, appl
                                 </td>
                             </tr>
                         ) : (
-                        notificationsList.map((notification, index) => (
-                            <tr
-                                key={notification.id}
-                                ref={(el) => (rowRefs.current[index] = el)}
-                                className={`body-normal__regular ${activeRowId === index ? "active" : ""} ${
-                                    notification.status == 0 ? "unread" : ""
-                                }`}
-                                onClick={(e) => {
-                                    updateNotification(notification.id);
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                }}
-                            >
-                                <td role="cell" className="body-normal__regular" onClick={() => handleRowClick(index)}>
-                                    <div
-                                        data-tooltip-id="tooltip"
-                                        data-tooltip-content={
-                                            activeRowId === index ? "Details schließen" : "Details öffnen"
-                                        }
-                                        data-tooltip-place="top"
-                                        data-tooltip-offset={10}
+                            notificationsList.map((notification, index) => (
+                                <tr
+                                    key={notification.id}
+                                    ref={(el) => (rowRefs.current[index] = el)}
+                                    className={`body-normal__regular ${activeRowId === index ? "active" : ""} ${
+                                        notification.status == 0 ? "unread" : ""
+                                    }`}
+                                    onClick={(e) => {
+                                        updateNotification(notification.id);
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                    }}
+                                >
+                                    <td
+                                        role="cell"
+                                        className="body-normal__regular"
+                                        onClick={() => handleRowClick(index)}
                                     >
-                                        <i className="icon-caret-right"></i>
-                                    </div>
-                                </td>
-                                <td role="cell" className="body-normal__regular" data-label={"Auftrag"}>
-                                    <Link to={`order-nr-here/80700`} className="link-component">
-                                    {notification.notifiable_type === "App\\Models\\Order" ? notification.notifiable.system_id : " "}
-                                    </Link>
-                                </td>
-                                <td
-                                    role="cell"
-                                    className="body-normal__regular"
-                                    data-label={"Datum"}
-                                    onClick={() => handleRowClick(index)}
-                                >
-                                    {notification.created_at
-                                        ? moment(notification.created_at).format("DD. MM. yyyy")
-                                        : "-"}
-                                </td>
-                                <td
-                                    role="cell"
-                                    className="body-normal__regular"
-                                    data-label={"Betreff"}
-                                    onClick={() => handleRowClick(index)}
-                                >
-                                    {notification.subject ? notification.subject : "-"}
-                                </td>
-                                <td
-                                    role="cell"
-                                    className="body-normal__regular"
-                                    data-label={"Kritisch"}
-                                    onClick={() => handleRowClick(index)}
-                                >
-                                    <div className="button button-gost button--big button--red">
-                                    {notification.notifiable_type === "critical" ? (
+                                        <div
+                                            data-tooltip-id="tooltip"
+                                            data-tooltip-content={
+                                                activeRowId === index ? "Details schließen" : "Details öffnen"
+                                            }
+                                            data-tooltip-place="top"
+                                            data-tooltip-offset={10}
+                                        >
+                                            <i className="icon-caret-right"></i>
+                                        </div>
+                                    </td>
+                                    <td role="cell" className="body-normal__regular" data-label={"Auftrag"}>
+                                        <Link to={`order-nr-here/80700`} className="link-component">
+                                            {notification.notifiable_type === "App\\Models\\Order"
+                                                ? notification.notifiable.system_id
+                                                : " "}
+                                        </Link>
+                                    </td>
+                                    <td
+                                        role="cell"
+                                        className="body-normal__regular"
+                                        data-label={"Datum"}
+                                        onClick={() => handleRowClick(index)}
+                                    >
+                                        {notification.created_at
+                                            ? moment(notification.created_at).format("DD. MM. yyyy")
+                                            : "-"}
+                                    </td>
+                                    <td
+                                        role="cell"
+                                        className="body-normal__regular"
+                                        data-label={"Betreff"}
+                                        onClick={() => handleRowClick(index)}
+                                    >
+                                        {notification.subject ? notification.subject : "-"}
+                                    </td>
+                                    <td
+                                        role="cell"
+                                        className="body-normal__regular"
+                                        data-label={"Kritisch"}
+                                        onClick={() => handleRowClick(index)}
+                                    >
+                                        <div className="button button-gost button--big button--red">
+                                            {notification.notifiable_type === "critical" ? (
                                                 <i className="button__icon icon-warning"></i>
                                             ) : (
                                                 " "
                                             )}
-                                    </div>
-                                </td>
-                                <td
-                                    role="cell"
-                                    className="contents"
-                                    data-label={"Inhalt"}
-                                    onClick={() => handleRowClick(index)}
-                                >
-                                    <span className="collapsed body-normal__regular">
-                                        {notification.message ? notification.message : "-"}
-                                    </span>
-                                </td>
-                                <td role="cell" className="table-list__button" data-label={" "}>
+                                        </div>
+                                    </td>
+                                    <td
+                                        role="cell"
+                                        className="contents"
+                                        data-label={"Inhalt"}
+                                        onClick={() => handleRowClick(index)}
+                                    >
+                                        <span className="collapsed body-normal__regular">
+                                            {notification.message ? notification.message : "-"}
+                                        </span>
+                                    </td>
+                                    <td role="cell" className="table-list__button" data-label={" "}>
                                         <div className="button button-gost button--big button--grey">
                                             <i className="button__icon icon-download-simple"></i>
                                         </div>
                                     </td>
-                            </tr>
-                        )))}
+                                </tr>
+                            ))
+                        )}
                     </tbody>
                 </table>
             </div>

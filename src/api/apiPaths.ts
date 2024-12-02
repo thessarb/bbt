@@ -16,7 +16,6 @@ const API_PATHS = {
     notificationUpdate: (notificationId: number) =>
       apiBaseUrl + `notification/${notificationId}/update`,
     notificationFilter: apiBaseUrl + "filter/notifications/",
-    notificationFilterOrder: apiBaseUrl + "filter/orders/system_id",
     
     userList: apiBaseUrl + "user/list",
     createUser: apiBaseUrl + "user/store",
@@ -30,6 +29,10 @@ const API_PATHS = {
         apiBaseUrl + `user/restore/${userId}`,
     customerList: apiBaseUrl + "customer/list",
     activateCustomer: apiBaseUrl + `user/store/customer`,
+
+    orderList: apiBaseUrl + "order/list",
+    orderFilter: apiBaseUrl + "filter/orders/system_id",
+
 };
 
 export default API_PATHS;

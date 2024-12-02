@@ -9,7 +9,8 @@ const PATHS = {
   thankYou: "/vielen-dank",
   dashboard: "/dashboard",
   orders: "/auftrage",
-  orderDetails: "/auftrage/:id",
+  orderDetails: "/auftrage/",
+  orderDetailsId: "/auftrage/:id",
   
   administration: "/verwaltung",
   administrationOrder: " /verwaltung/auftrag/:id",
