@@ -15,7 +15,7 @@ const ForgotPassword = () => {
     const [isEmailFocused, setIsEmailFocused] = useState<boolean>(false);
     const [isEmailError, setIsEmailError] = useState<boolean>(false);
     const [emaildIsRequired, setEmailIsRequired] = useState("Email is required!");
-
+    const [loading, setLoading] = useState(false);
     const isInputRequired = true;
     const [validations, setValidations] = useState<Record<string, string>>({});
 
@@ -131,15 +131,25 @@ const ForgotPassword = () => {
                             <i className="button__icon icon-arrow-left"></i>
                             <span className="button__text">Zurück</span>
                         </Link>
-
-                        <button
-                            id="forgot-password"
-                            className="forgot-password__button-forgot button button--big button--green"
-                            type="submit"
-                            name="forgot-password"
-                        >
-                            <span className="button__text">Passwort Link anfordern</span>
-                        </button>
+                        {loading ? (
+                            <button
+                                id="forgot-password"
+                                className="forgot-password__button-forgot button button--big button--green"
+                                type="button"
+                                name="forgot-password"
+                            >
+                                <span className="button__text">Passwort Link anfordern</span>
+                            </button>
+                        ) : (
+                            <button
+                                id="forgot-password"
+                                className="forgot-password__button-forgot button button--big button--green"
+                                type="submit"
+                                name="forgot-password"
+                            >
+                                <span className="button__text">Passwort Link anfordern</span>
+                            </button>
+                        )}
                     </div>
                 </form>
             </div>

@@ -50,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
 
         try {
             const response: any = await makeApiCall<ResponseType>(request, "GET", API_HEADERS.authenticated);
-            setNotificationsList(response.response);
+            setNotificationsList(response.response? response.response : []);
             setLoading(false);
         } catch (error: any) {}
     };
@@ -133,21 +133,20 @@ const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
                     </div>
                     <div className="navbar-header__user">
                         <div
+                            data-tooltip-id="tooltip"
+                            data-tooltip-content="Benachrichtigungen öffnen"
+                            data-tooltip-place="top"
+                            data-tooltip-offset={0}
                             className="navbar-header__notification"
                             ref={notificationRef}
                             onClick={handleNotificationClick}
                         >
-                            <i className="icon-notification"
-                               data-tooltip-id="tooltip"
-                               data-tooltip-content="Benachrichtigungen öffnen"
-                               data-tooltip-place="top"
-                               data-tooltip-offset={10}>
-                            </i>
+                            <i className="icon-notification">
                             {notificationsList.length > 0 ? (
-                                <span className="navbar-header__notification--notification-badge"></span>
+                                <span className="notification-badge"></span>
                             ) : (
                                 ""
-                            )}
+                            )}</i>
                             {isNotificationDropdownOpen && <div className="overlay" />}
                             <NotificationDropdown isOpen={isNotificationDropdownOpen} />
                         </div>

@@ -37,7 +37,9 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen }) =
             const response: any = await makeApiCall<ResponseType>(request, "GET", API_HEADERS.authenticated);
             setNotificationsList(response.response);
             setLoading(false);
-        } catch (error: any) {}
+        } catch (error: any) {
+            setLoading(false);
+        }
     };
 
     useEffect(() => {
@@ -59,7 +61,9 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen }) =
         <div
             ref={dropdownRef}
             onClick={handleClickInside}
-            className={`headerdropdown headerdropdown__notifications ${isOpen ? "open notification" : hasOpened ? "close" : ""}`}
+            className={`headerdropdown headerdropdown__notifications ${
+                isOpen ? "open notification" : hasOpened ? "close" : ""
+            }`}
         >
             <div className="headerdropdown__header heading__semibold">
                 <span>Systemnachrichten</span>
@@ -77,14 +81,18 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen }) =
                         notificationsList.map((notification, index) => (
                             <div className="headerdropdown__notification" key={notification.id}>
                                 <div className="headerdropdown__order-date">
-                                    <span className="caption__regular link-component headerdropdown__order">Auftrag 80700</span>
+                                    <span className="caption__regular link-component headerdropdown__order">
+                                        Auftrag 80700
+                                    </span>
                                     <span className="headerdropdown__subtitle caption__regular">
-                                         {notification.created_at ? moment(notification.created_at).format(" DD. MM. yyyy") : ""}
+                                        {notification.created_at
+                                            ? moment(notification.created_at).format(" DD. MM. yyyy")
+                                            : ""}
                                     </span>
                                 </div>
 
                                 <span className="headerdropdown__subject heading__regular">
-                                    {notification.subject.length > 50
+                                    {notification.subject
                                         ? `${notification.subject.substring(0, 50)}...`
                                         : notification.subject}
                                 </span>

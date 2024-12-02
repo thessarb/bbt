@@ -50,7 +50,7 @@
 			box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 			margin-top: 5px;
 			background-color: $bbt-white;
-			z-index: 11;
+			z-index: 2;
 			padding: $unit-1;
 			width: toRem(700);
 			height: auto;
@@ -134,6 +134,7 @@
 				background-color: $bbt-secondary-grey;
 				width: toRem(12);
 				height: toRem(12);
+				cursor: pointer;
 			}
 		}
 	}
@@ -165,7 +166,7 @@
 		box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.1);
 		overflow: hidden;
 		gap: $unit-factor;
-		z-index: 11;
+		z-index: 2;
 
 		&.is-visible {
 			opacity: 1;

@@ -22,6 +22,7 @@ const ResetPassword: React.FC = () => {
     const [confirmPasswordIsRequired, setConfirmPasswordIsRequired] = useState("Password is required!");
     const [validations, setValidations] = useState<Record<string, string>>({});
     const [resetToken, setResetToken] = useState("");
+    const [loading, setLoading] = useState(false);
     const isInputRequired = true;
 
     useEffect(() => {
@@ -33,8 +34,7 @@ const ResetPassword: React.FC = () => {
                     API_HEADERS.unauthenticated
                 );
 
-                setResetToken(response.response)
-                console.log(token)
+                setResetToken(response.response);
             } catch (error: any) {
                 navigate(PATHS.login);
             }
@@ -45,7 +45,7 @@ const ResetPassword: React.FC = () => {
 
     const resetPassword = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
-
+        setLoading(true);
         const passwordData = {
             password: password,
             password_confirmation: confirmPassword,
@@ -58,10 +58,12 @@ const ResetPassword: React.FC = () => {
                 API_HEADERS.unauthenticated,
                 passwordData
             );
+            setLoading(false);
             navigate(PATHS.login);
         } catch (error: any) {
             if (error.response.status === 404 || error.response.status === 422) {
                 setValidations(error.response.data);
+                setLoading(false);
             }
         }
     };
@@ -171,11 +173,19 @@ const ResetPassword: React.FC = () => {
                         value={confirmPassword}
                         onChange={handleInputChange(setConfirmPassword, setIsConfirmPasswordError)}
                         onFocus={handleInputFocus(setIsConfirmPasswordFocused)}
-                        onBlur={handleInputBlur(confirmPassword, setIsConfirmPasswordError, setIsConfirmPasswordFocused)}
+                        onBlur={handleInputBlur(
+                            confirmPassword,
+                            setIsConfirmPasswordError,
+                            setIsConfirmPasswordFocused
+                        )}
                     />
                     {validations.password_confirmation ? (
                         <ValidationMessage
-                            message={validations.password_confirmation ? validations.password_confirmation[0] : validations.error}
+                            message={
+                                validations.password_confirmation
+                                    ? validations.password_confirmation[0]
+                                    : validations.error
+                            }
                         />
                     ) : isConfirmPasswordError ? (
                         <ValidationMessage message={confirmPasswordIsRequired} />
@@ -224,13 +234,15 @@ const ResetPassword: React.FC = () => {
                     <Link to={PATHS.login} className="button button--big button-gost button--grey">
                         <span className="button__text">Abbrechen</span>
                     </Link>
-
-                    <button
-                        className="reset-password__button-reset button button--big button--green"
-                        type="submit"
-                    >
-                        <span className="button__text">Passwort ändern</span>
-                    </button>
+                    {loading ? (
+                        <button className="reset-password__button-reset button button--big button--green" type="button">
+                            <span className="button__text">Passwort ändern</span>
+                        </button>
+                    ) : (
+                        <button className="reset-password__button-reset button button--big button--green" type="submit">
+                            <span className="button__text">Passwort ändern</span>
+                        </button>
+                    )}
                 </div>
             </form>
         </div>
