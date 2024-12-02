@@ -12,7 +12,6 @@ interface SidebarButtonProps {
 
 const SidebarButton: React.FC<SidebarButtonProps> = ({ path, icon, name, roles }) => {
     const userData = useUserdata((state: any) => state.userData);
-console.log(userData)
     const [roleId, setRoleId] = useState<number | null | undefined>(userData.role_id);
 
     useEffect(() => {

@@ -35,7 +35,6 @@ const AppRouter: React.FC = () => {
         API_HEADERS.authenticated
       );
       addLoggedUserData(response.response);
-      console.log(addLoggedUserData(response.response),"ttt")
     } catch (error: any) {
       AppConfig.deleteAccessToken();
       window.location.href = PATHS.login;
@@ -52,7 +51,6 @@ const AppRouter: React.FC = () => {
   useEffect(() => {
     if (AppConfig.isLogged()) {
       userData();
-      console.log(userData())
     }
   }, [userData]);
 
@@ -78,7 +76,7 @@ const AppRouter: React.FC = () => {
           {memoizedPublicRoutes.map((route) => (
             <Route path={route.path} element={route.element} key={route.path} />
           ))}
-          {isAppLoaded && <Route path="*" element={<Error404 />} />}
+          {<Route path="*" element={<Error404 />} />}
         </Routes>
      )} 
     </Router>

@@ -20,7 +20,7 @@ const Login = () => {
     const [isPasswordError, setIsPasswordError] = useState<boolean>(false);
     const [passwordIsRequired, setPasswordIsRequired] = useState("Password is required!");
     const [emaildIsRequired, setEmailIsRequired] = useState("Email is required!");
-
+    const [loading, setLoading] = useState(false);
     const isInputRequired = true;
     const [validations, setValidations] = useState<Record<string, string>>({});
 
@@ -133,7 +133,9 @@ const Login = () => {
                             <ValidationMessage message={validations.email ? validations.email[0] : validations.error} />
                         ) : isEmailError ? (
                             <ValidationMessage message={emaildIsRequired} />
-                        ) : ("")}
+                        ) : (
+                            ""
+                        )}
                     </div>
 
                     <div className="input-field login__password">
@@ -171,13 +173,18 @@ const Login = () => {
                             />
                         ) : isPasswordError ? (
                             <ValidationMessage message={passwordIsRequired} />
-                        ) : ("")}
+                        ) : (
+                            ""
+                        )}
                         {validations.message && <ValidationMessageInvalid message={validations.message} />}
                     </div>
 
                     <div className="login__forgot-pasword caption__regular">
                         Sie haben Ihr Passwort vergessen?
-                        <Link to={PATHS.forgotPassword} className="login__forgot-pasword-link link-component caption__regular">
+                        <Link
+                            to={PATHS.forgotPassword}
+                            className="login__forgot-pasword-link link-component caption__regular"
+                        >
                             Klicken Sie hier.
                         </Link>
                     </div>
@@ -187,15 +194,25 @@ const Login = () => {
                             <span className="login__button-register-text">Sie haben noch keinen Zugang?</span>
                             <span className="link-component">Zugang anfragen</span>
                         </Link>
-
-                        <button
-                            id="logIn"
-                            className="login__button-login button button--big button--green"
-                            type="submit"
-                            name="login"
-                        >
-                            <span className="button__text">Jetzt einloggen</span>
-                        </button>
+                        {loading ? (
+                            <button
+                                id="logIn"
+                                className="login__button-login button button--big button--green"
+                                type="button"
+                                name="login"
+                            >
+                                <span className="button__text">Jetzt einloggen</span>
+                            </button>
+                        ) : (
+                            <button
+                                id="logIn"
+                                className="login__button-login button button--big button--green"
+                                type="submit"
+                                name="login"
+                            >
+                                <span className="button__text">Jetzt einloggen</span>
+                            </button>
+                        )}
                     </div>
                 </form>
             </div>

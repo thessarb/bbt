@@ -23,13 +23,13 @@
     border-radius: unset;
     box-shadow: unset;
   }
+ 
 }
 
 .pagination-block {
   display: flex;
   height: $unit-3;
   justify-content: space-between;
-  align-items: end;
 }
 
 .pagination {
@@ -50,13 +50,25 @@
       opacity: 0.5;
       pointer-events: none;
     }
+
+    &.prev-item{
+      padding-top: toRem(5);
+    }
+    &.next-item{
+      padding-top: toRem(5);
+    }
+    &.active {
+      .pagination__page-link {
+        color: $bbt-primary-green;
+      }
+    }
   }
 
   &__page-link {
     font-family: $font--boxed-regular;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
-    line-height: 15px;
+    line-height: 16.25px;
     padding: $unit-0 $unit-factor;
     border: 1px solid transparent;
     border-radius: toRem(4);

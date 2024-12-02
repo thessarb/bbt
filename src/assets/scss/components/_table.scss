@@ -1,344 +1,427 @@
 .page-title {
-	margin-bottom: 13px;
-	margin-top: 16px;
+  margin-bottom: 13px;
+  margin-top: 16px;
 }
 
 .table-list {
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	border-radius: toRem(4);
-	background: $bbt-grey-5;
-	box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.1);
-	margin-bottom: $unit-2;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: toRem(4);
+  background: $bbt-grey-5;
+  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: $unit-2;
 
-	&__title {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		gap: $unit-0;
-		min-height: $unit-5;
-		padding: $unit-factor toRem(26) $unit-factor $unit-factor;
-		background: $bbt-grey-10;
+  &__title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: $unit-0;
+    min-height: $unit-5;
+    padding: $unit-factor toRem(26) $unit-factor $unit-factor;
+    background: $bbt-grey-10;
 
-		@media (min-width: 992px) {
-			flex-direction: row;
-			justify-content: space-between;
-			height: $unit-5;
-			padding: 0 toRem(26) 0 $unit-factor;
-			background: $bbt-white;
-			border: none;
-		}
-	}
+    @media (min-width: 992px) {
+      flex-direction: row;
+      justify-content: space-between;
+      height: $unit-5;
+      padding: 0 toRem(26) 0 $unit-factor;
+      background: $bbt-white;
+      border: none;
+    }
+  }
 
-	&__title-right {
-		color: $bbt-primary-green;
-	}
+  &__title-right {
+    color: $bbt-primary-green;
+  }
 
-	table {
-		width: 100%;
-		border-spacing: 0;
-		border-collapse: unset;
+  table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: unset;
 
-		@media (min-width: 992px) {
-			background-color: $bbt-grey-10;
-		}
+    @media (min-width: 992px) {
+      background-color: $bbt-grey-10;
+    }
 
-		thead {
-			tr {
-				display: table-row;
+    thead {
+      tr {
+        display: table-row;
 
-				th {
-					height: $unit-5;
-					padding: 0 $unit-factor;
-					text-align: left;
+        th {
+          height: $unit-5;
+          padding: 0 $unit-factor;
+          text-align: left;
 
-					.body-normal__semibold {
-						display: flex;
-						gap: $unit-0;
-						color: $bbt-secondary-grey;
-					}
+          .body-normal__semibold {
+            display: flex;
+            gap: $unit-0;
+            color: $bbt-secondary-grey;
+          }
 
-					.icon-dots-three-vertical,
-					.icon-caret-up-down {
-						background-color: $bbt-grey-50;
-						cursor: pointer;
-					}
+          .icon-dots-three-vertical,
+          .icon-caret-up-down {
+            background-color: $bbt-grey-50;
+            cursor: pointer;
+          }
 
-					@media (min-width: 992px) {
-						min-width: toRem(120);
+          @media (min-width: 992px) {
+            min-width: toRem(120);
 
-						&:first-child,
-						&:last-child {
-							min-width: auto;
-						}
-					}
+            &:first-child,
+            &:last-child {
+              min-width: auto;
+            }
+          }
 
-					&.no-actions {
-						@media (min-width: 1400px) {
-							min-width: toRem(256);
-						}
-						@media (max-width: 992px) {
-							height: $unit-5;
-							padding: unset;
-							text-align: left;
-							min-width: auto;
-							&:last-child {
-								padding: unset;
-							}
-						}
-					}
-				}
-			}
-		}
+          &.no-actions {
+            @media (min-width: 1400px) {
+              min-width: toRem(256);
+            }
+            @media (max-width: 992px) {
+              height: $unit-5;
+              padding: unset;
+              text-align: left;
+              min-width: auto;
+              &:last-child {
+                padding: unset;
+              }
+            }
+          }
+        }
+      }
+    }
 
-		tbody {
-			tr {
-                display: table-row;
-				background: $bbt-white;
+    tbody {
+      tr {
+        display: table-row;
+        background: $bbt-white;
 
-				&:not(:last-child) {
-					margin-bottom: $unit-1;
+        &:not(:last-child) {
+          margin-bottom: $unit-1;
 
-					td {
-						border-bottom: toRem(1) solid $bbt-grey-10;
-					}
-				}
+          td {
+            border-bottom: toRem(1) solid $bbt-grey-10;
+          }
+        }
 
-				td {
-					padding: toRem(16) $unit-factor;
+        td {
+          padding: toRem(16) $unit-factor;
 
-					&.green-text {
-						color: $bbt-primary-green;
-						text-decoration: underline;
-					}
+          &.green-text {
+            color: $bbt-primary-green;
+            text-decoration: underline;
+          }
 
-					.button {
-						&:first-child {
-							margin-left: -$unit-factor;
-						}
-					}
+          .button {
+            &:first-child {
+              margin-left: -$unit-factor;
+            }
+          }
 
-					&:first-child {
-						border-top: toRem(1) solid $bbt-grey-10;
+          &:first-child {
+            border-top: toRem(1) solid $bbt-grey-10;
 
-						@media (min-width: 992px) {
-							padding: toRem(16) $unit-factor;
-							border-top: unset;
-						}
-					}
+            @media (min-width: 992px) {
+              padding: toRem(16) $unit-factor;
+              border-top: unset;
+            }
+          }
 
-					&:last-child {
-						padding: toRem(6) $unit-factor;
-						text-align: right !important;
+          &:last-child {
+            padding: toRem(6) $unit-factor;
+            text-align: right !important;
 
-						&:before {
-							display: none;
-							min-width: 0;
-							padding-right: 0;
+            &:before {
+              display: none;
+              min-width: 0;
+              padding-right: 0;
 
-							@media (min-width: 576px) {
-								display: block;
-								min-width: calc(50vw - $unit-4);
-								padding-right: $unit-factor;
-							}
-						}
+              @media (min-width: 576px) {
+                display: block;
+                min-width: calc(50vw - $unit-4);
+                padding-right: $unit-factor;
+              }
+            }
 
-						@media (min-width: 992px) {
-							padding: 0 $unit-factor;
-						}
-					}
+            @media (min-width: 992px) {
+              padding: 0 $unit-factor;
+            }
+          }
 
-					&.no-actions {
-						&:last-child {
-							padding: toRem(6) $unit-factor;
-							text-align: left !important;
+          &.no-actions {
+            &:last-child {
+              padding: toRem(6) $unit-factor;
+              text-align: left !important;
 
-							&:before {
-								display: none;
-								min-width: 0;
-								padding-right: 0;
+              &:before {
+                display: none;
+                min-width: 0;
+                padding-right: 0;
 
-								@media (min-width: 576px) {
-									display: block;
-									min-width: calc(50vw - $unit-4);
-									padding-right: $unit-factor;
-								}
-							}
+                @media (min-width: 576px) {
+                  display: block;
+                  min-width: calc(50vw - $unit-4);
+                  padding-right: $unit-factor;
+                }
+              }
 
-							@media (min-width: 992px) {
-								padding: 0 $unit-factor;
-							}
-						}
-					}
+              @media (min-width: 992px) {
+                padding: 0 $unit-factor;
+              }
+            }
+          }
 
-					&:nth-last-child(2) {
-						@media (min-width: 992px) {
-							[class^="icon-"] {
-								margin-left: $unit-0;
-							}
-						}
-					}
+          &:nth-last-child(2) {
+            @media (min-width: 992px) {
+              [class^="icon-"] {
+                margin-left: $unit-0;
+              }
+            }
+          }
 
-					@media (min-width: 576px) {
-						flex-direction: row;
-						gap: 0;
-					}
+          @media (min-width: 576px) {
+            flex-direction: row;
+            gap: 0;
+          }
 
-					@media (min-width: 992px) {
-						display: table-cell;
-						padding: toRem(16) $unit-factor;
-						word-break: break-word;
-						background: $bbt-white;
-						&.address {
-							display: grid;
-						}
-					}
+          @media (min-width: 992px) {
+            display: table-cell;
+            padding: toRem(16) $unit-factor;
+            word-break: break-word;
+            background: $bbt-white;
+            &.address {
+              display: grid;
+            }
+          }
 
-					.icon-warning {
-						background-color: $bbt-red-100;
-					}
-				}
+          .icon-warning {
+            background-color: $bbt-red-100;
+          }
+        }
 
-				@media (min-width: 992px) {
+        @media (min-width: 992px) {
+          height: $unit-5;
+          box-shadow: none;
+        }
+      }
+    }
+  }
 
-					height: $unit-5;
-					box-shadow: none;
-				}
-			}
-		}
-	}
+  &__scroll {
+    overflow-x: auto;
+  }
 
-	&__scroll {
-		overflow-x: auto;
-	}
+  // Text and Icon
+  .text-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: $unit-factor;
 
-	// Text and Icon
-	.text-icon {
-		display: inline-flex;
-		align-items: center;
-		gap: $unit-factor;
+    .icon-x-square {
+      background-color: $bbt-orange-100;
+    }
 
-		.icon-x-square {
-			background-color: $bbt-orange-100;
-		}
+    .icon-check-square {
+      background-color: $bbt-primary-green;
+    }
+  }
 
-		.icon-check-square {
-			background-color: $bbt-primary-green;
-		}
-	}
+  &--secondary,
+  &--accordion {
+    background-color: transparent;
+    box-shadow: none;
+    overflow: visible;
 
-	&--secondary,
-	&--accordion {
-		background-color: transparent;
-		box-shadow: none;
-		overflow: visible;
+    table {
+      border-spacing: 0 $unit-factor;
+      overflow: visible;
 
-		table {
-			border-spacing: 0 $unit-factor;
-			overflow: visible;
+      @media (min-width: 992px) {
+        background-color: transparent;
+      }
 
-			@media (min-width: 992px) {
-				background-color: transparent;
-			}
+      thead {
+        tr {
+          border-radius: toRem(10);
 
-			thead {
-				tr {
-					border-radius: toRem(10);
+          th {
+            &:first-child {
+              border-top-left-radius: toRem(4);
+              border-bottom-left-radius: toRem(4);
+            }
 
-					th {
-						&:first-child {
-							border-top-left-radius: toRem(4);
-							border-bottom-left-radius: toRem(4);
-						}
+            &:last-child {
+              border-top-right-radius: toRem(4);
+              border-bottom-right-radius: toRem(4);
+            }
+          }
 
-						&:last-child {
-							border-top-right-radius: toRem(4);
-							border-bottom-right-radius: toRem(4);
-						}
-					}
+          @media (min-width: 992px) {
+            background-color: $bbt-grey-10;
+          }
+        }
+      }
 
-					@media (min-width: 992px) {
-						background-color: $bbt-grey-10;
-					}
-				}
-			}
+      tbody {
+        tr {
+          box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.1);
 
-			tbody {
-				tr {
-					box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.1);
+          td {
+            &:first-child {
+              border-top-left-radius: toRem(4);
+              border-bottom-left-radius: toRem(4);
+            }
 
-					td {
-						&:first-child {
-							border-top-left-radius: toRem(4);
-							border-bottom-left-radius: toRem(4);
-						}
+            &:last-child {
+              flex-direction: row;
+              text-align: right !important;
+              border-top-right-radius: toRem(4);
+              border-bottom-right-radius: toRem(4);
+            }
+            &.table-loading {
+              &:last-child {
+                flex-direction: row;
+                text-align: center !important;
+                border-top-right-radius: toRem(4);
+                border-bottom-right-radius: toRem(4);
+              }
+            }
 
-						&:last-child {
-							flex-direction: row;
-							text-align: right !important;
-							border-top-right-radius: toRem(4);
-							border-bottom-right-radius: toRem(4);
-						}
+            &.table-no-result {
+              &:last-child {
+                flex-direction: row;
+                text-align: center !important;
+                border-top-right-radius: toRem(4);
+                border-bottom-right-radius: toRem(4);
+                background-color: $bbt-grey-10;
 
-						.icon-caret-right {
-							background-color: $bbt-secondary-grey;
-						}
+              }
+            }
 
-						@media (min-width: 576px) {
-							flex-direction: row;
-							gap: 0;
-						}
-					}
-				}
-			}
-		}
-	}
+            .icon-caret-right {
+              background-color: $bbt-secondary-grey;
+            }
 
-	&--accordion {
-		table {
-			tbody {
-				tr {
-					transition: font-weight 0.35s linear;
+            @media (min-width: 576px) {
+              flex-direction: row;
+              gap: 0;
+            }
+          }
+        }
+      }
+    }
+  }
 
-					&:hover,
-					&:focus,
-					&:active {
-						box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.15);
-						cursor: pointer;
-						transition: all 0.35s linear;
+  &--accordion {
+    table {
+      @media (max-width: 576px) {
+        table-layout: fixed;
+        width: 100%;
+        td {
+          padding: toRem(10) $unit-factor;
+        }
+      }
 
-						td,
-						.collapsed {
-							font-weight: 600;
-							color: $bbt-text;
+      thead {
+        tr {
+          border-radius: toRem(10);
 
-							.icon-caret-right {
-								background-color: $bbt-secondary-grey;
-							}
-						}
-					}
+          th {
+            &:first-child {
+              border-top-left-radius: toRem(4);
+              border-bottom-left-radius: toRem(4);
+            }
 
-					&.active {
-						box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.15);
+            &:last-child {
+              border-top-right-radius: toRem(4);
+              border-bottom-right-radius: toRem(4);
+            }
 
-						td {
-							color: $bbt-primary-green;
+            @media (max-width: 576px) {
+              padding: $unit-factor;
+              font-size: toRem(14); 
+            }
+          }
 
-							.icon-caret-right {
-								background-color: $bbt-primary-green;
-							}
-						}
-					}
-				}
+          @media (min-width: 576px) {
+            background-color: $bbt-grey-10;
+          }
+        }
+      }
 
-				td {
-					&:first-child {
-						text-align: center !important;
-					}
-				}
-			}
-		}
-	}
+      tbody {
+        tr {
+          box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.1);
+
+          td {
+            padding: toRem(16) $unit-factor;
+
+            &:first-child {
+              border-top-left-radius: toRem(4);
+              border-bottom-left-radius: toRem(4);
+            }
+
+            &:last-child {
+              text-align: right !important;
+              padding: toRem(6) $unit-factor;
+            }
+
+            &.table-loading,
+            &.table-no-result {
+              text-align: center !important;
+            }
+            .icon-caret-right {
+              cursor: pointer;
+            }
+          }
+
+          @media (max-width: 576px) {
+            display: block;
+            margin-bottom: $unit-1;
+          }
+
+          &.unread {
+            box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.15);
+            td {
+              color: $bbt-secondary-grey;
+              font-weight: 600;
+
+              .icon-caret-right {
+                background-color: $bbt-secondary-grey;
+                cursor: pointer;
+              }
+
+              span {
+                color: $bbt-secondary-grey;
+                font-weight: 600;
+              }
+            }
+          }
+
+          &.active {
+            box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.15);
+            td {
+              color: $bbt-secondary-grey;
+              word-break: break-word;
+
+              .icon-caret-right {
+                background-color: $bbt-primary-green;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+
+        td {
+          &:first-child {
+            word-break: break-word;
+            text-align: center !important;
+          }
+        }
+      }
+    }
+  }
+  
 }

@@ -13,6 +13,11 @@ const API_PATHS = {
         apiBaseUrl + `forgot-password/reset/view/${token}`,
     updateProfile: apiBaseUrl + "user/profile/change-password",
     notificationList: apiBaseUrl + "notification/list",
+    notificationUpdate: (notificationId: number) =>
+      apiBaseUrl + `notification/${notificationId}/update`,
+    notificationFilter: apiBaseUrl + "filter/notifications/",
+    notificationFilterOrder: apiBaseUrl + "filter/orders/system_id",
+    
     userList: apiBaseUrl + "user/list",
     createUser: apiBaseUrl + "user/store",
     getUser: (userId: number) =>
