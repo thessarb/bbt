@@ -54,8 +54,10 @@
       }
     }
 
-    &:has(.create-user__form--select-box .react-select__control--menu-is-open) {
-      .create-user__form--select-box {
+    &:has(.create-user__form--select-box .react-select__control--menu-is-open),
+    &:has(.create-user__form--dropdown .react-select__control--menu-is-open)
+    {
+      .create-user__form--dropdown {
         min-height: 210px;
       }
     }

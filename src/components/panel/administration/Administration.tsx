@@ -3,6 +3,7 @@ import ListNoResult from "../dashboard/deadlines/ListNoResult";
 import ActiveUsers from "./users/ActiveUsers";
 import InactiveUsers from "./users/InactiveUsers";
 import CreateUserModal from "./users/CreateUserModal";
+import CustomerList from "./users/CustomerList";
 
 const Administration = () => {
     // Tab
@@ -25,12 +26,11 @@ const Administration = () => {
 
 
     // Create User Modal
+    const [refreshUsersList, setRefreshUsersList] = useState( false);
     const [showCreateUser , setShowCreateUser] = useState(false);
     const handleShow = () => {
         setShowCreateUser(true);
     };
-
-
 
     return (
             <>
@@ -43,7 +43,7 @@ const Administration = () => {
                         <span><i className="button__icon icon-user-plus"></i></span>
                         <span className="button__text">Neuen Benutzer anlegen</span>
                     </button>
-                    {showCreateUser && <CreateUserModal show={showCreateUser} setShow={setShowCreateUser}/>}
+                    {showCreateUser && <CreateUserModal show={showCreateUser} setShow={setShowCreateUser} setRefreshUsersList={setRefreshUsersList} />}
                 </div>
 
                 <div className="tab administration__tab">
@@ -61,25 +61,44 @@ const Administration = () => {
                             >
                                 <span className="button__text">Inaktive Benutzer</span>
                             </button>
+                            <button
+                                    className={`tab__item subheading__regular ${activeTab === 2 ? "active" : ""}`}
+                                    onClick={() => handleTabClick(2)}
+                            >
+                                <span className="button__text">Kundenliste</span>
+                            </button>
                         </div>
                     </div>
 
                     <div className="tab__content">
-                        {visibleTab === 0 ? (
+                        {visibleTab === 0 &&
                                 <div
                                         id="active-users"
                                         className={`tab__content-item ${activeTab === 0 ? "active" : "close"}`}
                                 >
                                     {ActiveUsers ? <ActiveUsers/> : <ListNoResult/>}
-                                </div>
-                        ) : (
+                                </div>}
+                        {visibleTab === 1 &&
                                 <div
                                         id="inactive-users"
                                         className={`tab__content-item ${activeTab === 1 ? "active" : "close"}`}
                                 >
-                                    {InactiveUsers ? <InactiveUsers/> : <ListNoResult/>}
+                                    {InactiveUsers ? <InactiveUsers refreshUsersList={refreshUsersList}/> :
+                                            <ListNoResult/>}
                                 </div>
-                        )}
+                        }
+                        {visibleTab === 2 &&
+                                <div
+                                        id="customer-list"
+                                        className={`tab__content-item ${activeTab === 2 ? "active" : "close"}`}
+                                >
+                                    <div className="tab__content-item--customer">
+                                        <i className="tab__content-item--customer-icon icon-info"></i>
+                                        <span className="body-normal__semibold">Nutzerdaten können nur in Gesys/Betsi geändert werden.</span>
+                                    </div>
+                                    {CustomerList ? <CustomerList/> : <ListNoResult/>}
+                                </div>
+                        }
 
                     </div>
                 </div>

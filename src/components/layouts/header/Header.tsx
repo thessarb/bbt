@@ -133,15 +133,16 @@ const Header: React.FC<HeaderProps> = ({ sidebarStatus, toggleSidebar }) => {
                     </div>
                     <div className="navbar-header__user">
                         <div
-                            data-tooltip-id="tooltip"
-                            data-tooltip-content="Benachrichtigungen öffnen"
-                            data-tooltip-place="top"
-                            data-tooltip-offset={0}
                             className="navbar-header__notification"
                             ref={notificationRef}
                             onClick={handleNotificationClick}
                         >
-                            <i className="icon-notification"></i>
+                            <i className="icon-notification"
+                               data-tooltip-id="tooltip"
+                               data-tooltip-content="Benachrichtigungen öffnen"
+                               data-tooltip-place="top"
+                               data-tooltip-offset={10}>
+                            </i>
                             {notificationsList.length > 0 ? (
                                 <span className="navbar-header__notification--notification-badge"></span>
                             ) : (
