@@ -33,7 +33,9 @@ const API_PATHS = {
     orderList: apiBaseUrl + "order/list",
     orderFilter: apiBaseUrl + "filter/orders/system_id",
     orderFind: (orderId: number) =>
-      apiBaseUrl + `order/find/${orderId}`,
+       apiBaseUrl + `order/find/${orderId}`,
+    orderResponsiblePerson: (orderId: number) =>
+        apiBaseUrl + `order/${orderId}/responsible-persons`,
 };
 
 export default API_PATHS;

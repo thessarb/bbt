@@ -83,7 +83,7 @@ const OrderDetailsOverview = () => {
 
     const handleSelectChange = (selectedOption: { value: number; label: string } | null) => {
         if (selectedOption) {
-            navigate(PATHS.orderDetails + selectedOption.value);
+            window.location.href = PATHS.orderDetails + selectedOption.value;
         }
     };
 
