@@ -148,6 +148,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({showEditModal, setShowEdit
             setName(response.response.firstname);
             setEmail(response.response.email);
             setPhone(response.response.phone);
+            setCompany(response.company ? response.company.company_name ? response.company.company_name : response.company.lastname : 'BBT' );
             setRole({
                 id: response.response.role_id,
                 value: response.response.role.name,
