@@ -5,7 +5,7 @@ const SidebarItems = [
         path: PATHS.dashboard,
         icon: "icon-squares-four",
         name: "Übersicht",
-        roles: [3, 4],
+        roles: [2, 4],
     },
     {
         path: PATHS.userManagement,
@@ -17,25 +17,25 @@ const SidebarItems = [
         path: PATHS.orders,
         icon: "icon-file-text",
         name: "Aufträge",
-        roles: [1, 3, 4],
+        roles: [1, 2, 4],
     },
     {
         path: PATHS.documents,
         icon: "icon-files",
         name: "Dokumente",
-        roles: [3, 4],
+        roles: [2, 4],
     },
     {
         path: PATHS.library,
         icon: "icon-books",
         name: "Bibliothek",
-        roles: [3, 4],
+        roles: [2, 4],
     },
     {
         path: PATHS.messages,
         icon: "icon-envelope-simple",
         name: "Systemnachrichten",
-        roles: [1, 3, 4],
+        roles: [1, 2, 4],
     },
 ];
 

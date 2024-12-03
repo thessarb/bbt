@@ -96,7 +96,7 @@ const MessagesTable: React.FC<MessagesTableProps> = ({ filters, applyFilters }) 
                 "PUT",
                 API_HEADERS.authenticated
             );
-            // getNotifications();
+             getNotifications();
         } catch (error: any) {}
     };
 
@@ -215,7 +215,7 @@ const MessagesTable: React.FC<MessagesTableProps> = ({ filters, applyFilters }) 
                                         </div>
                                     </td>
                                     <td role="cell" className="body-normal__regular" data-label={"Auftrag"}>
-                                        <Link to={`order-nr-here/${notification.id}`} className="link-component">
+                                        <Link to={PATHS.orderDetails + notification.notifiable?.id} className="link-component">
                                             {notification.notifiable_type === "App\\Models\\Order"
                                                 ? notification.notifiable.system_id
                                                 : " "}
