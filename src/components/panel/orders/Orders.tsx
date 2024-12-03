@@ -5,68 +5,133 @@ import CustomPagination from "src/helpers/CustomPaginate";
 import FilterDialog from "src/helpers/TableFilters";
 import PATHS from "src/routes/Paths";
 import { Tooltip } from "react-tooltip";
+import { Link } from "react-router-dom";
+import { makeApiCall } from "src/api/apiRequests";
+import API_HEADERS from "src/api/apiConfig";
+import API_PATHS from "src/api/apiPaths";
+import SearchFilter from "src/helpers/SearchFilter";
+import Loading from "src/helpers/Loading";
+import moment from "moment";
+import ListNoResult from "../dashboard/deadlines/ListNoResult";
 
 const Orders = () => {
     const navigate = useNavigate();
 
     const [page, setPage] = useState(1);
-    const [searchTerm, setSearchTerm] = useState("");
-    const [filteredOptions, setFilteredOptions] = useState<any>([]);
-    const [selectedOptionSelect, setSelectedOptionSelect] = useState(null);
-    const [isFilterDialogOpen, setIsFilterDialogOpen] = useState<string | null>(null);
-    const [isOptionsOpen, setIsOptionsOpen] = useState(false);
-    const selectRef = useRef<HTMLDivElement>(null);
+    const [ordersList, setOrdersList] = useState<any[]>([]);
+    const [ordersListSelect, setOrdersListSelect] = useState<any[]>([]);
+    const [rows, setRows] = useState<number>(5);
+    const [paginate, setPaginate] = useState<any>([]);
+    const [pagination, setPagination] = useState<boolean>(true);
+    const [paginationSelect, setPaginationSelect] = useState<boolean>(false);
+    const [column, setColumn] = useState("");
+    const [orderColumn, setOrderColumn] = useState("asc");
+    const [loading, setLoading] = useState<boolean>(false);
 
-    const [selectedOption, setSelectedOption] = useState<{
-        value: string;
-        label: string;
-    } | null>(null);
-
-    const mockData = {
-        total: 100,
-        current_page: 1,
-        per_page: 10,
-        last_page: 10,
-    };
-
-    const [filterDialogPosition, setFilterDialogPosition] = useState<{
-        top: number;
-        left: number;
-    } | null>(null);
-
-    const [filterData, setFilterData] = useState<{
-        searchTerm: string;
-        order: string;
-        selectedOptions: string[];
-    }>({
-        searchTerm: "",
-        order: "asc",
-        selectedOptions: [],
+    const [selectedPageOption, setSelectedPageOption] = useState<{ value: string; label: string }>({
+        value: "5",
+        label: "5",
     });
 
-    const options = [
-        { value: "1", label: "Auftragsnummer 1" },
-        { value: "2", label: "Auftragsname 2" },
-        { value: "3", label: "Auftragsname 3" },
-        { value: "4", label: "Auftragsnummer 4" },
+    const rowsPerPageOptions = [
+        { value: "5", label: "5" },
+        { value: "10", label: "10" },
+        { value: "15", label: "15" },
+        { value: "20", label: "20" },
+        { value: "25", label: "25" },
     ];
 
-    const filterOption = (option: any, inputValue: any) => {
-        return option.label.toLowerCase().includes(inputValue.toLowerCase());
+    const getOrders = async (): Promise<void> => {
+        setLoading(true);
+        const searchParams: any = {
+            pagination: pagination,
+            page: page,
+            rows: rows,
+        };
+
+        if (column) {
+            searchParams.column = column;
+            searchParams.order = orderColumn;
+        }
+
+        const request: any = SearchFilter(searchParams, API_PATHS.orderList);
+
+        try {
+            const response: any = await makeApiCall(request, "GET", API_HEADERS.authenticated);
+            setOrdersList(response.response.data || []);
+            setPaginate({
+                total: response.response.total || 0,
+                current_page: response.response.current_page || 1,
+                per_page: rows,
+                last_page: Math.ceil((response.response.total || 0) / rows),
+            });
+            getOrdersSelect();
+            setLoading(false);
+        } catch (error: any) {
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const handleSelect = (option: any) => {
-        setSelectedOption(option);
+    useEffect(() => {
+        getOrders();
+    }, [page, rows, column, orderColumn]);
+
+    
+    const getOrdersSelect = async (): Promise<void> => {
+        setLoading(true);
+        const searchParams: any = {
+            pagination: paginationSelect,
+        };
+        const request: any = SearchFilter(searchParams, API_PATHS.orderList);
+
+        try {
+            const response: any = await makeApiCall(request, "GET", API_HEADERS.authenticated);
+            const formattedOptions = (response.response || []).map((order: any) => ({
+                value: order.id,
+                label: `Order ${order.system_id}`, 
+            }));
+            const optionsWithHeader = [
+                { value: "", label: "Aktive Aufträge", isDisabled: true, className: "non-selectable-header caption__regular"}, 
+                ...formattedOptions,
+            ];
+            setOrdersListSelect(optionsWithHeader);
+            setLoading(false);
+        } catch (error: any) {
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    
+    const handleSelectChange = (selectedOption: { value: number; label: string } | null) => {
+        if (selectedOption) {
+            navigate(PATHS.orderDetails + (selectedOption.value)); 
+        }
+    };
+
+    const handleRowsChange = (selected: { value: string; label: string } | null) => {
+        if (selected) {
+            setSelectedPageOption(selected);
+            setRows(Number(selected.value));
+            setPage(1);
+        }
+    };
+
+    const toggleOrder = (columnName: string) => {
+        setColumn(columnName);
+        setOrderColumn((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+        setPage(1);
     };
 
     const CustomOption = (props: any) => {
         const { data, selectProps } = props;
         const inputValue = selectProps.inputValue || "";
-
+    
         const highlightMatch = (label: string) => {
             const regex = new RegExp(`(${inputValue})`, "gi");
             const parts = label.split(regex);
-
+    
             return parts.map((part, index) =>
                 part.toLowerCase() === inputValue.toLowerCase() ? (
                     <span key={index} className="primary-green">
@@ -77,63 +142,30 @@ const Orders = () => {
                 )
             );
         };
-
+    
+        if (data.isDisabled && data.className) {
+            return (
+                <div className={`custom-option ${data.className}`}>
+                    {data.label}
+                </div>
+            );
+        }
+    
         return <components.Option {...props}>{highlightMatch(data.label)}</components.Option>;
     };
-
-    const handleFilterChange = (filter: { searchTerm: string; order: string; selectedOptions: string[] }) => {
-        setFilterData(filter);
-    };
-
-    const filterOptions = ["Option 1", "Option 2"];
-
-    const closeFilterDialog = () => setIsFilterDialogOpen(null);
-
-    const filterDialogRef = useRef<HTMLDivElement | null>(null);
-
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (filterDialogRef.current && !filterDialogRef.current.contains(event.target as Node)) {
-                closeFilterDialog();
-            }
-        };
-
-        if (isFilterDialogOpen) {
-            document.addEventListener("mousedown", handleClickOutside);
-        } else {
-            document.removeEventListener("mousedown", handleClickOutside);
-        }
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [isFilterDialogOpen]);
-
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (selectRef.current && !selectRef.current.contains(event.target as Node)) {
-                setIsOptionsOpen(false);
-            }
-        };
-
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
+    
 
     return (
         <>
             <div className="custom-select-wrapper">
                 <i className="icon-magnifying-glass" />
                 <Select
-                    options={options}
+                    options={ordersListSelect}
                     placeholder="Tragen Sie die Auftragsnummer oder -name ein."
                     className="custom-select"
                     classNamePrefix="react-select"
                     components={{ Option: CustomOption }}
-                    onChange={handleSelect}
-                    filterOption={filterOption}
+                    onChange={handleSelectChange}
                     isClearable
                     isSearchable
                 />
@@ -148,7 +180,7 @@ const Orders = () => {
                         <tr role="row">
                             <th role="columnheader" className="no-actions">
                                 <div className="body-normal__semibold">
-                                    Auftrag <i className="icon-caret-up-down" />
+                                    Auftrag <i className="icon-caret-up-down" onClick={() => toggleOrder("id")}/>
                                 </div>
                             </th>
                             <th role="columnheader" className="no-actions">
@@ -167,36 +199,67 @@ const Orders = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td role="cell" className="body-normal__regular no-actions" data-label={"Auftrag"}>
-                                80700
-                            </td>
-                            <td role="cell" className="body-normal__regular no-actions" data-label={"Name"}>
-                                München Isar
-                            </td>
-                            <td role="cell" className="body-normal__regular address no-actions" data-label={"Adresse"}>
-                                <span>Biergartenallee</span>
-                                <span>1 80311 München</span>
-                            </td>
-                            <td role="cell" className="body-normal__regular no-actions" data-label={"Verantwortlicher"}>
-                                Hauptverantwortliche des Kunden
-                            </td>
-                            <td role="cell" className="body-normal__regular no-actions" data-label={"Bauabschnitte"}>
-                                8
-                            </td>
-                            <td role="cell" className="table-list__button no-actions" data-label={" "}>
-                                <div
-                                    data-tooltip-id="tooltip"
-                                    data-tooltip-content="Auftrag anzeigen"
-                                    data-tooltip-place="top"
-                                    data-tooltip-offset={10}
-                                    className="button button-gost button--big button--grey"
-                                    onClick={() => navigate(PATHS.orderDetails)}
-                                >
-                                    <i className="button__icon icon-arrow-right"></i>
-                                </div>
-                            </td>
-                        </tr>
+                        {loading ? (
+                            <tr>
+                                <td className="table-loading" colSpan={7}>
+                                    <Loading />
+                                </td>
+                            </tr>
+                        ) : ordersList.length === 0 ? (
+                            <tr>
+                                <td className="table-no-result" colSpan={7}>
+                                    <ListNoResult />
+                                </td>
+                            </tr>
+                        ) : (
+                            ordersList.map((order, index) => (
+                                <tr>
+                                    <td role="cell" className="body-normal__regular no-actions" data-label={"Auftrag"}>
+                                        {order.system_id ? order.system_id : ""}
+                                    </td>
+                                    <td role="cell" className="body-normal__regular no-actions" data-label={"Name"}>
+                                        München Isar
+                                    </td>
+                                    <td
+                                        role="cell"
+                                        className="body-normal__regular 
+                                        no-actions" // address
+                                        data-label={"Adresse"}
+                                    >
+                                        {/* <span> */}
+                                        {order.address ? order.address : ""}
+                                        {/* </span> */}
+                                        {/* <span>1 80311 München</span> */}
+                                    </td>
+                                    <td
+                                        role="cell"
+                                        className="body-normal__regular no-actions"
+                                        data-label={"Verantwortlicher"}
+                                    >
+                                        Hauptverantwortliche des Kunden
+                                    </td>
+                                    <td
+                                        role="cell"
+                                        className="body-normal__regular no-actions"
+                                        data-label={"Bauabschnitte"}
+                                    >
+                                        {order.sub_orders_count ? order.sub_orders_count : "-"}
+                                    </td>
+                                    <td role="cell" className="table-list__button no-actions" data-label={" "}>
+                                        <div
+                                            data-tooltip-id="tooltip"
+                                            data-tooltip-content="Auftrag anzeigen"
+                                            data-tooltip-place="top"
+                                            data-tooltip-offset={10}
+                                            className="button button-gost button--big button--grey"
+                                            onClick={() => navigate(PATHS.orderDetails + order.id)}
+                                        >
+                                            <i className="button__icon icon-arrow-right"></i>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))
+                        )}
                     </tbody>
                 </table>
             </div>
@@ -205,28 +268,22 @@ const Orders = () => {
                     <div className="form__field-select">
                         <label
                             htmlFor="pagination"
-                            className={`form__label caption__regular ${selectedOption ? "filled" : ""}`}
+                            className={`form__label caption__regular ${ordersList.length > 0 ? "primary-green" : ""}`}
                         >
                             Einträge pro Seite
                         </label>
-
                         <Select
                             id="pagination"
                             classNamePrefix="react-select"
-                            className={`form__select body-normal__regular ${selectedOption ? "filled" : ""}`}
-                            placeholder={false}
-                            value={5}
-                            // options={options}
-                            isClearable={true}
+                            value={selectedPageOption}
+                            options={rowsPerPageOptions}
+                            onChange={handleRowsChange}
+                            isClearable={false}
                             closeMenuOnSelect={true}
-                            name="company-type"
-                            isSearchable={true}
-                            required
                         />
-                        <span className="error-message caption__regular">Error message</span>
                     </div>
                 </div>
-                <CustomPagination data={mockData} setActivePage={(e) => setPage(e)} />
+                <CustomPagination data={paginate} setActivePage={(e) => setPage(e)} />
             </div>
         </>
     );

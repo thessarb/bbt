@@ -1,6 +1,6 @@
-import React, {useState, useEffect, useRef} from "react";
-import {Tooltip} from "react-tooltip";
-import {Link} from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { Tooltip } from "react-tooltip";
+import { Link } from "react-router-dom";
 import { makeApiCall } from "src/api/apiRequests";
 import PATHS from "src/routes/Paths";
 import API_HEADERS from "src/api/apiConfig";
@@ -9,7 +9,7 @@ import SearchFilter from "src/helpers/SearchFilter";
 import Loading from "src/helpers/Loading";
 import moment from "moment";
 import CustomPagination from "src/helpers/CustomPaginate";
-import Select, {SingleValue} from "react-select";
+import Select, { SingleValue } from "react-select";
 import ListNoResult from "../dashboard/deadlines/ListNoResult";
 
 interface Filter {
@@ -28,6 +28,8 @@ const ReadMessagesTable: React.FC<ReadMessagesTableProps> = ({ filters, applyFil
     const [status, setStatus] = useState("1");
     const [page, setPage] = useState<number>(1);
     const [rows, setRows] = useState<number>(5);
+    const [column, setColumn] = useState("");
+    const [orderColumn, setOrderColumn] = useState("asc");
     const [paginate, setPaginate] = useState<any>([]);
     const [pagination, setPagination] = useState<boolean>(true);
     const [loading, setLoading] = useState<boolean>(false);
@@ -54,6 +56,11 @@ const ReadMessagesTable: React.FC<ReadMessagesTableProps> = ({ filters, applyFil
             status: status,
         };
 
+        if (column) {
+            searchParams.column = column;
+            searchParams.order = orderColumn;
+        }
+
         filters.forEach((filter) => {
             if (filter.selectedOption?.value) {
                 searchParams[filter.selectedOption.value] = filter.inputValue;
@@ -73,7 +80,8 @@ const ReadMessagesTable: React.FC<ReadMessagesTableProps> = ({ filters, applyFil
                 current_page: response.response.current_page || 1,
                 per_page: rows,
                 last_page: Math.ceil((response.response.total || 0) / rows),
-            });            setLoading(false);
+            });
+            setLoading(false);
         } catch (error: any) {
             console.error("Error fetching notifications:", error);
         } finally {
@@ -83,14 +91,14 @@ const ReadMessagesTable: React.FC<ReadMessagesTableProps> = ({ filters, applyFil
 
     useEffect(() => {
         if (applyFilters > 0) {
-            setPage(1); 
+            setPage(1);
             getNotifications();
         }
     }, [applyFilters]);
-    
+
     useEffect(() => {
         getNotifications();
-    }, [page, rows]);
+    }, [page, rows, column, orderColumn]);
 
     const updateNotification = async (notificationId: number): Promise<void> => {
         try {
@@ -99,6 +107,7 @@ const ReadMessagesTable: React.FC<ReadMessagesTableProps> = ({ filters, applyFil
                 "PUT",
                 API_HEADERS.authenticated
             );
+            // getNotifications();
         } catch (error: any) {}
     };
 
@@ -112,9 +121,15 @@ const ReadMessagesTable: React.FC<ReadMessagesTableProps> = ({ filters, applyFil
     const handleRowsChange = (selected: { value: string; label: string } | null) => {
         if (selected) {
             setSelectedPageOption(selected);
-            setRows(Number(selected.value)); 
-            setPage(1); 
+            setRows(Number(selected.value));
+            setPage(1);
         }
+    };
+
+    const toggleOrder = (columnName: string) => {
+        setColumn(columnName);
+        setOrderColumn((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+        setPage(1); 
     };
 
     return (
@@ -122,45 +137,43 @@ const ReadMessagesTable: React.FC<ReadMessagesTableProps> = ({ filters, applyFil
             <div className="messages table-list table-list--accordion">
                 <table role="table">
                     <thead>
-                    <tr role="row">
-                        <th role="columnheader"></th>
-                        <th role="columnheader">
-                            <div className="body-normal__semibold">
-                                Auftrag
-                                <i className="icon-caret-up-down"></i>
-                            </div>
-                        </th>
-                        <th role="columnheader">
-                            <div className="body-normal__semibold">
-                                Datum
-                                <i className="icon-caret-up-down"></i>
-                            </div>
-                        </th>
-                        <th role="columnheader">
-                            <div className="body-normal__semibold">
-                                Betreff
-                                <i className="icon-caret-up-down"></i>
-                            </div>
-                        </th>
-                        <th role="columnheader">
-                            <div className="body-normal__semibold">
-                                Kritisch
-                                <i className="icon-caret-up-down"></i>
-                            </div>
-                        </th>
-                        <th role="columnheader">
-                            <div className="contents body-normal__semibold">
-                                Inhalt
-                            </div>
-                        </th>
-                        <th role="columnheader">
-                            <div className="body-normal__semibold"></div>
-                        </th>
-                    </tr>
+                        <tr role="row">
+                            <th role="columnheader"></th>
+                            <th role="columnheader">
+                                <div className="body-normal__semibold">
+                                    Auftrag
+                                    <i className="icon-caret-up-down" onClick={() => toggleOrder("notifiable_id")}></i>
+                                </div>
+                            </th>
+                            <th role="columnheader">
+                                <div className="body-normal__semibold">
+                                    Datum
+                                    <i className="icon-caret-up-down" onClick={() => toggleOrder("created_at")}></i>
+                                </div>
+                            </th>
+                            <th role="columnheader">
+                                <div className="body-normal__semibold">
+                                    Betreff
+                                    <i className="icon-caret-up-down" onClick={() => toggleOrder("subject")}></i>
+                                </div>
+                            </th>
+                            <th role="columnheader">
+                                <div className="body-normal__semibold">
+                                    Kritisch
+                                    <i className="icon-caret-up-down" onClick={() => toggleOrder("type")}></i>
+                                </div>
+                            </th>
+                            <th role="columnheader">
+                                <div className="contents body-normal__semibold">Inhalt</div>
+                            </th>
+                            <th role="columnheader">
+                                <div className="body-normal__semibold"></div>
+                            </th>
+                        </tr>
                     </thead>
 
                     <tbody>
-                    {loading ? (
+                        {loading ? (
                             <tr>
                                 <td className="table-loading" colSpan={7}>
                                     <Loading />
@@ -173,8 +186,8 @@ const ReadMessagesTable: React.FC<ReadMessagesTableProps> = ({ filters, applyFil
                                 </td>
                             </tr>
                         ) : (
-                    notificationsList.map((notification, index) => (
-                            <tr
+                            notificationsList.map((notification, index) => (
+                                <tr
                                     key={notification.id}
                                     ref={(el) => (rowRefs.current[index] = el)}
                                     className={`body-normal__regular ${activeRowId === index ? "active" : ""}`}
@@ -183,50 +196,80 @@ const ReadMessagesTable: React.FC<ReadMessagesTableProps> = ({ filters, applyFil
                                         e.preventDefault();
                                         e.stopPropagation();
                                     }}
-                            >
-                                <td role="cell" className="body-normal__regular" onClick={() => handleRowClick(index)}>
-                                    <div data-tooltip-id="tooltip"
-                                         data-tooltip-content={activeRowId === index ? "Details schließen" : "Details öffnen"}
-                                         data-tooltip-place="top"
-                                         data-tooltip-offset={10}
+                                >
+                                    <td
+                                        role="cell"
+                                        className="body-normal__regular"
+                                        onClick={() => handleRowClick(index)}
                                     >
-                                        <i className="icon-caret-right"></i>
-                                    </div>
-                                </td>
-                                <td role="cell" className="body-normal__regular" data-label={"Auftrag"}>
-                                    <Link to={`order-nr-here/80700`} className="link-component">
-                                    {notification.notifiable_type === "App\\Models\\Order" ? notification.notifiable.system_id : " "}
-                                    </Link>
-                                </td>
-                                <td role="cell" className="body-normal__regular" data-label={"Datum"} onClick={() => handleRowClick(index)}>
-                                {notification.created_at
-                                        ? moment(notification.created_at).format("DD. MM. yyyy")
-                                        : "-"}
-                                </td>
-                                <td role="cell" className="body-normal__regular" data-label={"Betreff"} onClick={() => handleRowClick(index)}>
-                                {notification.subject ? notification.subject : "-"}
-                                </td>
-                                <td role="cell" className="body-normal__regular" data-label={"Kritisch"} onClick={() => handleRowClick(index)}>
-                                    <div className="button button-gost button--big button--red">
-                                    {notification.notifiable_type === "critical" ? (
+                                        <div
+                                            data-tooltip-id="tooltip"
+                                            data-tooltip-content={
+                                                activeRowId === index ? "Details schließen" : "Details öffnen"
+                                            }
+                                            data-tooltip-place="top"
+                                            data-tooltip-offset={10}
+                                        >
+                                            <i className="icon-caret-right"></i>
+                                        </div>
+                                    </td>
+                                    <td role="cell" className="body-normal__regular" data-label={"Auftrag"}>
+                                        <Link to={`order-nr-here/80700`} className="link-component">
+                                            {notification.notifiable_type === "App\\Models\\Order"
+                                                ? notification.notifiable.system_id
+                                                : " "}
+                                        </Link>
+                                    </td>
+                                    <td
+                                        role="cell"
+                                        className="body-normal__regular"
+                                        data-label={"Datum"}
+                                        onClick={() => handleRowClick(index)}
+                                    >
+                                        {notification.created_at
+                                            ? moment(notification.created_at).format("DD. MM. yyyy")
+                                            : "-"}
+                                    </td>
+                                    <td
+                                        role="cell"
+                                        className="body-normal__regular"
+                                        data-label={"Betreff"}
+                                        onClick={() => handleRowClick(index)}
+                                    >
+                                        {notification.subject ? notification.subject : "-"}
+                                    </td>
+                                    <td
+                                        role="cell"
+                                        className="body-normal__regular"
+                                        data-label={"Kritisch"}
+                                        onClick={() => handleRowClick(index)}
+                                    >
+                                        <div className="button button-gost button--big button--red">
+                                            {notification.notifiable_type === "critical" ? (
                                                 <i className="button__icon icon-warning"></i>
                                             ) : (
                                                 " "
                                             )}
-                                    </div>
-                                </td>
-                                <td role="cell" className="contents" data-label={"Inhalt"} onClick={() => handleRowClick(index)}>
-                                <span className="collapsed body-normal__regular">
-                                    {notification.message ? notification.message : "-"}
-                                </span>
-                                </td>
-                                <td role="cell" className="table-list__button" data-label={" "}>
+                                        </div>
+                                    </td>
+                                    <td
+                                        role="cell"
+                                        className="contents"
+                                        data-label={"Inhalt"}
+                                        onClick={() => handleRowClick(index)}
+                                    >
+                                        <span className="collapsed body-normal__regular">
+                                            {notification.message ? notification.message : "-"}
+                                        </span>
+                                    </td>
+                                    <td role="cell" className="table-list__button" data-label={" "}>
                                         <div className="button button-gost button--big button--grey">
                                             <i className="button__icon icon-download-simple"></i>
                                         </div>
                                     </td>
-                            </tr>
-                    )))}
+                                </tr>
+                            ))
+                        )}
                     </tbody>
                 </table>
             </div>
