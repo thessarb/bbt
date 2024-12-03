@@ -155,19 +155,20 @@ const EditUserModal: React.FC<EditUserModalProps> = ({showEditModal, setShowEdit
             });
 
             setLoading(false);
-            response.orders.map((order: any) => (
-                    setTableData([...tableData,
-                        {
-                            value: order.system_id,
-                            label: order.system_id,
-                            name: order.system_id,
-                            address: order.address,
-                            responsible: order.system_id,
-                        }
-            ])))
+            {response.orders &&
+                response.orders.map((order: any) => (
+                        setTableData([...tableData,
+                            {
+                                value: order.system_id,
+                                label: order.system_id,
+                                name: order.system_id,
+                                address: order.address,
+                                responsible: order.system_id,
+                            }
+                ])))
+            }
 
         } catch (error: any) {
-            console.error("Error fetching user:", error);
             setLoading(false);
         }
     };
@@ -194,13 +195,12 @@ const EditUserModal: React.FC<EditUserModalProps> = ({showEditModal, setShowEdit
                 ]);
             }
         } catch (error: any) {
-            console.error("Error fetching user:", error);
             setLoading(false);
         }
     };
     useEffect(() => {
         getUser();
-        getCompanyOrders();
+        {role?.id == 2 && getCompanyOrders();}
     }, []);
 
     // form validation
