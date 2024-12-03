@@ -16,7 +16,9 @@ const API_PATHS = {
     notificationUpdate: (notificationId: number) =>
       apiBaseUrl + `notification/${notificationId}/update`,
     notificationFilter: apiBaseUrl + "filter/notifications/",
-    
+    notificationFilterOrder: apiBaseUrl + "filter/orders/system_id",
+
+    // Administration Users
     userList: apiBaseUrl + "user/list",
     createUser: apiBaseUrl + "user/store",
     getUser: (userId: number) =>
@@ -27,15 +29,20 @@ const API_PATHS = {
         apiBaseUrl + `user/delete/${userId}`,
     restoreUser: (userId: number) =>
         apiBaseUrl + `user/restore/${userId}`,
+    // Administration Customers
+
     customerList: apiBaseUrl + "customer/list",
     activateCustomer: apiBaseUrl + `user/store/customer`,
 
+    // Administration Orders
     orderList: apiBaseUrl + "order/list",
     orderFilter: apiBaseUrl + "filter/orders/system_id",
     orderFind: (orderId: number) =>
        apiBaseUrl + `order/find/${orderId}`,
     orderResponsiblePerson: (orderId: number) =>
         apiBaseUrl + `order/${orderId}/responsible-persons`,
+    companyOrders: (userId: number) =>
+        apiBaseUrl + `order/my-company-orders/${userId}`,
 };
 
 export default API_PATHS;

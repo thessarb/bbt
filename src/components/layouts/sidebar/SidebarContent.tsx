@@ -6,7 +6,6 @@ import SidebarItems, { useSidebarItems } from "./SidebarItems";
 
 const SidebarContent: React.FC = () => {
   const userData = useUserdata((state: any) => state.userData);
-  console.log(userData)
   const simplebarRef = useRef<any>();
   const sidebarRef = useRef<any>();
 

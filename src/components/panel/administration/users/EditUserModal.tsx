@@ -6,7 +6,6 @@ import API_PATHS from "../../../../api/apiPaths";
 import {makeApiCall} from "../../../../api/apiRequests";
 import API_HEADERS from "../../../../api/apiConfig";
 import Select, {SingleValue} from "react-select";
-import {useNavigate} from "react-router-dom";
 
 interface EditUserModalProps {
     showEditModal: boolean;
@@ -15,7 +14,7 @@ interface EditUserModalProps {
     setRefreshList: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEditModal, userId, setRefreshList }) => {
+const EditUserModal: React.FC<EditUserModalProps> = ({showEditModal, setShowEditModal, userId, setRefreshList}) => {
     // Modal
     const [animateClose, setAnimateClose] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
@@ -45,6 +44,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEdi
     const [isCompanyError, setIsCompanyError] = useState<boolean>(false);
     const [isPhoneError, setIsPhoneError] = useState<boolean>(false);
     const isInputRequired = true;
+    const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
     const handleInputChange = (
             setter: React.Dispatch<React.SetStateAction<string>>,
@@ -73,11 +73,19 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEdi
         }
     };
 
-    // Select option Fields
+    // Select Role
     const [role, setRole] = useState<{ id: number; value: string; label: string } | null>(null);
     const [isSelectedOption1Focused, setIsSelectedOption1Focused] = useState<boolean>(false);
     const [isSelectedOption1Error, setIsSelectedOption1Error] = useState<boolean>(false);
     const isSelectedOptionRequired = true;
+
+    useEffect(() => {
+        if (role?.id === 2) {
+            setIsDisabled(true);
+        } else {
+            setIsDisabled(false);
+        }
+    }, [role]);
 
     const handleSelectChange1 = (newValue: SingleValue<{ id: number; value: string; label: string }>) => {
         setRole(newValue);
@@ -95,6 +103,35 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEdi
         {id: 5, value: 'Architect', label: 'Architect'},
     ];
 
+    // Select Order
+    const [selectOrder, setSelectOrder] = useState<{ value: string; label: string } | null>(null);
+    const [tableData, setTableData] = useState<{ value: string; label: string; name: string; address: string; responsible: string }[]>([]);
+    const [isSelectOrderFocused, setIsSelectOrderFocused] = useState<boolean>(false);
+    const [isSelectOrderError, setIsSelectOrderError] = useState<boolean>(false);
+    const isSelectOrderRequired = false;
+    const [allOptions, setAllOptions] = useState<{ value: string; label: string; name: string; address: string; responsible: string }[]>([]);
+
+    // Filter options to exclude already added orders
+    const filteredOptions = allOptions.filter(option => !tableData.some(data => data.value === option.value));
+    const handleSelectOrderChange = (newValue: SingleValue<{ value: string; label: string }>) => {
+        if (newValue) {
+            const selectedOrder = allOptions.find(option => option.value === newValue.value);
+            if (selectedOrder) {
+                setTableData([...tableData, selectedOrder]);
+                setSelectOrder(null); // Clear selection after adding
+            }
+        }
+        if (isSelectOrderRequired && !newValue) {
+            setIsSelectOrderError(true);
+        } else {
+            setIsSelectOrderError(false);
+        }
+    };
+    // Remove order from the table
+    const handleRemoveOrder = (value: string) => {
+        setTableData(tableData.filter(item => item.value !== value));
+    };
+
     // functionality
     const [user, setUser] = useState<any | null>(null);
 
@@ -111,24 +148,63 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEdi
             setName(response.response.firstname);
             setEmail(response.response.email);
             setPhone(response.response.phone);
-            setRole({ id: response.response.role_id, value: response.response.role.name, label: response.response.role.name});
+            setRole({
+                id: response.response.role_id,
+                value: response.response.role.name,
+                label: response.response.role.name
+            });
 
             setLoading(false);
+            response.orders.map((order: any) => (
+                    setTableData([...tableData,
+                        {
+                            value: order.system_id,
+                            label: order.system_id,
+                            name: order.system_id,
+                            address: order.address,
+                            responsible: order.system_id,
+                        }
+            ])))
+
         } catch (error: any) {
             console.error("Error fetching user:", error);
             setLoading(false);
         }
-
     };
 
+    const getCompanyOrders = async (): Promise<void> => {
+        try {
+            const response: any = await makeApiCall<ResponseType>(
+                    API_PATHS.companyOrders(userId),
+                    "GET",
+                    API_HEADERS.authenticated
+            );
+
+            if (response?.response) {
+                //toDo Add to label, name, responsible the correct path.
+                setAllOptions((prevOptions) => [
+                    ...prevOptions,
+                    ...response.response.map((order: any) => ({
+                        value: order.system_id,
+                        label: order.system_id,
+                        name: order.system_id,
+                        address: order.address,
+                        responsible: order.system_id,
+                    })),
+                ]);
+            }
+        } catch (error: any) {
+            console.error("Error fetching user:", error);
+            setLoading(false);
+        }
+    };
     useEffect(() => {
         getUser();
+        getCompanyOrders();
     }, []);
-
 
     // form validation
     const [validations, setValidations] = useState<Record<string, string>>({});
-    const navigate = useNavigate();
     const updateUser = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
         setLoading(true);
@@ -138,6 +214,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEdi
             email: email,
             phone: phone,
             role_id: role?.id,
+            order_ids: tableData.map(item => item.value)
         };
 
         try {
@@ -164,7 +241,6 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEdi
     return (
             <>
                 <Modal
-
                         isOpen={showEditModal}
                         key={userId}
                         toggle={handleClose}
@@ -187,29 +263,34 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEdi
                                     confirmation ? (
                                             <UserConfirmation email={email}/>
                                     ) : (
-                                            <div className="create-user__form">
-                                                <div className="create-user__form--content">
+                                            <div className="edit-user__form">
+                                                <div className="edit-user__form--content">
                                                     <div className="divider">
                                                         <span className="divider__title body-small__regular">Persönliche Daten</span>
                                                         <span className="divider__solid"></span>
                                                     </div>
 
-                                                    <div className="create-user__form--box">
+                                                    <div className="edit-user__form--box">
                                                         {/* Surname Field */}
-                                                        <div className="create-user__form--box-item">
+                                                        <div className="edit-user__form--box-item">
                                                             <div className="input-field">
                                                                 <label htmlFor="surname" className={`input-field__label caption__regular 
                                                                     ${isSurnameError ? 'input-field__label--error' : isSurnameFocused ? 'input-field__label--focused' : ''}
                                                                 `}>
                                                                     Nachname
-                                                                    {isInputRequired &&
+                                                                    {isInputRequired && !isDisabled &&
                                                                             <span className="input-field__label--required">*</span>}
                                                                 </label>
+
+                                                                {isDisabled &&
+                                                                        <i className="input-field__disabled icon-lock"></i>}
+
                                                                 <input
                                                                         id="surname"
                                                                         className={`input-field__content body-normal__regular ${isSurnameError ? 'input-field__content--error' : ''}`}
                                                                         type="text"
                                                                         name="surname"
+                                                                        disabled={isDisabled}
                                                                         placeholder="Geben Sie Ihren Nachnamen an"
                                                                         value={surname}
                                                                         onChange={handleInputChange(setSurname, setIsSurnameError)}
@@ -229,20 +310,24 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEdi
                                                         </div>
 
                                                         {/* Name Field */}
-                                                        <div className="create-user__form--box-item">
+                                                        <div className="edit-user__form--box-item">
                                                             <div className="input-field">
                                                                 <label htmlFor="name" className={`input-field__label caption__regular 
                                                                     ${isNameError ? 'input-field__label--error' : isNameFocused ? 'input-field__label--focused' : ''}
                                                                 `}>
                                                                     Vorname
-                                                                    {isInputRequired &&
+                                                                    {isInputRequired && !isDisabled &&
                                                                             <span className="input-field__label--required">*</span>}
                                                                 </label>
+
+                                                                {isDisabled &&
+                                                                        <i className="input-field__disabled icon-lock"></i>}
                                                                 <input
                                                                         id="name"
                                                                         className={`input-field__content body-normal__regular ${isNameError ? 'input-field__content--error' : ''}`}
                                                                         type="text"
                                                                         name="name"
+                                                                        disabled={isDisabled}
                                                                         placeholder="Geben Sie Ihren Vornamen an"
                                                                         value={name}
                                                                         onChange={handleInputChange(setName, setIsNameError)}
@@ -262,20 +347,23 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEdi
                                                         </div>
 
                                                         {/* Email Field */}
-                                                        <div className="create-user__form--box-item">
+                                                        <div className="edit-user__form--box-item">
                                                             <div className="input-field">
                                                                 <label htmlFor="email" className={`input-field__label caption__regular 
                                                                     ${isEmailError ? 'input-field__label--error' : isEmailFocused ? 'input-field__label--focused' : ''}
                                                                 `}>
                                                                     E-Mail-Adresse
-                                                                    {isInputRequired &&
+                                                                    {isInputRequired && !isDisabled &&
                                                                             <span className="input-field__label--required">*</span>}
                                                                 </label>
+                                                                {isDisabled &&
+                                                                        <i className="input-field__disabled icon-lock"></i>}
                                                                 <input
                                                                         id="email"
                                                                         className={`input-field__content body-normal__regular ${isEmailError ? 'input-field__content--error' : ''}`}
                                                                         type="email"
                                                                         name="email"
+                                                                        disabled={isDisabled}
                                                                         placeholder="Tragen Sie Ihre E-Mail-Adresse ein"
                                                                         value={email}
                                                                         onChange={handleInputChange(setEmail, setIsEmailError)}
@@ -295,20 +383,23 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEdi
                                                         </div>
 
                                                         {/* Phone Field */}
-                                                        <div className="create-user__form--box-item">
+                                                        <div className="edit-user__form--box-item">
                                                             <div className="input-field">
                                                                 <label htmlFor="phone" className={`input-field__label caption__regular 
                                                                     ${isPhoneError ? 'input-field__label--error' : isPhoneFocused ? 'input-field__label--focused' : ''}
                                                                 `}>
                                                                     Telefon
-                                                                    {isInputRequired &&
+                                                                    {isInputRequired && !isDisabled &&
                                                                             <span className="input-field__label--required">*</span>}
                                                                 </label>
+                                                                {isDisabled &&
+                                                                        <i className="input-field__disabled icon-lock"></i>}
                                                                 <input
                                                                         id="phone"
                                                                         className={`input-field__content body-normal__regular ${isPhoneError ? 'input-field__content--error' : ''}`}
                                                                         type="tel"
                                                                         name="phone"
+                                                                        disabled={isDisabled}
                                                                         placeholder="Ihre Telefonnummer"
                                                                         value={phone}
                                                                         onChange={handleInputChange(setPhone, setIsPhoneError)}
@@ -333,17 +424,19 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEdi
                                                         <span className="divider__solid"></span>
                                                     </div>
 
-                                                    <div className="create-user__form--box">
+                                                    <div className="edit-user__form--box">
                                                         {/* Funktion */}
-                                                        <div className="create-user__form--box-item create-user__form--dropdown">
+                                                        <div className="edit-user__form--box-item edit-user__form--dropdown">
                                                             <div className="select-field">
                                                                 <label htmlFor="function" className={`select-field__label caption__regular 
                                                                     ${isSelectedOption1Error ? 'select-field__label--error' : isSelectedOption1Focused ? 'select-field__label--focused' : ''}
                                                                 `}>
                                                                     Funktion
-                                                                    {isSelectedOptionRequired &&
+                                                                    {isSelectedOptionRequired && !isDisabled &&
                                                                             <span className="select-field__label--required">*</span>}
                                                                 </label>
+                                                                {isDisabled &&
+                                                                        <i className="select-field__disabled icon-lock"></i>}
                                                                 <Select
                                                                         id="function"
                                                                         classNamePrefix="react-select"
@@ -354,6 +447,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEdi
                                                                         isClearable={true}
                                                                         closeMenuOnSelect={true}
                                                                         name="function"
+                                                                        isDisabled={isDisabled}
                                                                         isSearchable={true}
                                                                         onChange={handleSelectChange1}
                                                                         onFocus={() => setIsSelectedOption1Focused(true)}
@@ -377,20 +471,23 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEdi
                                                         </div>
 
                                                         {/* Company Field */}
-                                                        <div className="create-user__form--box-item">
+                                                        <div className="edit-user__form--box-item">
                                                             <div className="input-field">
                                                                 <label htmlFor="company" className={`input-field__label caption__regular 
                                                                     ${isCompanyError ? 'input-field__label--error' : isCompanyFocused ? 'input-field__label--focused' : ''}
                                                                 `}>
                                                                     Firma
-                                                                    {isInputRequired &&
+                                                                    {isInputRequired && !isDisabled &&
                                                                             <span className="input-field__label--required">*</span>}
                                                                 </label>
+                                                                {isDisabled &&
+                                                                        <i className="input-field__disabled icon-lock"></i>}
                                                                 <input
                                                                         id="company"
                                                                         className={`input-field__content body-normal__regular ${isCompanyError ? 'input-field__content--error' : ''}`}
                                                                         type="text"
                                                                         name="company"
+                                                                        disabled={isDisabled}
                                                                         placeholder="Geben Sie den Firmennamen an"
                                                                         value={company}
                                                                         onChange={handleInputChange(setCompany, setIsCompanyError)}
@@ -409,6 +506,136 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEdi
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    {role?.id == 2 &&
+                                                            <>
+                                                                <div className="divider">
+                                                                    <span className="divider__title body-small__regular">Aufträge</span>
+                                                                    <span className="divider__solid"></span>
+                                                                </div>
+
+                                                                <div className="edit-user__form--select-box">
+
+                                                                    {/* Select order here */}
+                                                                    <div className="edit-user__form--box-item">
+                                                                        <div className="select-field">
+                                                                            <label htmlFor="order" className={`select-field__label caption__regular 
+                                                                                ${isSelectOrderError ? 'select-field__label--error' : isSelectOrderFocused ? 'select-field__label--focused' : ''}
+                                                                            `}>
+                                                                                Auftrag
+                                                                                {isSelectOrderRequired &&
+                                                                                        <span className="select-field__label--required">*</span>}
+                                                                            </label>
+
+                                                                            <div className="select-field__wrapper">
+                                                                                <i className="select-field__wrapper--icon icon-magnifying-glass"/>
+                                                                                <Select
+                                                                                        id="order"
+                                                                                        classNamePrefix="react-select"
+                                                                                        className={`select-field__content body-normal__regular ${selectOrder ? "filled" : ""}`}
+                                                                                        placeholder="Geben Sie die Auftragsnummer oder -name ein"
+                                                                                        value={selectOrder}
+                                                                                        options={filteredOptions}
+                                                                                        isClearable={true}
+                                                                                        closeMenuOnSelect={true}
+                                                                                        name="order"
+                                                                                        isSearchable={true}
+                                                                                        onChange={handleSelectOrderChange}
+                                                                                        onFocus={() => setIsSelectOrderFocused(true)}
+                                                                                        onBlur={() => {
+                                                                                            setIsSelectOrderFocused(false);
+                                                                                            if (isSelectOrderRequired && !selectOrder) {
+                                                                                                setIsSelectOrderError(true);
+                                                                                            }
+                                                                                        }}
+                                                                                />
+                                                                            </div>
+
+                                                                            {isSelectOrderError &&
+                                                                                    <div className="select-field--error-message caption__regular">This field is required</div>}
+                                                                        </div>
+                                                                    </div>
+
+                                                                    {/* Order table here */}
+                                                                    {tableData.length != 0 ? <div className="table-list">
+                                                                                <table role="table">
+                                                                                    <thead>
+                                                                                    <tr role="row">
+                                                                                        <th role="columnheader">
+                                                                                            <div className="body-normal__semibold">
+                                                                                                Auftrag
+                                                                                            </div>
+                                                                                        </th>
+                                                                                        <th role="columnheader">
+                                                                                            <div className="body-normal__semibold">
+                                                                                                Auftragsname
+                                                                                            </div>
+                                                                                        </th>
+                                                                                        <th role="columnheader">
+                                                                                            <div className="body-normal__semibold">
+                                                                                                Adresse
+                                                                                            </div>
+                                                                                        </th>
+                                                                                        <th role="columnheader">
+                                                                                            <div className="body-normal__semibold">
+                                                                                                Verantwortlicher
+                                                                                            </div>
+                                                                                        </th>
+                                                                                        <th role="columnheader">
+                                                                                            <div className="body-normal__semibold">
+                                                                                                Benachrichtigung
+                                                                                            </div>
+                                                                                        </th>
+                                                                                        <th role="columnheader">
+                                                                                        </th>
+                                                                                    </tr>
+                                                                                    </thead>
+
+                                                                                    <tbody>
+                                                                                    {tableData.map(order => (
+                                                                                            <tr key={order.value}>
+                                                                                                <td role="cell"
+                                                                                                    className="body-normal__regular"
+                                                                                                    data-label="Auftrag">{order.value}</td>
+                                                                                                <td role="cell"
+                                                                                                    className="body-normal__regular"
+                                                                                                    data-label="Auftragsname">{order.name}</td>
+                                                                                                <td role="cell"
+                                                                                                    className="body-normal__regular"
+                                                                                                    data-label="Adresse">{order.address}</td>
+                                                                                                <td role="cell"
+                                                                                                    className="body-normal__regular"
+                                                                                                    data-label="Verantwortlicher">{order.responsible}</td>
+                                                                                                <td role="cell"
+                                                                                                    className="body-normal__regular"
+                                                                                                    data-label="Benachrichtigung">
+                                                                                                    <label className="form-checkbox">
+                                                                                                        <input type="checkbox"/>
+                                                                                                    </label>
+                                                                                                </td>
+                                                                                                <td role="cell"
+                                                                                                    className="table-list__button"
+                                                                                                    data-label=" ">
+                                                                                                    <div
+                                                                                                            className="button button-gost button--grey"
+                                                                                                            onClick={() => handleRemoveOrder(order.value)}
+                                                                                                    >
+                                                                                                        <i className="button__icon icon-trash"></i>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                    ))}
+                                                                                    </tbody>
+
+                                                                                </table>
+                                                                            </div>
+                                                                            :
+                                                                            <span className="create-user__form--text body-normal__regular">Sie haben keine Aufträge zugewiesen</span>
+                                                                    }
+                                                                </div>
+                                                            </>
+                                                    }
+
                                                 </div>
                                             </div>
                                     )
@@ -416,7 +643,6 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEdi
 
                         </ModalBody>
                         <ModalFooter>
-
                             {loading ? (
                                     " "
                             ) : (
@@ -445,7 +671,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ showEditModal, setShowEdi
 
                 </Modal>
             </>
-)
+    )
 };
 
 export default EditUserModal;

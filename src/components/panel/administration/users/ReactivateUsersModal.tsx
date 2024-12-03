@@ -4,6 +4,7 @@ import ReactivateUserConfirmation from "./ReactivateUserConfirmation";
 import API_PATHS from "../../../../api/apiPaths";
 import {makeApiCall} from "../../../../api/apiRequests";
 import API_HEADERS from "../../../../api/apiConfig";
+import LoadingComponent from "../../../LoadingComponent";
 
 interface ReactivateUsersModalProps {
     show: boolean;
@@ -28,11 +29,11 @@ const ReactivateUsersModal: React.FC<ReactivateUsersModalProps> = ({ show, setSh
 
     // Reactivate user
     const [validations, setValidations] = useState<Record<string, string>>({});
+    const [loading, setLoading] = useState<boolean>(false);
 
     const reactivateUser = async (userId: number): Promise<void> => {
         const request: any = API_PATHS.restoreUser(userId);
-        setConfirmation(true);
-
+        setLoading(true);
         try {
             const response: any = await makeApiCall<ResponseType>(request, "PUT", API_HEADERS.authenticated);
         } catch (error: any) {
@@ -44,8 +45,9 @@ const ReactivateUsersModal: React.FC<ReactivateUsersModalProps> = ({ show, setSh
             }
         }
         setRefreshList((prev) => !prev);
+        setLoading(false);
+        setConfirmation(true);
     }
-
 
     return (
             <>
@@ -59,13 +61,20 @@ const ReactivateUsersModal: React.FC<ReactivateUsersModalProps> = ({ show, setSh
                         <span className="heading__semibold">Nutzer reaktiviert</span>
                     </ModalHeader>
                     <ModalBody>
-                        {confirmation ?
-                                <ReactivateUserConfirmation name={name} lastName={lastName}/> :
-                                <div className="reactivate-user__text body-big__regular">
-                                    Möchten Sie den Benutzer
-                                    <span className="body-big__medium">{` “${name} ${lastName}” `}</span>
-                                    wirklich wieder reaktivieren?
+
+                        {loading ?
+                                <div className="loading-container">
+                                    <LoadingComponent/>
                                 </div>
+                                :
+                                confirmation ?
+                                            <ReactivateUserConfirmation name={name} lastName={lastName} validations={validations.message}/> :
+                                            <div className="reactivate-user__text body-big__regular">
+                                                Möchten Sie den Benutzer
+                                                <span className="body-big__medium">{` “${name} ${lastName}” `}</span>
+                                                wirklich wieder reaktivieren?
+                                            </div>
+
                         }
 
                     </ModalBody>

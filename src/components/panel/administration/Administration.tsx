@@ -11,8 +11,6 @@ const Administration = () => {
     const [visibleTab, setVisibleTab] = useState(activeTab);
     const handleTabClick = (index: number) => {
         setActiveTab(index);
-        console.log(activeTab);
-        console.log(visibleTab);
     };
 
     // Animate the content change

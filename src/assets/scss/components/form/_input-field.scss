@@ -23,6 +23,16 @@
     }
   }
 
+  &__disabled {
+    position: absolute;
+    top: 50%;
+    right: toRem(5);
+    overflow-y: -50%;
+    width: toRem(12);
+    height: toRem(12);
+    background-color: $bbt-grey-50;
+  }
+
   /* Textarea Styles */
   &__content {
     display: flex;
@@ -61,6 +71,11 @@
     /* Error State for Textarea */
     &--error {
       border-bottom-color: $bbt-red-100; // Red border for error
+    }
+
+    &:disabled {
+      color: $bbt-grey-70;
+      border-bottom-color: $bbt-grey-30;
     }
   }
 
