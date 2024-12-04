@@ -51,7 +51,7 @@ const Login = () => {
                 case 1:
                     window.location.replace(PATHS.userManagement);
                     break;
-                case 3:
+                case 2:
                 case 4:
                     window.location.replace(PATHS.dashboard);
                     break;
