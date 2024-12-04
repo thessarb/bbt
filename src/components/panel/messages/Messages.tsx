@@ -11,16 +11,13 @@ import API_PATHS from "src/api/apiPaths";
 const Messages = () => {
     const [activeTab, setActiveTab] = useState("all");
     const [visibleTab, setVisibleTab] = useState(activeTab);
-    const [modified, setModified] = useState(false);
     const [showBigFilter, setShowBigFilter] = useState(false);
-    const dropdownRef = useRef<HTMLDivElement | null>(null);
     const dropdownRefFilter = useRef<HTMLDivElement | null>(null);
     const [notificationsFiltering, setNotificationsFiltering] = useState<Record<string, any[]>>({
         message: [],
         type: [],
         notifiable_id: [],
     });
-    const [notificationsFilteringOrder, setNotificationsFilteringOrder] = useState<any[]>([]);
 
     const [filters, setFilters] = useState<
         { id: number; selectedOption: SingleValue<{ value: string; label: string }>; inputValue: string }[]
@@ -29,8 +26,6 @@ const Messages = () => {
     const [appliedFilters, setAppliedFilters] = useState<
         { selectedOption: SingleValue<{ value: string; label: string }>; inputValue: string }[]
     >([]);
-
-    const [inputValue, setInputValue] = useState("");
 
     const [applyFilters, setApplyFilters] = useState(0);
     const toggleFilterDropdown = () => {

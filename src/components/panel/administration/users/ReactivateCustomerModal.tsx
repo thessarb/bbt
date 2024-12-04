@@ -4,6 +4,7 @@ import ReactivateUserConfirmation from "./ReactivateUserConfirmation";
 import API_PATHS from "../../../../api/apiPaths";
 import {makeApiCall} from "../../../../api/apiRequests";
 import API_HEADERS from "../../../../api/apiConfig";
+import LoadingComponent from "../../../LoadingComponent";
 
 interface ReactivateUsersModalProps {
     show: boolean;
@@ -34,12 +35,13 @@ const ReactivateCustomerModal: React.FC<ReactivateUsersModalProps> = ({ show, se
 
     // Reactivate user
     const [validations, setValidations] = useState<Record<string, string>>({});
+    const [loading, setLoading] = useState<boolean>(false);
 
     const activateCustomer = async (customerId: number): Promise<void> => {
-
         const updateCustomerData = {
             customer_id: customerId,
         };
+        setLoading(true);
 
         try {
             const response: any = await makeApiCall<ResponseType>(
@@ -55,6 +57,7 @@ const ReactivateCustomerModal: React.FC<ReactivateUsersModalProps> = ({ show, se
             setErrorMessage(true);
         }
         setRefreshList((prev) => !prev);
+        setLoading(false);
     }
 
     return (
@@ -69,8 +72,13 @@ const ReactivateCustomerModal: React.FC<ReactivateUsersModalProps> = ({ show, se
                         <span className="heading__semibold">Kunde aktivieren</span>
                     </ModalHeader>
                     <ModalBody>
-                        {confirmation ?
-                                <ReactivateUserConfirmation name={name} lastName={lastName}/> :
+                        {loading ?
+                                    <div className="loading-container">
+                                        <LoadingComponent/>
+                                    </div>
+                                    :
+                            confirmation ?
+                                <ReactivateUserConfirmation name={name} lastName={lastName} validations={validations.message}/> :
                                 errorMessage ?
                                         <div className="confirmation--secondary__error-box">
                                             <div className="confirmation--secondary confirmation--secondary__error body-normal__semibold">
@@ -86,9 +94,9 @@ const ReactivateCustomerModal: React.FC<ReactivateUsersModalProps> = ({ show, se
                                         </div>
                                         :
                                         <div className="reactivate-user__text body-big__regular">
-                                            Möchten Sie den Benutzer
+                                            Möchten Sie den Kunden
                                             <span className="body-big__medium">{` “${name} ${lastName}” `}</span>
-                                            wirklich wieder reaktivieren?
+                                            eine Einladungsbenachrichtung schicken?
                                         </div>
                         }
 
@@ -114,8 +122,8 @@ const ReactivateCustomerModal: React.FC<ReactivateUsersModalProps> = ({ show, se
                                             <button className="button button--big button--green"
                                                     onClick={() => activateCustomer(customerId)}
                                             >
-                                                <i className="button__icon icon-user-switch"></i>
-                                                <span className="button__text">Nutzer aktivieren</span>
+                                                <i className="button__icon icon-user-plus"></i>
+                                                <span className="button__text">Kunde einladen</span>
                                             </button>
                                         </>
                         }
