@@ -37,7 +37,7 @@ const PrivateRoutes: RouteItem[] = [
     {
         path: PATHS.dashboard,
         element: checkPrivateRoutes(
-            <ProtectedRoute roles={[3, 4]}>
+            <ProtectedRoute roles={[2, 4]}>
                 <DashboardView />
             </ProtectedRoute>
         ),
@@ -53,7 +53,7 @@ const PrivateRoutes: RouteItem[] = [
     {
         path: PATHS.orders,
         element: checkPrivateRoutes(
-            <ProtectedRoute roles={[1, 3, 4]}>
+            <ProtectedRoute roles={[1, 2, 4]}>
                 <OrdersView />
             </ProtectedRoute>
         ),
@@ -69,7 +69,7 @@ const PrivateRoutes: RouteItem[] = [
     {
         path: PATHS.administrationOrder,
         element: checkPrivateRoutes(
-            <ProtectedRoute roles={[3, 4]}>
+            <ProtectedRoute roles={[2, 4]}>
                 <AdministrationOrderView />
             </ProtectedRoute>
         ),
@@ -77,7 +77,7 @@ const PrivateRoutes: RouteItem[] = [
     {
         path: PATHS.documents,
         element: checkPrivateRoutes(
-            <ProtectedRoute roles={[3, 4]}>
+            <ProtectedRoute roles={[2, 4]}>
                 <DocumentsView />
             </ProtectedRoute>
         ),
@@ -85,7 +85,7 @@ const PrivateRoutes: RouteItem[] = [
     {
         path: PATHS.library,
         element: checkPrivateRoutes(
-            <ProtectedRoute roles={[3, 4]}>
+            <ProtectedRoute roles={[2, 4]}>
                 <LibraryView />
             </ProtectedRoute>
         ),
@@ -93,7 +93,7 @@ const PrivateRoutes: RouteItem[] = [
     {
         path: PATHS.messages,
         element: checkPrivateRoutes(
-            <ProtectedRoute roles={[1, 3, 4]}>
+            <ProtectedRoute roles={[1, 2, 4]}>
                 <MessagesView />
             </ProtectedRoute>
         ),
@@ -102,7 +102,7 @@ const PrivateRoutes: RouteItem[] = [
     {
         path: PATHS.orderDetailsId,
         element: checkPrivateRoutes(
-            <ProtectedRoute roles={[1, 3, 4]}>
+            <ProtectedRoute roles={[1, 2, 4]}>
                 <OrderDetailsOverviewView />
             </ProtectedRoute>
         ),
@@ -118,7 +118,7 @@ const checkPublicRoutes = (route: JSX.Element): JSX.Element => {
             case 1:
                 path = PATHS.userManagement;
                 break;
-            case 3:
+            case 2:
             case 4:
                 path = PATHS.dashboard;
                 break;

@@ -107,7 +107,7 @@ const UnreadMessagesTable: React.FC<UnreadMessagesTableProps> = ({ filters, appl
                 "PUT",
                 API_HEADERS.authenticated
             );
-            // getNotifications();
+            getNotifications();
         } catch (error: any) {}
     };
 
@@ -216,7 +216,7 @@ const UnreadMessagesTable: React.FC<UnreadMessagesTableProps> = ({ filters, appl
                                         </div>
                                     </td>
                                     <td role="cell" className="body-normal__regular" data-label={"Auftrag"}>
-                                        <Link to={`order-nr-here/80700`} className="link-component">
+                                        <Link to={PATHS.orderDetails + notification.notifiable?.id} className="link-component">
                                             {notification.notifiable_type === "App\\Models\\Order"
                                                 ? notification.notifiable.system_id
                                                 : " "}
