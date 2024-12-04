@@ -29,6 +29,7 @@ const API_PATHS = {
         apiBaseUrl + `user/delete/${userId}`,
     restoreUser: (userId: number) =>
         apiBaseUrl + `user/restore/${userId}`,
+    userFilter: apiBaseUrl + "filter/users/",
     // Administration Customers
 
     customerList: apiBaseUrl + "customer/list",
