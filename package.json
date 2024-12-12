@@ -2,7 +2,7 @@
   "name": "thomas-group",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://thessarb.github.io/bbt",
+  "homepage": "https://thessarb.github.io/bbt/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -39,7 +39,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "PUBLIC_URL=https://thessarb.github.io/bbt react-scripts build",
     "test": "react-scripts test",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
