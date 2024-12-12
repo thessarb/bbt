@@ -2,6 +2,9 @@
   "name": "thomas-group",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://thessarb.github.io/bbt",
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -63,6 +66,7 @@
   "devDependencies": {
     "@types/react-bootstrap": "^0.32.37",
     "@types/react-helmet": "^6.1.11",
-    "@types/simplebar": "^5.3.3"
+    "@types/simplebar": "^5.3.3",
+    "gh-pages": "^6.2.0"
   }
 }
