@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.5a253335.css",
+    "main.js": "/static/js/main.c8a03f35.js",
+    "static/media/BoxedRegular.ttf": "/static/media/BoxedRegular.104e65ad9c3796391e0e.ttf",
+    "static/media/BoxedMedium.ttf": "/static/media/BoxedMedium.4b3afc4121fa7df55556.ttf",
+    "static/media/BoxedSemibold.ttf": "/static/media/BoxedSemibold.ed566166d7bcadae7bd5.ttf",
+    "static/media/BoxedSemibold.woff": "/static/media/BoxedSemibold.50ede2d5a449a9286807.woff",
+    "static/media/BoxedMedium.woff": "/static/media/BoxedMedium.32de22753bc7fb53458f.woff",
+    "static/media/BoxedRegular.woff": "/static/media/BoxedRegular.1d838504ed9044e43f86.woff",
+    "static/media/BoxedMedium.woff2": "/static/media/BoxedMedium.fe53a45d9793b8623ee7.woff2",
+    "static/media/BoxedSemibold.woff2": "/static/media/BoxedSemibold.cb8505c030f73ee1d8a6.woff2",
+    "static/media/BoxedRegular.woff2": "/static/media/BoxedRegular.70e4eb1b81bb15254648.woff2",
+    "static/media/Logo.svg": "/static/media/Logo.7ffa60ecfd80a2d6b4b173a0fead2511.svg",
+    "static/media/Group.svg": "/static/media/Group.d5e2ae904ef2d8005443acd9a2fb6171.svg",
+    "index.html": "/index.html",
+    "main.5a253335.css.map": "/static/css/main.5a253335.css.map",
+    "main.c8a03f35.js.map": "/static/js/main.c8a03f35.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5a253335.css",
+    "static/js/main.c8a03f35.js"
+  ]
+}
