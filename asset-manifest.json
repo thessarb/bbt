@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "https://thessarb.github.io/bbt/static/css/main.fb18c138.css",
-    "main.js": "https://thessarb.github.io/bbt/static/js/main.7a9b68d0.js",
+    "main.js": "https://thessarb.github.io/bbt/static/js/main.9a78ed6e.js",
     "static/media/BoxedRegular.ttf": "https://thessarb.github.io/bbt/static/media/BoxedRegular.104e65ad9c3796391e0e.ttf",
     "static/media/BoxedMedium.ttf": "https://thessarb.github.io/bbt/static/media/BoxedMedium.4b3afc4121fa7df55556.ttf",
     "static/media/BoxedSemibold.ttf": "https://thessarb.github.io/bbt/static/media/BoxedSemibold.ed566166d7bcadae7bd5.ttf",
@@ -15,10 +15,10 @@
     "static/media/Group.svg": "https://thessarb.github.io/bbt/static/media/Group.d5e2ae904ef2d8005443acd9a2fb6171.svg",
     "index.html": "https://thessarb.github.io/bbt/index.html",
     "main.fb18c138.css.map": "https://thessarb.github.io/bbt/static/css/main.fb18c138.css.map",
-    "main.7a9b68d0.js.map": "https://thessarb.github.io/bbt/static/js/main.7a9b68d0.js.map"
+    "main.9a78ed6e.js.map": "https://thessarb.github.io/bbt/static/js/main.9a78ed6e.js.map"
   },
   "entrypoints": [
     "static/css/main.fb18c138.css",
-    "static/js/main.7a9b68d0.js"
+    "static/js/main.9a78ed6e.js"
   ]
 }
